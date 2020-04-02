@@ -1,0 +1,24 @@
+nav {
+  top: 0;
+  position: sticky;
+  padding: 1rem 2rem;
+  background-color: var(--color-silver);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--page-width);
+
+  ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li + li {
+    margin-left: 1rem;
+  }
+}
