@@ -10,6 +10,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "classnames": "2.2.6",
     "next": "9.3.4",
     "normalize.css": "8.0.1",
     "react": "16.13.1",
