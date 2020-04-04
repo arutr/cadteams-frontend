@@ -1,0 +1,16 @@
+figure {
+  width: min-content;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-weight: var(--font-weight__semibold);
+
+  &.center {
+    text-align: center;
+  }
+
+  &.right {
+    text-align: right;
+  }
+}
