@@ -1,8 +1,15 @@
+$color-black: #101820;
+$color-blue: #1b5faa;
+$color-cream: #fcf6f5;
+$color-gray: #434243;
+$color-silver: #dfdede;
+$color-white: #ffffff;
+
 :root {
-  --color-black: #101820;
-  --color-blue: #1b5faa;
-  --color-cream: #fcf6f5;
-  --color-gray: #434243;
-  --color-silver: #dfdede;
-  --color-white: #ffffff;
+  --color-black: #{$color-black};
+  --color-blue: #{$color-blue};
+  --color-cream: #{$color-cream};
+  --color-gray: #{$color-gray};
+  --color-silver: #{$color-silver};
+  --color-white: #{$color-white};
 }
