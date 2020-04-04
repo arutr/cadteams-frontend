@@ -1,20 +1,25 @@
 import React from 'react';
 import Navigation from '../src/components/Navigation';
+import Link from '../src/components/Link';
 
 export function Horizontal() {
   return (
     <div className="wrapper">
       <Navigation>
-        <span>Individuals</span>
-        <span>Enterprise</span>
-        <span>Sign In</span>
-        <span>Sign Up</span>
+        <Link icon="users">Individuals</Link>
+        <Link icon="briefcase">Enterprise</Link>
+        &emsp;
+        <Link icon="edit">Sign Up</Link>
+        <Link icon="sign-in">Sign In</Link>
       </Navigation>
       <h1>Heading</h1>
       <h2>Heading</h2>
       <h3>Heading</h3>
       <h4>Heading</h4>
-      <p>Lorem ipsum lol</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.
+      </p>
       <style jsx>
         {`
           .wrapper {
