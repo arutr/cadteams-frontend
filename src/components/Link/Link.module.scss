@@ -1,0 +1,7 @@
+@import 'styles/typography';
+
+.link {
+  @extend a;
+
+  cursor: pointer;
+}
