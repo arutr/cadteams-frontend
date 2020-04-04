@@ -8,7 +8,7 @@ function Button({ block, large, children }) {
   return (
     <button
       type="button"
-      className={classNames(styles.button, block && styles.block, large && styles.large)}
+      className={classNames(block && styles.block, large && styles.large)}
     >
       {children}
     </button>

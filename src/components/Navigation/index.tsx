@@ -4,12 +4,13 @@ import styles from './Navigation.module.scss';
 
 function Navigation({ children }) {
   return (
-    <nav className={styles.nav}>
+    <nav>
       <div className={styles.wrapper}>
         <img src="/logo.svg" alt="CADteams" />
         <ul>
-          {children.map((child) => (
-            <li key={child.id}>{child}</li>
+          {children.map((child, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={index}>{child}</li>
           ))}
         </ul>
       </div>
