@@ -1,24 +1,26 @@
-li + li {
-  margin-left: 1rem;
-}
+@import 'styles/typography';
 
 nav {
   top: 0;
   position: sticky;
   padding: 1.25rem 2rem;
   background-color: var(--color-silver);
-}
 
-ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  li + li {
+    margin-left: 1rem;
+  }
+
+  ul {
+    @extend .inline-list;
+
+    display: flex;
+    align-items: center;
+  }
 }
 
 .wrapper {
   display: flex;
+  margin: 0 auto;
   justify-content: space-between;
   max-width: var(--page-width);
 }
