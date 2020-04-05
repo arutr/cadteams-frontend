@@ -11,7 +11,7 @@ button {
   text-transform: uppercase;
   transition: background-color 200ms;
   background-color: var(--color-gray);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-family__monospace), monospace;
 
   &:focus {
     outline: none;
