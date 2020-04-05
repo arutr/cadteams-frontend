@@ -4,7 +4,7 @@ import Link from '../src/components/Link';
 
 export function Horizontal() {
   return (
-    <div className="wrapper">
+    <>
       <Navigation>
         <Link icon="users">Individuals</Link>
         <Link icon="briefcase">Enterprise</Link>
@@ -20,16 +20,19 @@ export function Horizontal() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua.
       </p>
-      <style jsx>
-        {`
-          .wrapper {
-            height: 200vh;
-            background: linear-gradient(var(--color-blue), var(--color-cream));
-          }
-        `}
-      </style>
-    </div>
+    </>
   );
 }
 
-export default { title: 'Navigation' };
+export default {
+  decorators: [(story) => (
+    <div style={{
+      height: '200vh',
+      background: 'linear-gradient(var(--color-blue), var(--color-cream))',
+    }}
+    >
+      {story()}
+    </div>
+  )],
+  title: 'Navigation',
+};
