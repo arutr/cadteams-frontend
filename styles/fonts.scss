@@ -7,12 +7,3 @@
   --font-family__sans-condensed: 'IBM Plex Sans Condensed';
   --font-family__monospace: 'IBM Plex Mono';
 }
-
-body {
-  font-family: var(--font-family__sans-serif), sans-serif;
-}
-
-html {
-  font-size: 14px;
-  color: var(--color-gray);
-}
