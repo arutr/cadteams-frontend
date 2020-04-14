@@ -1,9 +1,9 @@
-$icons: 'briefcase', 'edit', 'sign-in', 'sign-out', 'users';
+@import 'mixins/icons';
+
+$icons: 'briefcase', 'close', 'edit', 'menu', 'sign-in', 'sign-out', 'users';
 
 @each $icon in $icons {
-  .icon__#{$icon}:before {
-    background-image: url('/icons/#{$icon}.svg');
-  }
+  @include icon-image($icon, '.icon__#{$icon}');
 }
 
 .icon:before {
@@ -15,4 +15,6 @@ $icons: 'briefcase', 'edit', 'sign-in', 'sign-out', 'users';
   height: 1.25rem;
   width: 1.5rem;
   vertical-align: bottom;
+  // grey colour
+  filter: invert(26%) sepia(6%) saturate(69%) hue-rotate(251deg) brightness(98%) contrast(98%);
 }
