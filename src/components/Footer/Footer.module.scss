@@ -1,11 +1,11 @@
-@import 'styles/typography';
+@import 'styles/mixins/typography';
 
-footer {
-  padding: 1.25rem 2rem;
+.footer {
+  padding: var(--spacing) 0;
   background-color: var(--color-silver);
 
   ul {
-    @extend .inline-list;
+    @include inline-list;
 
     display: flex;
     font-size: 0.75rem;

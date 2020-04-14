@@ -1,0 +1,17 @@
+@mixin anchor {
+  outline: none;
+  color: var(--color-gray);
+  transition: opacity 200ms;
+
+  &:active,
+  &:focus,
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+@mixin inline-list {
+  list-style: none none;
+  margin: 0;
+  padding: 0;
+}
