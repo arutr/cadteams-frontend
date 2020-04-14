@@ -3,7 +3,7 @@ import MediaObject from '../src/components/MediaObject';
 
 export function leftAlign() {
   return (
-    <MediaObject src="/design1.png">
+    <MediaObject src="/images/landing-page/design1.png" width="20rem" captionAlign="left">
       Caption
     </MediaObject>
   );
@@ -11,7 +11,7 @@ export function leftAlign() {
 
 export function centreAlign() {
   return (
-    <MediaObject src="/design1.png" captionAlign="center">
+    <MediaObject src="/images/landing-page/design1.png" width="20rem">
       Caption
     </MediaObject>
   );
@@ -19,7 +19,7 @@ export function centreAlign() {
 
 export function rightAlign() {
   return (
-    <MediaObject src="/design1.png" captionAlign="right">
+    <MediaObject src="/images/landing-page/design1.png" width="20rem" captionAlign="right">
       Caption
     </MediaObject>
   );
