@@ -1,7 +1,7 @@
-@import 'styles/typography';
+@import 'styles/mixins/typography';
 
 .link {
-  @extend a;
+  @include anchor;
 
   cursor: pointer;
 }
