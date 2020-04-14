@@ -1,0 +1,9 @@
+@import 'mixins/responsive';
+
+:root {
+  --spacing: 1rem;
+
+  @include min-screen($screen-m) {
+    --spacing: 1.25rem;
+  }
+}
