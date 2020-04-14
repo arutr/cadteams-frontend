@@ -1,15 +1,27 @@
-:root {
-  --font-weight__semibold: 600;
-}
+@import 'mixins/typography';
+@import 'mixins/responsive';
+@import 'variables/typography';
 
 a {
-  color: var(--color-gray);
-  transition: opacity 200ms;
+  @include anchor;
+}
 
-  &:active,
-  &:focus,
-  &:hover {
-    opacity: 0.75;
+body {
+  font-family: var(--font-family__sans-serif), sans-serif;
+}
+
+html {
+  font-size: $font-size__root;
+  color: var(--color-gray);
+}
+
+h1 {
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+
+  @include max-screen($screen-m) {
+    font-size: 1.75em;
   }
 }
 
@@ -22,8 +34,6 @@ h6 {
   font-weight: normal;
 }
 
-.inline-list {
-  list-style: none none;
-  margin: 0;
-  padding: 0;
+strong {
+  font-weight: $font-weight__semibold;
 }

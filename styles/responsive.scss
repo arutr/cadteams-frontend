@@ -1,11 +1,13 @@
-:root {
-  --screen-xxs: 320px;
-  --screen-xs: 375px;
-  --screen-s: 425px;
-  --screen-m: 768px;
-  --screen-l: 1024px;
-  --screen-xl: 1280px;
-  --screen-xxl: 1440px;
+@import 'variables/responsive';
 
-  --page-width: var(--screen-xl);
+:root {
+  --screen-xxs: #{$screen-xxs};
+  --screen-xs: #{$screen-xs};
+  --screen-s: #{$screen-s};
+  --screen-m: #{$screen-m};
+  --screen-l: #{$screen-l};
+  --screen-xl: #{$screen-xl};
+  --screen-xxl: #{$screen-xxl};
+
+  --page-width: #{$page-width};
 }

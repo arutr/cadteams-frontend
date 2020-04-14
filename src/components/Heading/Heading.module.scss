@@ -1,5 +1,7 @@
+@import 'styles/variables/typography';
+
 .bold {
-  font-weight: var(--font-weight__semibold);
+  font-weight: $font-weight__semibold;
 }
 
 .condensed {

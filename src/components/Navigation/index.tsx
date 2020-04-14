@@ -1,20 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Navigation.module.scss';
+import Link from '../Link';
 
 function Navigation({ children }) {
+  const ul = (
+    <ul>
+      {children.map((child, index) => (
+        <li key={index}>{child}</li>
+      ))}
+    </ul>
+  );
+
   return (
-    <nav>
-      <div className={styles.wrapper}>
-        <img src="/logo.svg" alt="CADteams" />
-        <ul>
-          {children.map((child, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <li key={index}>{child}</li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+    <header className={styles.header}>
+      <nav>
+        <Link href="/">
+          <img src="/images/logo.svg" alt="CADteams" />
+        </Link>
+        {ul}
+        <details>
+          <summary className="icon" />
+          {ul}
+        </details>
+      </nav>
+    </header>
   );
 }
 

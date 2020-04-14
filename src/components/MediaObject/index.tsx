@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import styles from './MediaObject.module.scss';
 
 function MediaObject({
-  alt, children, captionAlign, height, src, width,
+  alt, children, captionAlign, height, src, width, id,
 }) {
   return (
-    <figure>
-      <img src={src} alt={alt} style={{ height, width }} />
+    <figure id={id} className={styles.figure} style={{ height, width }}>
+      <img src={src} alt={alt} />
       <figcaption className={styles[captionAlign]}>{children}</figcaption>
     </figure>
   );
@@ -18,6 +18,7 @@ MediaObject.propTypes = {
   alt: PropTypes.string,
   captionAlign: PropTypes.oneOf(['left', 'center', 'right']),
   children: PropTypes.node,
+  id: PropTypes.string,
   height: PropTypes.string,
   src: PropTypes.string,
   width: PropTypes.string,
@@ -25,8 +26,9 @@ MediaObject.propTypes = {
 
 MediaObject.defaultProps = {
   alt: null,
-  captionAlign: 'left',
+  captionAlign: 'center',
   children: null,
+  id: null,
   height: null,
   src: null,
   width: null,
