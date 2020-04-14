@@ -1,26 +1,88 @@
-@import 'styles/typography';
+@import 'styles/mixins/icons';
+@import 'styles/mixins/typography';
+@import 'styles/mixins/responsive';
+@import 'styles/variables/typography';
+@import 'styles/variables/ui';
 
-nav {
+.header {
   top: 0;
+  z-index: 2;
   position: sticky;
-  padding: 1.25rem 2rem;
+  box-shadow: $box-shadow;
   background-color: var(--color-silver);
+  padding: var(--spacing) var(--page-margin);
+
+  details {
+    @include min-screen($screen-m) {
+      display: none;
+    }
+
+    width: 100%;
+    max-height: 0;
+    transition: max-height 200ms;
+
+    &[open] {
+      max-height: 3rem;
+
+      summary {
+        @include icon-image('close');
+      }
+    }
+
+    ul {
+      margin-top: var(--spacing);
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      user-select: none;
+    }
+  }
+
+  img {
+    max-height: var(--logo-height);
+  }
 
   li + li {
     margin-left: 1rem;
   }
 
+  nav {
+    @include max-screen($screen-m) {
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    display: flex;
+    margin: 0 auto;
+    max-width: var(--page-width);
+    justify-content: space-between;
+
+    > ul {
+      @include max-screen($screen-m) {
+        display: none;
+      }
+    }
+
+    summary {
+      @include icon-image('menu');
+    }
+  }
+
+  summary {
+    @include min-screen($screen-m) {
+      display: none;
+    }
+
+    top: 0;
+    right: 0;
+    outline: none;
+    font-size: 0;
+    position: absolute;
+  }
+
   ul {
-    @extend .inline-list;
+    @include inline-list;
 
     display: flex;
     align-items: center;
   }
-}
-
-.wrapper {
-  display: flex;
-  margin: 0 auto;
-  justify-content: space-between;
-  max-width: var(--page-width);
 }
