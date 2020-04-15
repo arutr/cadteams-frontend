@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,10 +10,13 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@unly/utils": "1.0.3",
+    "amplitude-js": "5.11.0",
     "classnames": "2.2.6",
     "next": "9.3.4",
     "normalize.css": "8.0.1",
     "react": "16.13.1",
+    "react-amplitude-hooks": "0.9.14",
     "react-dom": "16.13.1",
     "sass": "1.26.3"
   },
