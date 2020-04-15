@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Amplitude, LogOnMount } from 'react-amplitude-hooks';
 import classNames from 'classnames';
 import Navigation from '../src/components/Navigation';
 import Link from '../src/components/Link';
@@ -40,83 +41,129 @@ function LandingPage() {
   }
 
   return (
-    <>
-      <ModalProvider>
-        <Navigation>
-          <Link icon="edit" onClick={toggleNewsletterModal}>Sign Up</Link>
-          <Link icon="sign-in" onClick={toggleNewsletterModal}>Sign In</Link>
-        </Navigation>
-        <main>
-          <section className={styles.hero}>
-            <article>
-              <Heading1>
-                Showcase your best pieces of building designs.
-              </Heading1>
-              <Button large onClick={toggleNewsletterModal}>Sign Up</Button>
-            </article>
-            <aside>
-              <MediaObject
-                id={styles.design1}
-                src="/images/landing-page/design1.png"
-                alt="Gateway House, Finchley"
+    <Amplitude
+      eventProperties={(inheritedProps) => ({
+        ...inheritedProps,
+        page: {
+          ...inheritedProps.page,
+          name: 'landing page',
+        },
+      })}
+    >
+      {({ logEvent }) => (
+        <>
+          <LogOnMount eventType="page-displayed" />
+          <ModalProvider>
+            <Navigation>
+              <Link
+                icon="edit"
+                onClick={() => {
+                  toggleNewsletterModal();
+                  logEvent('newsletter modal click', { scope: ['navigation', 'sign up'] });
+                }}
               >
-                Gateway House, Finchley
-              </MediaObject>
-              <MediaObject
-                id={styles.design2}
-                src="/images/landing-page/design2.png"
-                alt="Plant Room"
+                Sign Up
+              </Link>
+              <Link
+                icon="sign-in"
+                onClick={() => {
+                  toggleNewsletterModal();
+                  logEvent('newsletter modal click', { scope: ['navigation', 'sign in'] });
+                }}
               >
-                Plant Room
-              </MediaObject>
-              <MediaObject
-                id={styles.design3}
-                src="/images/landing-page/design3.png"
-                alt="Fairfield Inn and Suites"
-              >
-                Fairfield Inn and Suites
-              </MediaObject>
-            </aside>
-          </section>
-          {features.map((feature, index) => (
-            <section
-              className={classNames(styles.features, feature.reverse && styles.reverse)}
-              key={index}
-            >
-              <article>
-                <Heading1 bold condensed>{feature.heading}</Heading1>
-                <p>{feature.description}</p>
-              </article>
-              <aside>
-                <MediaObject src={feature.media} height={feature.maxHeight} />
-              </aside>
-            </section>
-          ))}
-          <section className={styles.cta}>
-            <article>
-              <Heading1 bold condensed>Time to show off!</Heading1>
-              <p>Get started with <b>CAD</b>teams <strong>for free</strong>.</p>
-              <p>Don’t miss out and join us today.</p>
-            </article>
-            <aside>
-              <Button block large onClick={toggleNewsletterModal}>Create a free account</Button>
-            </aside>
-          </section>
-        </main>
-        <Footer />
-        {newsletterModal && (
-          <Modal onClose={toggleNewsletterModal}>
-            <Heading1>Coming Soon!</Heading1>
-            <p>
-              We are working very hard to get <b>CAD</b>teams up and running.
-              Stay up-to-date with the progress by signing up to our newsletter.
-            </p>
-            <p>Fill out the form below to get started:</p>
-            <iframe title="mailchimp" src="/mailchimp.html" />
-          </Modal>
-        )}
-      </ModalProvider>
-    </>
+                Sign In
+              </Link>
+            </Navigation>
+            <main>
+              <section className={styles.hero}>
+                <article>
+                  <Heading1>
+                    Showcase your best pieces of building designs.
+                  </Heading1>
+                  <Button
+                    large
+                    onClick={() => {
+                      toggleNewsletterModal();
+                      logEvent('newsletter modal click', { scope: 'hero' });
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </article>
+                <aside>
+                  <MediaObject
+                    id={styles.design1}
+                    src="/images/landing-page/design1.png"
+                    alt="Gateway House, Finchley"
+                  >
+                    Gateway House, Finchley
+                  </MediaObject>
+                  <MediaObject
+                    id={styles.design2}
+                    src="/images/landing-page/design2.png"
+                    alt="Plant Room"
+                  >
+                    Plant Room
+                  </MediaObject>
+                  <MediaObject
+                    id={styles.design3}
+                    src="/images/landing-page/design3.png"
+                    alt="Fairfield Inn and Suites"
+                  >
+                    Fairfield Inn and Suites
+                  </MediaObject>
+                </aside>
+              </section>
+              {features.map((feature, index) => (
+                <section
+                  className={classNames(styles.features, feature.reverse && styles.reverse)}
+                  key={index}
+                >
+                  <article>
+                    <Heading1 bold condensed>{feature.heading}</Heading1>
+                    <p>{feature.description}</p>
+                  </article>
+                  <aside>
+                    <MediaObject src={feature.media} height={feature.maxHeight} />
+                  </aside>
+                </section>
+              ))}
+              <section className={styles.cta}>
+                <article>
+                  <Heading1 bold condensed>Time to show off!</Heading1>
+                  <p>Get started with <b>CAD</b>teams <strong>for free</strong>.</p>
+                  <p>Don’t miss out and join us today.</p>
+                </article>
+                <aside>
+                  <Button
+                    block
+                    large
+                    onClick={() => {
+                      toggleNewsletterModal();
+                      logEvent('newsletter modal click', { scope: 'call to action' });
+                    }}
+                  >
+                    Create a free account
+                  </Button>
+                </aside>
+              </section>
+            </main>
+            <Footer />
+            {newsletterModal && (
+              <Modal onClose={toggleNewsletterModal}>
+                <Heading1>Coming Soon!</Heading1>
+                <p>
+                  We are working very hard to get <b>CAD</b>teams up and running.
+                  Stay up-to-date with the progress by signing up to our newsletter.
+                </p>
+                <p>Fill out the form below to get started:</p>
+                <iframe title="mailchimp" src="/mailchimp.html" />
+              </Modal>
+            )}
+          </ModalProvider>
+        </>
+      )}
+    </Amplitude>
   );
 }
 
