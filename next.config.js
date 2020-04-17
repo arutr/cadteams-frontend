@@ -1,10 +1,14 @@
-const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+const {
+  PHASE_PRODUCTION_BUILD,
+  PHASE_PRODUCTION_SERVER,
+  PHASE_DEVELOPMENT_SERVER
+} = require('next/constants');
 
 module.exports = (phase) => {
-  // const isDevelopment = phase === PHASE_DEVELOPMENT_SERVER;
-  // const isStaging = phase === PHASE_PRODUCTION_BUILD && process.env.NODE_ENV === 'staging';
-  const isProduction = phase === PHASE_PRODUCTION_BUILD && process.env.NODE_ENV !== 'staging';
+  const isProduction = (phase === PHASE_PRODUCTION_BUILD || phase === PHASE_PRODUCTION_SERVER)
+                        && process.env.NODE_ENV !== 'staging';
 
+  console.log(`phase: ${phase}`);
   console.log(`environment: ${process.env.NODE_ENV}, isProduction: ${isProduction}`);
 
   const dotEnvResult = require('dotenv').config({
