@@ -1,14 +1,23 @@
-const { PHASE_PRODUCTION_BUILD } = require('next/constants');
-
-const AMPLITUDE_API_KEY_DEV = 'b24ef558d35927bc66874e6f55ee68e8';
-const AMPLITUDE_API_KEY_PROD = '3f4dbfec1d23492b37a61b301256286d';
+const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 module.exports = (phase) => {
-  const isProd = phase === PHASE_PRODUCTION_BUILD;
+  // const isDevelopment = phase === PHASE_DEVELOPMENT_SERVER;
+  // const isStaging = phase === PHASE_PRODUCTION_BUILD && process.env.NODE_ENV === 'staging';
+  const isProduction = phase === PHASE_PRODUCTION_BUILD && process.env.NODE_ENV !== 'staging';
+
+  console.log(`environment: ${process.env.NODE_ENV}, isProduction: ${isProduction}`);
+
+  const dotEnvResult = require('dotenv').config({
+    path: isProduction ? '.production.env' : '.staging.env',
+  });
+
+  if (dotEnvResult.error) {
+    throw dotEnvResult.error;
+  }
 
   return ({
     env: {
-      AMPLITUDE_API_KEY: isProd ? AMPLITUDE_API_KEY_PROD : AMPLITUDE_API_KEY_DEV,
+      AMPLITUDE_API_KEY: process.env.AMPLITUDE_API_KEY,
     },
     typescript: {
       ignoreDevErrors: true,
