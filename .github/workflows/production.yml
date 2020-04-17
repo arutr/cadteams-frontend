@@ -37,10 +37,10 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: cadteams
-        IMAGE_TAG: ${{ github.ref }}
+        #IMAGE_TAG: ${{ github.ref }}
       run: |
-        docker build -t $ECR_REPOSITORY:$GIT_TAG_NAME .
-        docker push $ECR_REPOSITORY:GIT_TAG_NAME
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
 
     - name: Logout of Amazon ECR
       if: always()
