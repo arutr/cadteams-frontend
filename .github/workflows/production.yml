@@ -45,3 +45,20 @@ jobs:
     - name: Logout of Amazon ECR
       if: always()
       run: docker logout ${{ steps.login-ecr.outputs.registry }}
+
+    - name: Reload Docker image
+      uses: appleboy/ssh-action@master
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: cadteams
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          sudo $(aws ecr get-login --no-include-email)
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
+          sudo docker stop frontend
+          sudo docker rm frontend
+          sudo docker run -d --name frontend --restart=always -p 80:3000 $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
+          sudo docker logout $ECR_REGISTRY
