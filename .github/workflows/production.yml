@@ -56,8 +56,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         envs: ECR_REGISTRY,ECR_REPOSITORY,GIT_TAG_NAME
-        debug: true
-        script_stop: true
         script: |
           sudo $(aws ecr get-login --no-include-email)
           sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
