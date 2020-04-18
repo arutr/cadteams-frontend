@@ -8,8 +8,10 @@ module.exports = (phase) => {
   const isProduction = (phase === PHASE_PRODUCTION_BUILD || phase === PHASE_PRODUCTION_SERVER)
                         && process.env.NODE_ENV !== 'staging';
 
-  console.log(`phase: ${phase}`);
-  console.log(`environment: ${process.env.NODE_ENV}, isProduction: ${isProduction}`);
+  if (phase !== PHASE_DEVELOPMENT_SERVER) {
+    console.log(`phase: ${phase}`);
+    console.log(`environment: ${process.env.NODE_ENV}, isProduction: ${isProduction}`);
+  }
 
   const dotEnvResult = require('dotenv').config({
     path: isProduction ? '.production.env' : '.staging.env',
