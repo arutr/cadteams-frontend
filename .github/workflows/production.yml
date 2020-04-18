@@ -60,5 +60,5 @@ jobs:
           sudo $(aws ecr get-login --no-include-email)
           sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
           cd server
-          sudo docker-compose up -d --force-recreate frontend
+          sudo -E docker-compose up -d --force-recreate frontend
           sudo docker logout $ECR_REGISTRY
