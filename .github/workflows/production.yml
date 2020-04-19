@@ -37,7 +37,6 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: cadteams
-        #IMAGE_TAG: ${{ github.ref }}
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
@@ -57,11 +56,10 @@ jobs:
         key: ${{ secrets.KEY }}
         envs: ECR_REGISTRY,ECR_REPOSITORY,GIT_TAG_NAME
         script: |
+          export IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
           sudo $(aws ecr get-login --no-include-email)
-          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$GIT_TAG_NAME
+          sudo docker pull $IMAGE
           cd server
-          export ECR_REGISTRY=$ECR_REGISTRY
-          export ECR_REPOSITORY=$ECR_REPOSITORY
-          export GIT_TAG_NAME=$GIT_TAG_NAME
-          sudo -Es docker-compose up -d --force-recreate frontend
+          git pull
+          sudo -E docker-compose up -d --force-recreate frontend
           sudo docker logout $ECR_REGISTRY
