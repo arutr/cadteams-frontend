@@ -1,4 +1,7 @@
+@import 'styles/mixins/responsive';
 @import 'styles/mixins/typography';
+
+$screen-wrap: $screen-s * 1.2;
 
 .footer {
   padding: var(--spacing) 0;
@@ -8,12 +11,23 @@
     @include inline-list;
 
     display: flex;
-    font-size: 0.75rem;
+    flex-direction: column;
+    font-size: 0.85rem;
     align-items: center;
     justify-content: center;
+
+    @include min-screen($screen-wrap) {
+      flex-direction: row;
+    }
 
     * + * {
       margin-left: 1rem;
     }
+  }
+}
+
+.social {
+  @include max-screen($screen-wrap) {
+    padding-top: var(--spacing);
   }
 }
