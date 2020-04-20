@@ -40,16 +40,6 @@ interface ModalProps {
 }
 
 class Modal extends React.PureComponent<ModalProps> {
-  componentDidMount() {
-    document.body.style.overflowY = 'hidden';
-    document.documentElement.style.overflowY = 'hidden';
-  }
-
-  componentWillUnmount() {
-    document.body.style.overflowY = null;
-    document.documentElement.style.overflowY = null;
-  }
-
   render() {
     const { onClose, children, ...props } = this.props;
     const modalNode = this.context;
