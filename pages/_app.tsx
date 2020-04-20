@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Amplitude, AmplitudeProvider } from 'react-amplitude-hooks';
 import { AmplitudeClient } from 'amplitude-js';
 import { isBrowser } from '@unly/utils';
@@ -22,6 +23,9 @@ export default function MyApp({ Component, pageProps }) {
       amplitudeInstance={amplitudeInstance}
       apiKey={process.env.AMPLITUDE_API_KEY}
     >
+      <Head>
+        <title>CADteams</title>
+      </Head>
       <Amplitude
         eventProperties={{
           page: {
