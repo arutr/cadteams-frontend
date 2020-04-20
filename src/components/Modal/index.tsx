@@ -48,7 +48,6 @@ class Modal extends React.PureComponent<ModalProps> {
       ? createPortal(
         <div className={styles.overlay}>
           <div className={styles.dialog} {...props}>
-            {children}
             <span
               aria-label="Close"
               className={classNames('icon', styles.close)}
@@ -57,6 +56,9 @@ class Modal extends React.PureComponent<ModalProps> {
               role="button"
               tabIndex={0}
             />
+            <section>
+              {children}
+            </section>
           </div>
         </div>,
         modalNode,
