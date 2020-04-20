@@ -52,8 +52,9 @@ $animation-duration: 500ms;
     border-top-right-radius: var(--border-radius);
   }
 
-  > *:first-child {
-    margin-top: 0;
+  section {
+    height: 100%;
+    overflow-y: auto;
   }
 }
 
