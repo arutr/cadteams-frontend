@@ -11,6 +11,7 @@ $icons:
   'menu',
   'sign-in',
   'sign-out',
+  'share',
   'users';
 
 @each $icon in $icons {
@@ -23,7 +24,7 @@ $icons:
   background-position: center;
   background-repeat: no-repeat;
   background-size: 1rem 1rem;
-  height: 1.25rem;
+  height: 18px;
   width: 1.5rem;
   vertical-align: bottom;
   // grey colour
