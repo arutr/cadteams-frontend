@@ -5,11 +5,14 @@ import classNames from 'classnames';
 import styles from './Heading.module.scss';
 
 function BaseHeading({
-  bold, children, condensed, level,
+  bold, children, condensed, level, marginTop, marginBottom,
 }) {
   const Level = level;
   return (
-    <Level className={classNames(bold && styles.bold, condensed && styles.condensed)}>
+    <Level
+      className={classNames(bold && styles.bold, condensed && styles.condensed)}
+      style={{ marginTop, marginBottom }}
+    >
       {children}
     </Level>
   );
@@ -27,6 +30,8 @@ BaseHeading.propTypes = {
   children: PropTypes.node,
   condensed: PropTypes.bool,
   level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+  marginTop: PropTypes.string,
+  marginBottom: PropTypes.string,
 };
 
 BaseHeading.defaultProps = {
@@ -34,4 +39,6 @@ BaseHeading.defaultProps = {
   children: null,
   condensed: false,
   level: 'h1',
+  marginTop: null,
+  marginBottom: null,
 };

@@ -165,7 +165,7 @@ function LandingPage() {
             <Footer />
             {newsletterModal && (
               <Modal onClose={toggleNewsletterModal}>
-                <Heading1>Coming Soon!</Heading1>
+                <Heading1 marginTop={0}>Coming Soon!</Heading1>
                 <p>
                   We are working very hard to get <b>CAD</b>teams up and running.
                   Stay up-to-date with the progress by signing up to our newsletter.
