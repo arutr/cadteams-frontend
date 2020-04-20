@@ -96,7 +96,14 @@ function LandingPage() {
                     src="/images/landing-page/design1.png"
                     alt="Gateway House, Finchley"
                   >
-                    Gateway House, Finchley
+                    <p>Gateway House, Finchley</p>
+                    <Link
+                      icon="share"
+                      href="https://www.david-miller.co.uk/gateway-house.php"
+                      external
+                    >
+                      David Miller Architects
+                    </Link>
                   </MediaObject>
                   <MediaObject
                     id={styles.design2}
@@ -110,7 +117,14 @@ function LandingPage() {
                     src="/images/landing-page/design3.png"
                     alt="Fairfield Inn and Suites"
                   >
-                    Fairfield Inn and Suites
+                    <p>Fairfield Inn and Suites</p>
+                    <Link
+                      icon="share"
+                      href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
+                      external
+                    >
+                      United BIM
+                    </Link>
                   </MediaObject>
                 </aside>
               </section>

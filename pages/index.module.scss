@@ -126,6 +126,10 @@
     scroll-snap-type: x mandatory;
     grid-template: 100% / repeat(3, calc(100vw - 2 * var(--page-margin)));
 
+    @include min-screen($screen-m) {
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    }
+
     figure {
       justify-content: center;
       scroll-snap-align: center;
@@ -135,10 +139,12 @@
           max-height: 95%;
         }
       }
-    }
 
-    @include min-screen($screen-m) {
-      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      a {
+        font-style: italic;
+        font-weight: normal;
+        text-decoration: none;
+      }
     }
 
     #design1 {
