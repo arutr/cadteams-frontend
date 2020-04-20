@@ -12,18 +12,27 @@ import styles from './Link.module.scss';
  * @param icon Left icon for the link - this also controls whether the link is underlined!
  * @param external Is this an external link? If so, create a standard anchor tag
  * @param onClick Click event handler
+ * @param className Additional HTML class(es)
  * @constructor
  */
 function Link({
-  href, children, icon, external, onClick,
+  href, children, icon, external, onClick, className,
 }) {
   return external
-    ? <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
-    : (
+    ? (
+      <a
+        href={href}
+        className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    ) : (
       <NextLink href={href}>
         {icon ? (
           <span
-            className={classNames(styles.link, icon && `icon icon__${icon}`)}
+            className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
             onClick={onClick}
             role="link"
             tabIndex={0}
@@ -32,7 +41,15 @@ function Link({
             {children}
           </span>
         ) : (
-          <a onClick={onClick} role="link" tabIndex={0} onKeyPress={onClick}>{children}</a>
+          <a
+            className={className}
+            onClick={onClick}
+            role="link"
+            tabIndex={0}
+            onKeyPress={onClick}
+          >
+            {children}
+          </a>
         )}
       </NextLink>
     );
@@ -44,6 +61,7 @@ Link.propTypes = {
   children: PropTypes.node,
   external: PropTypes.bool,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Link.defaultProps = {
@@ -52,6 +70,7 @@ Link.defaultProps = {
   children: null,
   external: false,
   onClick: null,
+  className: null,
 };
 
 export default Link;
