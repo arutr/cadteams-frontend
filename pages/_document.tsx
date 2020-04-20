@@ -15,6 +15,18 @@ export default class extends Document {
         <Head>
           <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
           <meta name="description" content="A platform for CAD and BIM specialists to showcase their best building designs." />
+          <meta name="author" content="CADteams" />
+          <meta property="og:url" content="https://cadteams.com/" />
+          <meta property="og:site_name" content="CADteams" />
+          <meta property="og:title" content="Showcase best building designs" />
+          <meta property="og:description" content="A platform for CAD and BIM specialists to showcase their best building designs." />
+          <meta property="og:type" content="website" />
+          <meta property="og:locale" content="en_GB" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content="CADteams" />
+          <meta name="twitter:description" content="A platform for CAD and BIM specialists to showcase their best building designs." />
+          <meta name="twitter:image:alt" content="CADteams" />
+          <meta name="theme-color" content="#fff" />
         </Head>
         <body>
           <Main />
