@@ -1,6 +1,17 @@
 @import 'mixins/icons';
 
-$icons: 'briefcase', 'close', 'edit', 'menu', 'sign-in', 'sign-out', 'users';
+$icons:
+  'briefcase',
+  'close',
+  'edit',
+  'facebook',
+  'instagram',
+  'linkedin',
+  'medium',
+  'menu',
+  'sign-in',
+  'sign-out',
+  'users';
 
 @each $icon in $icons {
   @include icon-image($icon, '.icon__#{$icon}');
@@ -17,4 +28,10 @@ $icons: 'briefcase', 'close', 'edit', 'menu', 'sign-in', 'sign-out', 'users';
   vertical-align: bottom;
   // grey colour
   filter: invert(26%) sepia(6%) saturate(69%) hue-rotate(251deg) brightness(98%) contrast(98%);
+}
+
+.icon__large:before {
+  background-size: 1.25rem 1.25rem;
+  height: 1.5rem;
+  width: 1.75rem;
 }
