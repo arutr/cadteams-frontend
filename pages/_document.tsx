@@ -43,6 +43,11 @@ export default class extends Document {
             src="https://unpkg.com/cookie-notice@^1/dist/cookie.notice.min.js"
           />
           <script async src="/cookie.js" />
+          <script
+            async
+            id="ze-snippet"
+            src="https://static.zdassets.com/ekr/snippet.js?key=7c2e5114-0d1f-4108-987f-55e17014a4bc"
+          />
         </Head>
         <body>
           <Main />
