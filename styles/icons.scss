@@ -25,6 +25,8 @@ $icons:
 }
 
 .icon:before {
+  @include icon-color;
+
   display: inline-block;
   content: ' ';
   background-position: center;
