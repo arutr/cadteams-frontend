@@ -27,6 +27,9 @@ export default class extends Document {
           <meta name="twitter:description" content="A platform for CAD and BIM specialists to showcase their best building designs." />
           <meta name="twitter:image:alt" content="CADteams" />
           <meta name="theme-color" content="#fff" />
+          <script async src="/hotjar.js" />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164283269-1" />
+          <script async src="/gtag.js" />
         </Head>
         <body>
           <Main />
