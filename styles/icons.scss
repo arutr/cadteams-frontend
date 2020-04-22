@@ -6,13 +6,19 @@ $icons:
   'edit',
   'facebook',
   'instagram',
+  'language',
   'linkedin',
+  'location',
+  'medal',
   'medium',
   'menu',
+  'ruler',
   'sign-in',
   'sign-out',
   'share',
-  'users';
+  'users',
+  'view'
+;
 
 @each $icon in $icons {
   @include icon-image($icon, '.icon__#{$icon}');
