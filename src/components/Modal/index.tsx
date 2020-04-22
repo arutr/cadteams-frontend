@@ -35,13 +35,19 @@ ModalProvider.defaultProps = {
 };
 
 interface ModalProps {
-  onClose: () => void,
+  onClose?: () => void,
   children: any,
+  className?: string,
 }
 
 class Modal extends React.PureComponent<ModalProps> {
   render() {
-    const { onClose, children, ...props } = this.props;
+    const {
+      onClose,
+      children,
+      className,
+      ...props
+    } = this.props;
     const modalNode = this.context;
 
     return modalNode
@@ -56,7 +62,7 @@ class Modal extends React.PureComponent<ModalProps> {
               role="button"
               tabIndex={0}
             />
-            <section>
+            <section className={className}>
               {children}
             </section>
           </div>
