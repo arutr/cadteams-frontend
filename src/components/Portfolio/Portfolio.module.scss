@@ -1,0 +1,130 @@
+@import 'styles/mixins/icons';
+@import 'styles/mixins/responsive';
+@import 'styles/variables/ui';
+
+.blank_design {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $box-shadow;
+  border-radius: var(--border-radius);
+  background-color: var(--color-silver);
+}
+
+.blank_profile {
+  @include icon-color;
+}
+
+.card {
+  background-color: var(--color-white);
+  box-shadow: $box-shadow;
+  border-radius: var(--border-radius);
+  padding: var(--spacing);
+}
+
+.cta {
+
+}
+
+.designs {
+  display: grid;
+  grid-template: repeat(4, 1fr) / 1fr;
+  grid-gap: var(--spacing);
+
+  @include min-screen($screen-m) {
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  }
+
+  img {
+    width: 100%;
+    box-shadow: $box-shadow;
+    border-radius: var(--border-radius);
+  }
+}
+
+.identity {
+  display: flex;
+
+  aside {
+    flex: 1;
+  }
+
+  img {
+    object-fit: cover;
+    width: 10rem;
+    max-height: 100%;
+    margin-right: var(--spacing);
+    border-radius: var(--border-radius);
+  }
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  > * {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .row {
+    display: grid;
+    grid-template: 1fr / repeat(2, 1fr);
+
+    > * {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+
+  //https://stackoverflow.com/questions/17881923/box-shadow-trimmed-in-css-columns-in-chrome
+  margin: -3px;
+
+  @include min-screen($screen-m) {
+    flex-direction: column;
+  }
+
+  a {
+    opacity: 1 !important;
+  }
+
+  header {
+    display: grid;
+    grid-template: repeat(2, 1fr) / 1fr;
+    grid-gap: var(--spacing);
+
+    @include min-screen($screen-m) {
+      grid-template: 1fr / repeat(2, 1fr);
+    }
+  }
+
+  > * {
+    //https://stackoverflow.com/questions/17881923/box-shadow-trimmed-in-css-columns-in-chrome
+    margin: 3px 3px var(--spacing);
+  }
+}
+
+.unique_skills {
+  text-align: center;
+
+  .row {
+    display: grid;
+    grid-template: repeat(3, 1fr) / 1fr;
+    grid-gap: var(--spacing);
+
+    @include min-screen($screen-m) {
+      grid-template: 1fr / repeat(3, 1fr);
+    }
+  }
+}
+
