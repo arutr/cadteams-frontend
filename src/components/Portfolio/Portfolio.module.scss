@@ -22,10 +22,6 @@
   padding: var(--spacing);
 }
 
-.cta {
-
-}
-
 .designs {
   display: grid;
   grid-template: repeat(4, 1fr) / 1fr;
@@ -52,7 +48,6 @@
   img {
     object-fit: cover;
     width: 10rem;
-    max-height: 100%;
     margin-right: var(--spacing);
     border-radius: var(--border-radius);
   }
