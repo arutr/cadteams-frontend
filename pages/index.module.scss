@@ -124,7 +124,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    grid-template: 100% / repeat(3, calc(100vw - 2 * var(--page-margin)));
+    grid-template: 100% / repeat(3, 100%);
 
     @include min-screen($screen-m) {
       grid-template: repeat(2, 1fr) / repeat(2, 1fr);
@@ -136,7 +136,7 @@
 
       img {
         @include max-screen($screen-m) {
-          max-height: 95%;
+          max-height: 85%;
         }
       }
 
@@ -148,7 +148,11 @@
     }
 
     #design1 {
-      grid-area: 1 / 1 / 2 / 2;
+      grid-area: 1 / 2;
+
+      @include min-screen($screen-all_designs) {
+        grid-area: 1 / 1 / 2 / 2;
+      }
 
       @include screen($screen-m, $screen-all_designs) {
         display: none;
@@ -156,7 +160,7 @@
     }
 
     #design2 {
-      grid-area: 1 / 2 / 2 / 3;
+      grid-area: 1 / 1;
 
       @include min-screen($screen-m) {
         grid-area: 1 / 1 / 3 / 3;
@@ -168,7 +172,7 @@
     }
 
     #design3 {
-      grid-area: 1 / 3 / 2 / 4;
+      grid-area: 1 / 3;
 
       @include min-screen($screen-m) {
         grid-area: 2 / 1 / 3 / 2;
