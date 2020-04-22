@@ -35,19 +35,19 @@ $animation-duration: 500ms;
   left: 0;
   top: 10%;
   z-index: 4;
-  width: calc(100% - 2 * var(--spacing));
+  width: calc(100vw - 2 * var(--spacing));
   position: absolute;
   box-shadow: $box-shadow;
   padding: var(--spacing);
   background: var(--color-cream);
   animation: slideIn $animation-duration;
-  height: calc(90% - var(--spacing));
+  height: calc(90vh - var(--spacing));
 
   @include min-screen($screen-m) {
     left: 50%;
     transform: translateX(-50%);
     max-width: var(--page-width);
-    width: calc(90% - 2 * var(--spacing));
+    width: calc(90vw - 2 * var(--spacing));
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
   }
