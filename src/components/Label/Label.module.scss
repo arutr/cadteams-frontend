@@ -1,0 +1,22 @@
+@import 'styles/variables/ui';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -0.25rem;
+
+  span {
+    flex-grow: 1;
+    margin: 0.25rem;
+  }
+}
+
+.label {
+  padding: 0.5rem;
+  text-align: center;
+  color: var(--color-white);
+  text-transform: uppercase;
+  background-color: var(--color-blue);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family__monospace);
+}
