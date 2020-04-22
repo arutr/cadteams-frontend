@@ -18,8 +18,8 @@ import styles from './Link.module.scss';
 function Link({
   href, children, icon, external, onClick, className,
 }) {
-  return external
-    ? (
+  if (external) {
+    return (
       <a
         href={href}
         className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
@@ -28,31 +28,36 @@ function Link({
       >
         {children}
       </a>
-    ) : (
+    );
+  }
+
+  if (href) {
+    return (
       <NextLink href={href}>
-        {icon ? (
-          <span
-            className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
-            onClick={onClick}
-            role="link"
-            tabIndex={0}
-            onKeyPress={onClick}
-          >
-            {children}
-          </span>
-        ) : (
-          <a
-            className={className}
-            onClick={onClick}
-            role="link"
-            tabIndex={0}
-            onKeyPress={onClick}
-          >
-            {children}
-          </a>
-        )}
+        <span
+          className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
+          onClick={onClick}
+          role="link"
+          tabIndex={0}
+          onKeyPress={onClick}
+        >
+          {children}
+        </span>
       </NextLink>
     );
+  }
+
+  return (
+    <a
+      className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
+      onClick={onClick}
+      role="link"
+      tabIndex={0}
+      onKeyPress={onClick}
+    >
+      {children}
+    </a>
+  );
 }
 
 Link.propTypes = {
