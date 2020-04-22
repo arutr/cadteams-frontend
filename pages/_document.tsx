@@ -30,6 +30,19 @@ export default class extends Document {
           <script async src="/hotjar.js" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164283269-1" />
           <script async src="/gtag.js" />
+          <script
+            data-cookie-notice={`{
+              "learnMoreLinkEnabled": true,
+              "learnMoreLinkHref": "https://www.cookiepolicygenerator.com/live.php?token=f4fTQvPPdUy8KwCfathBsjZZF5YfrKsv",
+              "buttonBgColor": "#dfdede",
+              "buttonTextColor": "#000",
+              "noticeBgColor": "#1b5faa",
+              "linkColor": "#fcf6f5",
+              "linkTarget": "_blank"
+            }`}
+            src="https://unpkg.com/cookie-notice@^1/dist/cookie.notice.min.js"
+          />
+          <script async src="/cookie.js" />
         </Head>
         <body>
           <Main />
