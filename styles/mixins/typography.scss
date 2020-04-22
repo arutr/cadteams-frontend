@@ -1,5 +1,6 @@
 @mixin anchor {
   outline: none;
+  cursor: pointer;
   color: var(--color-gray);
   transition: opacity 200ms;
 

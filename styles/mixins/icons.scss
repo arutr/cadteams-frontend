@@ -1,3 +1,8 @@
+@mixin icon-color {
+  // black -> #434243
+  filter: invert(26%) sepia(6%) saturate(69%) hue-rotate(251deg) brightness(98%) contrast(98%);
+}
+
 @mixin icon-image($icon, $target: null) {
   @if ($target == null) {
     &:before {
