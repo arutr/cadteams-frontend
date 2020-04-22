@@ -35,12 +35,14 @@ $icons:
   height: 18px;
   width: 1.5rem;
   vertical-align: bottom;
-  // grey colour
-  filter: invert(26%) sepia(6%) saturate(69%) hue-rotate(251deg) brightness(98%) contrast(98%);
 }
 
-.icon__large:before {
-  background-size: 1.25rem 1.25rem;
-  height: 1.5rem;
-  width: 1.75rem;
+.icon__large {
+  line-height: 20px;
+
+  &:before {
+    background-size: 1.25rem 1.25rem;
+    height: 1.5rem;
+    width: 1.75rem;
+  }
 }

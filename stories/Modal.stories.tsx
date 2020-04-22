@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal, { ModalProvider } from '../src/components/Modal';
 import Button from '../src/components/Button';
 import { Heading1 } from '../src/components/Heading';
+import User from '../src/api/User';
+import PortfolioModal from '../src/components/Portfolio';
 
 export function Basic() {
   const [open, setOpen] = useState(false);
@@ -27,6 +29,37 @@ export function Basic() {
           <Button block>Learn More</Button>
         </Modal>
       )}
+    </ModalProvider>
+  );
+}
+
+export function Portfolio() {
+  const user: User = {
+    firstName: 'Manuel',
+    lastName: 'A.',
+    profileUrl: '/images/portfolio-demo/profile-picture.jpg',
+    specialisation: 'Architectural Technology',
+    labels: ['Residential', 'Modular'],
+    location: 'Brighton, UK',
+    experience: 5,
+    languages: ['English', 'Spanish'],
+    tools: ['Revit', '3Ds Max', 'Photoshop'],
+    designs: [
+      '/images/portfolio-demo/design1.png',
+      '/images/portfolio-demo/design2.png',
+      '/images/portfolio-demo/design3.png',
+      '/images/portfolio-demo/design4.png',
+    ],
+    uniqueSkills: [
+      'Tight plantroom coordination',
+      '2D and 3D work',
+      'Foundation drawings',
+    ],
+  };
+
+  return (
+    <ModalProvider>
+      <PortfolioModal onClose={() => {}} user={user} />
     </ModalProvider>
   );
 }
