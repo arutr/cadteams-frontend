@@ -7,8 +7,8 @@ $screen-wrap: $screen-s * 1.2;
   padding: var(--spacing) 0;
   background-color: var(--color-silver);
 
-  @include max-screen($screen-s) {
-    padding-bottom: calc(2.5 * var(--spacing));
+  @include max-screen($screen-m) {
+    padding-bottom: 4rem;
   }
 
   ul {
