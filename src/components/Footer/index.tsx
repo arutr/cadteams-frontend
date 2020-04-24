@@ -34,7 +34,7 @@ function Footer() {
             external
             href="https://drive.google.com/uc?id=1MuNKTTASbRC7NhVGxbMNxtwDDdhxrOe9"
           >
-            Terms and Conditions
+            Privacy & Terms
           </Link>
           <a href="mailto:hello@cadteams.com">Contact Us</a>
         </div>
