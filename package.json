@@ -14,6 +14,8 @@
     "build-docker:staging": "docker build --rm --build-arg ENVIRONMENT=staging -t cadteams/frontend ."
   },
   "dependencies": {
+    "@types/classnames": "2.2.10",
+    "@types/lodash": "4.14.150",
     "@types/react": "16.9.31",
     "@types/react-dom": "16.9.6",
     "@types/node": "13.9.8",
@@ -21,6 +23,7 @@
     "amplitude-js": "5.11.0",
     "classnames": "2.2.6",
     "dotenv": "8.2.0",
+    "lodash": "4.17.15",
     "next": "9.3.4",
     "normalize.css": "8.0.1",
     "react": "16.13.1",
