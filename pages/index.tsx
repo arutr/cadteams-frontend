@@ -51,6 +51,11 @@ function LandingPage() {
       '/images/portfolio-demo/design3.png',
       '/images/portfolio-demo/design4.png',
     ],
+    uniqueSkills: [
+      'Combining Revit and image editing tools for stunning visuals',
+      'Construction-ready drawings in line with BS',
+      'Surveying and site supervision',
+    ],
   };
   const [newsletterModal, setNewsletterModal] = useState(false);
   const [portfolioModal, setPortfolioModal] = useState(false);
