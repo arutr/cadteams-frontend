@@ -85,8 +85,10 @@
 }
 
 .hero {
+  $viewport-height: calc(var(--vh, 1vh) * 100);
+
   display: flex;
-  height: calc(100vh - (2 * var(--spacing)) - var(--logo-height));
+  height: calc(#{$viewport-height} - (2 * var(--spacing)) - var(--logo-height));
   max-height: 800px;
 
   @include max-screen($screen-m) {
@@ -183,4 +185,9 @@
       }
     }
   }
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
 }
