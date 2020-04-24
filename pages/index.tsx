@@ -153,7 +153,7 @@ function LandingPage() {
       </main>
       <Footer />
       {newsletterModal && (
-        <Modal onClose={toggleNewsletterModal}>
+        <Modal className={styles.newsletter} onClose={toggleNewsletterModal}>
           <Heading1 marginTop={0}>Coming Soon!</Heading1>
           <p>
             We are working very hard to get <b>CAD</b>teams up and running.

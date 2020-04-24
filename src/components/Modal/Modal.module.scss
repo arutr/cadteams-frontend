@@ -32,6 +32,8 @@ $animation-duration: 500ms;
 }
 
 .dialog {
+  $dialog-height: calc(var(--vh, 1vh) * 90);
+
   left: 0;
   top: 10%;
   z-index: 4;
@@ -41,7 +43,7 @@ $animation-duration: 500ms;
   padding: var(--spacing);
   background: var(--color-cream);
   animation: slideIn $animation-duration;
-  height: calc(90vh - var(--spacing));
+  height: calc(#{$dialog-height} - 2 * var(--spacing));
 
   @include min-screen($screen-m) {
     left: 50%;
