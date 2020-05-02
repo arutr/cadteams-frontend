@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import Navigation from '../src/components/Navigation';
+import NextLink from 'next/link';
 import Link from '../src/components/Link';
 import Footer from '../src/components/Footer';
 import { Heading1 } from '../src/components/Heading';
-import Button from '../src/components/Button';
+import { AnchorButton } from '../src/components/Button';
 import MediaObject from '../src/components/MediaObject';
 import Modal, { ModalProvider } from '../src/components/Modal';
 
@@ -70,23 +70,15 @@ function LandingPage() {
 
   return (
     <ModalProvider>
-      <Navigation>
-        <Link icon="edit" onClick={toggleNewsletterModal}>
-          Sign Up
-        </Link>
-        <Link icon="sign-in" onClick={toggleNewsletterModal}>
-          Sign In
-        </Link>
-      </Navigation>
       <main>
         <section className={styles.hero}>
           <article>
             <Heading1>
               Showcase your best pieces of building designs.
             </Heading1>
-            <Button large onClick={toggleNewsletterModal}>
-              Sign Up
-            </Button>
+            <NextLink href="/sign-up" passHref>
+              <AnchorButton large>Sign Up</AnchorButton>
+            </NextLink>
           </article>
           <aside>
             <MediaObject
@@ -150,9 +142,11 @@ function LandingPage() {
             <p>Don’t miss out and join us today.</p>
           </article>
           <aside>
-            <Button block large onClick={toggleNewsletterModal}>
-              Create a free account
-            </Button>
+            <NextLink href="/sign-up" passHref>
+              <AnchorButton block large>
+                Create a free account
+              </AnchorButton>
+            </NextLink>
           </aside>
         </section>
       </main>
