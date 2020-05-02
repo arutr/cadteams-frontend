@@ -1,0 +1,31 @@
+@import 'styles/variables/ui';
+
+form {
+  > * + * {
+    margin-top: var(--spacing);
+  }
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  background-color: var(--color-silver);
+  transition: box-shadow 200ms, border 200ms;
+  font-family: var(--font-family__sans-serif);
+
+  &[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $box-shadow;
+    border-color: var(--color-gray);
+  }
+
+  &::placeholder {
+    font-family: var(--font-family__monospace);
+  }
+}
