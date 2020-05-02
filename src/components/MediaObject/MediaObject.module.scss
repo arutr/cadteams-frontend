@@ -4,6 +4,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   figcaption {
     width: 100%;
@@ -21,6 +22,12 @@
     p {
       margin: 0;
       line-height: 1.5;
+    }
+
+    a {
+      font-style: italic;
+      font-weight: normal;
+      text-decoration: none;
     }
   }
 
