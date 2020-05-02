@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import debounce from 'lodash/debounce';
+import '../styles/index.scss';
+import { AppProps } from 'next/app';
 import { Amplitude, AmplitudeProvider } from 'react-amplitude-hooks';
 import { AmplitudeClient } from 'amplitude-js';
 import { isBrowser } from '@unly/utils';
+import AuthProvider from '../src/components/AuthProvider';
+import Navigation from '../src/components/Navigation';
+import useResize from '../src/utils/viewportHeight';
 
-import '../styles/index.scss';
+export default function App({ Component, pageProps }: AppProps) {
+  const Layout = (
+    <AuthProvider>
+      <Navigation />
+      <Component {...pageProps} />
+    </AuthProvider>
+  );
 
-// eslint-disable-next-line react/prop-types
-export default function MyApp({ Component, pageProps }) {
   if (!isBrowser()) {
-    return <Component {...pageProps} />;
+    return Layout;
   }
 
-  function handleResize() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-
-  useEffect(() => {
-    handleResize();
-    const debouncedResize = debounce(handleResize, 500);
-    window.addEventListener('resize', debouncedResize);
-    return () => window.removeEventListener('resize', debouncedResize);
-  });
+  useResize();
 
   // eslint-disable-next-line global-require
   const amplitude = require('amplitude-js');
   const amplitudeInstance: AmplitudeClient = amplitude.getInstance();
-
   amplitudeInstance.init(process.env.AMPLITUDE_API_KEY);
 
   return (
@@ -49,7 +46,7 @@ export default function MyApp({ Component, pageProps }) {
           },
         }}
       >
-        <Component {...pageProps} />
+        {Layout}
       </Amplitude>
     </AmplitudeProvider>
   );
