@@ -2,7 +2,7 @@
 @import 'mixins/responsive';
 @import 'variables/typography';
 
-a {
+a:not([role="button"]) {
   @include anchor;
 }
 
@@ -40,8 +40,11 @@ h6 {
   font-weight: normal;
 }
 
-p {
+label, p {
   line-height: 1.5;
+}
+
+p {
   margin: 0.25rem 0;
 }
 
