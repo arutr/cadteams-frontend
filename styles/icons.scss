@@ -4,7 +4,9 @@ $icons:
   'briefcase',
   'close',
   'edit',
+  'error',
   'facebook',
+  'google',
   'instagram',
   'language',
   'linkedin',
@@ -17,6 +19,7 @@ $icons:
   'sign-out',
   'share',
   'users',
+  'user-blank',
   'view'
 ;
 
@@ -45,4 +48,8 @@ $icons:
     height: 1.5rem;
     width: 1.75rem;
   }
+}
+
+.icon__white:before {
+  filter: invert(100%);
 }
