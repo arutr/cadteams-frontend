@@ -1,0 +1,121 @@
+@import 'styles/mixins/responsive';
+@import 'styles/variables/layout';
+
+$content-width: 55vw;
+
+.button__facebook {
+  $color: #4267b2;
+
+  background-color: $color !important;
+
+  &:focus,
+  &:hover {
+    background-color: darken($color, 5%) !important;
+  }
+
+  &:active {
+    background-color: darken($color, 10%) !important;
+  }
+}
+
+.button__google {
+  color: inherit !important;
+  background-color: white !important;
+
+  &:focus,
+  &:hover {
+    background-color: darken(white, 5%) !important;
+  }
+
+  &:active {
+    background-color: darken(white, 10%) !important;
+  }
+}
+
+.error {
+  padding: 0.75rem;
+  margin: var(--spacing) 0;
+  color: var(--color-white);
+  background-color: var(--color-red);
+  border-radius: var(--border-radius);
+
+  &:before {
+    margin-right: 0.25rem;
+  }
+}
+
+.main {
+  display: flex;
+  height: 90vh;
+
+  @include max-screen($screen-m) {
+    margin-bottom: 5rem;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing);
+
+    @include min-screen($screen-m) {
+      width: calc(#{$content-width} - 2 * var(--page-margin));
+      padding-right: 5vw;
+    }
+
+    @include min-screen($page-width + 2 * $page-margin__desktop) {
+      width: calc(#{$content-width} - var(--page-margin) - (100vw - #{$page-width}) / 2);
+    }
+
+    .background {
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -1;
+      height: 100%;
+      position: fixed;
+      background-color: var(--color-cream);
+
+      @include min-screen($screen-m) {
+        width: #{$content-width};
+      }
+    }
+
+    button + button {
+      margin-top: var(--spacing);
+    }
+
+    .separator {
+      display: flex;
+      margin: var(--spacing) 0;
+
+      hr {
+        flex: 2;
+        border: none;
+        height: 2px;
+        background-color: var(--color-gray);
+      }
+
+      strong {
+        flex: 1;
+        text-align: center;
+      }
+    }
+
+    input[type="checkbox"] + label, p {
+      text-align: justify;
+    }
+  }
+
+  aside {
+    display: none;
+
+    @include min-screen($screen-m) {
+      flex: 1;
+      display: flex;
+      padding-left: 5vw;
+      justify-content: center;
+      padding-top: var(--spacing);
+    }
+  }
+}
