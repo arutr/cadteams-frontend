@@ -7,47 +7,48 @@
     "build": "next build",
     "start": "next start",
     "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook",
-    "docker": "docker run -d --name frontend -p 80:3000 cadteams/frontend",
-    "docker:staging": "docker run --rm -it --name frontend -p 80:3000 cadteams/frontend",
-    "build-docker": "docker build --rm -t cadteams/frontend .",
-    "build-docker:staging": "docker build --rm --build-arg ENVIRONMENT=staging -t cadteams/frontend ."
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@types/axios": "0.14.0",
     "@types/classnames": "2.2.10",
     "@types/lodash": "4.14.150",
+    "@types/node": "13.9.8",
+    "@types/nookies": "2.0.3",
     "@types/react": "16.9.31",
     "@types/react-dom": "16.9.6",
-    "@types/node": "13.9.8",
     "@unly/utils": "1.0.3",
     "amplitude-js": "5.11.0",
+    "axios": "0.19.2",
     "classnames": "2.2.6",
     "dotenv": "8.2.0",
     "lodash": "4.17.15",
     "next": "9.3.4",
+    "nookies": "2.2.4",
     "normalize.css": "8.0.1",
     "react": "16.13.1",
     "react-amplitude-hooks": "0.9.14",
     "react-dom": "16.13.1",
+    "react-hook-form": "5.6.0",
+    "react-social-login": "3.4.6",
     "sass": "1.26.3",
+    "store2": "2.11.1",
+    "swr": "0.2.0",
     "typescript": "3.8.3"
   },
   "devDependencies": {
     "@storybook/addon-actions": "5.3.18",
     "@storybook/addon-links": "5.3.18",
     "@storybook/addons": "5.3.18",
-    "@storybook/react": "5.3.18",
     "@storybook/preset-typescript": "3.0.0",
+    "@storybook/react": "5.3.18",
+    "@typescript-eslint/eslint-plugin": "2.26.0",
     "babel-loader": "8.1.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-typescript": "7.2.0",
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.19.0",
-    "eslint-plugin-react-hooks": "2.5.0",
-    "@typescript-eslint/eslint-plugin": "2.26.0"
-  },
-  "optionalDependencies": {
-    "fsevents": "^2.1.2"
+    "eslint-plugin-react-hooks": "2.5.0"
   }
 }
