@@ -22,7 +22,7 @@ function LandingPage() {
     },
     {
       heading: 'Explore designs of other talented individuals.',
-      description: `Browse through a gallery of design portfolios created by top CAD/BIM
+      description: `Browse through a gallery of design portfolios created by top BIM/CAD
       specialists.`,
       media: '/images/landing-page/feature2.png',
       reverse: true,
@@ -38,9 +38,9 @@ function LandingPage() {
   const user: User = {
     firstName: 'Manuel',
     lastName: 'A.',
-    profileUrl: '/images/portfolio-demo/profile-picture.jpg',
-    specialisation: 'Architectural Technology',
-    labels: ['Residential', 'Modular'],
+    profilePhoto: '/images/portfolio-demo/profile-picture.jpg',
+    specialization: 'Architectural Technician',
+    sectors: ['Residential', 'Modular'],
     location: 'Brighton, UK',
     experience: 5,
     languages: ['English', 'Spanish'],

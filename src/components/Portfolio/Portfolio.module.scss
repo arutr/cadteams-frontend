@@ -95,10 +95,6 @@
     flex-direction: column;
   }
 
-  a {
-    opacity: 1 !important;
-  }
-
   header {
     display: grid;
     grid-template: repeat(2, auto) / 1fr;
