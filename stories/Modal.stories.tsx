@@ -37,9 +37,9 @@ export function Portfolio() {
   const user: User = {
     firstName: 'Manuel',
     lastName: 'A.',
-    profileUrl: '/images/portfolio-demo/profile-picture.jpg',
-    specialisation: 'Architectural Technology',
-    labels: ['Residential', 'Modular'],
+    profilePhoto: '/images/portfolio-demo/profile-picture.jpg',
+    specialization: 'Architectural Technology',
+    sectors: ['Residential', 'Modular'],
     location: 'Brighton, UK',
     experience: 5,
     languages: ['English', 'Spanish'],

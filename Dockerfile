@@ -1,13 +1,13 @@
 # Do the npm install in the full image
 FROM mhart/alpine-node AS builder
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json yarn.lock ./
+RUN yarn --prod
 COPY . .
 
 ARG ENVIRONMENT=production
 ENV NODE_ENV $ENVIRONMENT
-RUN npm run build
+RUN yarn build
 
 # And then copy over node_modules, etc from that stage to the smaller base image
 FROM mhart/alpine-node:base
