@@ -7,6 +7,7 @@ import styles from './Link.module.scss';
 
 /**
  * Link component
+ * @param as Render link as a given HTML element
  * @param href Route path
  * @param children Link text
  * @param icon Left icon for the link - this also controls whether the link is underlined!
@@ -16,25 +17,27 @@ import styles from './Link.module.scss';
  * @constructor
  */
 function Link({
-  href, children, icon, external, onClick, className,
+  as, href, children, icon, external, onClick, className,
 }) {
   if (external) {
+    const As = as ?? 'a';
     return (
-      <a
+      <As
         href={href}
         className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
       >
         {children}
-      </a>
+      </As>
     );
   }
 
   if (href) {
+    const As = as ?? 'span';
     return (
       <NextLink href={href}>
-        <span
+        <As
           className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
           onClick={onClick}
           role="link"
@@ -42,13 +45,14 @@ function Link({
           onKeyPress={onClick}
         >
           {children}
-        </span>
+        </As>
       </NextLink>
     );
   }
 
+  const As = as ?? 'a';
   return (
-    <a
+    <As
       className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
       onClick={onClick}
       role="link"
@@ -56,11 +60,12 @@ function Link({
       onKeyPress={onClick}
     >
       {children}
-    </a>
+    </As>
   );
 }
 
 Link.propTypes = {
+  as: PropTypes.node,
   href: PropTypes.string,
   icon: PropTypes.string,
   children: PropTypes.node,
@@ -70,6 +75,7 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
+  as: null,
   href: '',
   icon: '',
   children: null,

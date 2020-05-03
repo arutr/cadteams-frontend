@@ -1,9 +1,9 @@
 interface User {
   firstName: string;
   lastName: string;
-  profileUrl?: string;
-  specialisation: string;
-  labels: string[];
+  profilePhoto?: string;
+  specialization: string;
+  sectors: string[];
   location: string;
   experience: number;
   languages: string[];

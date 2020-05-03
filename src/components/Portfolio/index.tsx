@@ -5,7 +5,7 @@ import User from '../../api/User';
 import { Heading1, Heading2, Heading3 } from '../Heading';
 import Label, { LabelContainer } from '../Label';
 import Link from '../Link';
-import Button from '../Button';
+import Button, { AnchorButton } from '../Button';
 
 import styles from './Portfolio.module.scss';
 
@@ -20,20 +20,20 @@ function Portfolio({ user, onClose }: Props) {
       <header>
         <div className={classNames(styles.card, styles.identity)}>
           <img
-            className={!user.profileUrl ? styles.blank_profile : null}
-            src={user.profileUrl || '/icons/user-blank.svg'}
+            className={!user.profilePhoto ? styles.blank_profile : null}
+            src={user.profilePhoto || '/icons/user-blank.svg'}
             alt={`${user.firstName} ${user.lastName}`}
           />
           <aside>
             <Heading1 bold condensed marginTop={0} marginBottom={0}>
-              {user.firstName ? `${user.firstName} ${user.lastName}` : 'CAD/BIM Specialist'}
+              {user.firstName ? `${user.firstName} ${user.lastName}` : 'BIM/CAD Specialist'}
             </Heading1>
             <Heading3 marginTop="0.25rem">
-              {user.specialisation}
+              {user.specialization}
             </Heading3>
-            {user.labels && (
+            {user.sectors && (
               <LabelContainer>
-                {user.labels.map((label, index) => (
+                {user.sectors.map((label, index) => (
                   <Label key={index}>
                     {label}
                   </Label>
@@ -116,9 +116,9 @@ function Portfolio({ user, onClose }: Props) {
           like {user.firstName} on <b>CAD</b>teams <strong>soon</strong>.
           Stay informed on our progress through <b>CAD</b>teams Magazine.
         </p>
-        <Link external href="http://eepurl.com/gXt3-L">
-          <Button block>Sign up to the newsletter</Button>
-        </Link>
+        <AnchorButton block external href="https://eepurl.com/gXt3-L">
+          Sign up to the newsletter
+        </AnchorButton>
       </footer>
     </Modal>
   );
