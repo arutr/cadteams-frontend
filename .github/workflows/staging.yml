@@ -1,0 +1,56 @@
+name: Frontend Staging Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-2
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    #- name: Get tag name
+    #  uses: olegtarasov/get-tag@v2
+
+    - name: Build, tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: frontend
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:staging --build-arg ENVIRONMENT=staging .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:staging
+
+    - name: Logout of Amazon ECR
+      if: always()
+      run: docker logout ${{ steps.login-ecr.outputs.registry }}
+
+    - name: Reload Docker image
+      uses: appleboy/ssh-action@master
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: frontend
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        envs: ECR_REGISTRY,ECR_REPOSITORY
+        script: |
+          export IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:staging
+          sudo $(aws ecr get-login --no-include-email)
+          sudo docker pull $IMAGE
+          cd server
+          git pull
+          sudo -E docker-compose up -d --force-recreate frontend-staging
+          sudo docker logout $ECR_REGISTRY
