@@ -18,6 +18,7 @@ COPY --from=builder /app/next.config.js ./next.config.js
 COPY --from=builder /app/public ./public
 
 ARG ENVIRONMENT=production
+ENV NODE_ENV $ENVIRONMENT
 COPY --from=builder /app/.$ENVIRONMENT.env ./.$ENVIRONMENT.env
 
 EXPOSE 3000
