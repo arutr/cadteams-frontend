@@ -145,7 +145,8 @@ function SignUp() {
         provider="facebook"
         appId={process.env.FACEBOOK_APP_ID}
         onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
-        onLoginFailure={setServerError}
+        onLoginFailure={() => setServerError(`Social media authentication failed. Refresh the
+        page to try again.`)}
         scope="public_profile,email"
       />
     </AuthLayout>
