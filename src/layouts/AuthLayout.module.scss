@@ -46,10 +46,13 @@ $content-width: 55vw;
 
 .main {
   display: flex;
-  height: 90vh;
 
   @include max-screen($screen-m) {
     margin-bottom: 5rem;
+  }
+
+  @include min-screen($screen-m) {
+    height: 90vh;
   }
 
   .content {
