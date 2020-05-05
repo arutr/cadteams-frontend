@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import NextLink from 'next/link';
+// import NextLink from 'next/link';
 import Link from '../src/components/Link';
 import Footer from '../src/components/Footer';
 import { Heading1 } from '../src/components/Heading';
-import { AnchorButton } from '../src/components/Button';
+import Button from '../src/components/Button';
 import MediaObject from '../src/components/MediaObject';
 import Modal, { ModalProvider } from '../src/components/Modal';
 
@@ -76,9 +76,9 @@ function LandingPage() {
             <Heading1>
               Showcase your best pieces of building designs.
             </Heading1>
-            <NextLink href="/sign-up" passHref>
-              <AnchorButton large>Sign Up</AnchorButton>
-            </NextLink>
+            {/* <NextLink href="/sign-up" passHref> */}
+            <Button onClick={toggleNewsletterModal} large>Sign Up</Button>
+            {/* </NextLink> */}
           </article>
           <aside>
             <MediaObject
@@ -142,11 +142,11 @@ function LandingPage() {
             <p>Don’t miss out and join us today.</p>
           </article>
           <aside>
-            <NextLink href="/sign-up" passHref>
-              <AnchorButton block large>
-                Create a free account
-              </AnchorButton>
-            </NextLink>
+            {/* <NextLink href="/sign-up" passHref> */}
+            <Button onClick={toggleNewsletterModal} block large>
+              Create a free account
+            </Button>
+            {/* </NextLink> */}
           </aside>
         </section>
       </main>

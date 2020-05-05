@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Router from 'next/router';
 import React from 'react';
 import { useAuth } from '../AuthProvider';
+// import { AnchorButton } from '../Button';
 import styles from './Navigation.module.scss';
 import Link from '../Link';
 
@@ -12,8 +13,8 @@ function Navigation() {
   if (!isAuthenticated()) {
     Links = (
       <ul>
-        <Link as="li" href="/sign-up" icon="edit">Sign Up</Link>
-        <Link as="li" href="/log-in" icon="sign-in">Log In</Link>
+        <Link external href="https://eepurl.com/gXt3-L" icon="edit">Sign Up</Link>
+        <Link external href="https://eepurl.com/gXt3-L" icon="sign-in">Log In</Link>
       </ul>
     );
   } else if (Router.pathname.includes('/app')) {
