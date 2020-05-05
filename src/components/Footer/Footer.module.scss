@@ -1,7 +1,7 @@
 @import 'styles/mixins/responsive';
 @import 'styles/mixins/typography';
 
-$screen-wrap: $screen-s * 1.2;
+$screen-wrap: $screen-s * 1.4;
 
 .footer {
   padding: var(--spacing) 0;
