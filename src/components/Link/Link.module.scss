@@ -6,3 +6,11 @@
   cursor: pointer;
   display: inline-block;
 }
+
+.hover-effect {
+  &:active,
+  &:focus,
+  &:hover {
+    opacity: 0.75;
+  }
+}

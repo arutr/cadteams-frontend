@@ -3,12 +3,6 @@
   cursor: pointer;
   color: var(--color-gray);
   transition: opacity 200ms;
-
-  &:active,
-  &:focus,
-  &:hover {
-    opacity: 0.75;
-  }
 }
 
 @mixin inline-list {

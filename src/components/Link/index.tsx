@@ -17,14 +17,21 @@ import styles from './Link.module.scss';
  * @constructor
  */
 function Link({
-  as, href, children, icon, external, onClick, className,
+  as, href, children, icon, external, onClick, className, hoverEffect,
 }) {
+  const classes = classNames(
+    styles.link,
+    className,
+    hoverEffect && styles['hover-effect'],
+    icon && `icon icon__${icon}`,
+  );
+
   if (external) {
     const As = as ?? 'a';
     return (
       <As
         href={href}
-        className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
+        className={classes}
         target="_blank"
         rel="noopener"
       >
@@ -38,7 +45,7 @@ function Link({
     return (
       <NextLink href={href}>
         <As
-          className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
+          className={classes}
           onClick={onClick}
           role="link"
           tabIndex={0}
@@ -53,7 +60,7 @@ function Link({
   const As = as ?? 'a';
   return (
     <As
-      className={classNames(styles.link, className, icon && `icon icon__${icon}`)}
+      className={classes}
       onClick={onClick}
       role="link"
       tabIndex={0}
@@ -66,12 +73,13 @@ function Link({
 
 Link.propTypes = {
   as: PropTypes.node,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  external: PropTypes.bool,
   href: PropTypes.string,
   icon: PropTypes.string,
-  children: PropTypes.node,
-  external: PropTypes.bool,
+  hoverEffect: PropTypes.bool,
   onClick: PropTypes.func,
-  className: PropTypes.string,
 };
 
 Link.defaultProps = {
@@ -81,6 +89,7 @@ Link.defaultProps = {
   children: null,
   external: false,
   onClick: null,
+  hoverEffect: true,
   className: null,
 };
 
