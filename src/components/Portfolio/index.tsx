@@ -81,7 +81,7 @@ function Portfolio({ user, onClose }: Props) {
         {[1, 2, 3, 4].map((_, index) => {
           if (user.designs[index]) {
             return (
-              <Link key={index} external href={user.designs[index]}>
+              <Link key={index} external href={user.designs[index]} hoverEffect={false}>
                 <img
                   src={user.designs[index]}
                   alt="Design"

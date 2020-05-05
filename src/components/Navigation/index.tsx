@@ -33,7 +33,7 @@ function Navigation() {
   return (
     <header className={styles.header}>
       <nav>
-        <Link href={isAuthenticated() ? '/app' : '/'}>
+        <Link href={isAuthenticated() ? '/app' : '/'} hoverEffect={false}>
           <img src="/images/logo.svg" alt="CADteams" />
         </Link>
         {Links}
