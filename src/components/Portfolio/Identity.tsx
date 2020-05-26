@@ -127,7 +127,7 @@ function ProfilePictureForm({ isProfile, setDialog, user }) {
   const profilePicture = user?.profilePicture;
   const profilePictureUrl = getApiResource(
     profilePicture?.formats?.thumbnail?.url,
-    profilePicture?.profilePicture?.url,
+    profilePicture?.url,
   );
 
   const onClick = () => document.querySelector<HTMLInputElement>('#profilePicture').click();
