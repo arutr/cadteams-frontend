@@ -3,7 +3,7 @@
 
 .button {
   border: none;
-  display: block;
+  display: inline-block;
   cursor: pointer;
   font-weight: 600;
   user-select: none;
@@ -14,14 +14,8 @@
   text-transform: uppercase;
   background-color: var(--color-gray);
   border-radius: var(--border-radius);
-  transition: background-color 200ms, box-shadow 200ms;
+  transition: background-color 200ms, filter 200ms;
   font-family: var(--font-family__monospace), monospace;
-
-  &:active,
-  &:focus,
-  &:hover {
-    box-shadow: $box-shadow;
-  }
 
   &:focus {
     outline: none;

@@ -1,5 +1,6 @@
 import React from 'react';
 import SocialLogin from 'react-social-login';
+import Icon from 'src/components/Icon';
 import styles from '../layouts/AuthLayout.module.scss';
 import Button from './Button';
 
@@ -10,18 +11,9 @@ interface Props {
 function FacebookLogin({ triggerLogin }: Props) {
   return (
     <Button onClick={triggerLogin} block className={styles.button__facebook}>
-      <span className="icon icon__white icon__facebook" /> Continue with Facebook
-    </Button>
-  );
-}
-
-function GoogleLogin({ triggerLogin }: Props) {
-  return (
-    <Button onClick={triggerLogin} block className={styles.button__google}>
-      <span className="icon icon__google" /> Sign in with Google
+      <Icon name="facebook" inverted /> Continue with Facebook
     </Button>
   );
 }
 
 export const FacebookLoginButton = SocialLogin(FacebookLogin);
-export const GoogleLoginButton = SocialLogin(GoogleLogin);
