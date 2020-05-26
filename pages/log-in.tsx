@@ -1,33 +1,31 @@
-import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import NextLink from 'next/link';
-import { LoginForm } from '../src/api/Auth';
-import { useAuth } from '../src/components/AuthProvider';
+import { LoginForm } from 'src/api/Auth';
+import Dialog from 'src/components/Dialog';
+import Icon from 'src/components/Icon';
+import { useAuth } from 'src/contexts/AuthProvider';
+import { Error, Form, Input } from 'src/components/Form';
+import { Heading1 } from 'src/components/Heading';
+import { FacebookLoginButton } from 'src/components/SocialLogin';
 import Button, { AnchorButton } from '../src/components/Button';
-import { Error, Input } from '../src/components/Form';
-import { Heading1 } from '../src/components/Heading';
 import Link from '../src/components/Link';
 import MediaObject from '../src/components/MediaObject';
 import PageTitle from '../src/components/PageTitle';
-import { FacebookLoginButton } from '../src/components/SocialLogin';
 import AuthLayout from '../src/layouts/AuthLayout';
 import styles from '../src/layouts/AuthLayout.module.scss';
 
 function LogIn() {
   const [serverError, setServerError] = useState<string>();
-  const {
-    register, handleSubmit, errors,
-  } = useForm<LoginForm>();
-
+  const { register, handleSubmit, errors } = useForm<LoginForm>();
   const { handleSocialLogin, logIn, redirectToApp } = useAuth();
   const onSubmit = handleSubmit(async (values) => {
     setServerError(null);
     try {
       await logIn(values).then(redirectToApp);
     } catch (error) {
-      if (error.response) {
-        setServerError(error.response?.data?.message[0]?.messages[0]?.message);
+      if (error.response?.data?.message[0]?.messages) {
+        setServerError(error.response.data.message[0]?.messages[0]?.message);
       } else {
         setServerError('Unknown error has occurred. Please refresh the page.');
       }
@@ -43,11 +41,10 @@ function LogIn() {
       >
         <p>Pont de Sèvres Towers</p>
         <Link
-          icon="share"
           href="https://www.archdaily.com/224252/citylights-dominique-perrault-architecture"
           external
         >
-          Citylights / Dominique Perrault Architecture
+          <Icon name="share" /> Citylights / Dominique Perrault Architecture
         </Link>
       </MediaObject>
     )}
@@ -56,17 +53,16 @@ function LogIn() {
       <Heading1 marginBottom="0">
         Log In
       </Heading1>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         {serverError && (
-          <div className={classNames(styles.error, 'icon icon__white icon__error')}>
-            {serverError}
-          </div>
+          <Dialog type="error" message={serverError} />
         )}
         <Input
           label="E-mail Address:"
           placeholder="your@email.com"
           id="email"
           type="email"
+          autoComplete="username"
           ref={register({ required: 'Please enter your e-mail address.' })}
         />
         <Error errors={errors} name="email" />
@@ -75,12 +71,13 @@ function LogIn() {
           placeholder="y0urPa55w0rd"
           id="password"
           type="password"
+          autoComplete="current-password"
           ref={register({ required: 'Please enter a password.' })}
         />
         <Error errors={errors} name="password" />
         <Link external as="a" href="mailto:hello@cadteams.com">Forgot your password?</Link>
         <Button type="submit" block>Submit</Button>
-      </form>
+      </Form>
       <div className={styles.separator}>
         <hr />
         <strong>OR</strong>
@@ -106,12 +103,3 @@ function LogIn() {
 }
 
 export default LogIn;
-
-/*
-<GoogleLoginButton
-  provider="google"
-  appId={process.env.GOOGLE_CLIENT_ID}
-  onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
-  onLoginFailure={setServerError}
-/>
- */
