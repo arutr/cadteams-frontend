@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from '../Link';
-
+import Icon from 'src/components/Icon';
+import Link from 'src/components/Link';
 import styles from './Footer.module.scss';
 
 const socialMedia = [
@@ -36,17 +36,13 @@ function Footer() {
           >
             Privacy & Terms
           </Link>
-          <a href="mailto:hello@cadteams.com">Contact Us</a>
+          <Link external href="mailto:hello@cadteams.com">Contact Us</Link>
         </div>
         <div className={styles.social}>
           {socialMedia.map(({ name, href }, index) => (
-            <Link
-              key={index}
-              className="icon__large"
-              icon={name}
-              href={href}
-              external
-            />
+            <Link key={index} href={href} external>
+              <Icon name={name} large />
+            </Link>
           ))}
         </div>
       </ul>

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import Head from 'next/head';
 import '../styles/index.scss';
@@ -5,15 +6,19 @@ import { AppProps } from 'next/app';
 import { Amplitude, AmplitudeProvider } from 'react-amplitude-hooks';
 import { AmplitudeClient } from 'amplitude-js';
 import { isBrowser } from '@unly/utils';
-import AuthProvider from '../src/components/AuthProvider';
+import AuthProvider from '../src/contexts/AuthProvider';
 import Navigation from '../src/components/Navigation';
 import useResize from '../src/utils/viewportHeight';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter();
+  const inApp = pathname.startsWith('/app');
   const Layout = (
     <AuthProvider>
-      <Navigation />
-      <Component {...pageProps} />
+      <div className={inApp ? 'app' : null}>
+        {inApp ? <Navigation /> : <Navigation horizontal />}
+        <Component {...pageProps} />
+      </div>
     </AuthProvider>
   );
 

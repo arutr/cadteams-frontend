@@ -1,4 +1,5 @@
 @import 'styles/variables/colors';
+@import 'styles/variables/ui';
 @import 'styles/variables/typography';
 
 .checkbox {
@@ -29,10 +30,11 @@
 
   .error {
     z-index: 0;
+    font-size: 1rem;
     color: var(--color-white);
+    padding: 1rem 0.5rem 0.5rem;
     background-color: var(--color-red);
     margin-top: calc(-1 * var(--border-radius));
-    padding: 1rem 0.5rem 0.5rem;
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
   }
@@ -94,5 +96,24 @@
     input:checked + label {
       background-color: var(--color-blue);
     }
+  }
+}
+
+.form > * + * {
+  margin-top: var(--spacing);
+}
+
+.input {
+  padding: 0.5rem;
+  border: 1px solid transparent;
+
+  &:focus {
+    outline: none;
+    filter: $drop-shadow;
+    border-color: var(--color-gray);
+  }
+
+  &::placeholder {
+    font-family: var(--font-family__monospace);
   }
 }

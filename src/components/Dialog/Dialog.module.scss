@@ -1,0 +1,30 @@
+.dialog {
+  display: flex;
+  padding: 0.75rem;
+  align-items: center;
+  margin: var(--spacing) 0;
+  color: var(--color-white);
+  border-radius: var(--border-radius);
+}
+
+.error {
+  background-color: var(--color-red);
+}
+
+.info {
+  color: var(--color-black);
+  background-color: var(--color-silver);
+}
+
+.icon {
+  margin-left: 0.25rem;
+  margin-right: 1rem;
+}
+
+.message {
+  flex: 1;
+}
+
+.success {
+  background-color: var(--color-blue);
+}

@@ -1,13 +1,5 @@
 @import 'variables/responsive';
 
 :root {
-  --screen-xxs: #{$screen-xxs};
-  --screen-xs: #{$screen-xs};
-  --screen-s: #{$screen-s};
-  --screen-m: #{$screen-m};
-  --screen-l: #{$screen-l};
-  --screen-xl: #{$screen-xl};
-  --screen-xxl: #{$screen-xxl};
-
   --page-width: #{$page-width};
 }

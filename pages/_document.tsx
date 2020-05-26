@@ -13,7 +13,7 @@ export default class extends Document {
     return (
       <Html lang="en-GB">
         <Head>
-          <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
           <meta name="description" content="A platform for BIM and CAD specialists to showcase their best building designs." />
           <meta name="author" content="CADteams" />
           <meta property="og:url" content="https://cadteams.com/" />

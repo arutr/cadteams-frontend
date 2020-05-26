@@ -38,3 +38,16 @@
   }
 }
 
+.vertical {
+  align-items: center;
+  flex-direction: row;
+
+  figcaption {
+    margin-top: 0;
+    margin-left: 1rem;
+  }
+
+  img {
+    border-radius: var(--border-radius);
+  }
+}

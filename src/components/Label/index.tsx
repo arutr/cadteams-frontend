@@ -1,15 +1,45 @@
+import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import styles from './Label.module.scss';
 
-function Label({ children }) {
+function Label({
+  children,
+  className,
+  removeLabel,
+  small,
+}) {
   return (
-    <span className={styles.label}>
+    <span className={classNames(styles.label, className, small && styles.small)}>
       {children}
+      {removeLabel && (
+        <span
+          className={styles.remove}
+          role="button"
+          tabIndex={0}
+          onKeyDown={removeLabel}
+          onClick={removeLabel}
+        >
+          X
+        </span>
+      )}
     </span>
   );
 }
+
+Label.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  removeLabel: PropTypes.func,
+  small: PropTypes.bool,
+};
+
+Label.defaultProps = {
+  children: null,
+  className: null,
+  removeLabel: null,
+  small: false,
+};
 
 export function LabelContainer({ children }) {
   return (
@@ -19,14 +49,8 @@ export function LabelContainer({ children }) {
   );
 }
 
-Label.propTypes = {
-  children: PropTypes.node,
+LabelContainer.propTypes = {
+  children: PropTypes.node.isRequired,
 };
-LabelContainer.propTypes = Label.propTypes;
-
-Label.defaultProps = {
-  children: null,
-};
-LabelContainer.defaultProps = Label.defaultProps;
 
 export default Label;

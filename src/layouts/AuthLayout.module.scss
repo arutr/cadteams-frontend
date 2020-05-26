@@ -32,18 +32,6 @@ $content-width: 55vw;
   }
 }
 
-.error {
-  padding: 0.75rem;
-  margin: var(--spacing) 0;
-  color: var(--color-white);
-  background-color: var(--color-red);
-  border-radius: var(--border-radius);
-
-  &:before {
-    margin-right: 0.25rem;
-  }
-}
-
 .main {
   display: flex;
 
@@ -51,9 +39,7 @@ $content-width: 55vw;
     margin-bottom: 5rem;
   }
 
-  @include min-screen($screen-m) {
-    height: 90vh;
-  }
+  height: calc(#{$viewport-height} - #{$navigation-height});
 
   .content {
     width: 100%;
@@ -116,7 +102,7 @@ $content-width: 55vw;
     @include min-screen($screen-m) {
       flex: 1;
       display: flex;
-      padding-left: 5vw;
+      padding-left: var(--spacing);
       justify-content: center;
       padding-top: var(--spacing);
     }

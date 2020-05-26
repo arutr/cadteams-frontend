@@ -5,11 +5,15 @@ import classNames from 'classnames';
 import styles from './MediaObject.module.scss';
 
 function MediaObject({
-  alt, children, className, captionAlign, height, src, width, id,
+  alt, children, className, captionAlign, height, id, imageHeight, imageWidth, src, width, vertical,
 }) {
   return (
-    <figure id={id} className={classNames(styles.figure, className)} style={{ height, width }}>
-      <img src={src} alt={alt} />
+    <figure
+      id={id}
+      className={classNames(styles.figure, vertical && styles.vertical, className)}
+      style={{ height, width }}
+    >
+      <img src={src} alt={alt} style={{ height: imageHeight, width: imageWidth }} />
       <figcaption className={styles[captionAlign]}>{children}</figcaption>
     </figure>
   );
@@ -20,10 +24,13 @@ MediaObject.propTypes = {
   captionAlign: PropTypes.oneOf(['left', 'center', 'right']),
   children: PropTypes.node,
   className: PropTypes.string,
-  id: PropTypes.string,
   height: PropTypes.string,
+  id: PropTypes.string,
+  imageHeight: PropTypes.string,
+  imageWidth: PropTypes.string,
   src: PropTypes.string,
   width: PropTypes.string,
+  vertical: PropTypes.bool,
 };
 
 MediaObject.defaultProps = {
@@ -31,10 +38,13 @@ MediaObject.defaultProps = {
   captionAlign: 'center',
   children: null,
   className: null,
-  id: null,
   height: null,
+  id: null,
+  imageHeight: null,
+  imageWidth: null,
   src: null,
   width: null,
+  vertical: false,
 };
 
 export default MediaObject;
