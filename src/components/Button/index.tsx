@@ -8,7 +8,7 @@ interface Props {
   children?: any;
   className?: string;
   large?: boolean;
-  onClick?: () => void;
+  onClick?: (event) => void;
   type?: 'submit' | 'button';
 }
 
@@ -17,7 +17,7 @@ function Button({
 }: Props) {
   return (
     <button
-      type={type || 'submit'}
+      type={type ?? 'submit'}
       className={classNames(styles.button, className, block && styles.block, large && styles.large)}
       onClick={onClick}
     >
@@ -43,7 +43,7 @@ export const AnchorButton = React.forwardRef<HTMLAnchorElement, AnchorProps>(({
     tabIndex={0}
     target={external && '_blank'}
     onClick={onClick}
-    onKeyPress={onClick}
+    onKeyDown={onClick}
   >
     {children}
   </a>

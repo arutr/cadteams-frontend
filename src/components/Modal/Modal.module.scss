@@ -1,5 +1,4 @@
 @import 'styles/variables/ui';
-@import 'styles/mixins/icons';
 @import 'styles/mixins/responsive';
 
 $animation-duration: 500ms;
@@ -17,8 +16,6 @@ $animation-duration: 500ms;
 }
 
 .close {
-  @include icon-image('close');
-
   cursor: pointer;
   position: absolute;
   outline: none;
@@ -39,7 +36,6 @@ $animation-duration: 500ms;
   z-index: 4;
   width: calc(100vw - 2 * var(--spacing));
   position: absolute;
-  box-shadow: $box-shadow;
   padding: var(--spacing);
   background: var(--color-cream);
   animation: slideIn $animation-duration;
@@ -55,7 +51,7 @@ $animation-duration: 500ms;
   }
 
   > section {
-    margin-top: 2rem;
+    padding-top: 2rem;
     height: calc(100% - 2rem);
     overflow-y: auto;
 

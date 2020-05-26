@@ -4,6 +4,7 @@ import React, {
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Icon from 'src/components/Icon';
 
 import styles from './Modal.module.scss';
 
@@ -64,11 +65,12 @@ class Modal extends React.PureComponent<ModalProps> {
       ? createPortal(
         <div className={styles.overlay}>
           <div className={styles.dialog} {...props}>
-            <span
+            <Icon
+              name="close"
               aria-label="Close"
-              className={classNames('icon', styles.close)}
+              className={styles.close}
               onClick={onClose}
-              onKeyPress={onClose}
+              onKeyDown={onClose}
               role="button"
               tabIndex={0}
             />
