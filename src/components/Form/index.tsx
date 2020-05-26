@@ -1,5 +1,7 @@
+import classNames from 'classnames';
 import React from 'react';
 import { ErrorMessage } from 'react-hook-form';
+import Icon from 'src/components/Icon';
 import styles from './Form.module.scss';
 
 interface CheckboxProps {
@@ -17,40 +19,60 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 );
 
 interface ErrorProps {
-  errors: object;
   name: string;
+  errors: object;
+  filler?: boolean;
+  className?: string;
 }
 
-export function Error({ errors, name }: ErrorProps) {
+export function Error({
+  className, errors, filler = true, name,
+}: ErrorProps) {
   return (
     <ErrorMessage errors={errors} name={name}>
       {({ message }) => (
         <div className={styles['fieldset-error']}>
-          <span className={styles.filler} />
-          <span className={styles.error}>{message}</span>
+          {filler && <span className={styles.filler} />}
+          <span className={classNames(styles.error, className)}>
+            <Icon name="error" /> {message}
+          </span>
         </div>
       )}
     </ErrorMessage>
   );
 }
 
-interface Props {
-  id: string;
-  label: string;
-  placeholder: string;
-  type?: 'input' | 'radio' | 'email' | 'password';
+interface FormProps {
+  children: any;
+  className?: string;
+  [key: string]: any;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, Props>(({
-  id, label, placeholder, type,
-}: Props, ref) => (
-  <div className={styles.fieldset}>
+export function Form({ children, className, ...props }: FormProps) {
+  return (
+    <form className={classNames(styles.form, className)} {...props}>{children}</form>
+  );
+}
+
+interface InputProps {
+  className?: string;
+  id: string;
+  label: string | JSX.Element;
+  type?: string;
+  [key: string]: any;
+}
+
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
+  className, id, label, type, ...props
+}: InputProps, ref) => (
+  <div className={classNames(styles.fieldset, className)}>
     <input
+      className={styles.input}
       id={id}
       name={id}
       type={type || 'input'}
-      placeholder={placeholder}
       ref={ref}
+      {...props}
     />
     <label htmlFor={id}>{label}</label>
   </div>
