@@ -10,6 +10,20 @@
   }
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-cream);
+
+  @include min-screen($screen-ml) {
+    flex-direction: row;
+  }
+
+  main {
+    flex: 1;
+  }
+}
+
 body {
   margin: 0;
 }
@@ -28,4 +42,8 @@ main {
   max-width: var(--page-width);
   padding: 0 var(--page-margin);
   margin: 0 auto;
+}
+
+small {
+  display: inline-block;
 }
