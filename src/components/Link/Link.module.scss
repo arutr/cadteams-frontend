@@ -1,16 +1,27 @@
 @import 'styles/mixins/typography';
+@import 'styles/variables/typography';
+
+.active {
+  font-weight: $font-weight__semibold;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hover-effect {
+  transition: filter 200ms;
+
+  &:active,
+  &:focus,
+  &:hover {
+    filter: brightness(25%);
+  }
+}
 
 .link {
   @include anchor;
 
-  cursor: pointer;
   display: inline-block;
-}
-
-.hover-effect {
-  &:active,
-  &:focus,
-  &:hover {
-    opacity: 0.75;
-  }
 }

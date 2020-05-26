@@ -1,19 +1,8 @@
-const {
-  PHASE_PRODUCTION_BUILD,
-  PHASE_PRODUCTION_SERVER,
-  PHASE_DEVELOPMENT_SERVER
-} = require('next/constants');
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 module.exports = (phase) => {
-  const isProduction = (phase === PHASE_PRODUCTION_BUILD || phase === PHASE_PRODUCTION_SERVER)
-                        && process.env.NODE_ENV !== 'staging';
-
   if (phase !== PHASE_DEVELOPMENT_SERVER) {
-    console.log(`
-      phase: ${phase}
-      environment: ${process.env.NODE_ENV}
-      isProduction: ${isProduction}`
-    );
+    console.log(`phase: ${phase} environment: ${process.env.NODE_ENV}`);
   }
 
   const dotEnvResult = require('dotenv').config({
@@ -33,6 +22,26 @@ module.exports = (phase) => {
     },
     typescript: {
       ignoreDevErrors: true,
+    },
+    webpack: (config, options) => {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          options.defaultLoaders.babel,
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgoConfig: {
+                plugins: {
+                  removeViewBox: false
+                }
+              }
+            }
+          }
+        ],
+      });
+
+      return config;
     },
   });
 };

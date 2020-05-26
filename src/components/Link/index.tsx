@@ -1,8 +1,8 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 import classNames from 'classnames';
-
 import styles from './Link.module.scss';
 
 /**
@@ -14,16 +14,19 @@ import styles from './Link.module.scss';
  * @param external Is this an external link? If so, create a standard anchor tag
  * @param onClick Click event handler
  * @param className Additional HTML class(es)
+ * @param hoverEffect Use anchor transition effects
  * @constructor
  */
 function Link({
-  as, href, children, icon, external, onClick, className, hoverEffect,
+  as, href, children, disabled, external, onClick, className, hoverEffect,
 }) {
+  const { pathname } = useRouter();
   const classes = classNames(
     styles.link,
     className,
+    disabled && styles.disabled,
+    href && pathname.includes(href) && styles.active,
     hoverEffect && styles['hover-effect'],
-    icon && `icon icon__${icon}`,
   );
 
   if (external) {
@@ -32,6 +35,7 @@ function Link({
       <As
         href={href}
         className={classes}
+        disabled={disabled}
         target="_blank"
         rel="noopener"
       >
@@ -46,10 +50,11 @@ function Link({
       <NextLink href={href}>
         <As
           className={classes}
+          disabled={disabled}
           onClick={onClick}
           role="link"
           tabIndex={0}
-          onKeyPress={onClick}
+          onKeyDown={onClick}
         >
           {children}
         </As>
@@ -61,10 +66,11 @@ function Link({
   return (
     <As
       className={classes}
+      disabled={disabled}
       onClick={onClick}
       role="link"
       tabIndex={0}
-      onKeyPress={onClick}
+      onKeyDown={onClick}
     >
       {children}
     </As>
@@ -75,22 +81,22 @@ Link.propTypes = {
   as: PropTypes.node,
   children: PropTypes.node,
   className: PropTypes.string,
+  disabled: PropTypes.bool,
   external: PropTypes.bool,
-  href: PropTypes.string,
-  icon: PropTypes.string,
   hoverEffect: PropTypes.bool,
+  href: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 Link.defaultProps = {
   as: null,
-  href: '',
-  icon: '',
-  children: null,
-  external: false,
-  onClick: null,
-  hoverEffect: true,
   className: null,
+  children: null,
+  disabled: false,
+  external: false,
+  hoverEffect: true,
+  href: '',
+  onClick: null,
 };
 
 export default Link;

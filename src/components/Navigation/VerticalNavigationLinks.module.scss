@@ -1,0 +1,31 @@
+@import 'styles/mixins/responsive';
+
+.active {
+  position: relative;
+
+  &:after {
+    content: ' ';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-left: calc(var(--border-radius) / 2) solid var(--color-gray);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    margin-left: calc(-1 * var(--page-margin));
+
+    @include min-screen($screen-m) {
+      border-width: var(--border-radius);
+      margin-left: -2rem;
+    }
+  }
+}
+
+.coming-soon {
+  margin-left: 0.5rem;
+}
+
+.separator {
+  margin-top: auto;
+}

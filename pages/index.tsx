@@ -1,72 +1,102 @@
-import React, { useState } from 'react';
 import classNames from 'classnames';
-// import NextLink from 'next/link';
-import Link from '../src/components/Link';
-import Footer from '../src/components/Footer';
-import { Heading1 } from '../src/components/Heading';
-import Button from '../src/components/Button';
-import MediaObject from '../src/components/MediaObject';
-import Modal, { ModalProvider } from '../src/components/Modal';
-
-import styles from './index.module.scss';
+import NextLink from 'next/link';
+import React, { useState } from 'react';
+import { Heading1 } from 'src/components/Heading';
+import Icon from 'src/components/Icon';
+import { PortfolioModal } from 'src/components/Portfolio';
+import { ModalProvider } from 'src/components/Modal';
+import { AnchorButton } from 'src/components/Button';
 import User from '../src/api/User';
-import PortfolioModal from '../src/components/Portfolio';
+import Footer from '../src/components/Footer';
+import Link from '../src/components/Link';
+import MediaObject from '../src/components/MediaObject';
+import styles from './index.module.scss';
+
+const features = [
+  {
+    heading: 'Present yourself with designs you are proud of.',
+    description: `Create a portfolio of your expertise: upload design samples from your favourite
+      projects, and highlight the skills that make you stand out.`,
+    media: '/images/landing-page/feature1.png',
+  },
+  {
+    heading: 'Explore designs of other talented individuals.',
+    description: `Browse through a gallery of design portfolios created by top BIM/CAD
+      specialists.`,
+    media: '/images/landing-page/feature2.png',
+    reverse: true,
+  },
+  {
+    heading: 'Get to know each other.',
+    description: `Enjoying someone’s portfolio? Send a request for their contact information and
+      become acquainted with each other.`,
+    media: '/images/landing-page/feature3.png',
+    maxHeight: '7rem',
+  },
+];
+const user: User = {
+  username: 'Manuel A.',
+  profilePicture: {
+    url: '/images/portfolio-demo/profile-picture.jpg',
+  },
+  specialization: 'Architectural Technician',
+  sectors: [{
+    id: 1,
+    label: 'Residential',
+  }, {
+    id: 2,
+    label: 'Modular',
+  }],
+  location: 'Brighton, UK',
+  experience: 5,
+  languages: [{
+    id: 1,
+    label: 'English',
+  }, {
+    id: 2,
+    label: 'Spanish',
+  }],
+  tools: [{
+    id: 1,
+    label: 'Revit',
+  }, {
+    id: 2,
+    label: '3Ds Max',
+  }, {
+    id: 3,
+    label: 'Photoshop',
+  }],
+  designs: [
+    {
+      url: '/images/portfolio-demo/design1.png',
+    },
+    {
+      url: '/images/portfolio-demo/design2.png',
+    },
+    {
+      url: '/images/portfolio-demo/design3.png',
+    },
+    {
+      url: '/images/portfolio-demo/design4.png',
+    },
+  ],
+  uniqueSkills: [{
+    id: 1,
+    skill: 'Combining Revit and image profile tools for stunning visuals',
+  }, {
+    id: 2,
+    skill: 'Construction-ready drawings in line with BS',
+  }, {
+    id: 3,
+    skill: 'Surveying and site supervision',
+  }],
+};
 
 function LandingPage() {
-  const features = [
-    {
-      heading: 'Present yourself with designs you are proud of.',
-      description: `Create a portfolio of your expertise: upload design samples from your favourite
-      projects, and highlight the skills that make you stand out.`,
-      media: '/images/landing-page/feature1.png',
-    },
-    {
-      heading: 'Explore designs of other talented individuals.',
-      description: `Browse through a gallery of design portfolios created by top BIM/CAD
-      specialists.`,
-      media: '/images/landing-page/feature2.png',
-      reverse: true,
-    },
-    {
-      heading: 'Get to know each other.',
-      description: `Enjoying someone’s portfolio? Send a request for their contact information and
-      become acquainted with each other.`,
-      media: '/images/landing-page/feature3.png',
-      maxHeight: '7rem',
-    },
-  ];
-  const user: User = {
-    firstName: 'Manuel',
-    lastName: 'A.',
-    profilePhoto: '/images/portfolio-demo/profile-picture.jpg',
-    specialization: 'Architectural Technician',
-    sectors: ['Residential', 'Modular'],
-    location: 'Brighton, UK',
-    experience: 5,
-    languages: ['English', 'Spanish'],
-    tools: ['Revit', '3Ds Max', 'Photoshop'],
-    designs: [
-      '/images/portfolio-demo/design1.png',
-      '/images/portfolio-demo/design2.png',
-      '/images/portfolio-demo/design3.png',
-      '/images/portfolio-demo/design4.png',
-    ],
-    uniqueSkills: [
-      'Combining Revit and image editing tools for stunning visuals',
-      'Construction-ready drawings in line with BS',
-      'Surveying and site supervision',
-    ],
-  };
-  const [newsletterModal, setNewsletterModal] = useState(false);
+  // const [newsletterModal, setNewsletterModal] = useState(false);
   const [portfolioModal, setPortfolioModal] = useState(false);
-
-  function toggleNewsletterModal() {
-    setNewsletterModal(!newsletterModal);
-  }
-
-  function togglePortfolioModal() {
-    setPortfolioModal(!portfolioModal);
-  }
+  // const toggleNewsletterModal = () => setNewsletterModal(!newsletterModal);
+  const togglePortfolioModal = () => setPortfolioModal(!portfolioModal);
 
   return (
     <ModalProvider>
@@ -76,9 +106,9 @@ function LandingPage() {
             <Heading1>
               Showcase your best pieces of building designs.
             </Heading1>
-            {/* <NextLink href="/sign-up" passHref> */}
-            <Button onClick={toggleNewsletterModal} large>Sign Up</Button>
-            {/* </NextLink> */}
+            <NextLink href="/sign-up" passHref>
+              <AnchorButton large>Sign Up</AnchorButton>
+            </NextLink>
           </article>
           <aside>
             <MediaObject
@@ -87,12 +117,8 @@ function LandingPage() {
               alt="Gateway House, Finchley"
             >
               <p>Gateway House, Finchley</p>
-              <Link
-                icon="share"
-                href="https://www.david-miller.co.uk/gateway-house.php"
-                external
-              >
-                David Miller Architects
+              <Link href="https://www.david-miller.co.uk/gateway-house.php" external>
+                <Icon name="share" /> David Miller Architects
               </Link>
             </MediaObject>
             <MediaObject
@@ -101,8 +127,8 @@ function LandingPage() {
               alt="Plant Room"
             >
               <p>Plant Room</p>
-              <Link icon="view" onClick={togglePortfolioModal}>
-                Manuel A.
+              <Link onClick={togglePortfolioModal}>
+                <Icon name="view" /> Manuel A.
               </Link>
             </MediaObject>
             <MediaObject
@@ -112,11 +138,10 @@ function LandingPage() {
             >
               <p>Fairfield Inn and Suites</p>
               <Link
-                icon="share"
                 href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
                 external
               >
-                United BIM
+                <Icon name="share" /> United BIM
               </Link>
             </MediaObject>
           </aside>
@@ -142,28 +167,28 @@ function LandingPage() {
             <p>Don’t miss out and join us today.</p>
           </article>
           <aside>
-            {/* <NextLink href="/sign-up" passHref> */}
-            <Button onClick={toggleNewsletterModal} block large>
-              Create a free account
-            </Button>
-            {/* </NextLink> */}
+            <NextLink href="/sign-up" passHref>
+              <AnchorButton block large>
+                Create a free account
+              </AnchorButton>
+            </NextLink>
           </aside>
         </section>
       </main>
       <Footer />
-      {newsletterModal && (
-        <Modal className={styles.newsletter} onClose={toggleNewsletterModal}>
-          <Heading1 marginTop={0}>Coming Soon!</Heading1>
-          <p>
-            We are working very hard to get <b>CAD</b>teams up and running.
-            Stay up-to-date with the progress by signing up to our newsletter.
-          </p>
-          <p>Fill out the form below to get started:</p>
-          <iframe title="mailchimp" src="/mailchimp.html" />
-        </Modal>
-      )}
+      {/* {newsletterModal && ( */}
+      {/*  <Modal className={styles.newsletter} onClose={toggleNewsletterModal}> */}
+      {/*    <Heading1 marginTop={0}>Coming Soon!</Heading1> */}
+      {/*    <p> */}
+      {/*      We are working very hard to get <b>CAD</b>teams up and running. */}
+      {/*      Stay up-to-date with the progress by signing up to our newsletter. */}
+      {/*    </p> */}
+      {/*    <p>Fill out the form below to get started:</p> */}
+      {/*    <iframe title="mailchimp" src="/mailchimp.html" /> */}
+      {/*  </Modal> */}
+      {/* )} */}
       {portfolioModal && (
-        <PortfolioModal user={user} onClose={togglePortfolioModal} />
+        <PortfolioModal demo user={user} onClose={togglePortfolioModal} />
       )}
     </ModalProvider>
   );
