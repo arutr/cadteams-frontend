@@ -1,78 +1,16 @@
-@import 'styles/mixins/icons';
 @import 'styles/mixins/responsive';
 @import 'styles/variables/ui';
 
-.blank_design {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: $box-shadow;
-  border-radius: var(--border-radius);
-  background-color: var(--color-silver);
-}
-
-.blank_profile {
-  @include icon-color;
-}
-
 .card {
-  background-color: var(--color-white);
-  box-shadow: $box-shadow;
-  border-radius: var(--border-radius);
+  position: relative;
+  filter: $drop-shadow;
   padding: var(--spacing);
+  border-radius: var(--border-radius);
+  background-color: var(--color-white);
 }
 
-.designs {
-  display: grid;
-  grid-template: repeat(4, 1fr) / 1fr;
-  grid-gap: var(--spacing);
-
-  @include min-screen($screen-m) {
-    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-  }
-
-  img {
-    width: 100%;
-    box-shadow: $box-shadow;
-    border-radius: var(--border-radius);
-  }
-}
-
-.identity {
-  display: flex;
-
-  aside {
-    flex: 1;
-  }
-
-  img {
-    width: 10rem;
-    //noinspection CssInvalidPropertyValue
-    height: min-intrinsic;
-    object-fit: cover;
-    margin-right: var(--spacing);
-    border-radius: var(--border-radius);
-  }
-}
-
+.contact-information,
 .skills {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-
-  > * {
-    display: flex;
-    align-items: center;
-
-    span {
-      margin-right: 0.5rem;
-    }
-  }
-
-  > * + * {
-    margin-top: var(--spacing);
-  }
-
   .row {
     display: grid;
     grid-template: 1fr / repeat(2, 1fr);
@@ -84,35 +22,181 @@
   }
 }
 
-.portfolio {
-  display: flex;
-  flex-direction: column;
-
-  //https://stackoverflow.com/questions/17881923/box-shadow-trimmed-in-css-columns-in-chrome
-  margin: -3px;
-
-  @include min-screen($screen-m) {
-    flex-direction: column;
+.contact-information {
+  button {
+    margin-top: var(--spacing);
   }
 
-  header {
-    display: grid;
-    grid-template: repeat(2, auto) / 1fr;
-    grid-gap: var(--spacing);
+  form {
+    .fieldset {
+      flex: 1;
+    }
 
-    @include min-screen($screen-m) {
-      grid-template: 1fr / repeat(2, 1fr);
+    label {
+      flex: none;
+      flex-basis: 2.5rem;
     }
   }
 
-  > * {
-    //https://stackoverflow.com/questions/17881923/box-shadow-trimmed-in-css-columns-in-chrome
-    margin: 3px 3px var(--spacing);
+  .row {
+    grid-gap: var(--spacing);
   }
 }
 
-.unique_skills {
+.designs {
+  .grid {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-gap: var(--spacing);
+    grid-template: repeat(4, 1fr) / 1fr;
+
+    @include min-screen($screen-m) {
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    }
+  }
+
+  .design {
+    display: flex;
+    min-height: 16rem;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+
+    &.blank {
+      background-color: var(--color-silver);
+    }
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  img, video {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    object-fit: cover;
+    filter: $drop-shadow;
+    border-radius: var(--border-radius);
+  }
+}
+
+.edit {
+  top: calc(-1 * var(--border-radius));
+  right: calc(-1 * var(--border-radius));
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  position: absolute;
+  padding: 0.25rem !important;
+}
+
+.error {
+  color: var(--color-red) !important;
+  background-color: transparent !important;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
+
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+
+  aside {
+    flex: 1;
+  }
+
+  img {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    margin-right: var(--spacing);
+    border-radius: var(--border-radius);
+
+    @include min-screen($screen-m) {
+      width: 10rem;
+      height: 10rem;
+    }
+  }
+
+  .profile-picture {
+    position: relative;
+
+    .edit {
+      right: calc(var(--spacing) - var(--border-radius));
+    }
+  }
+}
+
+.header {
+  display: grid;
+  grid-template: repeat(2, auto) / 1fr;
+  grid-gap: var(--spacing);
+
+  @include min-screen($screen-m) {
+    grid-template: 1fr / repeat(2, 1fr);
+  }
+}
+
+.modal {
+  //https://stackoverflow.com/questions/17881923/box-shadow-trimmed-in-css-columns-in-chrome
+  margin: -3px;
+
+  .wrapper > * {
+    //https://stackoverflow.com/questions/17881923/box-shadow-trimmed-in-css-columns-in-chrome
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+}
+
+.placeholder {
+  opacity: 0.5;
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  > div {
+    display: flex;
+    align-items: center;
+
+    input {
+      flex: 1;
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  > div + div {
+    margin-top: var(--spacing);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    margin-bottom: var(--spacing);
+  }
+}
+
+.unique-skills {
   text-align: center;
+
+  .edit {
+    position: static;
+    vertical-align: top;
+    margin-left: 0.5rem;
+  }
 
   .row {
     display: grid;
@@ -122,6 +206,29 @@
     @include min-screen($screen-m) {
       grid-template: 1fr / repeat(3, 1fr);
     }
+
+    h3 {
+      word-break: break-all;
+    }
+  }
+}
+
+footer.row {
+  display: grid;
+  grid-template: repeat(2, auto) / 1fr;
+  grid-gap: var(--spacing);
+
+  @include min-screen($screen-m) {
+    grid-template: 1fr / repeat(2, 1fr);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  p {
+    white-space: pre-line;
   }
 }
 
