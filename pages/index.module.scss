@@ -34,7 +34,6 @@
 
 .cta {
   color: var(--color-white);
-  box-shadow: $box-shadow;
   background-color: var(--color-blue);
   margin: 0 calc(-1 * var(--page-margin));
   padding: var(--spacing) var(--page-margin);
@@ -86,8 +85,6 @@
 }
 
 .hero {
-  $viewport-height: calc(var(--vh, 1vh) * 100);
-
   display: flex;
   height: calc(#{$viewport-height} - #{$navigation-height});
   max-height: 800px;
