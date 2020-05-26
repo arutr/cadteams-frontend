@@ -1,88 +1,185 @@
-@import 'styles/mixins/icons';
 @import 'styles/mixins/typography';
 @import 'styles/mixins/responsive';
+@import 'styles/variables/layout';
 @import 'styles/variables/typography';
 @import 'styles/variables/ui';
 
-.header {
+.vertical {
+  --vertical-padding: 1rem;
+  --horizontal-padding: var(--page-margin);
+
   top: 0;
   z-index: 2;
   position: sticky;
-  box-shadow: $box-shadow;
+  filter: $drop-shadow;
+  box-sizing: border-box;
+  height: $navigation-height;
+  padding: var(--vertical-padding) var(--horizontal-padding);
   background-color: var(--color-silver);
-  padding: var(--spacing) var(--page-margin);
 
-  details {
-    @include min-screen($screen-m) {
-      display: none;
+  @include min-screen($screen-ml) {
+    --vertical-padding: 1.75rem;
+    --horizontal-padding: 2rem;
+
+    width: auto;
+    height: $viewport-height;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+
+    @include max-screen($screen-ml) {
+      order: 1;
+      margin-left: var(--spacing);
     }
 
-    width: 100%;
-    max-height: 0;
-    transition: max-height 200ms;
-
-    &[open] {
-      max-height: 3rem;
-
-      summary {
-        @include icon-image('close');
-      }
-    }
-
-    ul {
-      margin-top: var(--spacing);
-      justify-content: space-evenly;
-      flex-wrap: wrap;
-      user-select: none;
+    img {
+      max-height: var(--logo-height);
     }
   }
 
-  img {
-    max-height: var(--logo-height);
+  figcaption {
+    font-family: var(--font-family__sans-condensed);
   }
 
   nav {
+    display: flex;
+    align-items: center;
+
+    @include min-screen($screen-ml) {
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  .links {
+    @include inline-list;
+    @include max-screen($screen-ml) {
+      left: 0;
+      box-sizing: border-box;
+      height: calc(#{$viewport-height} - #{$navigation-height});
+      position: absolute;
+      top: $navigation-height;
+      padding-left: var(--page-margin);
+      padding-right: var(--page-margin);
+      padding-bottom: var(--spacing);
+      background-color: var(--color-silver);
+
+      &:not(.open) {
+        display: none;
+      }
+    }
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    > a,
+    > span,
+    > figure {
+      margin-top: var(--spacing);
+      padding: 0.5rem 0;
+    }
+
+    &.open {
+
+    }
+  }
+
+  .toggle {
+    @include min-screen($screen-ml) {
+      display: none;
+    }
+
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.horizontal {
+  top: 0;
+  z-index: 2;
+  position: sticky;
+  filter: $drop-shadow;
+  background-color: var(--color-silver);
+  padding: var(--spacing) var(--page-margin);
+
+  .logo {
+    display: flex;
+    justify-content: center;
+
+    img {
+      max-height: var(--logo-height);
+    }
+  }
+
+  nav {
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    max-width: var(--page-width);
+    justify-content: space-between;
+
     @include max-screen($screen-m) {
       flex-wrap: wrap;
       position: relative;
     }
+  }
+
+  figcaption {
+    font-family: var(--font-family__sans-condensed);
+  }
+
+  figure {
+    margin: -1rem 0;
+  }
+
+  .links {
+    @include inline-list;
 
     display: flex;
-    margin: 0 auto;
-    max-width: var(--page-width);
-    justify-content: space-between;
+    flex-wrap: wrap;
+    user-select: none;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
 
-    > ul {
-      @include max-screen($screen-m) {
+    @include max-screen($screen-m) {
+      width: 100%;
+      min-height: 0;
+      transition: min-height 200ms;
+
+      &:not(.open) > * {
         display: none;
       }
+    }
 
+    @include min-screen($screen-m) {
       > * + * {
         margin-left: var(--spacing);
       }
     }
 
-    summary {
-      @include icon-image('menu');
+    &.open {
+      @include max-screen($screen-m) {
+        margin-top: var(--spacing);
+        min-height: 2rem;
+      }
     }
   }
 
-  summary {
+  .toggle {
     @include min-screen($screen-m) {
       display: none;
     }
 
-    top: 1px;
     right: 0;
-    outline: none;
-    font-size: 0;
+    top: 1px;
+    cursor: pointer;
+    user-select: none;
     position: absolute;
-  }
-
-  ul {
-    @include inline-list;
-
-    display: flex;
-    align-items: center;
   }
 }
