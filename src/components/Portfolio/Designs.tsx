@@ -76,8 +76,11 @@ function DesignForm({ index, isProfile, setDialog }) {
 
 DesignForm.propTypes = {
   index: PropTypes.number.isRequired,
-  isProfile: PropTypes.bool.isRequired,
+  isProfile: PropTypes.bool,
   setDialog: PropTypes.func.isRequired,
+};
+DesignForm.defaultProps = {
+  isProfile: false,
 };
 
 export default function Designs({ user, isProfile, setDialog }: PortfolioSectionProps) {
@@ -139,14 +142,18 @@ export default function Designs({ user, isProfile, setDialog }: PortfolioSection
             );
           }
 
-          return (
-            <DesignForm
-              key={index}
-              index={index}
-              isProfile={isProfile}
-              setDialog={setDialog}
-            />
-          );
+          if (isProfile) {
+            return (
+              <DesignForm
+                key={index}
+                index={index}
+                isProfile={isProfile}
+                setDialog={setDialog}
+              />
+            );
+          }
+
+          return null;
         })}
       </div>
     </section>

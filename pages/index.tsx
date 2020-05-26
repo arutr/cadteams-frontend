@@ -36,6 +36,7 @@ const features = [
 ];
 const user: User = {
   username: 'Manuel A.',
+  type: 'individual',
   profilePicture: {
     url: '/images/portfolio-demo/profile-picture.jpg',
   },
@@ -188,7 +189,7 @@ function LandingPage() {
       {/*  </Modal> */}
       {/* )} */}
       {portfolioModal && (
-        <PortfolioModal demo user={user} onClose={togglePortfolioModal} />
+        <PortfolioModal isProfile={false} demo user={user} onClose={togglePortfolioModal} />
       )}
     </ModalProvider>
   );

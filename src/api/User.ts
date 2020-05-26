@@ -12,7 +12,7 @@ interface User {
   sectors: Label[];
   specialization: string;
   tools: Label[];
-  type?: 'individual' | 'enterprise';
+  type: 'individual' | 'enterprise';
   uniqueSkills: UniqueSkill[];
   username: string;
   website?: string;

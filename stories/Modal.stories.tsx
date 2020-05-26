@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Heading1 } from 'src/components/Heading';
+import { PortfolioModal } from 'src/components/Portfolio';
 import Modal, { ModalProvider } from '../src/components/Modal';
 import Button from '../src/components/Button';
 import User from '../src/api/User';
-import { PortfolioModal } from '../src/components/Portfolio';
 
 export function Basic() {
   const [open, setOpen] = useState(false);
@@ -36,6 +36,7 @@ export function Basic() {
 export function Portfolio() {
   const user: User = {
     username: 'Manuel A.',
+    type: 'individual',
     profilePicture: {
       url: '/images/portfolio-demo/profile-picture.jpg',
     },
@@ -94,7 +95,7 @@ export function Portfolio() {
 
   return (
     <ModalProvider>
-      <PortfolioModal onClose={() => {}} user={user} />
+      <PortfolioModal isProfile={false} onClose={() => {}} user={user} />
     </ModalProvider>
   );
 }
