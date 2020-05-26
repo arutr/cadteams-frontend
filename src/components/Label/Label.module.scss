@@ -5,8 +5,11 @@
   flex-wrap: wrap;
   margin: 0 -0.25rem;
 
-  span {
+  > input, span {
     flex-grow: 1;
+  }
+
+  > * {
     margin: 0.25rem;
   }
 }
@@ -19,4 +22,15 @@
   background-color: var(--color-blue);
   border-radius: var(--border-radius);
   font-family: var(--font-family__monospace);
+}
+
+.remove {
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.small {
+  padding: 0.33rem;
+  font-size: 70%;
 }
