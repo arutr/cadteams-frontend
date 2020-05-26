@@ -34,5 +34,25 @@ module.exports = (phase) => {
     typescript: {
       ignoreDevErrors: true,
     },
+    webpack: (config, options) => {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          options.defaultLoaders.babel,
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgoConfig: {
+                plugins: {
+                  removeViewBox: false
+                }
+              }
+            }
+          }
+        ],
+      });
+
+      return config;
+    },
   });
 };
