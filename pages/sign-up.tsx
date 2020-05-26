@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
-import { RegistrationForm } from '../src/api/Auth';
-import { useAuth } from '../src/components/AuthProvider';
+import Dialog from 'src/components/Dialog';
+import Icon from 'src/components/Icon';
+import { RegistrationForm } from 'src/api/Auth';
+import { useAuth } from 'src/contexts/AuthProvider';
+import { Heading1 } from 'src/components/Heading';
+import {
+  Checkbox, Error, Form, Input, Radio,
+} from 'src/components/Form';
+import { FacebookLoginButton } from 'src/components/SocialLogin';
 import PageTitle from '../src/components/PageTitle';
 import MediaObject from '../src/components/MediaObject';
-import { Heading1 } from '../src/components/Heading';
-import {
-  Checkbox, Error, Input, Radio,
-} from '../src/components/Form';
 import Link from '../src/components/Link';
 import Button from '../src/components/Button';
-import { FacebookLoginButton } from '../src/components/SocialLogin';
 import AuthLayout from '../src/layouts/AuthLayout';
 import styles from '../src/layouts/AuthLayout.module.scss';
 
@@ -28,11 +29,9 @@ function SignUp() {
     try {
       await registerAccount(values).then(redirectToApp);
     } catch (error) {
-      if (error.response) {
-        setServerError(error.response?.data?.message[0]?.messages[0]?.message);
-      } else {
-        setServerError('Unknown error has occurred. Please refresh the page.');
-      }
+      const message = error.response?.data?.message?.[0]?.messages?.[0]?.message
+        || 'Unknown error has occurred. Please refresh the page.';
+      setServerError(message);
     }
   });
 
@@ -45,11 +44,10 @@ function SignUp() {
       >
         <p>Weill Cornell Medical College Belfer Research Building</p>
         <Link
-          icon="share"
           href="https://www.archdaily.com/480963/weill-cornell-medical-college-ennead-architects"
           external
         >
-          Todd Schliemann / Ennead Architects
+          <Icon name="share" /> Todd Schliemann / Ennead Architects
         </Link>
       </MediaObject>
     )}
@@ -62,21 +60,14 @@ function SignUp() {
         Register an account on <b>CAD</b>teams to explore the best of what the top talented
         BIM/CAD specialists have to offer.
       </p>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         {serverError && (
-          <div className={classNames(styles.error, 'icon icon__white icon__error')}>
-            {serverError}
-          </div>
+          <Dialog type="error">{serverError}</Dialog>
         )}
-        <Radio
-          id="type"
-          labels={['Individual', 'Enterprise']}
-          legend="I am an..."
-          ref={register}
-        />
+        <Radio id="type" labels={['Individual', 'Enterprise']} legend="I am an..." ref={register} />
         <Input
-          label={watchType === 'individual' ? 'Full Name:' : 'Company:'}
-          placeholder={watchType === 'individual' ? 'John Smith' : 'CADteams Limited'}
+          label="Full Name:"
+          placeholder="John Smith"
           id="username"
           ref={register({
             required: 'Please enter a name.',
@@ -91,11 +82,33 @@ function SignUp() {
           })}
         />
         <Error errors={errors} name="username" />
+        {watchType === 'enterprise' && (
+          <>
+            <Input
+              label="Company:"
+              placeholder="CADteams Ltd"
+              id="company"
+              ref={register({
+                required: 'Please enter a company name.',
+                minLength: {
+                  value: 2,
+                  message: 'Please enter a company name.',
+                },
+                pattern: {
+                  value: /^([a-zA-Z0-9-'/&]+ *)+$/,
+                  message: 'Please enter a valid company name.',
+                },
+              })}
+            />
+            <Error errors={errors} name="company" />
+          </>
+        )}
         <Input
           label="E-mail Address:"
           placeholder="your@email.com"
           id="email"
           type="email"
+          autoComplete="username"
           ref={register({ required: 'Please enter an e-mail address.' })}
         />
         <Error errors={errors} name="email" />
@@ -104,6 +117,7 @@ function SignUp() {
           placeholder="y0urPa55w0rd"
           id="password"
           type="password"
+          autoComplete="new-password"
           ref={register({
             required: 'Please enter a password.',
             validate: (value) => (
@@ -135,31 +149,26 @@ function SignUp() {
           </Link>.
         </p>
         <Button type="submit" block>Create a free account</Button>
-      </form>
-      <div className={styles.separator}>
-        <hr />
-        <strong>OR</strong>
-        <hr />
-      </div>
-      <FacebookLoginButton
-        provider="facebook"
-        appId={process.env.FACEBOOK_APP_ID}
-        onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
-        onLoginFailure={() => setServerError(`Social media authentication failed. Refresh the
-        page to try again.`)}
-        scope="public_profile,email"
-      />
+      </Form>
+      {watchType === 'individual' && (
+        <>
+          <div className={styles.separator}>
+            <hr />
+            <strong>OR</strong>
+            <hr />
+          </div>
+          <FacebookLoginButton
+            provider="facebook"
+            appId={process.env.FACEBOOK_APP_ID}
+            onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
+            onLoginFailure={() => setServerError(`Social media authentication failed. Refresh the
+          page to try again.`)}
+            scope="public_profile,email"
+          />
+        </>
+      )}
     </AuthLayout>
   );
 }
 
 export default SignUp;
-
-/*
-<GoogleLoginButton
-  provider="google"
-  appId={process.env.GOOGLE_CLIENT_ID}
-  onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
-  onLoginFailure={setServerError}
-/>
- */
