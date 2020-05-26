@@ -6,7 +6,7 @@ import {
   Heading4,
   Heading5,
   Heading6,
-} from '../src/components/Heading';
+} from 'src/components/Heading';
 
 export function Basic() {
   return (

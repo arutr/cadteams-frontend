@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Heading1 } from 'src/components/Heading';
 import Modal, { ModalProvider } from '../src/components/Modal';
 import Button from '../src/components/Button';
-import { Heading1 } from '../src/components/Heading';
 import User from '../src/api/User';
-import PortfolioModal from '../src/components/Portfolio';
+import { PortfolioModal } from '../src/components/Portfolio';
 
 export function Basic() {
   const [open, setOpen] = useState(false);
@@ -35,26 +35,61 @@ export function Basic() {
 
 export function Portfolio() {
   const user: User = {
-    firstName: 'Manuel',
-    lastName: 'A.',
-    profilePhoto: '/images/portfolio-demo/profile-picture.jpg',
-    specialization: 'Architectural Technology',
-    sectors: ['Residential', 'Modular'],
+    username: 'Manuel A.',
+    profilePicture: {
+      url: '/images/portfolio-demo/profile-picture.jpg',
+    },
+    specialization: 'Architectural Technician',
+    sectors: [{
+      id: 1,
+      label: 'Residential',
+    }, {
+      id: 2,
+      label: 'Modular',
+    }],
     location: 'Brighton, UK',
     experience: 5,
-    languages: ['English', 'Spanish'],
-    tools: ['Revit', '3Ds Max', 'Photoshop'],
+    languages: [{
+      id: 1,
+      label: 'English',
+    }, {
+      id: 2,
+      label: 'Spanish',
+    }],
+    tools: [{
+      id: 1,
+      label: 'Revit',
+    }, {
+      id: 2,
+      label: '3Ds Max',
+    }, {
+      id: 3,
+      label: 'Photoshop',
+    }],
     designs: [
-      '/images/portfolio-demo/design1.png',
-      '/images/portfolio-demo/design2.png',
-      '/images/portfolio-demo/design3.png',
-      '/images/portfolio-demo/design4.png',
+      {
+        url: '/images/portfolio-demo/design1.png',
+      },
+      {
+        url: '/images/portfolio-demo/design2.png',
+      },
+      {
+        url: '/images/portfolio-demo/design3.png',
+      },
+      {
+        url: '/images/portfolio-demo/design4.png',
+      },
     ],
-    uniqueSkills: [
-      'Tight plantroom coordination',
-      '2D and 3D work',
-      'Foundation drawings',
-    ],
+    uniqueSkills: [{
+      id: 1,
+      skill: 'Combining Revit and image profile tools for stunning visuals',
+    }, {
+      id: 2,
+      skill: 'Construction-ready drawings in line with BS',
+    }, {
+      id: 3,
+      skill: 'Surveying and site supervision',
+    }],
   };
 
   return (
