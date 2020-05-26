@@ -1,0 +1,33 @@
+@import 'styles/variables/typography';
+
+.editable {
+  width: 100%;
+  background: none;
+  padding: 0.33rem;
+  border-radius: var(--border-radius);
+  border: 1px dashed var(--color-gray);
+
+  &:focus {
+    outline: none;
+    border-width: 2px;
+  }
+
+  h1 & {
+    font-family: var(--font-family__sans-condensed);
+    font-weight: $font-weight__semibold;
+  }
+
+  &.label {
+    border-color: var(--color-blue);
+
+    &, &::placeholder {
+      color: var(--color-blue);
+      font-family: var(--font-family__monospace);
+      text-transform: uppercase;
+    }
+  }
+}
+
+textarea.editable {
+  min-height: 10rem;
+}
