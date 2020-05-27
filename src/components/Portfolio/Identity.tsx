@@ -32,7 +32,7 @@ type UpdateFormProps = {
   setSectors: (sectors) => void,
 } & PortfolioSectionProps;
 
-const PROFILE_PICTURE_MAX_SIZE = 1048576;
+const PROFILE_PICTURE_MAX_SIZE = 4 * 1048576;
 
 function UpdateForm({
   isProfile, sectors, setSectors, user,
@@ -151,7 +151,7 @@ function ProfilePictureForm({ isProfile, setDialog, user }) {
     if (picture[0].size > PROFILE_PICTURE_MAX_SIZE) {
       setDialog({
         type: 'error',
-        message: 'Maximum file size of a profile picture is 1 megabyte.',
+        message: 'Maximum file size of a profile picture is 4 megabytes.',
       });
       return;
     }
