@@ -7,18 +7,27 @@
   border-radius: var(--border-radius);
 }
 
+small.dialog {
+  margin: 0.25rem 0;
+  padding: 0.33rem;
+}
+
 .error {
   background-color: var(--color-red);
 }
 
-.info {
+.info, .hint {
   color: var(--color-black);
   background-color: var(--color-silver);
 }
 
-.icon {
+div .icon {
   margin-left: 0.25rem;
   margin-right: 1rem;
+}
+
+small .icon {
+  margin-right: 0.25rem;
 }
 
 .message {
