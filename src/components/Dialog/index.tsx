@@ -5,23 +5,28 @@ import styles from './Dialog.module.scss';
 
 export interface DialogProps {
   children?: any;
-  type: 'error' | 'success' | 'info';
   message?: string;
+  small?: boolean;
+  type: 'error' | 'hint' | 'success' | 'info';
 }
 
-export default function Dialog({ children, type, message }: DialogProps) {
+export default function Dialog({
+  children, type, small, message,
+}: DialogProps) {
   const icon = {
     error: 'error',
+    hint: 'bulb',
     info: 'info',
     success: 'check',
   };
+  const As = small ? 'small' : 'div';
 
   if (children || message) {
     return (
-      <div className={classNames(styles.dialog, styles[type])}>
+      <As className={classNames(styles.dialog, styles[type])}>
         <Icon className={styles.icon} large name={icon[type]} />
         <p className={styles.message}>{children ?? message}</p>
-      </div>
+      </As>
     );
   }
 
