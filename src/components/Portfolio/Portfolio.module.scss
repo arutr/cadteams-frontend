@@ -23,18 +23,19 @@
 }
 
 .contact-information {
-  button {
-    margin-top: var(--spacing);
-  }
+  position: relative;
 
   form {
-    .fieldset {
-      flex: 1;
+    display: flex;
+    align-items: center;
+    margin: var(--spacing) 0;
+
+    .icon {
+      margin-right: 0.5rem;
     }
 
-    label {
-      flex: none;
-      flex-basis: 2.5rem;
+    input {
+      flex: 1;
     }
   }
 
@@ -166,7 +167,7 @@
     display: flex;
     align-items: center;
 
-    input {
+    > input {
       flex: 1;
     }
 
@@ -175,7 +176,7 @@
     }
   }
 
-  > div + div {
+  > small {
     margin-top: var(--spacing);
   }
 }
