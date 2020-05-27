@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Label as LabelType } from 'src/api/User';
+import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import Icon from 'src/components/Icon';
 import Label, { LabelContainer } from 'src/components/Label';
@@ -86,6 +87,11 @@ function UpdateForm({
               </EditableInput>
             </div>
           </div>
+          {editing && (
+            <Dialog small type="hint">
+              Type in a label into a dashed field below and press <strong>Enter</strong> to apply.
+            </Dialog>
+          )}
           <div className={styles.languages}>
             <Icon className={styles.icon} large name="language" title="Spoken languages" />
             <LabelContainer>
