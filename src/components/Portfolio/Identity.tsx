@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
 import Button from 'src/components/Button';
+import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
@@ -91,6 +92,11 @@ function UpdateForm({
           </EditableInput>
         )}
       </Heading3>
+      {editing && (
+        <Dialog small type="hint">
+          Type in a label into a dashed field below and press <strong>Enter</strong> to apply.
+        </Dialog>
+      )}
       <LabelContainer>
         {sectors?.length ? sectors.map(({ id, label }) => (
           <Label key={id} removeLabel={editing ? (() => removeSector(id)) : null}>
@@ -108,11 +114,6 @@ function UpdateForm({
           />
         )}
       </LabelContainer>
-      {editing && (
-        <small>
-          <Icon name="bulb" /> Type in a label and press <strong>Enter</strong> to apply.
-        </small>
-      )}
     </form>
   );
 }
