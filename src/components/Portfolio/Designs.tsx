@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
@@ -17,25 +17,31 @@ interface Form {
   design: FileList;
 }
 
-const IMAGE_MAX_SIZE = 4194304;
-const VIDEO_MAX_SIZE = 15728640;
+const IMAGE_MAX_SIZE = 4 * 1048576;
+const VIDEO_MAX_SIZE = 20 * 1048576;
 
 function DesignForm({ index, isProfile, setDialog }) {
   const { register, handleSubmit } = useForm<Form>();
   const { updateUser } = useAuth();
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const onClick = () => document.querySelector<HTMLInputElement>(`#design${index}`).click();
   const onInput = handleSubmit(async ({ design }) => {
     setDialog(null);
+    setSubmitting(true);
 
     if (design[0]?.type.startsWith('image/') && design[0]?.size > IMAGE_MAX_SIZE) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({ type: 'error', message: 'Image files cannot be larger than 4 megabytes.' });
+      setSubmitting(false);
+
       return;
     }
 
     if (design[0]?.type.startsWith('video/') && design[0]?.size > VIDEO_MAX_SIZE) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      setDialog({ type: 'error', message: 'Video files cannot be larger than 15 megabytes.' });
+      setDialog({ type: 'error', message: 'Video files cannot be larger than 20 megabytes.' });
+      setSubmitting(false);
+
       return;
     }
 
@@ -53,6 +59,8 @@ function DesignForm({ index, isProfile, setDialog }) {
         throw error;
       }
     });
+
+    setSubmitting(false);
   });
   return (
     <form className={classNames(styles.design, styles.blank)}>
@@ -67,7 +75,9 @@ function DesignForm({ index, isProfile, setDialog }) {
             ref={register}
             onInput={onInput}
           />
-          <Button type="button" onClick={onClick}>+ Add a design</Button>
+          <Button disabled={submitting} type="button" onClick={onClick}>
+            {submitting ? 'Uploading...' : '+ Add a design'}
+          </Button>
         </>
       )}
     </form>
