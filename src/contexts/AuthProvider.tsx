@@ -94,7 +94,7 @@ export default class AuthProvider extends React.Component<any, State> {
 
   redirectToApp = () => {
     if (this.isAuthenticated()) {
-      Router.push('/app');
+      Router.push('/app/profile');
       return;
     }
 
