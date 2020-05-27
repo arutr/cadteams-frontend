@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
 import Button from 'src/components/Button';
+import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
@@ -31,7 +32,7 @@ type UpdateFormProps = {
   setSectors: (sectors) => void,
 } & PortfolioSectionProps;
 
-const PROFILE_PICTURE_MAX_SIZE = 1048576;
+const PROFILE_PICTURE_MAX_SIZE = 4 * 1048576;
 
 function UpdateForm({
   isProfile, sectors, setSectors, user,
@@ -91,6 +92,11 @@ function UpdateForm({
           </EditableInput>
         )}
       </Heading3>
+      {editing && (
+        <Dialog small type="hint">
+          Type in a label into a dashed field below and press <strong>Enter</strong> to apply.
+        </Dialog>
+      )}
       <LabelContainer>
         {sectors?.length ? sectors.map(({ id, label }) => (
           <Label key={id} removeLabel={editing ? (() => removeSector(id)) : null}>
@@ -108,11 +114,6 @@ function UpdateForm({
           />
         )}
       </LabelContainer>
-      {editing && (
-        <small>
-          <Icon name="bulb" /> Type in a label and press <strong>Enter</strong> to apply.
-        </small>
-      )}
     </form>
   );
 }
@@ -150,7 +151,7 @@ function ProfilePictureForm({ isProfile, setDialog, user }) {
     if (picture[0].size > PROFILE_PICTURE_MAX_SIZE) {
       setDialog({
         type: 'error',
-        message: 'Maximum file size of a profile picture is 1 megabyte.',
+        message: 'Maximum file size of a profile picture is 4 megabytes.',
       });
       return;
     }

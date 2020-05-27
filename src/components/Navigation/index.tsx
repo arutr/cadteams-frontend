@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useAuth } from 'src/contexts/AuthProvider';
 import getApiResource from '../../utils/api';
 import Icon from '../Icon';
 import MediaObject from '../MediaObject';
 import styles from './Navigation.module.scss';
 import Link from '../Link';
-import VerticalNavigationLinks from './VerticalNavigationLinks';
+import AppNavigationLinks from './VerticalNavigationLinks';
 
-export function HorizontalNavigationLinks() {
+export function GuestNavigationLinks() {
   const { isAuthenticated, logOut, user } = useAuth();
 
   if (!isAuthenticated()) {
@@ -32,7 +32,7 @@ export function HorizontalNavigationLinks() {
 
   return (
     <>
-      <Link as="li" href="/app" hoverEffect={false}>
+      <Link as="li" href="/app/profile" hoverEffect={false}>
         <MediaObject
           captionAlign="left"
           src={getApiResource(user?.profilePicture?.formats?.thumbnail?.url)
@@ -52,16 +52,28 @@ interface Props {
 }
 
 function Navigation({ horizontal }: Props) {
+  const router = useRouter();
   const { isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
-  const links = horizontal ? <HorizontalNavigationLinks /> : <VerticalNavigationLinks />;
+  const links = horizontal ? <GuestNavigationLinks /> : <AppNavigationLinks />;
 
   const toggleMenu = () => setOpen(!open);
+
+  useEffect(() => {
+    const handleChange = () => setOpen(false);
+    router.events.on('routeChangeStart', handleChange);
+
+    return () => router.events.off('routeChangeStart', handleChange);
+  });
 
   return (
     <header className={horizontal ? styles.horizontal : styles.vertical}>
       <nav>
-        <Link href={isAuthenticated() ? '/app' : '/'} hoverEffect={false} className={styles.logo}>
+        <Link
+          href={isAuthenticated() ? '/app/profile' : '/'}
+          hoverEffect={false}
+          className={styles.logo}
+        >
           <img src="/images/logo.svg" alt="CADteams" />
         </Link>
         <Icon className={styles.toggle} name={open ? 'close' : 'menu'} onClick={toggleMenu} />

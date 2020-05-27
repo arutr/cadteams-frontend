@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Label as LabelType } from 'src/api/User';
+import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import Icon from 'src/components/Icon';
 import Label, { LabelContainer } from 'src/components/Label';
@@ -86,6 +87,11 @@ function UpdateForm({
               </EditableInput>
             </div>
           </div>
+          {editing && (
+            <Dialog small type="hint">
+              Type in a label into a dashed field below and press <strong>Enter</strong> to apply.
+            </Dialog>
+          )}
           <div className={styles.languages}>
             <Icon className={styles.icon} large name="language" title="Spoken languages" />
             <LabelContainer>
@@ -95,7 +101,7 @@ function UpdateForm({
                 </Label>
               )) : null}
               {!editing && !languages?.length && isProfile && (
-                <Label className={styles.placeholder}>Language(s)</Label>
+                <Label className={styles.placeholder}>Spoken language(s)</Label>
               )}
               {editing && (
                 <EditableLabel
@@ -107,7 +113,12 @@ function UpdateForm({
             </LabelContainer>
           </div>
           <div>
-            <Icon className={styles.icon} large name="ruler" title="Software tools" />
+            <Icon
+              className={styles.icon}
+              large
+              name="ruler"
+              title="Modelling/Rendering software"
+            />
             <LabelContainer>
               {tools?.length ? tools.map(({ id, label }) => (
                 <Label key={id} removeLabel={editing ? (() => removeTool(id)) : null}>
@@ -115,12 +126,12 @@ function UpdateForm({
                 </Label>
               )) : null}
               {!editing && !tools?.length && isProfile && (
-                <Label className={styles.placeholder}>Software and tool(s)</Label>
+                <Label className={styles.placeholder}>Modelling/Rendering software</Label>
               )}
               {editing && (
                 <EditableLabel
                   labels={tools}
-                  placeholder="Software/tool"
+                  placeholder="Modelling/Rendering software"
                   setLabels={setTools}
                 />
               )}
@@ -147,12 +158,12 @@ function UpdateForm({
             </EditableInput>
           </div>
           <div>
-            <Icon className={styles.icon} large name="building" title="Founding year" />
+            <Icon className={styles.icon} large name="building" title="Establishing year" />
             <EditableInput
               defaultValue={user?.experience > 0 ? user.experience : new Date().getFullYear()}
               placeholder="YYYY"
               name="experience"
-              prefix="Founded in&ensp;"
+              prefix="Established in&ensp;"
               type="number"
               style={{ maxWidth: '5rem' }}
               ref={register({ min: 0 })}
@@ -160,9 +171,9 @@ function UpdateForm({
               <Placeholder
                 isProfile={isProfile}
                 publicValue="N/A"
-                profileValue="Year of company founding"
+                profileValue="Year of company establishing"
                 value={user?.experience && (
-                  <span>Founded in <strong>{user?.experience}</strong></span>
+                  <span>Established in <strong>{user?.experience}</strong></span>
                 )}
               />
             </EditableInput>
@@ -175,9 +186,7 @@ function UpdateForm({
               name="website"
               ref={register({
                 validate: (value) => (
-                  !value.length || validator.isURL(value, {
-                    require_protocol: true,
-                  }) || 'Please enter a valid URL.'
+                  !value.length || validator.isURL(value) || 'Please enter a valid URL.'
                 ),
               })}
             >
@@ -185,7 +194,14 @@ function UpdateForm({
                 isProfile={isProfile}
                 publicValue="N/A"
                 profileValue="Company website"
-                value={<Link external href={user?.website}>{user?.website}</Link>}
+                value={(
+                  <Link
+                    external
+                    href={`${!user?.website.startsWith('http') ? '//' : ''}${user?.website}`}
+                  >
+                    {user?.website}
+                  </Link>
+                )}
               />
             </EditableInput>
             <Error className={styles.error} filler={false} errors={errors} name="website" />

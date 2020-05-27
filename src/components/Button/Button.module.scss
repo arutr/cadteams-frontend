@@ -17,6 +17,11 @@
   transition: background-color 200ms, filter 200ms;
   font-family: var(--font-family__monospace), monospace;
 
+  &:disabled {
+    cursor: wait;
+    opacity: 0.5;
+  }
+
   &:focus {
     outline: none;
   }

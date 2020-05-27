@@ -7,19 +7,21 @@ interface Props {
   block?: boolean;
   children?: any;
   className?: string;
+  disabled?: boolean;
   large?: boolean;
   onClick?: (event) => void;
   type?: 'submit' | 'button';
 }
 
 function Button({
-  block, large, children, onClick, className, type,
+  block, large, children, disabled, onClick, className, type,
 }: Props) {
   return (
     <button
       type={type ?? 'submit'}
       className={classNames(styles.button, className, block && styles.block, large && styles.large)}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

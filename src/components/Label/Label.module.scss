@@ -1,6 +1,7 @@
 @import 'styles/variables/ui';
 
 .container {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   margin: 0 -0.25rem;
