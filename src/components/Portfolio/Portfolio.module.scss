@@ -207,10 +207,6 @@
     @include min-screen($screen-m) {
       grid-template: 1fr / repeat(3, 1fr);
     }
-
-    h3 {
-      word-break: break-all;
-    }
   }
 }
 

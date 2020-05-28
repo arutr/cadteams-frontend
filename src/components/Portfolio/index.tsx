@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import Dialog, { DialogProps } from 'src/components/Dialog';
 import Designs from 'src/components/Portfolio/Designs';
@@ -22,13 +23,14 @@ function NewsletterFooter({ user }: PortfolioProps) {
     <footer className={styles.card}>
       <Heading2 marginTop="0" bold condensed>Like what you&apos;re seeing?</Heading2>
       <p>
-        Get in touch with specialists
-        like {user?.username} on <b>CAD</b>teams <strong>soon</strong>.
-        Stay informed on our progress through <b>CAD</b>teams Magazine.
+        Get in touch with specialists like {user?.username} on <b>CAD</b>teams today.
+        Create a <strong>free</strong> account and explore what CADteams has to offer!
       </p>
-      <AnchorButton block external href="https://eepurl.com/gXt3-L">
-        Sign up to the newsletter
-      </AnchorButton>
+      <Link href="/sign-up" passHref>
+        <AnchorButton block>
+          Create a free account
+        </AnchorButton>
+      </Link>
     </footer>
   );
 }
