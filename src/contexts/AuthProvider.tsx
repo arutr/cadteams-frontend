@@ -47,11 +47,11 @@ export default class AuthProvider extends React.Component<any, State> {
   componentDidMount() {
     this.getUser();
     this.handleRouteChange(Router.pathname);
-    Router.events.on('routeChangeStart', this.handleRouteChange);
+    Router.events.on('routeChangeComplete', this.handleRouteChange);
   }
 
   componentWillUnmount() {
-    return () => Router.events.off('routeChangeStart', this.handleRouteChange);
+    return () => Router.events.off('routeChangeComplete', this.handleRouteChange);
   }
 
   static setAuthorizationHeader(token) {
@@ -95,10 +95,9 @@ export default class AuthProvider extends React.Component<any, State> {
   redirectToApp = () => {
     if (this.isAuthenticated()) {
       Router.push('/app/profile');
-      return;
+    } else {
+      this.logOut();
     }
-
-    this.logOut();
   };
 
   handleRouteChange = (url: string) => {
