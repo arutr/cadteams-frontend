@@ -197,7 +197,7 @@ function UpdateForm({
                 value={(
                   <Link
                     external
-                    href={`${!user?.website.startsWith('http') ? '//' : ''}${user?.website}`}
+                    href={`${!user?.website?.startsWith('http') ? '//' : ''}${user?.website}`}
                   >
                     {user?.website}
                   </Link>
