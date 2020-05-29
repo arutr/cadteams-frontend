@@ -14,7 +14,8 @@ import MediaObject from '../src/components/MediaObject';
 import Link from '../src/components/Link';
 import Button from '../src/components/Button';
 import AuthLayout from '../src/layouts/AuthLayout';
-import styles from '../src/layouts/AuthLayout.module.scss';
+import authStyles from '../src/layouts/AuthLayout.module.scss';
+import styles from './sign-up.module.scss';
 
 function SignUp() {
   const [serverError, setServerError] = useState<string>();
@@ -128,23 +129,17 @@ function SignUp() {
           })}
         />
         <Error errors={errors} name="password" />
-        <Checkbox id="newsletter" ref={register}>
+        <Checkbox className={styles.newsletter} id="newsletter" ref={register}>
           <strong>Yes!</strong> Sign me up to <b>CAD</b>teams Magazine to hear about latest news
-          and offers from <b>CAD</b>teams.
+          and offers from <b>CAD</b>teams (optional).
         </Checkbox>
         <p>
-          By signing up, I accept the <b>CAD</b>teams&nbsp;
-          <Link
-            external
-            href="https://drive.google.com/uc?id=1MuNKTTASbRC7NhVGxbMNxtwDDdhxrOe9"
-          >
+          By signing up, you accept <b>CAD</b>teams&nbsp;
+          <Link external href="/terms-and-conditions.pdf">
             Terms and Conditions
           </Link>
           &nbsp;and acknowledge the&nbsp;
-          <Link
-            external
-            href="https://drive.google.com/uc?id=1MuNKTTASbRC7NhVGxbMNxtwDDdhxrOe9"
-          >
+          <Link external href="/terms-and-conditions.pdf">
             Privacy Policy
           </Link>.
         </p>
@@ -152,7 +147,7 @@ function SignUp() {
       </Form>
       {watchType === 'individual' && (
         <>
-          <div className={styles.separator}>
+          <div className={authStyles.separator}>
             <hr />
             <strong>OR</strong>
             <hr />
