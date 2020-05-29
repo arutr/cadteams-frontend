@@ -1,0 +1,21 @@
+@import 'styles/variables/colors';
+
+.newsletter {
+  padding: 0.75rem;
+  transition: background-color 200ms;
+  border-radius: var(--border-radius);
+  background-color: var(--color-silver);
+
+  &, > * {
+    cursor: pointer;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: darken($color-silver, 5%);
+  }
+
+  &:active {
+    background-color: darken($color-silver, 10%);
+  }
+}

@@ -7,11 +7,12 @@ import styles from './Form.module.scss';
 interface CheckboxProps {
   id: string;
   children?: any;
+  className?: string;
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, children }: CheckboxProps, ref) => (
-    <div className={styles.checkbox}>
+  ({ id, children, className }: CheckboxProps, ref) => (
+    <div className={classNames(styles.checkbox, className)}>
       <input id={id} name={id} type="checkbox" ref={ref} />
       <label htmlFor={id}>{children}</label>
     </div>
@@ -57,7 +58,7 @@ export function Form({ children, className, ...props }: FormProps) {
 interface InputProps {
   className?: string;
   id: string;
-  label: string | JSX.Element;
+  label: any;
   type?: string;
   [key: string]: any;
 }
