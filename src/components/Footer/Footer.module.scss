@@ -1,10 +1,8 @@
 @import 'styles/mixins/responsive';
 @import 'styles/mixins/typography';
 
-$screen-wrap: $screen-s * 1.4;
-
 .footer {
-  padding: var(--spacing) 0;
+  padding-top: var(--spacing);
   background-color: var(--color-silver);
 
   @include max-screen($screen-m) {
@@ -15,23 +13,17 @@ $screen-wrap: $screen-s * 1.4;
     @include inline-list;
 
     display: flex;
-    flex-direction: column;
-    font-size: 0.85rem;
+    font-size: 85%;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-
-    @include min-screen($screen-wrap) {
-      flex-direction: row;
-    }
 
     * + * {
       margin-left: 1rem;
     }
-  }
-}
 
-.social {
-  @include max-screen($screen-wrap) {
-    padding-top: var(--spacing);
+    > * {
+      padding-bottom: var(--spacing);
+    }
   }
 }
