@@ -26,19 +26,14 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <ul>
+        <span>
+          &copy; {new Date().getFullYear()} <b>CAD</b>teams Ltd (Company No. 12404180)
+        </span>
         <div>
-          <span>
-            &copy; {new Date().getFullYear()} <b>CAD</b>teams
-          </span>
-          <Link
-            external
-            href="https://drive.google.com/uc?id=1MuNKTTASbRC7NhVGxbMNxtwDDdhxrOe9"
-          >
-            Privacy & Terms
-          </Link>
-          <Link external href="mailto:hello@cadteams.com">Contact Us</Link>
+          <Link external href="/terms-and-conditions.pdf">Privacy & Terms</Link>
+          <Link external href="mailto:hello@cadteams.com">hello@cadteams.com</Link>
         </div>
-        <div className={styles.social}>
+        <div>
           {socialMedia.map(({ name, href }, index) => (
             <Link key={index} href={href} external>
               <Icon name={name} large />
