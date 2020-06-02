@@ -5,15 +5,41 @@ import classNames from 'classnames';
 import styles from './MediaObject.module.scss';
 
 function MediaObject({
-  alt, children, className, captionAlign, height, id, imageHeight, imageWidth, src, width, vertical,
+  alt, children, className, captionAlign, height, href, id, onClick, src, width, vertical,
 }) {
+  if (href) {
+    /* eslint-disable jsx-a11y/no-interactive-element-to-noninteractive-role */
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener"
+        role="figure"
+        id={id}
+        className={classNames(styles.figure, vertical && styles.vertical, className)}
+        style={{ height, width }}
+      >
+        <img src={src} alt={alt} />
+        <figcaption className={styles[captionAlign]}>{children}</figcaption>
+      </a>
+    );
+  }
+
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <figure
       id={id}
-      className={classNames(styles.figure, vertical && styles.vertical, className)}
+      onKeyDown={onClick}
+      onClick={onClick}
+      className={classNames(
+        styles.figure,
+        onClick && styles.clickable,
+        vertical && styles.vertical,
+        className,
+      )}
       style={{ height, width }}
     >
-      <img src={src} alt={alt} style={{ height: imageHeight, width: imageWidth }} />
+      <img src={src} alt={alt} />
       <figcaption className={styles[captionAlign]}>{children}</figcaption>
     </figure>
   );
@@ -25,9 +51,9 @@ MediaObject.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   height: PropTypes.string,
+  href: PropTypes.string,
   id: PropTypes.string,
-  imageHeight: PropTypes.string,
-  imageWidth: PropTypes.string,
+  onClick: PropTypes.func,
   src: PropTypes.string,
   width: PropTypes.string,
   vertical: PropTypes.bool,
@@ -39,9 +65,9 @@ MediaObject.defaultProps = {
   children: null,
   className: null,
   height: null,
+  href: null,
   id: null,
-  imageHeight: null,
-  imageWidth: null,
+  onClick: null,
   src: null,
   width: null,
   vertical: false,
