@@ -2,7 +2,8 @@
 @import 'mixins/responsive';
 @import 'variables/typography';
 
-a:not([role="button"]) {
+a:not([role="button"]),
+[role="link"] {
   @include anchor;
 }
 
