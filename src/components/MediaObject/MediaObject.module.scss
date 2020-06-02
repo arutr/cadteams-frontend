@@ -1,5 +1,9 @@
 @import 'styles/variables/typography';
 
+.clickable {
+  cursor: pointer;
+}
+
 .figure {
   margin: 0;
   display: flex;
@@ -24,7 +28,7 @@
       line-height: 1.5;
     }
 
-    a {
+    a, i {
       font-style: italic;
       font-weight: normal;
       text-decoration: none;
@@ -36,6 +40,11 @@
     max-height: 100%;
     object-fit: contain;
   }
+}
+
+a.figure {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .vertical {

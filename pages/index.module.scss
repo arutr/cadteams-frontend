@@ -130,6 +130,7 @@
       grid-template: repeat(2, 1fr) / repeat(2, 1fr);
     }
 
+    a[role="figure"],
     figure {
       scroll-snap-align: center;
 
