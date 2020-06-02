@@ -39,7 +39,8 @@ export type PortfolioSectionProps = {
   setDialog: ({ type, message }: DialogProps) => void,
 } & PortfolioProps;
 
-function Portfolio({ demo, ...props }: PortfolioProps) {
+function Portfolio(props: PortfolioProps) {
+  const { demo } = props;
   const [dialog, setDialog] = useState<DialogProps>();
   return (
     <div className={styles.wrapper}>

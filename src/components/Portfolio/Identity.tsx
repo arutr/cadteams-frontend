@@ -122,11 +122,13 @@ interface Form {
   picture: FileList;
 }
 
-function ProfilePictureForm({ isProfile, setDialog, user }) {
+function ProfilePictureForm({
+  demo, isProfile, setDialog, user,
+}: PortfolioSectionProps) {
   const { register, handleSubmit } = useForm<Form>();
   const { updateUser } = useAuth();
   const profilePicture = user?.profilePicture;
-  const profilePictureUrl = getApiResource(
+  const profilePictureUrl = demo ? profilePicture?.url : getApiResource(
     profilePicture?.formats?.thumbnail?.url,
     profilePicture?.url,
   );
@@ -165,7 +167,7 @@ function ProfilePictureForm({ isProfile, setDialog, user }) {
 
   return (
     <div className={styles['profile-picture']}>
-      <img src={profilePictureUrl || '/icons/user-blank.svg'} alt={user?.username} />
+      <img src={profilePictureUrl ?? '/icons/user-blank.svg'} alt={user?.username} />
       {isProfile && (
         <form>
           <input
@@ -195,16 +197,6 @@ function ProfilePictureForm({ isProfile, setDialog, user }) {
     </div>
   );
 }
-
-ProfilePictureForm.propTypes = {
-  isProfile: PropTypes.bool.isRequired,
-  setDialog: PropTypes.func.isRequired,
-  user: PropTypes.object,
-};
-
-ProfilePictureForm.defaultProps = {
-  user: null,
-};
 
 export default function Identity(props: PortfolioSectionProps) {
   const [sectors, setSectors] = useState<LabelType[]>();

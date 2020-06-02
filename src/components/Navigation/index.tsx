@@ -30,15 +30,17 @@ export function GuestNavigationLinks() {
     );
   }
 
+  const profilePicture = user?.profilePicture;
+
   return (
     <>
       <Link as="li" href="/app/profile" hoverEffect={false}>
         <MediaObject
           captionAlign="left"
-          src={getApiResource(user?.profilePicture?.formats?.thumbnail?.url)
+          className={styles.avatar}
+          src={getApiResource(profilePicture?.formats?.thumbnail?.url, profilePicture?.url)
           ?? '/icons/user-blank.svg'}
           vertical
-          imageWidth="3rem"
         >
           {user?.username}
         </MediaObject>
