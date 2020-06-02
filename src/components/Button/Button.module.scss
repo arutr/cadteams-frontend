@@ -14,7 +14,7 @@
   text-transform: uppercase;
   background-color: var(--color-gray);
   border-radius: var(--border-radius);
-  transition: background-color 200ms, filter 200ms;
+  transition: background-color 200ms, opacity 200ms;
   font-family: var(--font-family__monospace), monospace;
 
   &:disabled {
