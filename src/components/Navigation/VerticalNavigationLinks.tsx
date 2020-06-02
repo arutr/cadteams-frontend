@@ -14,6 +14,7 @@ function tabActiveStyle(tab) {
 
 export default function VerticalNavigationLinks() {
   const { logOut, user } = useAuth();
+  const profilePicture = user?.profilePicture;
 
   return (
     <>
@@ -46,8 +47,8 @@ export default function VerticalNavigationLinks() {
       <div className={styles.separator} />
       <MediaObject
         captionAlign="left"
-        imageWidth="5rem"
-        src={getApiResource(user?.profilePicture?.formats?.thumbnail?.url)
+        className={styles.avatar}
+        src={getApiResource(profilePicture?.formats?.thumbnail?.url, profilePicture?.url)
         ?? '/icons/user-blank.svg'}
         vertical
         width="11rem"

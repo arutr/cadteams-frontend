@@ -8,7 +8,6 @@ import { ModalProvider } from 'src/components/Modal';
 import { AnchorButton } from 'src/components/Button';
 import User from '../src/api/User';
 import Footer from '../src/components/Footer';
-import Link from '../src/components/Link';
 import MediaObject from '../src/components/MediaObject';
 import styles from './index.module.scss';
 
@@ -114,36 +113,36 @@ function LandingPage() {
           <aside>
             <MediaObject
               id={styles.design1}
+              href="https://www.david-miller.co.uk/gateway-house.php"
               src="/images/landing-page/design1.png"
               alt="Gateway House, Finchley"
             >
               <p>Gateway House, Finchley</p>
-              <Link href="https://www.david-miller.co.uk/gateway-house.php" external>
+              <i role="link">
                 <Icon name="share" /> David Miller Architects
-              </Link>
+              </i>
             </MediaObject>
             <MediaObject
               id={styles.design2}
+              onClick={togglePortfolioModal}
               src="/images/landing-page/design2.png"
               alt="Plant Room"
             >
               <p>Plant Room</p>
-              <Link onClick={togglePortfolioModal}>
+              <i role="link">
                 <Icon name="view" /> Manuel A.
-              </Link>
+              </i>
             </MediaObject>
             <MediaObject
               id={styles.design3}
+              href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
               src="/images/landing-page/design3.png"
               alt="Fairfield Inn and Suites"
             >
               <p>Fairfield Inn and Suites</p>
-              <Link
-                href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
-                external
-              >
+              <i role="link">
                 <Icon name="share" /> United BIM
-              </Link>
+              </i>
             </MediaObject>
           </aside>
         </section>
@@ -177,17 +176,6 @@ function LandingPage() {
         </section>
       </main>
       <Footer />
-      {/* {newsletterModal && ( */}
-      {/*  <Modal className={styles.newsletter} onClose={toggleNewsletterModal}> */}
-      {/*    <Heading1 marginTop={0}>Coming Soon!</Heading1> */}
-      {/*    <p> */}
-      {/*      We are working very hard to get <b>CAD</b>teams up and running. */}
-      {/*      Stay up-to-date with the progress by signing up to our newsletter. */}
-      {/*    </p> */}
-      {/*    <p>Fill out the form below to get started:</p> */}
-      {/*    <iframe title="mailchimp" src="/mailchimp.html" /> */}
-      {/*  </Modal> */}
-      {/* )} */}
       {portfolioModal && (
         <PortfolioModal isProfile={false} demo user={user} onClose={togglePortfolioModal} />
       )}

@@ -19,6 +19,7 @@ import styles from './sign-up.module.scss';
 
 function SignUp() {
   const [serverError, setServerError] = useState<string>();
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const {
     register, handleSubmit, errors, watch,
   } = useForm<RegistrationForm>();
@@ -27,12 +28,21 @@ function SignUp() {
 
   const onSubmit = handleSubmit(async (values) => {
     setServerError(null);
+    setSubmitting(true);
+
     try {
-      await registerAccount(values).then(redirectToApp);
+      await registerAccount(values);
+
+      // @ts-ignore
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
+      });
+      await redirectToApp();
     } catch (error) {
       const message = error.response?.data?.message?.[0]?.messages?.[0]?.message
         || 'Unknown error has occurred. Please refresh the page.';
       setServerError(message);
+      setSubmitting(false);
     }
   });
 
@@ -143,7 +153,9 @@ function SignUp() {
             Privacy Policy
           </Link>.
         </p>
-        <Button type="submit" block>Create a free account</Button>
+        <Button disabled={submitting} type="submit" block>
+          {submitting ? 'Processing...' : 'Create a free account'}
+        </Button>
       </Form>
       {watchType === 'individual' && (
         <>

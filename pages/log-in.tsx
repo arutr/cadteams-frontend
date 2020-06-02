@@ -17,18 +17,23 @@ import styles from '../src/layouts/AuthLayout.module.scss';
 
 function LogIn() {
   const [serverError, setServerError] = useState<string>();
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const { register, handleSubmit, errors } = useForm<LoginForm>();
   const { handleSocialLogin, logIn, redirectToApp } = useAuth();
   const onSubmit = handleSubmit(async (values) => {
     setServerError(null);
+    setSubmitting(true);
+
     try {
-      await logIn(values).then(redirectToApp);
+      await logIn(values);
+      await redirectToApp();
     } catch (error) {
       if (error.response?.data?.message[0]?.messages) {
         setServerError(error.response.data.message[0]?.messages[0]?.message);
       } else {
         setServerError('Unknown error has occurred. Please refresh the page.');
       }
+      setSubmitting(false);
     }
   });
 
@@ -76,7 +81,9 @@ function LogIn() {
         />
         <Error errors={errors} name="password" />
         <Link external as="a" href="mailto:hello@cadteams.com">Forgot your password?</Link>
-        <Button type="submit" block>Submit</Button>
+        <Button disabled={submitting} type="submit" block>
+          {submitting ? 'Processing...' : 'Submit'}
+        </Button>
       </Form>
       <div className={styles.separator}>
         <hr />

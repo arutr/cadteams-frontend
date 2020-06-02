@@ -36,10 +36,13 @@ $content-width: 55vw;
   display: flex;
 
   @include max-screen($screen-m) {
+    min-height: 90vh;
     margin-bottom: 5rem;
   }
 
-  height: calc(#{$viewport-height} - #{$navigation-height});
+  @include min-screen($screen-m) {
+    height: calc(#{$viewport-height} - #{$navigation-height});
+  }
 
   .content {
     width: 100%;
