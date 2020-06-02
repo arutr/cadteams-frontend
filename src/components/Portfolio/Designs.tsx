@@ -93,7 +93,9 @@ DesignForm.defaultProps = {
   isProfile: false,
 };
 
-export default function Designs({ user, isProfile, setDialog }: PortfolioSectionProps) {
+export default function Designs({
+  demo, user, isProfile, setDialog,
+}: PortfolioSectionProps) {
   const { updateUser } = useAuth();
   const removeDesign = (id) => updateUser(null, 'delete', `/upload/me/${id}`)
     .catch((error) => {
@@ -125,8 +127,10 @@ export default function Designs({ user, isProfile, setDialog }: PortfolioSection
         {Array(6).fill(1).map((_, index) => {
           const design = user?.designs[index];
           if (design) {
-            const url = getApiResource(design.url);
-            const thumbnailUrl = getApiResource(design.formats?.medium?.url, design.url);
+            const url = demo ? design.url : getApiResource(design.url);
+            const thumbnailUrl = demo
+              ? design.url
+              : getApiResource(design.formats?.medium?.url, design.url);
 
             return (
               <div key={index} className={styles.design}>

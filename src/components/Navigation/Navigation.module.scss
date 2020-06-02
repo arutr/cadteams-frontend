@@ -82,10 +82,6 @@
       margin-top: var(--spacing);
       padding: 0.5rem 0;
     }
-
-    &.open {
-
-    }
   }
 
   .toggle {
@@ -133,8 +129,13 @@
     font-family: var(--font-family__sans-condensed);
   }
 
-  figure {
+  .avatar {
     margin: -1rem 0;
+
+    img {
+      width: 3rem;
+      max-height: 3rem;
+    }
   }
 
   .links {
