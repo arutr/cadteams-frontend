@@ -1,16 +1,16 @@
+import classNames from 'classnames';
 import React, {
   useEffect, useRef, useState,
 } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Icon from 'src/components/Icon';
 
 import styles from './Modal.module.scss';
 
 const Context = React.createContext(null);
 
-export function ModalProvider({ children }) {
+export function ModalProvider({ className, children }) {
   const modalRef = useRef();
   const [context, setContext] = useState();
 
@@ -20,19 +20,20 @@ export function ModalProvider({ children }) {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <main className={classNames(styles.container, className)} ref={modalRef}>
       <Context.Provider value={context}>{children}</Context.Provider>
-      <div ref={modalRef} />
-    </div>
+    </main>
   );
 }
 
 ModalProvider.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 ModalProvider.defaultProps = {
   children: null,
+  className: null,
 };
 
 interface ModalProps {
@@ -42,16 +43,6 @@ interface ModalProps {
 }
 
 class Modal extends React.PureComponent<ModalProps> {
-  componentDidMount() {
-    document.body.style.overflowY = 'auto';
-    document.documentElement.style.overflowY = 'auto';
-  }
-
-  componentWillUnmount() {
-    document.body.style.overflowY = null;
-    document.documentElement.style.overflowY = null;
-  }
-
   render() {
     const {
       onClose,
@@ -63,7 +54,7 @@ class Modal extends React.PureComponent<ModalProps> {
 
     return modalNode
       ? createPortal(
-        <div className={styles.overlay}>
+        <div className={classNames(styles.overlay, 'modal-overlay')}>
           <div className={styles.dialog} {...props}>
             <Icon
               name="close"

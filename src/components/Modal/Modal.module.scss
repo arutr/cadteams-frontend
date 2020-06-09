@@ -1,5 +1,6 @@
-@import 'styles/variables/ui';
 @import 'styles/mixins/responsive';
+@import 'styles/variables/layout';
+@import 'styles/variables/ui';
 
 $animation-duration: 500ms;
 
@@ -34,26 +35,28 @@ $animation-duration: 500ms;
   left: 0;
   top: 10%;
   z-index: 4;
-  width: calc(100vw - 2 * var(--spacing));
+  width: 100%;
   position: absolute;
+  box-sizing: border-box;
+  height: $dialog-height;
   padding: var(--spacing);
   background: var(--color-cream);
   animation: slideIn $animation-duration;
-  height: calc(#{$dialog-height} - 2 * var(--spacing));
+  padding-top: calc(3 * var(--spacing));
 
   @include min-screen($screen-m) {
     left: 50%;
+    width: 90%;
     transform: translateX(-50%);
     max-width: var(--page-width);
-    width: calc(90vw - 2 * var(--spacing));
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
   }
 
   > section {
-    padding-top: 2rem;
-    height: calc(100% - 2rem);
+    height: 100%;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     @include max-screen($screen-m) {
       > *:last-child {

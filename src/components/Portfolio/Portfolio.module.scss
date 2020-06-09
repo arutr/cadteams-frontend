@@ -184,6 +184,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  will-change: transform; // fix slow scrolling in Safari
 
   > * {
     margin-bottom: var(--spacing);

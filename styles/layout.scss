@@ -1,9 +1,38 @@
 @import 'mixins/responsive';
+@import 'variables/layout';
 
 :root {
   --spacing: 1rem;
 
   @include min-screen($screen-m) {
     --spacing: 1.25rem;
+  }
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-cream);
+
+  @include min-screen($screen-ml) {
+    flex-direction: row;
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    min-height: 95vh;
+    box-sizing: border-box;
+
+    @include max-screen($screen-m) {
+      margin-bottom: $mobile-chin;
+    }
+  }
+
+  .modal-overlay {
+    @include min-screen($screen-ml) {
+      width: calc(100% - #{$navigation-app__width});
+      left: $navigation-app__width;
+    }
   }
 }
