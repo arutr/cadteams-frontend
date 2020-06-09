@@ -16,8 +16,8 @@ export function GuestNavigationLinks() {
   if (!isAuthenticated()) {
     return (
       <>
-        <Link as="li" href="/sign-up"><Icon name="edit" /> Sign Up</Link>
-        <Link as="li" href="/log-in"><Icon name="sign-in" /> Log In</Link>
+        <Link href="/sign-up"><Icon name="edit" /> Sign Up</Link>
+        <Link href="/log-in"><Icon name="sign-in" /> Log In</Link>
       </>
     );
   }
@@ -25,7 +25,7 @@ export function GuestNavigationLinks() {
   if (Router.pathname.startsWith('/app')) {
     return (
       <>
-        <Link as="li" onClick={logOut}><Icon name="sign-out" /> Log Out</Link>
+        <Link onClick={logOut}><Icon name="sign-out" /> Log Out</Link>
       </>
     );
   }
@@ -34,7 +34,7 @@ export function GuestNavigationLinks() {
 
   return (
     <>
-      <Link as="li" href="/app/profile" hoverEffect={false}>
+      <Link href="/app/profile" hoverEffect={false}>
         <MediaObject
           captionAlign="left"
           className={styles.avatar}
