@@ -208,6 +208,7 @@ function UpdateForm({
           </div>
         </>
       )}
+      {isProfile && <EditButton bottom />}
     </form>
   );
 }

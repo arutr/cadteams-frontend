@@ -43,6 +43,7 @@ function DescriptionUpdateForm({ isProfile, user }: PortfolioSectionProps) {
           />
         </EditableTextArea>
       </p>
+      {isProfile && <EditButton bottom />}
     </form>
   );
 }
@@ -163,13 +164,11 @@ export default function PortfolioFooter(props: PortfolioSectionProps) {
       </ProfileUpdateProvider>
       <ProfileUpdateProvider<ContactInformationFormValues> setDialog={setDialog}>
         <section className={classNames(styles.card, styles['contact-information'])}>
-          <Heading2 bold condensed marginTop={0}>Contact Information</Heading2>
-          {isProfile && (
-            <>
-              <EditButton />
-              <ContactInformationForm {...props} />
-            </>
-          )}
+          <Heading2 bold condensed marginTop={0}>
+            {isProfile ? 'Contact Information' : 'Like what you\'re seeing?'}
+          </Heading2>
+          <ContactInformationForm {...props} />
+          {isProfile && <EditButton bottom />}
         </section>
       </ProfileUpdateProvider>
     </footer>
