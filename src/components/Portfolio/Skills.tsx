@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import { countries, getEmojiFlag } from 'countries-list';
+import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Label as LabelType } from 'src/api/User';
 import Dialog from 'src/components/Dialog';
@@ -7,7 +8,12 @@ import { Error } from 'src/components/Form';
 import Icon from 'src/components/Icon';
 import Label, { LabelContainer } from 'src/components/Label';
 import Link from 'src/components/Link';
-import { EditableInput, EditableLabel, Placeholder } from 'src/components/Portfolio/Editable';
+import {
+  EditableDropdown,
+  EditableInput,
+  EditableLabel,
+  Placeholder,
+} from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioSectionProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
@@ -17,9 +23,15 @@ import ProfileUpdateProvider, {
 } from 'src/contexts/ProfileUpdateContext';
 import validator from 'validator';
 
+const countryOptions = Object.entries(countries).map(([code, country]) => ({
+  label: country.name,
+  value: code,
+}));
+
 interface UpdateFormValues {
-  location: string;
+  country: string;
   experience: number;
+  location: string;
   website: string;
 }
 
@@ -40,11 +52,10 @@ function UpdateForm({
 
   return (
     <form className={classNames(styles.card, styles.skills)}>
-      {isProfile && <EditButton />}
       {user?.type === 'individual' && (
         <>
           <div className={styles.row}>
-            <div>
+            <span>
               <Icon className={styles.icon} large name="location" title="Location" />
               <EditableInput
                 defaultValue={user?.location}
@@ -59,33 +70,56 @@ function UpdateForm({
                   value={user?.location}
                 />
               </EditableInput>
-            </div>
-            <div>
-              <Icon
-                className={styles.icon}
-                large
-                name="medal"
-                title="Years of professional experience"
-              />
-              <EditableInput
-                defaultValue={user?.experience}
-                placeholder="YY"
-                name="experience"
-                suffix="&ensp;year(s) of experience"
-                type="number"
-                style={{ maxWidth: '3rem' }}
-                ref={register({ min: 0 })}
+            </span>
+            <span>
+              {!user?.country || editing ? (
+                <Icon className={styles.icon} large name="globe-flag" title="Country" />
+              ) : (
+                <span className={classNames(styles.icon, styles.emoji)}>
+                  {getEmojiFlag(user?.country)}
+                </span>
+              )}
+              <EditableDropdown
+                options={countryOptions}
+                placeholder="--- Your country ---"
+                defaultValue={user?.country}
+                name="country"
+                ref={register}
               >
                 <Placeholder
                   isProfile={isProfile}
                   publicValue="N/A"
-                  profileValue="Years of professional experience"
-                  value={user?.experience && (
-                    <span><strong>{user?.experience}</strong> years of experience</span>
-                  )}
+                  profileValue="Your country"
+                  value={countries[user?.country]?.name}
                 />
-              </EditableInput>
-            </div>
+              </EditableDropdown>
+            </span>
+          </div>
+          <div>
+            <Icon
+              className={styles.icon}
+              large
+              name="medal"
+              title="Years of professional experience"
+            />
+            <EditableInput
+              defaultValue={user?.experience}
+              placeholder="YY"
+              name="experience"
+              suffix="&ensp;year(s) of experience"
+              type="number"
+              style={{ maxWidth: '3rem' }}
+              ref={register({ min: 0 })}
+            >
+              <Placeholder
+                isProfile={isProfile}
+                publicValue="N/A"
+                profileValue="Years of experience"
+                value={user?.experience && (
+                  <span><strong>{user?.experience}</strong> years of experience</span>
+                )}
+              />
+            </EditableInput>
           </div>
           {editing && (
             <Dialog small type="hint">
@@ -100,6 +134,9 @@ function UpdateForm({
                   {label}
                 </Label>
               )) : null}
+              {!editing && !languages?.length && !isProfile && (
+                <Label className={styles.placeholder}>N/A</Label>
+              )}
               {!editing && !languages?.length && isProfile && (
                 <Label className={styles.placeholder}>Spoken language(s)</Label>
               )}
@@ -125,6 +162,9 @@ function UpdateForm({
                   {label}
                 </Label>
               )) : null}
+              {!editing && !tools?.length && !isProfile && (
+                <Label className={styles.placeholder}>N/A</Label>
+              )}
               {!editing && !tools?.length && isProfile && (
                 <Label className={styles.placeholder}>Modelling/Rendering software</Label>
               )}
@@ -218,13 +258,15 @@ export default function Skills(props: PortfolioSectionProps) {
   const [tools, setTools] = useState<LabelType[]>();
   const { user, setDialog } = props;
 
-  if (!languages && user?.languages) {
-    setLanguages(user.languages);
-  }
+  useEffect(() => {
+    if (!languages && user?.languages) {
+      setLanguages(user.languages);
+    }
 
-  if (!tools && user?.tools) {
-    setTools(user.tools);
-  }
+    if (!tools && user?.tools) {
+      setTools(user.tools);
+    }
+  }, [user]);
 
   return (
     <ProfileUpdateProvider<UpdateFormValues>
