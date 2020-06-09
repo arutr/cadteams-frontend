@@ -7,17 +7,18 @@ export interface DialogProps {
   children?: any;
   message?: string;
   small?: boolean;
-  type: 'error' | 'hint' | 'success' | 'info';
+  type: string;
 }
 
 export default function Dialog({
-  children, type, small, message,
+  children, type = 'info', small, message,
 }: DialogProps) {
   const icon = {
     error: 'error',
     hint: 'bulb',
     info: 'info',
     success: 'check',
+    warning: 'warning',
   };
   const As = small ? 'small' : 'div';
 
