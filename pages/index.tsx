@@ -5,9 +5,9 @@ import { LogOnMount } from 'react-amplitude-hooks';
 import { AnchorButton } from 'src/components/Button';
 import { Heading1 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
-import { PortfolioModal } from 'src/components/Portfolio';
+import Link from 'src/components/Link';
 import { ModalProvider } from 'src/components/Modal';
-import { AnchorButton } from 'src/components/Button';
+import { PortfolioModal } from 'src/components/Portfolio';
 import User from '../src/api/User';
 import Footer from '../src/components/Footer';
 import MediaObject from '../src/components/MediaObject';
@@ -37,6 +37,7 @@ const features = [
 ];
 const user: User = {
   username: 'Manuel A.',
+  country: 'GB',
   type: 'individual',
   profilePicture: {
     url: '/images/portfolio-demo/profile-picture.jpg',
@@ -49,7 +50,7 @@ const user: User = {
     id: 2,
     label: 'Modular',
   }],
-  location: 'Brighton, UK',
+  location: 'Brighton',
   experience: 5,
   languages: [{
     id: 1,
@@ -95,9 +96,7 @@ const user: User = {
 };
 
 function LandingPage() {
-  // const [newsletterModal, setNewsletterModal] = useState(false);
   const [portfolioModal, setPortfolioModal] = useState(false);
-  // const toggleNewsletterModal = () => setNewsletterModal(!newsletterModal);
   const togglePortfolioModal = () => setPortfolioModal(!portfolioModal);
 
   return (
@@ -121,9 +120,10 @@ function LandingPage() {
               alt="Gateway House, Finchley"
             >
               <p>Gateway House, Finchley</p>
-              <i role="link">
-                <Icon name="share" /> David Miller Architects
-              </i>
+              <Link external href="https://www.david-miller.co.uk/gateway-house.php">
+                <Icon name="share" />
+                David Miller Architects
+              </Link>
             </MediaObject>
             <MediaObject
               id={styles.design2}
@@ -132,9 +132,10 @@ function LandingPage() {
               alt="Plant Room"
             >
               <p>Plant Room</p>
-              <i role="link">
-                <Icon name="view" /> Manuel A.
-              </i>
+              <Link onClick={togglePortfolioModal}>
+                <Icon name="view" />
+                Manuel A.
+              </Link>
             </MediaObject>
             <MediaObject
               id={styles.design3}
@@ -143,9 +144,13 @@ function LandingPage() {
               alt="Fairfield Inn and Suites"
             >
               <p>Fairfield Inn and Suites</p>
-              <i role="link">
-                <Icon name="share" /> United BIM
-              </i>
+              <Link
+                external
+                href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
+              >
+                <Icon name="share" />
+                United BIM
+              </Link>
             </MediaObject>
           </aside>
         </section>
@@ -177,12 +182,12 @@ function LandingPage() {
             </NextLink>
           </aside>
         </section>
-      </main>
+        {portfolioModal && (
+          <PortfolioModal demo user={user} onClose={togglePortfolioModal} />
+        )}
+      </ModalProvider>
       <Footer />
-      {portfolioModal && (
-        <PortfolioModal isProfile={false} demo user={user} onClose={togglePortfolioModal} />
-      )}
-    </ModalProvider>
+    </>
   );
 }
 

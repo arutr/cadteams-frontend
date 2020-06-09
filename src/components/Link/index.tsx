@@ -5,18 +5,6 @@ import NextLink from 'next/link';
 import classNames from 'classnames';
 import styles from './Link.module.scss';
 
-/**
- * Link component
- * @param as Render link as a given HTML element
- * @param href Route path
- * @param children Link text
- * @param icon Left icon for the link - this also controls whether the link is underlined!
- * @param external Is this an external link? If so, create a standard anchor tag
- * @param onClick Click event handler
- * @param className Additional HTML class(es)
- * @param hoverEffect Use anchor transition effects
- * @constructor
- */
 function Link({
   as, href, children, disabled, external, onClick, className, hoverEffect,
 }) {
@@ -30,50 +18,45 @@ function Link({
   );
 
   if (external) {
-    const As = as ?? 'a';
     return (
-      <As
+      <a
         href={href}
         className={classes}
-        disabled={disabled}
         target="_blank"
         rel="noopener"
       >
         {children}
-      </As>
+      </a>
     );
   }
 
   if (href) {
-    const As = as ?? 'span';
     return (
       <NextLink href={href}>
-        <As
+        <a
           className={classes}
-          disabled={disabled}
           onClick={onClick}
           role="link"
           tabIndex={0}
           onKeyDown={onClick}
+          style={{ textDecoration: 'none' }}
         >
           {children}
-        </As>
+        </a>
       </NextLink>
     );
   }
 
-  const As = as ?? 'a';
   return (
-    <As
+    <span
       className={classes}
-      disabled={disabled}
       onClick={onClick}
       role="link"
       tabIndex={0}
       onKeyDown={onClick}
     >
       {children}
-    </As>
+    </span>
   );
 }
 
