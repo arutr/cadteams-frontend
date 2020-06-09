@@ -24,12 +24,9 @@ export default function VerticalNavigationLinks() {
         </Link>
         <Label className={styles['coming-soon']} small>Coming soon</Label>
       </span>
-      <span>
-        <Link className={tabActiveStyle('explore')} href="/app/explore" disabled>
-          <Icon large name="shop" /> Explore
-        </Link>
-        <Label className={styles['coming-soon']} small>Coming soon</Label>
-      </span>
+      <Link className={tabActiveStyle('explore')} href="/app/explore">
+        <Icon large name="shop" /> Explore
+      </Link>
       {user?.type === 'enterprise' && (
         <span>
           <Link className={tabActiveStyle('favorites')} href="/app/favorites" disabled>
@@ -40,7 +37,7 @@ export default function VerticalNavigationLinks() {
       )}
       <span>
         <Link className={tabActiveStyle('jobs')} href="/app/jobs" disabled>
-          <Icon large name="construction" /> Jobs
+          <Icon large name="plan" /> Jobs
         </Link>
         <Label className={styles['coming-soon']} small>Coming soon</Label>
       </span>

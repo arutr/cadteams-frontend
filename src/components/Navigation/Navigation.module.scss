@@ -14,15 +14,15 @@
   filter: $drop-shadow;
   box-sizing: border-box;
   height: $navigation-height;
-  padding: var(--vertical-padding) var(--horizontal-padding);
   background-color: var(--color-silver);
+  padding: var(--vertical-padding) var(--horizontal-padding);
 
   @include min-screen($screen-ml) {
     --vertical-padding: 1.75rem;
     --horizontal-padding: 2rem;
 
-    width: auto;
     height: $viewport-height;
+    width: $navigation-app__width;
   }
 
   .logo {
@@ -139,8 +139,6 @@
   }
 
   .links {
-    @include inline-list;
-
     display: flex;
     flex-wrap: wrap;
     user-select: none;

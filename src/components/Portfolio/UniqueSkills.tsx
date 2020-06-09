@@ -20,7 +20,7 @@ function UpdateForm({ isProfile, user }: PortfolioSectionProps) {
         <article key={index} className={styles.card}>
           <Heading3>
             <EditableInput
-              defaultValue={user?.uniqueSkills[index]?.skill}
+              defaultValue={user?.uniqueSkills?.[index]?.skill}
               placeholder="Something which makes you stand out"
               name={`uniqueSkills[${index}].skill`}
               ref={register}
@@ -30,7 +30,7 @@ function UpdateForm({ isProfile, user }: PortfolioSectionProps) {
                 isProfile={isProfile}
                 publicValue="N/A"
                 profileValue="Something which makes you stand out"
-                value={user?.uniqueSkills[index]?.skill}
+                value={user?.uniqueSkills?.[index]?.skill}
               />
             </EditableInput>
           </Heading3>

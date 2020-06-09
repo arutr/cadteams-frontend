@@ -1,58 +1,43 @@
+import { AppProps } from 'next/app';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import Head from 'next/head';
-import '../styles/index.scss';
-import { AppProps } from 'next/app';
-import { Amplitude, AmplitudeProvider } from 'react-amplitude-hooks';
-import { AmplitudeClient } from 'amplitude-js';
-import { isBrowser } from '@unly/utils';
-import AuthProvider from '../src/contexts/AuthProvider';
+import AmplitudeProvider from 'src/contexts/Amplitude';
 import Navigation from '../src/components/Navigation';
+import AuthProvider from '../src/contexts/AuthProvider';
 import useResize from '../src/utils/viewportHeight';
+import '../styles/index.scss';
+
+const isBrowser = () => typeof window !== 'undefined';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
   const inApp = pathname.startsWith('/app');
-  const Layout = (
+  const Layout = (Page) => (
     <AuthProvider>
       <div className={inApp ? 'app' : null}>
-        {inApp ? <Navigation /> : <Navigation horizontal />}
-        <Component {...pageProps} />
+        {inApp ? <Navigation /> : <Navigation guest />}
+        {Page}
       </div>
     </AuthProvider>
   );
 
   if (!isBrowser()) {
-    return Layout;
+    return Layout(<Component {...pageProps} />);
   }
 
   useResize();
 
-  // eslint-disable-next-line global-require
-  const amplitude = require('amplitude-js');
-  const amplitudeInstance: AmplitudeClient = amplitude.getInstance();
-  amplitudeInstance.init(process.env.AMPLITUDE_API_KEY);
-
   return (
-    <AmplitudeProvider
-      amplitudeInstance={amplitudeInstance}
-      apiKey={process.env.AMPLITUDE_API_KEY}
-    >
+    <>
       <Head>
         <title>CADteams</title>
       </Head>
-      <Amplitude
-        eventProperties={{
-          page: {
-            url: window.location.href,
-            path: window.location.pathname,
-            origin: window.location.origin,
-            name: null,
-          },
-        }}
-      >
-        {Layout}
-      </Amplitude>
-    </AmplitudeProvider>
+      {Layout((
+        <AmplitudeProvider>
+          <Component {...pageProps} />
+        </AmplitudeProvider>
+      ))}
+    </>
   );
 }

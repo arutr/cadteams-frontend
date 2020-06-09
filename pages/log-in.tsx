@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
 import NextLink from 'next/link';
 import { LoginForm } from 'src/api/Auth';
@@ -16,6 +17,7 @@ import AuthLayout from '../src/layouts/AuthLayout';
 import styles from '../src/layouts/AuthLayout.module.scss';
 
 function LogIn() {
+  const { logEvent } = useAmplitude();
   const [serverError, setServerError] = useState<string>();
   const [submitting, setSubmitting] = useState<boolean>(false);
   const { register, handleSubmit, errors } = useForm<LoginForm>();
@@ -26,16 +28,33 @@ function LogIn() {
 
     try {
       await logIn(values);
-      await redirectToApp();
+      logEvent('log in', {
+        provider: 'local',
+      }, redirectToApp);
     } catch (error) {
-      if (error.response?.data?.message[0]?.messages) {
+      if (error?.response?.data?.message[0]?.messages) {
         setServerError(error.response.data.message[0]?.messages[0]?.message);
       } else {
         setServerError('Unknown error has occurred. Please refresh the page.');
       }
+
       setSubmitting(false);
     }
   });
+  const onSocialLogin = async (data) => {
+    try {
+      await handleSocialLogin(data);
+      logEvent('log in', {
+        provider: data.provider,
+      }, redirectToApp);
+    } catch (error) {
+      if (error?.response?.data?.message[0]?.messages) {
+        setServerError(error.response.data.message[0]?.messages[0]?.message);
+      } else {
+        setServerError('Unknown error has occurred. Please refresh the page.');
+      }
+    }
+  };
 
   return (
     <AuthLayout aside={(
@@ -80,7 +99,7 @@ function LogIn() {
           ref={register({ required: 'Please enter a password.' })}
         />
         <Error errors={errors} name="password" />
-        <Link external as="a" href="mailto:hello@cadteams.com">Forgot your password?</Link>
+        <Link external href="mailto:hello@cadteams.com">Forgot your password?</Link>
         <Button disabled={submitting} type="submit" block>
           {submitting ? 'Processing...' : 'Submit'}
         </Button>
@@ -93,7 +112,7 @@ function LogIn() {
       <FacebookLoginButton
         provider="facebook"
         appId={process.env.FACEBOOK_APP_ID}
-        onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
+        onLoginSuccess={onSocialLogin}
         onLoginFailure={() => setServerError(`Social media authentication failed. Refresh the
         page to try again.`)}
         scope="public_profile,email"

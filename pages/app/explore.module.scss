@@ -1,0 +1,21 @@
+@import 'styles/variables/ui';
+@import 'styles/variables/responsive';
+
+$grid-item__width: $screen-xxs - (14px * 2);
+
+.entry {
+  justify-content: flex-start;
+}
+
+.grid {
+  display: grid;
+  grid-gap: var(--spacing);
+  grid-template-columns: repeat(auto-fill, minmax($grid-item__width, 1fr));
+
+  img {
+    object-fit: cover;
+    max-height: 14rem;
+    filter: $drop-shadow;
+    border-radius: var(--border-radius);
+  }
+}

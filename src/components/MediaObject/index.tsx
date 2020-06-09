@@ -8,38 +8,34 @@ function MediaObject({
   alt, children, className, captionAlign, height, href, id, onClick, src, width, vertical,
 }) {
   if (href) {
-    /* eslint-disable jsx-a11y/no-interactive-element-to-noninteractive-role */
     return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener"
-        role="figure"
+      <figure
         id={id}
         className={classNames(styles.figure, vertical && styles.vertical, className)}
         style={{ height, width }}
       >
-        <img src={src} alt={alt} />
+        <a href={href} target="_blank" rel="noopener">
+          <img src={src} alt={alt} />
+        </a>
         <figcaption className={styles[captionAlign]}>{children}</figcaption>
-      </a>
+      </figure>
     );
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <figure
       id={id}
-      onKeyDown={onClick}
-      onClick={onClick}
-      className={classNames(
-        styles.figure,
-        onClick && styles.clickable,
-        vertical && styles.vertical,
-        className,
-      )}
+      className={classNames(styles.figure, vertical && styles.vertical, className)}
       style={{ height, width }}
     >
-      <img src={src} alt={alt} />
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      <img
+        className={classNames(onClick && styles.clickable)}
+        onKeyDown={onClick}
+        onClick={onClick}
+        src={src}
+        alt={alt}
+      />
       <figcaption className={styles[captionAlign]}>{children}</figcaption>
     </figure>
   );
