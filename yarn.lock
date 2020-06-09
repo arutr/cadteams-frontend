@@ -8443,10 +8443,10 @@ raw-loader@^3.1.0:
     loader-utils "^1.1.0"
     schema-utils "^2.0.1"
 
-react-amplitude-hooks@0.9.14:
-  version "0.9.14"
-  resolved "https://registry.yarnpkg.com/react-amplitude-hooks/-/react-amplitude-hooks-0.9.14.tgz#7bed4a5e12dc7e505c6160be075ea65c3bf1772e"
-  integrity sha512-F5Snb9y8BOW4t7FYqpf9qb15SnlKjS6OjqEYLg0Yjp9lKebIhdQVwLHp6a9AbLNgA2VdbEkHKSignCZITI/J9A==
+react-amplitude-hooks@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-amplitude-hooks/-/react-amplitude-hooks-0.10.0.tgz#a40d40a5b0c01ccaaa58bde736ec6fb7c6deb161"
+  integrity sha512-nyy2GIz8qLlS6+Z8T1FHiuzJ3+NHzzFqhGOf99OVvPBFTdTKT9OeqBal1GvIO6V2R4gGyzxZVqOu5IIAFXqZTQ==
   dependencies:
     prop-types "^15.7.2"
 

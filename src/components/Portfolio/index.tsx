@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { Amplitude, LogOnMount } from 'react-amplitude-hooks';
 import Dialog, { DialogProps } from 'src/components/Dialog';
 import Designs from 'src/components/Portfolio/Designs';
 import Identity from 'src/components/Portfolio/Identity';
@@ -64,12 +65,38 @@ type ModalProps = {
   onClose: () => void,
 } & PortfolioProps;
 
-export function PortfolioModal({ onClose, ...props }: ModalProps) {
-  return (
+export function PortfolioModal(props: ModalProps) {
+  const { onClose, user } = props;
+  const Component = (
     <Modal onClose={onClose} className={styles.modal}>
       <Portfolio {...props} />
     </Modal>
   );
+
+  if (user?.id) {
+    return (
+      <Amplitude
+        eventProperties={{
+          portfolio: {
+            id: user.id,
+            country: countries[user?.country]?.name.toLowerCase(),
+            designCount: user?.designs?.length,
+            experience: user?.experience,
+            languages: user?.languages?.map(({ label }) => label.toLowerCase().trim()),
+            profilePicture: !!user?.profilePicture,
+            sectors: user?.sectors?.map(({ label }) => label.toLowerCase().trim()),
+            specialization: user?.specialization?.toLowerCase().trim(),
+            tools: user?.tools?.map(({ label }) => label.toLowerCase().trim()),
+          },
+        }}
+      >
+        <LogOnMount eventType="view portfolio" />
+        {Component}
+      </Amplitude>
+    );
+  }
+
+  return Component;
 }
 
 export default Portfolio;

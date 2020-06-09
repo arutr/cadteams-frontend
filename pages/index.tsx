@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
+import { LogOnMount } from 'react-amplitude-hooks';
+import { AnchorButton } from 'src/components/Button';
 import { Heading1 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import { PortfolioModal } from 'src/components/Portfolio';
@@ -99,8 +101,9 @@ function LandingPage() {
   const togglePortfolioModal = () => setPortfolioModal(!portfolioModal);
 
   return (
-    <ModalProvider>
-      <main>
+    <>
+      <LogOnMount eventType="view page" />
+      <ModalProvider>
         <section className={styles.hero}>
           <article>
             <Heading1>

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
+import { useAmplitude } from 'react-amplitude-hooks';
 import { useFormContext } from 'react-hook-form';
 import { Error } from 'src/components/Form';
 import { Heading2 } from 'src/components/Heading';
@@ -51,37 +52,103 @@ interface ContactInformationFormValues {
 }
 
 function ContactInformationForm({ isProfile, user }: PortfolioSectionProps) {
+  const { instrument } = useAmplitude((inheritedProps) => ({
+    portfolio: {
+      ...inheritedProps.portfolio,
+      email: !!user?.contactEmail,
+      phone: !!user?.phone,
+    },
+  }));
+  const [revealed, setRevealed] = useState<boolean>(isProfile);
   const { register, errors } = useFormContext<ContactInformationFormValues>();
 
   return (
     <>
-      <p>
-        These details will be shared with other <b>CAD</b>teams members.
-      </p>
-      <form>
-        <Icon className={styles.icon} large name="phone" title="Phone number" />
-        <EditableInput
-          defaultValue={user?.phone}
-          placeholder="+44 1234 567890"
-          name="phone"
-          type="tel"
-          ref={register({
-            validate: (value) => (
-              !value.length
-              || validator.isMobilePhone(value, 'en-GB')
-              || 'Please enter a valid UK phone number.'
-            ),
-          })}
-        >
-          <Placeholder
-            isProfile={isProfile}
-            publicValue=""
-            profileValue="Contact phone number"
-            value={<a href={`tel:${user?.phone}`}>{user?.phone}</a>}
-          />
-        </EditableInput>
-        <Error className={styles.error} filler={false} errors={errors} name="phone" />
-      </form>
+      {isProfile && user?.type === 'individual' && (
+        <p className={styles.disclaimer}>
+          These details will be shared with companies registered on <b>CAD</b>teams who may wish to
+          get in touch with you.
+        </p>
+      )}
+      {isProfile && user?.type === 'enterprise' && (
+        <p className={styles.disclaimer}>
+          These details will be shared with <b>CAD</b>teams members present in
+          <Link href="/app/contacts" disabled><Icon large name="handshake" /> Contacts</Link>
+          <Label className={styles['coming-soon']} small>Coming soon</Label>.
+        </p>
+      )}
+      {!isProfile && revealed && (
+        <p className={styles.disclaimer}>
+          You can get in touch with <strong>{user?.username}</strong> via:
+        </p>
+      )}
+      <Form>
+        {revealed ? (
+          <>
+            <Fieldset className={styles.fieldset}>
+              <Icon className={styles.icon} large name="phone" title="Phone number" />
+              <EditableInput
+                defaultValue={user?.phone}
+                placeholder="+441234567890"
+                name="phone"
+                type="tel"
+                ref={register({
+                  validate: (value) => (
+                    !value.length
+                    || validator.isMobilePhone(value)
+                    || 'Please enter a valid phone number.'
+                  ),
+                })}
+              >
+                <Placeholder
+                  isProfile={isProfile}
+                  publicValue="N/A"
+                  profileValue="Contact phone number"
+                  value={<a href={`tel:${user?.phone}`}>{user?.phone}</a>}
+                />
+              </EditableInput>
+              <Error className={styles.error} filler={false} errors={errors} name="phone" />
+            </Fieldset>
+            <Fieldset className={styles.fieldset}>
+              <Icon className={styles.icon} large name="email" title="E-mail address" />
+              <EditableInput
+                defaultValue={user?.contactEmail}
+                placeholder="your@email.com"
+                name="contactEmail"
+                type="email"
+                ref={register({
+                  validate: (value) => (
+                    !value.length
+                    || validator.isEmail(value)
+                    || 'Please enter a valid e-mail address.'
+                  ),
+                })}
+              >
+                <Placeholder
+                  isProfile={isProfile}
+                  publicValue="N/A"
+                  profileValue="Contact e-mail address"
+                  value={<a href={`mailto:${user?.contactEmail}`}>{user?.contactEmail}</a>}
+                />
+              </EditableInput>
+              <Error className={styles.error} filler={false} errors={errors} name="contactEmail" />
+            </Fieldset>
+          </>
+        ) : (
+          <>
+            <p className={styles.disclaimer}>
+              Get in touch with {getFirstName(user?.username)} if you wish to discuss this
+              portfolio further!
+            </p>
+            <Button
+              onClick={instrument('reveal contact information', () => setRevealed(true))}
+              block
+            >
+              <Icon name="view" /> Reveal Contact Information
+            </Button>
+          </>
+        )}
+      </Form>
     </>
   );
 }

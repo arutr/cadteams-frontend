@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { LogOnMount } from 'react-amplitude-hooks';
 import styles from './AuthLayout.module.scss';
 
 export default function AuthLayout({ children, aside }) {
   return (
     <main className={styles.main}>
+      <LogOnMount eventType="view page" />
       <section className={styles.content}>
         {children}
         <div className={styles.background} />
