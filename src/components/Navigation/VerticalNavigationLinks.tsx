@@ -37,7 +37,7 @@ export default function VerticalNavigationLinks() {
       )}
       <span>
         <Link className={tabActiveStyle('jobs')} href="/app/jobs" disabled>
-          <Icon large name="construction" /> Jobs
+          <Icon large name="plan" /> Jobs
         </Link>
         <Label className={styles['coming-soon']} small>Coming soon</Label>
       </span>

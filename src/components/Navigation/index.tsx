@@ -50,14 +50,14 @@ export function GuestNavigationLinks() {
 }
 
 interface Props {
-  horizontal?: boolean;
+  guest?: boolean;
 }
 
-function Navigation({ horizontal }: Props) {
+function Navigation({ guest }: Props) {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
-  const links = horizontal ? <GuestNavigationLinks /> : <AppNavigationLinks />;
+  const links = guest ? <GuestNavigationLinks /> : <AppNavigationLinks />;
 
   const toggleMenu = () => setOpen(!open);
 
@@ -69,7 +69,7 @@ function Navigation({ horizontal }: Props) {
   });
 
   return (
-    <header className={horizontal ? styles.horizontal : styles.vertical}>
+    <header className={guest ? styles.horizontal : styles.vertical}>
       <nav>
         <Link
           href={isAuthenticated() ? '/app/profile' : '/'}
@@ -79,9 +79,9 @@ function Navigation({ horizontal }: Props) {
           <img src="/images/logo.svg" alt="CADteams" />
         </Link>
         <Icon className={styles.toggle} name={open ? 'close' : 'menu'} onClick={toggleMenu} />
-        <ul className={classNames(styles.links, open && styles.open)}>
+        <div className={classNames(styles.links, open && styles.open)}>
           {links}
-        </ul>
+        </div>
       </nav>
     </header>
   );
