@@ -3898,6 +3898,11 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
+countries-list@2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/countries-list/-/countries-list-2.5.4.tgz#c1a0ab8f63c0972b266254d63e595ea86a6cfe1e"
+  integrity sha512-6+AIKth3MCOEWTLOVTgR7zTe6oH3JlL0MworsJwIyG0jQi+cKeChOEPvcKszNtGAuCp7p+OrqdxPWxjhu8LqoA==
+
 create-ecdh@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
@@ -8443,10 +8448,10 @@ raw-loader@^3.1.0:
     loader-utils "^1.1.0"
     schema-utils "^2.0.1"
 
-react-amplitude-hooks@0.9.14:
-  version "0.9.14"
-  resolved "https://registry.yarnpkg.com/react-amplitude-hooks/-/react-amplitude-hooks-0.9.14.tgz#7bed4a5e12dc7e505c6160be075ea65c3bf1772e"
-  integrity sha512-F5Snb9y8BOW4t7FYqpf9qb15SnlKjS6OjqEYLg0Yjp9lKebIhdQVwLHp6a9AbLNgA2VdbEkHKSignCZITI/J9A==
+react-amplitude-hooks@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-amplitude-hooks/-/react-amplitude-hooks-0.10.0.tgz#a40d40a5b0c01ccaaa58bde736ec6fb7c6deb161"
+  integrity sha512-nyy2GIz8qLlS6+Z8T1FHiuzJ3+NHzzFqhGOf99OVvPBFTdTKT9OeqBal1GvIO6V2R4gGyzxZVqOu5IIAFXqZTQ==
   dependencies:
     prop-types "^15.7.2"
 

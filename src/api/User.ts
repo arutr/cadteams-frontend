@@ -2,9 +2,13 @@ import Media from './Media';
 
 interface User {
   company?: string;
+  contactEmail?: string;
+  country: string;
   description?: string;
   designs: Media[];
   experience: number;
+  email?: string;
+  id?: number;
   languages: Label[];
   location: string;
   phone?: string;

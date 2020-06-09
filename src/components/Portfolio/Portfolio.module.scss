@@ -13,7 +13,8 @@
 .skills {
   .row {
     display: grid;
-    grid-template: 1fr / repeat(2, 1fr);
+    grid-gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
 
     > * {
       display: flex;
@@ -26,9 +27,7 @@
   position: relative;
 
   form {
-    display: flex;
-    align-items: center;
-    margin: var(--spacing) 0;
+    margin: 0.25rem 0;
 
     .icon {
       margin-right: 0.5rem;
@@ -36,6 +35,18 @@
 
     input {
       flex: 1;
+    }
+  }
+
+  .coming-soon {
+    margin-left: 0.5rem;
+  }
+
+  .disclaimer {
+    text-align: justify;
+
+    & + form {
+      margin-top: var(--spacing);
     }
   }
 
@@ -49,22 +60,22 @@
     display: grid;
     grid-auto-rows: 1fr;
     grid-gap: var(--spacing);
-    grid-template: repeat(4, 1fr) / 1fr;
+    grid-template-columns: 1fr;
 
     @include min-screen($screen-m) {
-      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   .design {
     display: flex;
-    min-height: 16rem;
     position: relative;
     align-items: center;
     justify-content: center;
     border-radius: var(--border-radius);
 
     &.blank {
+      min-height: 16rem;
       background-color: var(--color-silver);
     }
   }
@@ -84,42 +95,98 @@
 }
 
 .edit {
-  top: calc(-1 * var(--border-radius));
-  right: calc(-1 * var(--border-radius));
-  width: 2rem;
-  height: 2rem;
   font-size: 1rem;
-  position: absolute;
-  padding: 0.25rem !important;
+  max-height: 2.75rem;
+
+  &.bottom {
+    left: 0;
+    bottom: calc(-1 * var(--border-radius));
+    width: 100%;
+    position: absolute;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &.corner {
+    position: absolute;
+    top: calc(-1 * var(--border-radius));
+    right: calc(-1 * var(--border-radius));
+  }
+
+  &.editing {
+    background-color: var(--color-green);
+
+    &:focus,
+    &:hover {
+      background-color: darken($color-green, 5%);
+    }
+
+    &:active {
+      background-color: darken($color-green, 10%);
+    }
+  }
+
+  .label {
+    margin-left: 0.25rem;
+    margin-right: 0.33rem;
+  }
 }
 
 .error {
+  font-weight: normal;
   color: var(--color-red) !important;
   background-color: transparent !important;
+  font-family: var(--font-family__sans-serif);
+}
+
+.fieldset {
+  flex-wrap: wrap;
+
+  > div[class *= "error"] {
+    order: 2;
+    width: 100%;
+  }
 }
 
 .icon {
   margin-right: 0.5rem;
+
+  &.emoji {
+    font-size: 1.5rem;
+    line-height: 0.85;
+  }
 }
 
 .identity {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+
+  @include min-screen($screen-m) {
+    flex-direction: row;
+  }
 
   aside {
     flex: 1;
+
+    @include max-screen($screen-m) {
+      margin-top: var(--spacing);
+    }
   }
 
   img {
-    width: 6rem;
-    height: 6rem;
+    width: 100%;
+    max-height: 100%;
     object-fit: cover;
-    margin-right: var(--spacing);
     border-radius: var(--border-radius);
+
+    @include max-screen($screen-m) {
+      height: 16rem;
+    }
 
     @include min-screen($screen-m) {
       width: 10rem;
-      height: 10rem;
+      max-height: 16rem;
     }
   }
 
@@ -127,18 +194,34 @@
     position: relative;
 
     .edit {
-      right: calc(var(--spacing) - var(--border-radius));
+      position: static;
+      margin-top: -1rem;
+    }
+
+    > * {
+      @include min-screen($screen-m) {
+        margin-right: var(--spacing);
+      }
     }
   }
 }
 
 .header {
   display: grid;
-  grid-template: repeat(2, auto) / 1fr;
-  grid-gap: var(--spacing);
+  grid-row-gap: calc(2 * var(--spacing));
+  grid-column-gap: var(--spacing);
+  grid-template-columns: 1fr;
 
   @include min-screen($screen-m) {
-    grid-template: 1fr / repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.header,
+footer.row {
+  & > * {
+    padding-bottom: calc(3 * var(--spacing));
+    margin-bottom: var(--spacing);
   }
 }
 
@@ -179,11 +262,16 @@
   > small {
     margin-top: var(--spacing);
   }
+
+  > * + * {
+    margin-top: 0.75rem;
+  }
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
+  will-change: transform; // fix slow scrolling in Safari
 
   > * {
     margin-bottom: var(--spacing);
@@ -192,6 +280,10 @@
 
 .unique-skills {
   text-align: center;
+
+  h2 {
+    line-height: 2.75rem;
+  }
 
   .edit {
     position: static;

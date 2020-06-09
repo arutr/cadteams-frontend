@@ -55,6 +55,12 @@ export function Form({ children, className, ...props }: FormProps) {
   );
 }
 
+export function Fieldset({ children, className, ...props }: FormProps) {
+  return (
+    <div className={classNames(styles.fieldset, className)} {...props}>{children}</div>
+  );
+}
+
 interface InputProps {
   className?: string;
   id: string;

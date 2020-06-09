@@ -7,6 +7,15 @@
   border-radius: var(--border-radius);
 }
 
+div .icon {
+  margin-left: 0.25rem;
+  margin-right: 1rem;
+}
+
+small .icon {
+  margin-right: 0.25rem;
+}
+
 small.dialog {
   margin: 0.25rem 0;
   padding: 0.33rem;
@@ -21,19 +30,14 @@ small.dialog {
   background-color: var(--color-silver);
 }
 
-div .icon {
-  margin-left: 0.25rem;
-  margin-right: 1rem;
-}
-
-small .icon {
-  margin-right: 0.25rem;
-}
-
 .message {
   flex: 1;
 }
 
 .success {
   background-color: var(--color-blue);
+}
+
+.warning {
+  background-color: var(--color-orange);
 }

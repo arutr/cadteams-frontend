@@ -9,14 +9,47 @@ interface Props {
   children: any;
   placeholder: any;
   defaultValue: string;
-  prefix?: string;
-  suffix?: string;
   [key: string]: any;
 }
 
-export const EditableInput = React.forwardRef<HTMLInputElement, Props>(({
+type DropdownProps = {
+  options: {
+    label: string;
+    value: string;
+  }[];
+} & Props;
+
+export const EditableDropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(({
+  children, placeholder, defaultValue, options, ...props
+}: DropdownProps, ref) => {
+  const { editing } = useProfileUpdate();
+  if (editing) {
+    return (
+      <select
+        className={styles.editable}
+        defaultValue={defaultValue}
+        ref={ref}
+        {...props}
+      >
+        <option value="">{placeholder}</option>
+        {options.map(({ label, value }, index) => (
+          <option key={index} value={value}>{label}</option>
+        ))}
+      </select>
+    );
+  }
+
+  return children;
+});
+
+type InputProps = {
+  prefix?: string;
+  suffix?: string;
+} & Props;
+
+export const EditableInput = React.forwardRef<HTMLInputElement, InputProps>(({
   children, placeholder, defaultValue, prefix, suffix, ...props
-}: Props, ref) => {
+}: InputProps, ref) => {
   const { editing } = useProfileUpdate();
   if (editing) {
     return (
@@ -44,15 +77,13 @@ export const EditableTextArea = React.forwardRef<HTMLTextAreaElement, Props>(({
   const { editing } = useProfileUpdate();
   if (editing) {
     return (
-      <>
-        <textarea
-          className={styles.editable}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          ref={ref}
-          {...props}
-        />
-      </>
+      <textarea
+        className={styles.editable}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        ref={ref}
+        {...props}
+      />
     );
   }
 
@@ -99,12 +130,13 @@ export function Placeholder({
 }
 
 Placeholder.propTypes = {
-  isProfile: PropTypes.bool.isRequired,
+  isProfile: PropTypes.bool,
   profileValue: PropTypes.node.isRequired,
   publicValue: PropTypes.node.isRequired,
   value: PropTypes.node,
 };
 
 Placeholder.defaultProps = {
+  isProfile: false,
   value: null,
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
 import Dialog from 'src/components/Dialog';
 import Icon from 'src/components/Icon';
@@ -18,6 +19,7 @@ import authStyles from '../src/layouts/AuthLayout.module.scss';
 import styles from './sign-up.module.scss';
 
 function SignUp() {
+  const { logEvent } = useAmplitude();
   const [serverError, setServerError] = useState<string>();
   const [submitting, setSubmitting] = useState<boolean>(false);
   const {
@@ -32,19 +34,45 @@ function SignUp() {
 
     try {
       await registerAccount(values);
-
-      // @ts-ignore
-      window.gtag('event', 'conversion', {
-        send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
+      logEvent('sign up', {
+        provider: 'local',
+      }, async () => {
+        // @ts-ignore
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
+        });
+        await redirectToApp();
       });
-      await redirectToApp();
     } catch (error) {
-      const message = error.response?.data?.message?.[0]?.messages?.[0]?.message
-        || 'Unknown error has occurred. Please refresh the page.';
-      setServerError(message);
+      if (error?.response?.data?.message[0]?.messages) {
+        setServerError(error.response.data.message[0]?.messages[0]?.message);
+      } else {
+        setServerError('Unknown error has occurred. Please refresh the page.');
+      }
+
       setSubmitting(false);
     }
   });
+  const onSocialLogin = async (data) => {
+    try {
+      await handleSocialLogin(data);
+      logEvent('sign up', {
+        provider: data.provider,
+      }, async () => {
+        // @ts-ignore
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
+        });
+        await redirectToApp();
+      });
+    } catch (error) {
+      if (error?.response?.data?.message[0]?.messages) {
+        setServerError(error.response.data.message[0]?.messages[0]?.message);
+      } else {
+        setServerError('Unknown error has occurred. Please refresh the page.');
+      }
+    }
+  };
 
   return (
     <AuthLayout aside={(
@@ -167,7 +195,7 @@ function SignUp() {
           <FacebookLoginButton
             provider="facebook"
             appId={process.env.FACEBOOK_APP_ID}
-            onLoginSuccess={(data) => handleSocialLogin(data, setServerError)}
+            onLoginSuccess={onSocialLogin}
             onLoginFailure={() => setServerError(`Social media authentication failed. Refresh the
           page to try again.`)}
             scope="public_profile,email"
