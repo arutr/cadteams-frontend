@@ -2,9 +2,12 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useAmplitude } from 'react-amplitude-hooks';
 import { useFormContext } from 'react-hook-form';
-import { Error } from 'src/components/Form';
+import Button from 'src/components/Button';
+import { Error, Fieldset, Form } from 'src/components/Form';
 import { Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
+import Label from 'src/components/Label';
+import Link from 'src/components/Link';
 import { EditableInput, EditableTextArea, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioSectionProps } from 'src/components/Portfolio/index';
@@ -12,33 +15,48 @@ import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import validator from 'validator';
 
+const getFirstName = (username) => {
+  if (username) {
+    return username.split(' ')[0];
+  }
+
+  return '';
+};
+
 interface DescriptionUpdateFormValues {
   description: string;
 }
 
 function DescriptionUpdateForm({ isProfile, user }: PortfolioSectionProps) {
   const { register } = useFormContext<DescriptionUpdateFormValues>();
-  const placeholder = `A short description of your ${user?.type === 'individual'
+  let descriptionHeading;
+
+  if (isProfile) {
+    descriptionHeading = user?.type === 'enterprise' ? 'Your Company' : 'Yourself';
+  } else {
+    descriptionHeading = getFirstName(user?.username);
+  }
+
+  const descriptionPlaceholder = user?.type === 'individual'
     ? 'professional experience'
-    : 'company'}.`;
+    : 'company';
 
   return (
     <form className={styles.card}>
       <Heading2 bold condensed marginTop={0}>
-        About {user?.type === 'individual' ? 'Yourself' : 'Your Company'}
+        About {descriptionHeading}
       </Heading2>
-      {isProfile && <EditButton />}
       <p style={{ flex: 1 }}>
         <EditableTextArea
           defaultValue={user?.description}
-          placeholder={placeholder}
+          placeholder={`A short description of your ${descriptionPlaceholder}.`}
           name="description"
           ref={register}
         >
           <Placeholder
             isProfile={isProfile}
             publicValue="N/A"
-            profileValue={placeholder}
+            profileValue={`A short description of your ${descriptionPlaceholder}.`}
             value={user?.description}
           />
         </EditableTextArea>
@@ -50,6 +68,7 @@ function DescriptionUpdateForm({ isProfile, user }: PortfolioSectionProps) {
 
 interface ContactInformationFormValues {
   phone: string;
+  contactEmail: string;
 }
 
 function ContactInformationForm({ isProfile, user }: PortfolioSectionProps) {
