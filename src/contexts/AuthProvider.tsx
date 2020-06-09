@@ -8,7 +8,7 @@ import User from '../api/User';
 
 interface Context {
   isAuthenticated: () => boolean;
-  handleSocialLogin: ({ profile, provider, token }, setErrorMessage) => Promise<void>;
+  handleSocialLogin: ({ profile, provider, token }) => Promise<void>;
   logIn: (values: LoginForm) => Promise<void>;
   logOut: () => void;
   registerAccount: (values: RegistrationForm) => Promise<void>;
@@ -140,7 +140,7 @@ export default class AuthProvider extends React.Component<any, State> {
       .then(({ data }) => this.storeAuthPayload(data))
   );
 
-  handleSocialLogin = ({ profile, provider, token }, setErrorMessage) => (
+  handleSocialLogin = ({ profile, provider, token }) => (
     Axios
       .get(`/auth/${provider}/callback`, {
         params: {
@@ -148,24 +148,7 @@ export default class AuthProvider extends React.Component<any, State> {
           email: profile.email,
         },
       })
-      .then(({ data }) => {
-        this.storeAuthPayload(data);
-        this.redirectToApp();
-      })
-      .catch((error) => {
-        let message = error?.response?.data?.message[0]?.messages[0]?.message;
-
-        if (!message) {
-          message = `Unknown error has occurred. Please try again. If the problem persists, please
-          get in touch with us.`;
-        }
-
-        setErrorMessage(message);
-
-        if (PHASE_DEVELOPMENT_SERVER) {
-          throw error;
-        }
-      })
+      .then(({ data }) => this.storeAuthPayload(data))
   );
 
   render() {

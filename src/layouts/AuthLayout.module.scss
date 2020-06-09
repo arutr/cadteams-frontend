@@ -59,6 +59,18 @@ $content-width: 55vw;
       width: calc(#{$content-width} - var(--page-margin) - (100vw - #{$page-width}) / 2);
     }
 
+    input[type="checkbox"] + label, p {
+      text-align: justify;
+    }
+
+    button + button {
+      margin-top: var(--spacing);
+    }
+
+    form > *:first-child {
+      margin-top: var(--spacing);
+    }
+
     .background {
       top: 0;
       left: 0;
@@ -71,10 +83,6 @@ $content-width: 55vw;
       @include min-screen($screen-m) {
         width: #{$content-width};
       }
-    }
-
-    button + button {
-      margin-top: var(--spacing);
     }
 
     .separator {
@@ -92,10 +100,6 @@ $content-width: 55vw;
         flex: 1;
         text-align: center;
       }
-    }
-
-    input[type="checkbox"] + label, p {
-      text-align: justify;
     }
   }
 
