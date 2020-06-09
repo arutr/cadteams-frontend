@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
 import Button from 'src/components/Button';
@@ -43,18 +42,24 @@ function UpdateForm({
 
   return (
     <form>
-      {isProfile && <EditButton />}
       <Heading1 bold condensed marginTop={0} marginBottom={0}>
         <EditableInput
           defaultValue={user?.username}
-          placeholder="CADteams User"
+          placeholder="CADteams Member"
           name="username"
-          ref={register({ required: 'Please enter your name.' })}
+          ref={register({
+            required: 'Please enter your name.',
+            maxLength: {
+              value: 30,
+              message: 'Your name is too long!',
+            },
+            validate: (value) => value.match(/^[a-zA-Z -]+$/) || 'Please enter your name.',
+          })}
         >
           <Placeholder
             isProfile={isProfile}
-            publicValue="CADteams User"
-            profileValue="CADteams User"
+            publicValue="CADteams Member"
+            profileValue="CADteams Member"
             value={user?.username}
           />
         </EditableInput>
@@ -70,7 +75,7 @@ function UpdateForm({
           >
             <Placeholder
               isProfile={isProfile}
-              publicValue=""
+              publicValue="N/A"
               profileValue="Your specialisation"
               value={user?.specialization}
             />
@@ -85,7 +90,7 @@ function UpdateForm({
           >
             <Placeholder
               isProfile={isProfile}
-              publicValue=""
+              publicValue="N/A"
               profileValue="Your company"
               value={user?.company}
             />
@@ -103,6 +108,9 @@ function UpdateForm({
             {label}
           </Label>
         )) : null}
+        {!editing && !sectors?.length && !isProfile && (
+          <Label className={styles.placeholder}>N/A</Label>
+        )}
         {!editing && !sectors?.length && isProfile && (
           <Label className={styles.placeholder}>Industry sector(s)</Label>
         )}
@@ -129,7 +137,7 @@ function ProfilePictureForm({
   const { updateUser } = useAuth();
   const profilePicture = user?.profilePicture;
   const profilePictureUrl = demo ? profilePicture?.url : getApiResource(
-    profilePicture?.formats?.thumbnail?.url,
+    profilePicture?.formats?.small?.url,
     profilePicture?.url,
   );
 
@@ -181,15 +189,20 @@ function ProfilePictureForm({
           />
           {profilePictureUrl ? (
             <Button
-              className={styles.edit}
+              className={classNames(styles.edit, styles.bottom)}
               type="button"
               onClick={removePicture}
             >
               <Icon name="trash" inverted title="Remove this profile picture" />
             </Button>
           ) : (
-            <Button className={styles.edit} type="button" onClick={onClick}>
+            <Button
+              className={classNames(styles.edit, styles.bottom)}
+              type="button"
+              onClick={onClick}
+            >
               <Icon name="camera" inverted title="Upload a profile picture" />
+              <span className={styles.label}>Upload</span>
             </Button>
           )}
         </form>
@@ -200,7 +213,7 @@ function ProfilePictureForm({
 
 export default function Identity(props: PortfolioSectionProps) {
   const [sectors, setSectors] = useState<LabelType[]>();
-  const { user, setDialog } = props;
+  const { user, setDialog, isProfile } = props;
 
   if (!sectors && user?.sectors) {
     setSectors(user.sectors);
@@ -213,6 +226,7 @@ export default function Identity(props: PortfolioSectionProps) {
         <aside>
           <UpdateForm {...props} sectors={sectors} setSectors={setSectors} />
         </aside>
+        {isProfile && <EditButton bottom />}
       </div>
     </ProfileUpdateProvider>
   );

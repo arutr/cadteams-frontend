@@ -145,11 +145,12 @@ export default function Designs({
                 )}
                 {isProfile && (
                   <Button
-                    className={styles.edit}
+                    className={classNames(styles.edit, styles.corner)}
                     type="button"
                     onClick={() => removeDesign(design.id)}
                   >
                     <Icon name="trash" inverted title="Remove this design" />
+                    <span className={styles.label}>Remove</span>
                   </Button>
                 )}
               </div>
