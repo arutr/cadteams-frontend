@@ -18,7 +18,6 @@ export default class extends Document {
           <meta name="author" content="CADteams" />
           <meta property="og:url" content="https://cadteams.com/" />
           <meta property="og:site_name" content="CADteams" />
-          <meta property="og:title" content="Showcase best building designs" />
           <meta property="og:description" content="A platform for BIM and CAD specialists to showcase their best building designs." />
           <meta property="og:type" content="website" />
           <meta property="og:locale" content="en_GB" />
@@ -40,7 +39,7 @@ export default class extends Document {
               "linkColor": "#fcf6f5",
               "linkTarget": "_blank"
             }`}
-            src="https://unpkg.com/cookie-notice@^1/dist/cookie.notice.min.js"
+            src="/cookie.notice.min.js"
           />
           <script async defer src="/cookie.js" />
           <script id="hs-script-loader" async defer src="//js.hs-scripts.com/6921417.js" />
