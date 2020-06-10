@@ -7,5 +7,9 @@ export default function getApiResource(url, fallback?) {
     return process.env.API_URL + url;
   }
 
+  if (fallback?.startsWith('http')) {
+    return fallback;
+  }
+
   return fallback ? process.env.API_URL + fallback : null;
 }
