@@ -128,7 +128,7 @@ export default function Designs({
           const design = user?.designs[index];
           if (design) {
             const url = demo ? design.url : getApiResource(design.url);
-            const thumbnailUrl = demo
+            const preview = demo
               ? design.url
               : getApiResource(design.formats?.medium?.url, design.url);
 
@@ -140,7 +140,7 @@ export default function Designs({
                   </video>
                 ) : (
                   <Link external href={url} hoverEffect={false}>
-                    <img src={thumbnailUrl} alt="Design" />
+                    <img src={preview} alt="Design" />
                   </Link>
                 )}
                 {isProfile && (
