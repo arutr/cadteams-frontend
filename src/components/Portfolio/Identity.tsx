@@ -194,6 +194,7 @@ function ProfilePictureForm({
               onClick={removePicture}
             >
               <Icon name="trash" inverted title="Remove this profile picture" />
+              <span className={styles.label}>Remove</span>
             </Button>
           ) : (
             <Button
