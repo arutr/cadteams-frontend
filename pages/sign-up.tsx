@@ -38,9 +38,9 @@ function SignUp() {
         provider: 'local',
       }, async () => {
         // @ts-ignore
-        window.gtag('event', 'conversion', {
-          send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
-        });
+        // window.gtag('event', 'conversion', {
+        //   send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
+        // });
         await redirectToApp();
       });
     } catch (error) {
@@ -60,9 +60,9 @@ function SignUp() {
         provider: data.provider,
       }, async () => {
         // @ts-ignore
-        window.gtag('event', 'conversion', {
-          send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
-        });
+        // window.gtag('event', 'conversion', {
+        //   send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
+        // });
         await redirectToApp();
       });
     } catch (error) {
