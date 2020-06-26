@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import styles from './Link.module.scss';
 
 function Link({
-  as, href, children, disabled, external, onClick, className, hoverEffect,
+  href, children, disabled, external, onClick, className, hoverEffect, underlined,
 }) {
   const { pathname } = useRouter();
   const classes = classNames(
@@ -34,12 +34,11 @@ function Link({
     return (
       <NextLink href={href}>
         <a
-          className={classes}
+          className={classNames(classes, !underlined && styles['not-underlined'])}
           onClick={onClick}
           role="link"
           tabIndex={0}
           onKeyDown={onClick}
-          style={{ textDecoration: 'none' }}
         >
           {children}
         </a>
@@ -61,23 +60,23 @@ function Link({
 }
 
 Link.propTypes = {
-  as: PropTypes.node,
   children: PropTypes.node,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   external: PropTypes.bool,
   hoverEffect: PropTypes.bool,
+  underlined: PropTypes.bool,
   href: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 Link.defaultProps = {
-  as: null,
   className: null,
   children: null,
   disabled: false,
   external: false,
   hoverEffect: true,
+  underlined: false,
   href: '',
   onClick: null,
 };
