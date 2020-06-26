@@ -19,6 +19,7 @@ export interface PortfolioProps {
   user: User;
   demo?: boolean;
   isProfile?: boolean;
+  inModal?: boolean;
 }
 
 function LandingPageFooter({ user }: PortfolioProps) {
@@ -39,28 +40,30 @@ function LandingPageFooter({ user }: PortfolioProps) {
 }
 
 export type PortfolioSectionProps = {
-  setDialog: ({ type, message }: DialogProps) => void,
+  setDialog?: ({ type, message }: DialogProps) => void,
 } & PortfolioProps;
 
 function Portfolio(props: PortfolioProps) {
   const { demo, isProfile } = props;
   const [dialog, setDialog] = useState<DialogProps>();
   const { user: authUser } = useAuth();
+  const isNotIndividual = authUser?.type !== 'individual';
+
   return (
     <div className={styles.wrapper}>
       {dialog?.message && <Dialog {...dialog} />}
       <header className={styles.header}>
         <Identity {...props} setDialog={setDialog} />
-        {(demo || isProfile || authUser.type === 'enterprise') && (
+        {(demo || isProfile || isNotIndividual) && (
           <Skills {...props} setDialog={setDialog} />
         )}
       </header>
       <Designs {...props} setDialog={setDialog} />
-      {(demo || isProfile || authUser.type === 'enterprise') && (
+      {(demo || isProfile || isNotIndividual) && (
         <UniqueSkills {...props} setDialog={setDialog} />
       )}
       {demo && <LandingPageFooter {...props} />}
-      {!demo && (isProfile || authUser.type === 'enterprise') && (
+      {!demo && (isProfile || isNotIndividual) && (
         <PortfolioFooter {...props} setDialog={setDialog} />
       )}
     </div>
@@ -75,7 +78,7 @@ export function PortfolioModal(props: ModalProps) {
   const { onClose, user } = props;
   const Component = (
     <Modal onClose={onClose} className={styles.modal}>
-      <Portfolio {...props} />
+      <Portfolio {...props} inModal />
     </Modal>
   );
 

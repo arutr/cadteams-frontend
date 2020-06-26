@@ -43,15 +43,16 @@ type UpdateFormProps = {
 } & PortfolioSectionProps;
 
 function UpdateForm({
-  isProfile, languages, setLanguages, tools, setTools, user,
+  demo, isProfile, languages, setLanguages, tools, setTools, user,
 }: UpdateFormProps) {
   const { register, errors } = useFormContext<UpdateFormValues>();
   const { editing } = useProfileUpdate();
   const removeLanguage = removeLabel(languages, setLanguages);
   const removeTool = removeLabel(tools, setTools);
+  const showChin = isProfile || !demo;
 
   return (
-    <form className={classNames(styles.card, styles.skills)}>
+    <form className={classNames(styles.card, styles.skills, showChin && styles.chin)}>
       {user?.type === 'individual' && (
         <>
           <div className={styles.row}>
