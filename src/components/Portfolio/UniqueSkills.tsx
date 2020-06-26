@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { UniqueSkill } from 'src/api/User';
+import { Individual, UniqueSkill } from 'src/api/User';
 import { Heading2, Heading3 } from 'src/components/Heading';
 import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
@@ -12,8 +12,10 @@ interface UpdateFormValues {
   uniqueSkills: UniqueSkill[];
 }
 
-function UpdateForm({ isProfile, user }: PortfolioSectionProps) {
+function UpdateForm({ isProfile, ...props }: PortfolioSectionProps) {
   const { register } = useFormContext<UpdateFormValues>();
+  // eslint-disable-next-line react/destructuring-assignment
+  const user = (props.user as Individual);
   return (
     <form className={styles.row}>
       {[1, 2, 3].map((_, index) => (

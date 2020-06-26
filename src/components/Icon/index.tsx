@@ -5,6 +5,7 @@ import styles from './Icon.module.scss';
 
 interface Props {
   name: string;
+  className?: string;
   inverted?: boolean;
   large?: boolean;
   [key: string]: any;

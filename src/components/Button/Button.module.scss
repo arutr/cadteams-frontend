@@ -47,7 +47,8 @@
     padding-right: 0;
   }
 
-  p + & {
+  p + &,
+  & + a, {
     margin-top: var(--spacing);
   }
 }

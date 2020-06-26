@@ -9,7 +9,7 @@ import PortfolioFooter from 'src/components/Portfolio/PortfolioFooter';
 import Skills from 'src/components/Portfolio/Skills';
 import UniqueSkills from 'src/components/Portfolio/UniqueSkills';
 import { useAuth } from 'src/contexts/AuthProvider';
-import User from '../../api/User';
+import User, { Individual } from 'src/api/User';
 import { AnchorButton } from '../Button';
 import { Heading2 } from '../Heading';
 import Modal from '../Modal';
@@ -19,6 +19,7 @@ export interface PortfolioProps {
   user: User;
   demo?: boolean;
   isProfile?: boolean;
+  inModal?: boolean;
 }
 
 function LandingPageFooter({ user }: PortfolioProps) {
@@ -38,44 +39,47 @@ function LandingPageFooter({ user }: PortfolioProps) {
   );
 }
 
-export type PortfolioSectionProps = {
-  setDialog: ({ type, message }: DialogProps) => void,
-} & PortfolioProps;
+export interface PortfolioSectionProps extends PortfolioProps {
+  setDialog?: ({ type, message }: DialogProps) => void,
+}
 
 function Portfolio(props: PortfolioProps) {
   const { demo, isProfile } = props;
   const [dialog, setDialog] = useState<DialogProps>();
   const { user: authUser } = useAuth();
+  const isNotIndividual = authUser?.type !== 'individual';
+
   return (
     <div className={styles.wrapper}>
       {dialog?.message && <Dialog {...dialog} />}
       <header className={styles.header}>
         <Identity {...props} setDialog={setDialog} />
-        {(demo || isProfile || authUser.type === 'enterprise') && (
+        {(demo || isProfile || isNotIndividual) && (
           <Skills {...props} setDialog={setDialog} />
         )}
       </header>
       <Designs {...props} setDialog={setDialog} />
-      {(demo || isProfile || authUser.type === 'enterprise') && (
+      {(demo || isProfile || isNotIndividual) && (
         <UniqueSkills {...props} setDialog={setDialog} />
       )}
       {demo && <LandingPageFooter {...props} />}
-      {!demo && (isProfile || authUser.type === 'enterprise') && (
+      {!demo && (isProfile || isNotIndividual) && (
         <PortfolioFooter {...props} setDialog={setDialog} />
       )}
     </div>
   );
 }
 
-type ModalProps = {
+interface ModalProps extends PortfolioProps {
   onClose: () => void,
-} & PortfolioProps;
+  user: Individual,
+}
 
 export function PortfolioModal(props: ModalProps) {
   const { onClose, user } = props;
   const Component = (
     <Modal onClose={onClose} className={styles.modal}>
-      <Portfolio {...props} />
+      <Portfolio {...props} inModal />
     </Modal>
   );
 
