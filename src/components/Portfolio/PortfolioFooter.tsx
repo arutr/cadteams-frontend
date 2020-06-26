@@ -27,9 +27,10 @@ interface DescriptionUpdateFormValues {
   description: string;
 }
 
-function DescriptionUpdateForm({ isProfile, user }: PortfolioSectionProps) {
+function DescriptionUpdateForm({ demo, isProfile, user }: PortfolioSectionProps) {
   const { register } = useFormContext<DescriptionUpdateFormValues>();
   let descriptionHeading;
+  const showChin = isProfile || !demo;
 
   if (isProfile) {
     descriptionHeading = user?.type === 'enterprise' ? 'Your Company' : 'Yourself';
@@ -42,8 +43,8 @@ function DescriptionUpdateForm({ isProfile, user }: PortfolioSectionProps) {
     : 'company';
 
   return (
-    <form className={styles.card}>
-      <Heading2 bold condensed marginTop={0}>
+    <form className={classNames(styles.card, showChin && styles.chin)}>
+      <Heading2 bold condensed marginTop="0">
         About {descriptionHeading}
       </Heading2>
       <p style={{ flex: 1 }}>
@@ -182,8 +183,13 @@ export default function PortfolioFooter(props: PortfolioSectionProps) {
         <DescriptionUpdateForm {...props} />
       </ProfileUpdateProvider>
       <ProfileUpdateProvider<ContactInformationFormValues> setDialog={setDialog}>
-        <section className={classNames(styles.card, styles['contact-information'])}>
-          <Heading2 bold condensed marginTop={0}>
+        <section className={classNames(
+          styles.card,
+          styles['contact-information'],
+          isProfile && styles.chin,
+        )}
+        >
+          <Heading2 bold condensed marginTop="0">
             {isProfile ? 'Contact Information' : 'Like what you\'re seeing?'}
           </Heading2>
           <ContactInformationForm {...props} />
