@@ -1,194 +1,226 @@
 import classNames from 'classnames';
-import NextLink from 'next/link';
-import React, { useState } from 'react';
-import { LogOnMount } from 'react-amplitude-hooks';
+import React from 'react';
 import { AnchorButton } from 'src/components/Button';
-import { Heading1 } from 'src/components/Heading';
+import Footer from 'src/components/Footer';
+import { Heading1, Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
+import Illustration from 'src/components/Illustration';
 import Link from 'src/components/Link';
-import { ModalProvider } from 'src/components/Modal';
-import { PortfolioModal } from 'src/components/Portfolio';
-import User from '../src/api/User';
-import Footer from '../src/components/Footer';
-import MediaObject from '../src/components/MediaObject';
-import styles from './index.module.scss';
+import Newsletter from 'src/components/Newsletter';
+import layout from 'src/layouts/LandingPageLayout.module.scss';
 
-const features = [
+const howCadteamsWorks = [
   {
-    heading: 'Present yourself with designs you are proud of.',
-    description: `Create a portfolio of your expertise: upload design samples from your favourite
-      projects, and highlight the skills that make you stand out.`,
-    media: '/images/landing-page/feature1.png',
+    illustration: 'personal_data',
+    title: 'Personalise Your Profile',
+    description: `If you're a specialist, this is the time to shine! Upload screenshots of your
+    best building designs, specify your area of expertise and highlight top three unique skills.`,
   },
   {
-    heading: 'Explore designs of other talented individuals.',
-    description: `Browse through a gallery of design portfolios created by top BIM/CAD
-      specialists.`,
-    media: '/images/landing-page/feature2.png',
-    reverse: true,
+    illustration: 'user_profile',
+    title: 'Connect with Others',
+    description: `Browse Specialist portfolios, find talented people and start growing your
+    professional network. Meeting your new remote colleagues has never been easier.`,
   },
   {
-    heading: 'Get to know each other.',
-    description: `Enjoying someone’s portfolio? Send a request for their contact information and
-      become acquainted with each other.`,
-    media: '/images/landing-page/feature3.png',
-    maxHeight: '7rem',
+    illustration: 'handshake',
+    title: 'Discuss Opportunities',
+    description: (
+      <>
+        <b>CAD</b>teams is a unique environment attracting people from the same industry, which
+        means you can jump straight into business.
+      </>
+    ),
+  },
+  {
+    illustration: 'manager',
+    title: (
+      <>
+        Let <span className="cadteams"><b>CAD</b>teams</span> Organise the Work for You
+      </>
+    ),
+    description: `Admin tasks can be very time consuming and feel like an unnecessary overhead. We
+    try our best to take that burden away from you because we understand that work is already
+    stressful enough.`,
   },
 ];
-const user: User = {
-  username: 'Manuel A.',
-  country: 'GB',
-  type: 'individual',
-  profilePicture: {
-    url: '/images/portfolio-demo/profile-picture.jpg',
+const exploreCadteams = [
+  {
+    illustration: 'world_wide_web',
+    title: 'Remote Specialists',
+    description: (
+      <>
+        Are you experienced in BIM and CAD tools? Do you want to showcase your efforts to a wider
+        audience?<br /><br />Join the <b>CAD</b>teams Community of talented individuals and enjoy
+        the new way of finding work opportunities.
+      </>
+    ),
+    href: '/individuals',
   },
-  specialization: 'Architectural Technician',
-  sectors: [{
-    id: 1,
-    label: 'Residential',
-  }, {
-    id: 2,
-    label: 'Modular',
-  }],
-  location: 'Brighton',
-  experience: 5,
-  languages: [{
-    id: 1,
-    label: 'English',
-  }, {
-    id: 2,
-    label: 'Spanish',
-  }],
-  tools: [{
-    id: 1,
-    label: 'Revit',
-  }, {
-    id: 2,
-    label: '3Ds Max',
-  }, {
-    id: 3,
-    label: 'Photoshop',
-  }],
-  designs: [
-    {
-      url: '/images/portfolio-demo/design1.png',
-    },
-    {
-      url: '/images/portfolio-demo/design2.png',
-    },
-    {
-      url: '/images/portfolio-demo/design3.png',
-    },
-    {
-      url: '/images/portfolio-demo/design4.png',
-    },
-  ],
-  uniqueSkills: [{
-    id: 1,
-    skill: 'Combining Revit and image profile tools for stunning visuals',
-  }, {
-    id: 2,
-    skill: 'Construction-ready drawings in line with BS',
-  }, {
-    id: 3,
-    skill: 'Surveying and site supervision',
-  }],
-};
+  {
+    illustration: 'architect',
+    title: 'Companies',
+    description: (
+      <>
+        The pandemic has proven that we are all capable of working from home and leasing an
+        expensive office no longer make sense.<br /><br />If you are a
+        registered <strong>Architecture, Engineering or Construction</strong> (AEC)
+        business, <Link underlined href="/sign-up">sign up</Link> for an Enterprise account to
+        discover how <b>CAD</b>teams can help you find remote colleagues and manage project
+        resources.
+      </>
+    ),
+    href: '/enterprise',
+  },
+  {
+    illustration: 'online_presentation',
+    title: 'Outsourcing Studios',
+    description: (
+      <>
+        You have a website and existing clients, but how do you establish those new
+        connections to grow your pipeline?<br /><br />Showcase your past projects and get noticed by
+        AEC companies on the platform. When you need to expand your team, reach out to
+        specialists. <strong>We are all on the same platform!</strong>
+      </>
+    ),
+    href: '/outsourcing',
+  },
+];
+const advantages = [
+  {
+    illustration: 'time',
+    title: 'Real-Time People Resourcing',
+    description: `View your team's availability and spread the workload accordingly. No more time
+    wasted on asking multiple parties if they can fit that extra task into their week.`,
+  },
+  {
+    illustration: 'user_group',
+    title: 'Talent Marketplace',
+    description: `The beauty of a talent pool is that it attracts a variety of specialists, who know
+    how to model structural elements in Revit, produce photo-realistic architectural renders,
+    coordinate MEP services, implement layout changes, etc.`,
+  },
+  {
+    illustration: 'calendar',
+    title: 'Shared Calendar',
+    description: (
+      <>
+        Synchronise Microsoft Outlook and Google Calendar with <b>CAD</b>teams to easily manage your
+        projects pipeline. Indicate your days off for a good work-life balance. You&apos;re in
+        charge of your schedule now!
+      </>
+    ),
+  },
+  {
+    illustration: 'handshake',
+    title: 'Business Development',
+    description: (
+      <>
+        What is the best part of industry-specific events? Getting everyone under the same
+        roof to foster conversations among like-minded people, which lead to new professional
+        relationships. Welcome to the <b>CAD</b>teams Business Development Venue.
+      </>
+    ),
+  },
+  {
+    illustration: 'achievement',
+    title: 'Digital Assistant',
+    description: `Did you know that basic admin tasks are costing the self-employed in the United
+    Kingdom £28.1bn annually? Whether you're a single Specialist, or an Enterprise team, our tools
+    can save you time, so you can focus on delivering world-class projects.`,
+  },
+  {
+    illustration: 'world_connection_mc',
+    title: 'Remote Work',
+    description: (
+      <>
+        We are all capable of working remotely, so why not embrace the full potential of this new
+        normal? At <b>CAD</b>teams we believe that access to the best specialists, as well as a
+        variety of work opportunities, is more important than a shared physical location.
+      </>
+    ),
+  },
+];
 
-function LandingPage() {
-  const [portfolioModal, setPortfolioModal] = useState(false);
-  const togglePortfolioModal = () => setPortfolioModal(!portfolioModal);
-
+export default function LandingPage() {
   return (
-    <>
-      <LogOnMount eventType="view page" />
-      <ModalProvider>
-        <section className={styles.hero}>
-          <article>
-            <Heading1>
-              Showcase your best pieces of building designs.
-            </Heading1>
-            <NextLink href="/sign-up" passHref>
-              <AnchorButton large>Sign Up</AnchorButton>
-            </NextLink>
-          </article>
-          <aside>
-            <MediaObject
-              id={styles.design1}
-              href="https://www.david-miller.co.uk/gateway-house.php"
-              src="/images/landing-page/design1.png"
-              alt="Gateway House, Finchley"
-            >
-              <p>Gateway House, Finchley</p>
-              <Link external href="https://www.david-miller.co.uk/gateway-house.php">
-                <Icon name="share" />
-                David Miller Architects
-              </Link>
-            </MediaObject>
-            <MediaObject
-              id={styles.design2}
-              onClick={togglePortfolioModal}
-              src="/images/landing-page/design2.png"
-              alt="Plant Room"
-            >
-              <p>Plant Room</p>
-              <Link onClick={togglePortfolioModal}>
-                <Icon name="view" />
-                Manuel A.
-              </Link>
-            </MediaObject>
-            <MediaObject
-              id={styles.design3}
-              href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
-              src="/images/landing-page/design3.png"
-              alt="Fairfield Inn and Suites"
-            >
-              <p>Fairfield Inn and Suites</p>
-              <Link
-                external
-                href="https://www.united-bim.com/portfolio/fairfield-inn-and-suites-mep/"
-              >
-                <Icon name="share" />
-                United BIM
-              </Link>
-            </MediaObject>
+    <div className={layout.index}>
+      <main>
+        <section className={layout.hero}>
+          <div className={layout.left}>
+            <Heading1>Global marketplace for talented BIM/CAD specialists.</Heading1>
+            <AnchorButton href="/sign-up" large>Sign Up</AnchorButton>
+            <Link underlined href="/individuals">
+              <Icon name="arrow-right-double" />
+              For BIM/CAD remote specialists
+            </Link>
+            <Link underlined href="/enterprise">
+              <Icon name="arrow-right-double" />
+              For companies
+            </Link>
+            <Link underlined href="/outsourcing">
+              <Icon name="arrow-right-double" />
+              For outsourcing studios
+            </Link>
+          </div>
+          <aside className={layout.illustration}>
+            <Illustration name="3d_model" />
           </aside>
         </section>
-        {features.map((feature, index) => (
-          <section
-            className={classNames(styles.features, feature.reverse && styles.reverse)}
-            key={index}
-          >
-            <article>
-              <Heading1 bold condensed>{feature.heading}</Heading1>
-              <p>{feature.description}</p>
-            </article>
-            <aside>
-              <MediaObject src={feature.media} height={feature.maxHeight} />
-            </aside>
+      </main>
+      <div className={classNames(layout.background, layout.silver)}>
+        <main>
+          <Heading1 marginTop="0" bold condensed>
+            How <span className="cadteams"><b>CAD</b>teams</span> Works
+          </Heading1>
+          <section className={layout['four-column-grid']}>
+            {howCadteamsWorks.map((item, index) => (
+              <article key={index}>
+                <Illustration name={item.illustration} />
+                <Heading2 bold condensed>{item.title}</Heading2>
+                <p>{item.description}</p>
+              </article>
+            ))}
           </section>
-        ))}
-        <section className={styles.cta}>
-          <article>
-            <Heading1 bold condensed>Time to show off!</Heading1>
-            <p>Get started with <b>CAD</b>teams <strong>for free</strong>.</p>
-            <p>Don’t miss out and join us today.</p>
-          </article>
-          <aside>
-            <NextLink href="/sign-up" passHref>
-              <AnchorButton block large>
-                Create a free account
-              </AnchorButton>
-            </NextLink>
-          </aside>
+        </main>
+      </div>
+      <div className={classNames(layout.background, layout.blue)}>
+        <main>
+          <Heading1 marginTop="0" bold condensed>
+            Explore <span className="cadteams"><b>CAD</b>teams</span>
+          </Heading1>
+          <p>
+            Curious to learn more about us? Navigate to a relevant section below find out
+            how <b>CAD</b>teams can help you go further.
+          </p>
+          <section className={layout['three-column-grid']}>
+            {exploreCadteams.map((item, index) => (
+              <article key={index}>
+                <Illustration name={item.illustration} />
+                <Heading2 bold condensed>{item.title}</Heading2>
+                <p>{item.description}</p>
+                <AnchorButton href={item.href}>Learn More</AnchorButton>
+              </article>
+            ))}
+          </section>
+        </main>
+      </div>
+      <main>
+        <Heading1 marginTop="0" bold condensed>
+          The <span className="cadteams"><b>CAD</b>teams</span> Advantage
+        </Heading1>
+        <section className={layout['three-column-grid']}>
+          {advantages.map((item, index) => (
+            <article key={index}>
+              <Illustration name={item.illustration} />
+              <Heading2 bold condensed>{item.title}</Heading2>
+              <p>{item.description}</p>
+            </article>
+          ))}
         </section>
-        {portfolioModal && (
-          <PortfolioModal demo user={user} onClose={togglePortfolioModal} />
-        )}
-      </ModalProvider>
+      </main>
+      <Newsletter />
       <Footer />
-    </>
+    </div>
   );
 }
-
-export default LandingPage;

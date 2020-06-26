@@ -116,3 +116,29 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(({
     </div>
   </div>
 ));
+
+type DropdownProps = {
+  options: {
+    label: string;
+    value: string;
+  }[];
+  placeholder?: string;
+  defaultValue?: string;
+  [key: string]: any;
+};
+
+export const Select = React.forwardRef<HTMLSelectElement, DropdownProps>(({
+  placeholder, defaultValue, options, ...props
+}: DropdownProps, ref) => (
+  <select
+    className={styles.select}
+    defaultValue={defaultValue}
+    ref={ref}
+    {...props}
+  >
+    {placeholder && <option value="">{placeholder}</option>}
+    {options.map(({ label, value }, index) => (
+      <option key={index} value={value}>{label}</option>
+    ))}
+  </select>
+));

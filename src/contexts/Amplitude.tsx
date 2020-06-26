@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import { AmplitudeClient } from 'amplitude-js';
 import { Amplitude, AmplitudeProvider as BaseAmplitudeProvider } from 'react-amplitude-hooks';
 import { useAuth } from 'src/contexts/AuthProvider';
+import { inApp } from 'src/utils/misc';
 
 export default function AmplitudeProvider({ children }) {
   const { user } = useAuth();
   const { pathname } = useRouter();
 
-  if ((pathname.startsWith('/app') && !user) || user?.email.endsWith('cadteams.com')) {
+  if ((inApp() && !user) || user?.email.endsWith('cadteams.com')) {
     return children;
   }
 

@@ -13,7 +13,7 @@ interface Context {
 export const ProfileUpdateContext = React.createContext<Context>(null);
 
 interface Props {
-  setDialog: ({ type, message }: DialogProps) => void;
+  setDialog?: ({ type, message }: DialogProps) => void;
   labelStates?: {
     [key: string]: Label[];
   };
