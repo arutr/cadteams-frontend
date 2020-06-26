@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import React, { useEffect, useState } from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
-import { Label as LabelType } from 'src/api/User';
+import { Enterprise, Individual, Label as LabelType } from 'src/api/User';
 import Button from 'src/components/Button';
 import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
@@ -34,8 +34,10 @@ type UpdateFormProps = {
 const PROFILE_PICTURE_MAX_SIZE = 4 * 1048576;
 
 function UpdateForm({
-  isProfile, sectors, setSectors, user,
+  isProfile, sectors, setSectors, ...props
 }: UpdateFormProps) {
+  // eslint-disable-next-line react/destructuring-assignment
+  const user = (props.user as Individual & Enterprise);
   const { register, errors } = useFormContext<UpdateFormValues>();
   const { editing } = useProfileUpdate();
   const removeSector = setSectors ? removeLabel(sectors, setSectors) : null;
@@ -224,8 +226,10 @@ type IdentityCardProps = {
 
 export function IdentityCard(props: IdentityCardProps) {
   const {
-    className, currency, exchangeRate = 1.0, demo, isProfile, inModal, user,
+    className, currency, exchangeRate = 1.0, demo, isProfile, inModal,
   } = props;
+  // eslint-disable-next-line react/destructuring-assignment
+  const user = (props.user as Individual);
   const [demoModal, setDemoModal] = useState(false);
   const toggleDemoModal = () => setDemoModal(!demoModal);
   const showChin = isProfile || !inModal;
