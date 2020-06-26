@@ -10,7 +10,7 @@ import styles from './Modal.module.scss';
 
 const Context = React.createContext(null);
 
-export function ModalProvider({ className, children }) {
+export function ModalProvider({ className, children, providerOnly }) {
   const modalRef = useRef();
   const [context, setContext] = useState();
 
@@ -18,6 +18,14 @@ export function ModalProvider({ className, children }) {
   useEffect(() => {
     setContext(modalRef.current);
   }, []);
+
+  if (providerOnly) {
+    return (
+      <div className={className} ref={modalRef}>
+        <Context.Provider value={context}>{children}</Context.Provider>
+      </div>
+    );
+  }
 
   return (
     <main className={classNames(styles.container, className)} ref={modalRef}>
@@ -29,11 +37,13 @@ export function ModalProvider({ className, children }) {
 ModalProvider.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  providerOnly: PropTypes.bool,
 };
 
 ModalProvider.defaultProps = {
   children: null,
   className: null,
+  providerOnly: false,
 };
 
 interface ModalProps {
