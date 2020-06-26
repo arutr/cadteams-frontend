@@ -4,6 +4,32 @@
 @import 'styles/variables/typography';
 @import 'styles/variables/ui';
 
+.beta {
+  margin-left: 0.75rem;
+
+  @include min-screen($screen-m) {
+    margin-top: -4px;
+    margin-bottom: -8px;
+  }
+}
+
+.users {
+  @include max-screen($screen-m) {
+    flex-basis: 100%;
+  }
+}
+
+.separator {
+  display: none;
+  height: 100%;
+  margin: 0 var(--spacing);
+  border-left: 1px solid var(--color-black);
+
+  @include min-screen($screen-m) {
+    display: inline-block;
+  }
+}
+
 .vertical {
   --vertical-padding: 1rem;
   --horizontal-padding: var(--page-margin);
@@ -27,7 +53,7 @@
 
   .logo {
     display: flex;
-    justify-content: center;
+    align-items: center;
 
     @include max-screen($screen-ml) {
       order: 1;
@@ -104,7 +130,7 @@
 
   .logo {
     display: flex;
-    justify-content: center;
+    align-items: center;
 
     img {
       max-height: var(--logo-height);
@@ -130,7 +156,9 @@
   }
 
   .avatar {
-    margin: -1rem 0;
+    &:not(.blank) {
+      margin: -1rem 0;
+    }
 
     img {
       width: 3rem;
@@ -138,14 +166,17 @@
     }
   }
 
-  .links {
+  .links,
+  .users {
     display: flex;
     flex-wrap: wrap;
     user-select: none;
     align-items: center;
     flex-direction: row;
     justify-content: space-evenly;
+  }
 
+  .links {
     @include max-screen($screen-m) {
       width: 100%;
       min-height: 0;
@@ -157,8 +188,11 @@
     }
 
     @include min-screen($screen-m) {
-      > * + * {
-        margin-left: var(--spacing);
+      .sign-up {
+        margin-top: -4px;
+        margin-bottom: -5px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
       }
     }
 
@@ -167,6 +201,10 @@
         margin-top: var(--spacing);
         min-height: 2rem;
       }
+    }
+
+    a + a {
+      margin-left: var(--spacing);
     }
   }
 
@@ -180,5 +218,11 @@
     cursor: pointer;
     user-select: none;
     position: absolute;
+  }
+
+  .users {
+    @include max-screen($screen-m) {
+      margin-bottom: var(--spacing);
+    }
   }
 }
