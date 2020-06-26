@@ -27,7 +27,7 @@ function Footer() {
     <footer className={styles.footer}>
       <ul>
         <span>
-          &copy; {new Date().getFullYear()} <b>CAD</b>teams Ltd (Company No. 12404180)
+          &copy; {new Date().getFullYear()} <b>CAD</b>teams Ltd (UK Company No. 12404180)
         </span>
         <div>
           <Link external href="/terms-and-conditions.pdf">Privacy & Terms</Link>

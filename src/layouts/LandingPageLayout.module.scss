@@ -1,0 +1,145 @@
+@import 'styles/mixins/responsive';
+@import 'styles/variables/layout';
+
+@mixin grid {
+  display: grid;
+  grid-gap: calc(2 * var(--spacing));
+
+  article {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      text-align: justify;
+    }
+  }
+}
+
+.background {
+  &.blue {
+    color: var(--color-white);
+    background-color: var(--color-blue);
+  }
+
+  &.purple {
+    color: var(--color-white);
+    background-color: var(--color-purple);
+  }
+
+  &.silver {
+    background-color: var(--color-silver);
+  }
+}
+
+.four-column-grid {
+  @include grid;
+
+  grid-template-columns: repeat(auto-fill, minmax($grid-item--four-column__width, 1fr));
+
+  svg {
+    max-width: 100%;
+    height: 10rem;
+
+    @include min-screen($screen-m) {
+      height: 16rem;
+    }
+  }
+}
+
+.hero {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr;
+
+  @include min-screen($screen-m) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .illustration {
+    @include max-screen($screen-m) {
+      order: -1;
+    }
+
+    svg {
+      max-height: 30rem;
+    }
+  }
+
+  a[role="link"] {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.index {
+  > *:not(footer) {
+    padding-block-end: 2em;
+    padding-block-start: 2em;
+  }
+}
+
+.power-up {
+  height: 100%;
+
+  svg {
+    margin-bottom: 0;
+  }
+}
+
+.step-heading {
+  font-size: 3rem;
+  margin-top: var(--spacing);
+}
+
+.three-column-grid {
+  @include grid;
+
+  grid-template-columns: repeat(auto-fill, minmax($grid-item__width, 1fr));
+
+  a[role="link"] {
+    color: var(--color-white);
+
+    &:active,
+    &:focus,
+    &:hover {
+      filter: brightness(75%);
+    }
+  }
+
+  article {
+    a[role="button"] {
+      margin-top: auto;
+    }
+
+    p {
+      margin-bottom: var(--spacing);
+    }
+  }
+
+  svg {
+    max-width: 100%;
+    height: 10rem;
+  }
+}
+
+.two-column-grid {
+  @include grid;
+
+  grid-template-columns: repeat(auto-fit, minmax($grid-item__width, 1fr));
+
+  blockquote {
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    background-color: var(--color-cream);
+  }
+
+  > aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+p + .three-column-grid {
+  margin-top: var(--spacing);
+}
