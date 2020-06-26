@@ -1,17 +1,17 @@
 import classNames from 'classnames';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
+import { Label as LabelType } from 'src/api/User';
 import Button from 'src/components/Button';
 import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
-import { Label as LabelType } from 'src/api/User';
 import Label, { LabelContainer } from 'src/components/Label';
 import { EditableInput, EditableLabel, Placeholder } from 'src/components/Portfolio/Editable';
-import EditButton from 'src/components/Portfolio/EditButton';
-import { PortfolioSectionProps } from 'src/components/Portfolio/index';
+import EditButton, { PortfolioButton } from 'src/components/Portfolio/EditButton';
+import { PortfolioModal, PortfolioSectionProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import { useAuth } from 'src/contexts/AuthProvider';
 import ProfileUpdateProvider, {
@@ -28,7 +28,7 @@ interface UpdateFormValues {
 
 type UpdateFormProps = {
   sectors: LabelType[],
-  setSectors: (sectors) => void,
+  setSectors?: (sectors) => void,
 } & PortfolioSectionProps;
 
 const PROFILE_PICTURE_MAX_SIZE = 4 * 1048576;
@@ -38,11 +38,11 @@ function UpdateForm({
 }: UpdateFormProps) {
   const { register, errors } = useFormContext<UpdateFormValues>();
   const { editing } = useProfileUpdate();
-  const removeSector = removeLabel(sectors, setSectors);
+  const removeSector = setSectors ? removeLabel(sectors, setSectors) : null;
 
   return (
     <form>
-      <Heading1 bold condensed marginTop={0} marginBottom={0}>
+      <Heading1 bold condensed marginTop="0" marginBottom="0">
         <EditableInput
           defaultValue={user?.username}
           placeholder="CADteams Member"
@@ -175,7 +175,11 @@ function ProfilePictureForm({
 
   return (
     <div className={styles['profile-picture']}>
-      <img src={profilePictureUrl ?? '/icons/user-blank.svg'} alt={user?.username} />
+      <img
+        className={!profilePictureUrl ? styles.blank : null}
+        src={profilePictureUrl ?? '/icons/user-blank.svg'}
+        alt={user?.username}
+      />
       {isProfile && (
         <form>
           <input
@@ -212,23 +216,80 @@ function ProfilePictureForm({
   );
 }
 
+type IdentityCardProps = {
+  className?: string;
+  currency?: string;
+  exchangeRate?: number;
+} & UpdateFormProps;
+
+export function IdentityCard(props: IdentityCardProps) {
+  const {
+    className, currency, exchangeRate = 1.0, demo, isProfile, inModal, user,
+  } = props;
+  const [demoModal, setDemoModal] = useState(false);
+  const toggleDemoModal = () => setDemoModal(!demoModal);
+  const showChin = isProfile || !inModal;
+  const currencyFormat = new Intl.NumberFormat(
+    'en-US',
+    {
+      style: 'currency',
+      currency: currency ?? 'GBP',
+    },
+  );
+
+  return (
+    <>
+      <div className={classNames(
+        styles.card,
+        styles.identity,
+        showChin && styles.chin,
+        className,
+      )}
+      >
+        {demo && !inModal && user?.dailyRate && (
+          <Label className={styles.rate}>
+            {currencyFormat.format(user.dailyRate * exchangeRate)}/day
+          </Label>
+        )}
+        <ProfilePictureForm {...props} />
+        <aside>
+          <UpdateForm {...props} />
+        </aside>
+        {isProfile && <EditButton bottom />}
+        {demo && !inModal && (
+          <PortfolioButton
+            bottom
+            onClick={toggleDemoModal}
+          >
+            <Icon
+              name="view"
+              inverted
+              title="View portfolio"
+            />
+            <span className={styles.label}>View Portfolio</span>
+          </PortfolioButton>
+        )}
+      </div>
+      {demoModal && (
+        <PortfolioModal onClose={toggleDemoModal} user={user} demo />
+      )}
+    </>
+  );
+}
+
 export default function Identity(props: PortfolioSectionProps) {
   const [sectors, setSectors] = useState<LabelType[]>();
-  const { user, setDialog, isProfile } = props;
+  const { user, setDialog } = props;
 
-  if (!sectors && user?.sectors) {
-    setSectors(user.sectors);
-  }
+  useEffect(() => {
+    if (!sectors && user?.sectors) {
+      setSectors(user.sectors);
+    }
+  }, [user]);
 
   return (
     <ProfileUpdateProvider<UpdateFormValues> setDialog={setDialog} labelStates={{ sectors }}>
-      <div className={classNames(styles.card, styles.identity)}>
-        <ProfilePictureForm {...props} />
-        <aside>
-          <UpdateForm {...props} sectors={sectors} setSectors={setSectors} />
-        </aside>
-        {isProfile && <EditButton bottom />}
-      </div>
+      <IdentityCard sectors={sectors} setSectors={setSectors} {...props} />
     </ProfileUpdateProvider>
   );
 }
