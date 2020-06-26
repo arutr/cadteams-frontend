@@ -20,6 +20,10 @@
   }
 }
 
+.not-underlined {
+  text-decoration: none;
+}
+
 .link {
   @include anchor;
 
