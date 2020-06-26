@@ -9,7 +9,7 @@ import PortfolioFooter from 'src/components/Portfolio/PortfolioFooter';
 import Skills from 'src/components/Portfolio/Skills';
 import UniqueSkills from 'src/components/Portfolio/UniqueSkills';
 import { useAuth } from 'src/contexts/AuthProvider';
-import User from '../../api/User';
+import User, { Individual } from 'src/api/User';
 import { AnchorButton } from '../Button';
 import { Heading2 } from '../Heading';
 import Modal from '../Modal';
@@ -39,9 +39,9 @@ function LandingPageFooter({ user }: PortfolioProps) {
   );
 }
 
-export type PortfolioSectionProps = {
+export interface PortfolioSectionProps extends PortfolioProps {
   setDialog?: ({ type, message }: DialogProps) => void,
-} & PortfolioProps;
+}
 
 function Portfolio(props: PortfolioProps) {
   const { demo, isProfile } = props;
@@ -70,9 +70,10 @@ function Portfolio(props: PortfolioProps) {
   );
 }
 
-type ModalProps = {
+interface ModalProps extends PortfolioProps {
   onClose: () => void,
-} & PortfolioProps;
+  user: Individual,
+}
 
 export function PortfolioModal(props: ModalProps) {
   const { onClose, user } = props;

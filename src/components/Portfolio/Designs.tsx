@@ -3,6 +3,7 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { Individual } from 'src/api/User';
 import Button from 'src/components/Button';
 import Dialog from 'src/components/Dialog';
 import { Heading2 } from 'src/components/Heading';
@@ -94,8 +95,10 @@ DesignForm.defaultProps = {
 };
 
 export default function Designs({
-  demo, user, isProfile, setDialog,
+  demo, isProfile, setDialog, ...props
 }: PortfolioSectionProps) {
+  // eslint-disable-next-line react/destructuring-assignment
+  const user = (props.user as Individual);
   const { updateUser } = useAuth();
   const removeDesign = (id) => updateUser(null, 'delete', `/upload/me/${id}`)
     .catch((error) => {

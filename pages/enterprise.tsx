@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { InferGetStaticPropsType } from 'next';
 import React, { useState } from 'react';
-import Individual from 'src/api/User';
+import { Individual } from 'src/api/User';
 import { AnchorButton } from 'src/components/Button';
 import Footer from 'src/components/Footer';
 import { Select } from 'src/components/Form';

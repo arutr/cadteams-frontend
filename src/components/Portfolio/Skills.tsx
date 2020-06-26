@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { countries, getEmojiFlag } from 'countries-list';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Label as LabelType } from 'src/api/User';
+import { Enterprise, Individual, Label as LabelType } from 'src/api/User';
 import Dialog from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import Icon from 'src/components/Icon';
@@ -43,8 +43,10 @@ type UpdateFormProps = {
 } & PortfolioSectionProps;
 
 function UpdateForm({
-  demo, isProfile, languages, setLanguages, tools, setTools, user,
+  demo, isProfile, languages, setLanguages, tools, setTools, ...props
 }: UpdateFormProps) {
+  // eslint-disable-next-line react/destructuring-assignment
+  const user = (props.user as Individual & Enterprise);
   const { register, errors } = useFormContext<UpdateFormValues>();
   const { editing } = useProfileUpdate();
   const removeLanguage = removeLabel(languages, setLanguages);
@@ -257,7 +259,9 @@ function UpdateForm({
 export default function Skills(props: PortfolioSectionProps) {
   const [languages, setLanguages] = useState<LabelType[]>();
   const [tools, setTools] = useState<LabelType[]>();
-  const { user, setDialog } = props;
+  // eslint-disable-next-line react/destructuring-assignment
+  const user = (props.user as Individual);
+  const { setDialog } = props;
 
   useEffect(() => {
     if (!languages && user?.languages) {
