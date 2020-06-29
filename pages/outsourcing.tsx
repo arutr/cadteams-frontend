@@ -82,7 +82,10 @@ export default function Outsourcing() {
       <main>
         <section className={layout.hero}>
           <div className={layout.left}>
-            <Heading1>Win more AEC clients and source talented BIM/CAD specialists.</Heading1>
+            <Heading1>
+              Establish global business relationships with AEC clients and talented BIM/CAD
+              specialists.
+            </Heading1>
             <AnchorButton href="/sign-up" large>Get Started</AnchorButton>
           </div>
           <aside className={layout.illustration}>
@@ -97,10 +100,10 @@ export default function Outsourcing() {
           </Heading1>
           <p>
             For outsourcing studios in architecture, engineering, and construction (AEC)
-            sectors focused on quality building modelling and design. Incorporate <b>CAD</b>teams
-            into your operations and take advantage:
+            sectors focused on delivering quality building modelling services.
+            Incorporate <b>CAD</b>teams into your operations and take advantage of:
           </p>
-          <section className={layout['three-column-grid']}>
+          <section className={classNames(layout['three-column-grid'], layout.steps)}>
             {steps.map((item, index) => (
               <article key={index}>
                 <Heading2 bold condensed>{item.title}</Heading2>

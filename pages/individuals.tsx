@@ -79,18 +79,27 @@ const upgrades = [
     ),
   },
 ];
-// const quotes = [
-//   {
-//     author: 'Revit Expert',
-//     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in lectus
-//     gravida, vestibulum augue dictum, finibus enim. Integer sed ex tellus.`,
-//   },
-//   {
-//     author: 'CAD Specialist',
-//     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in lectus
-//     gravida, vestibulum augue dictum, finibus enim. Integer sed ex tellus.`,
-//   },
-// ];
+const quotes = [
+  {
+    author: 'Regelle E., BIM Specialist',
+    description: (
+      <>
+        I found <b>CAD</b>teams to be a very interesting and inspiring platform to share and to be
+        noticed by the client.<br /><br />
+      </>
+    ),
+  },
+  {
+    author: 'Karolina F., CAD Specialist',
+    description: (
+      <>
+        The idea behind <b>CAD</b>teams is great and realised very well. Portfolios focus mainly on
+        model designs and drawings. The website is very well thought-out for us CAD
+        specialists.
+      </>
+    ),
+  },
+];
 
 export default function Individuals() {
   return (
@@ -145,14 +154,14 @@ export default function Individuals() {
           </section>
         </main>
       </div>
-      {/* <main className={layout['two-column-grid']}> */}
-      {/*  {quotes.map((item, index) => ( */}
-      {/*    <blockquote key={index}> */}
-      {/*      <p><i>{item.description}</i></p> */}
-      {/*      <strong>{item.author}</strong> */}
-      {/*    </blockquote> */}
-      {/*  ))} */}
-      {/* </main> */}
+      <main className={layout['two-column-grid']}>
+        {quotes.map((item, index) => (
+          <blockquote key={index}>
+            <p><i>{item.description}</i></p>
+            <strong>{item.author}</strong>
+          </blockquote>
+        ))}
+      </main>
       <div className={classNames(layout.background, layout.blue)}>
         <main className={layout['two-column-grid']}>
           <section>

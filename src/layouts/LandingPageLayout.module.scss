@@ -86,6 +86,14 @@
   }
 }
 
+.steps {
+  h2 {
+    @include min-screen(640px) {
+      min-height: 2.75em;
+    }
+  }
+}
+
 .step-heading {
   font-size: 3rem;
   margin-top: var(--spacing);
