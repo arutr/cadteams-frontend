@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import classNames from 'classnames';
 
@@ -35,20 +36,32 @@ type AnchorProps = {
 
 export const AnchorButton = React.forwardRef<HTMLAnchorElement, AnchorProps>(({
   block, children, external, href, large, onClick, className,
-}: AnchorProps, ref) => (
-  <a
-    href={href}
-    ref={ref}
-    rel={external && 'noopener'}
-    role="button"
-    className={classNames(styles.button, className, block && styles.block, large && styles.large)}
-    tabIndex={0}
-    target={external && '_blank'}
-    onClick={onClick}
-    onKeyDown={onClick}
-  >
-    {children}
-  </a>
-));
+}: AnchorProps, ref) => {
+  const Anchor = (
+    <a
+      href={href}
+      ref={ref}
+      rel={external && 'noopener'}
+      role="button"
+      className={classNames(styles.button, className, block && styles.block, large && styles.large)}
+      tabIndex={0}
+      target={external && '_blank'}
+      onClick={onClick}
+      onKeyDown={onClick}
+    >
+      {children}
+    </a>
+  );
+
+  if (external) {
+    return Anchor;
+  }
+
+  return (
+    <Link href={href}>
+      {Anchor}
+    </Link>
+  );
+});
 
 export default Button;
