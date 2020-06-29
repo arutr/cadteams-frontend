@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import { AnchorButton } from 'src/components/Button';
-import Footer from 'src/components/Footer';
 import { Heading1, Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Illustration from 'src/components/Illustration';
@@ -145,7 +144,6 @@ export default function Outsourcing() {
         </main>
       </div>
       <Newsletter />
-      <Footer />
     </div>
   );
 }
