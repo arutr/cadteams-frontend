@@ -23,6 +23,7 @@ export function GuestNavigationLinks() {
           <Link href="/individuals">Specialists</Link>
           <Link href="/enterprise">Enterprise</Link>
           <Link href="/outsourcing">Outsourcing</Link>
+          <Link underlined={false} external href="https://medium.com/cadteams-magazine">Blog</Link>
         </div>
         <span className={styles.separator} />
         <Link className={styles['log-in']} href="/log-in">

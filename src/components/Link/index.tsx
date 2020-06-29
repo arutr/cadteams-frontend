@@ -15,6 +15,7 @@ function Link({
     disabled && styles.disabled,
     href && pathname.includes(href) && styles.active,
     hoverEffect && styles['hover-effect'],
+    !underlined && styles['not-underlined'],
   );
 
   if (external) {
@@ -34,7 +35,7 @@ function Link({
     return (
       <NextLink href={href}>
         <a
-          className={classNames(classes, !underlined && styles['not-underlined'])}
+          className={classes}
           onClick={onClick}
           role="link"
           tabIndex={0}
