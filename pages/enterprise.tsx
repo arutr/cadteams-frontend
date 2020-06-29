@@ -127,6 +127,17 @@ const specialists: Individual[] = [
         url: '/images/portfolio-demo/jamie/design4.jpeg',
       },
     ],
+    uniqueSkills: [{
+      id: 1,
+      skill: `Communication of design with all stakeholders ensuring efficiency improvements can be
+      achieved in manufacturing`,
+    }, {
+      id: 2,
+      skill: 'Fabrication drawings ready for the factory shopfloor',
+    }, {
+      id: 3,
+      skill: 'Plant room design from scratch',
+    }],
   },
 ];
 const steps = [
@@ -253,7 +264,7 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
             source of experienced BIM/CAD specialists. Here&apos;s how <b>CAD</b>teams can integrate
             into your existing talent acquisition process:
           </p>
-          <section className={layout['four-column-grid']}>
+          <section className={classNames(layout['four-column-grid'], layout.steps)}>
             {steps.map((item, index) => (
               <article key={index}>
                 <span className={layout['step-heading']}>{index + 1}.</span>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
-import NextLink from 'next/link';
 import { LoginForm } from 'src/api/Auth';
 import Dialog from 'src/components/Dialog';
 import Icon from 'src/components/Icon';
@@ -120,9 +119,7 @@ function LogIn() {
       <div style={{ marginTop: 'auto' }}>
         <p>Haven&apos;t registered a <b>CAD</b>teams account yet?</p>
         <p>Create one now, <strong>it&apos;s free</strong>!</p>
-        <NextLink href="/sign-up" passHref>
-          <AnchorButton block>Create a free account</AnchorButton>
-        </NextLink>
+        <AnchorButton href="/sign-up" block>Create a free account</AnchorButton>
       </div>
     </AuthLayout>
   );

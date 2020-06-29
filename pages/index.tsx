@@ -35,7 +35,7 @@ const howCadteamsWorks = [
     illustration: 'manager',
     title: (
       <>
-        Let <span className="cadteams"><b>CAD</b>teams</span> Organise the Work for You
+        Get Productive
       </>
     ),
     description: `Admin tasks can be very time consuming and feel like an unnecessary overhead. We
@@ -58,11 +58,11 @@ const exploreCadteams = [
   },
   {
     illustration: 'architect',
-    title: 'Companies',
+    title: 'Enterprises',
     description: (
       <>
         The pandemic has proven that we are all capable of working from home and leasing an
-        expensive office no longer make sense.<br /><br />If you are a
+        expensive office does no longer make sense.<br /><br />If you are a
         registered <strong>Architecture, Engineering or Construction</strong> (AEC)
         business, <Link underlined href="/sign-up">sign up</Link> for an Enterprise account to
         discover how <b>CAD</b>teams can help you find remote colleagues and manage project
@@ -79,7 +79,7 @@ const exploreCadteams = [
         You have a website and existing clients, but how do you establish those new
         connections to grow your pipeline?<br /><br />Showcase your past projects and get noticed by
         AEC companies on the platform. When you need to expand your team, reach out to
-        specialists. <strong>We are all on the same platform!</strong>
+        specialists. <strong>We are all in the same boat!</strong>
       </>
     ),
     href: '/outsourcing',
@@ -147,19 +147,19 @@ export default function LandingPage() {
       <main>
         <section className={layout.hero}>
           <div className={layout.left}>
-            <Heading1>Global marketplace for talented BIM/CAD specialists.</Heading1>
+            <Heading1>Global marketplace for talented BIM/CAD specialists and AEC firms.</Heading1>
             <AnchorButton href="/sign-up" large>Sign Up</AnchorButton>
             <Link underlined href="/individuals">
               <Icon name="arrow-right-double" />
-              For BIM/CAD remote specialists
+              For BIM/CAD Remote Specialists
             </Link>
             <Link underlined href="/enterprise">
               <Icon name="arrow-right-double" />
-              For companies
+              For Enterprises
             </Link>
             <Link underlined href="/outsourcing">
               <Icon name="arrow-right-double" />
-              For outsourcing studios
+              For Outsourcing Studios
             </Link>
           </div>
           <aside className={layout.illustration}>
