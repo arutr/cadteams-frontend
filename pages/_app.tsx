@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import Footer from 'src/components/Footer';
 import AmplitudeProvider from 'src/contexts/Amplitude';
 import { inApp, isBrowser } from 'src/utils/misc';
 import Navigation from '../src/components/Navigation';
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className={inApp() ? 'app' : null}>
         {inApp() ? <Navigation /> : <Navigation guest />}
         {Page}
+        {!inApp() && <Footer />}
       </div>
     </AuthProvider>
   );
