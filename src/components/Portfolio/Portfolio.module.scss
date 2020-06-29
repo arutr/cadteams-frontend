@@ -166,47 +166,28 @@
 .identity {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-
-  @include min-screen($screen-m) {
-    flex-direction: row;
-  }
+  flex-direction: row;
 
   aside {
-    flex: 1;
-
-    @include max-screen($screen-m) {
-      margin-top: var(--spacing);
-    }
+    flex: 1 50%;
+    height: 100%;
   }
 
   img {
-    width: 100%;
+    width: 10rem;
     height: 10rem;
     object-fit: cover;
     border-radius: var(--border-radius);
-
-    @include min-screen($screen-m) {
-      width: 10rem;
-
-      &:not(.blank) {
-        height: calc(100% - 2rem);
-      }
-    }
   }
 
   .profile-picture {
     position: relative;
+    margin-bottom: 0.5rem;
+    margin-right: var(--spacing);
 
     .edit {
       position: static;
       margin-top: -1rem;
-    }
-
-    > * {
-      @include min-screen($screen-m) {
-        margin-right: var(--spacing);
-      }
     }
   }
 }
