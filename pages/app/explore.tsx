@@ -11,7 +11,7 @@ import MediaObject from 'src/components/MediaObject';
 import { ModalProvider } from 'src/components/Modal';
 import PageTitle from 'src/components/PageTitle';
 import { PortfolioModal } from 'src/components/Portfolio';
-import getApiResource from 'src/utils/api';
+import { getApiResource } from 'src/utils/api';
 import useSWR from 'swr';
 import styles from './explore.module.scss';
 

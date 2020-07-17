@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Individual } from 'src/api/User';
 import Button from 'src/components/Button';
@@ -12,7 +12,7 @@ import Link from 'src/components/Link';
 import { PortfolioSectionProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import { useAuth } from 'src/contexts/AuthProvider';
-import getApiResource from 'src/utils/api';
+import { getApiResource } from 'src/utils/api';
 
 interface Form {
   design: FileList;
