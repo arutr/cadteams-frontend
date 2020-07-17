@@ -3,7 +3,7 @@ import { countries, getEmojiFlag } from 'countries-list';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Enterprise, Individual, Label as LabelType } from 'src/api/User';
-import Dialog from 'src/components/Dialog';
+import Dialog, { DialogType } from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import Icon from 'src/components/Icon';
 import Label, { LabelContainer } from 'src/components/Label';
@@ -125,7 +125,7 @@ function UpdateForm({
             </EditableInput>
           </div>
           {editing && (
-            <Dialog small type="hint">
+            <Dialog small type={DialogType.Hint}>
               Type in a label into a dashed field below and press <strong>Enter</strong> to apply.
             </Dialog>
           )}

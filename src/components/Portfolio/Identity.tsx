@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
 import { Enterprise, Individual, Label as LabelType } from 'src/api/User';
 import Button from 'src/components/Button';
-import Dialog from 'src/components/Dialog';
+import Dialog, { DialogType } from 'src/components/Dialog';
 import { Error } from 'src/components/Form';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
@@ -18,7 +18,7 @@ import ProfileUpdateProvider, {
   removeLabel,
   useProfileUpdate,
 } from 'src/contexts/ProfileUpdateContext';
-import getApiResource from 'src/utils/api';
+import { getApiResource } from 'src/utils/api';
 
 interface UpdateFormValues {
   company: string;
@@ -100,7 +100,7 @@ function UpdateForm({
         )}
       </Heading3>
       {editing && (
-        <Dialog small type="hint">
+        <Dialog small type={DialogType.Hint}>
           Type in a label into a dashed field below and press <strong>Enter</strong> to apply.
         </Dialog>
       )}
@@ -148,7 +148,7 @@ function ProfilePictureForm({
   const removePicture = () => updateUser(null, 'delete', `/upload/me/${profilePicture?.id}`)
     .catch((error) => {
       setDialog({
-        type: 'error',
+        type: DialogType.Error,
         message: 'An error has occurred during file deletion. Please try again later.',
       });
 
@@ -162,7 +162,7 @@ function ProfilePictureForm({
 
     if (picture[0].size > PROFILE_PICTURE_MAX_SIZE) {
       setDialog({
-        type: 'error',
+        type: DialogType.Error,
         message: 'Maximum file size of a profile picture is 4 megabytes.',
       });
       return;

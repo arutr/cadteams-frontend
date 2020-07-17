@@ -6,7 +6,7 @@ import { AnchorButton } from 'src/components/Button';
 import Label from 'src/components/Label';
 import { useAuth } from 'src/contexts/AuthProvider';
 import { inApp } from 'src/utils/misc';
-import getApiResource from '../../utils/api';
+import { getApiResource } from '../../utils/api';
 import Icon from '../Icon';
 import Link from '../Link';
 import MediaObject from '../MediaObject';
@@ -69,7 +69,6 @@ interface Props {
 
 function Navigation({ guest }: Props) {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
   const links = guest ? <GuestNavigationLinks /> : <AppNavigationLinks />;
 
