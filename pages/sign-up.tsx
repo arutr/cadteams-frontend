@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
-import Dialog from 'src/components/Dialog';
-import Icon from 'src/components/Icon';
 import { RegistrationForm } from 'src/api/Auth';
-import { useAuth } from 'src/contexts/AuthProvider';
-import { Heading1 } from 'src/components/Heading';
+import Dialog, { DialogType } from 'src/components/Dialog';
 import {
   Checkbox, Error, Form, Input, Radio,
 } from 'src/components/Form';
@@ -101,7 +98,7 @@ function SignUp() {
       </p>
       <Form onSubmit={onSubmit}>
         {serverError && (
-          <Dialog type="error">{serverError}</Dialog>
+          <Dialog type={DialogType.Error}>{serverError}</Dialog>
         )}
         <Radio id="type" labels={['Individual', 'Enterprise']} legend="I am an..." ref={register} />
         <Input

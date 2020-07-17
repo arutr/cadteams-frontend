@@ -3,15 +3,23 @@ import React from 'react';
 import Icon from 'src/components/Icon';
 import styles from './Dialog.module.scss';
 
+export enum DialogType {
+  Error = 'error',
+  Hint = 'hint',
+  Info = 'info',
+  Success = 'success',
+  Warning = 'warning',
+}
+
 export interface DialogProps {
   children?: any;
   message?: string;
   small?: boolean;
-  type: string;
+  type?: DialogType;
 }
 
 export default function Dialog({
-  children, type = 'info', small, message,
+  children, type = DialogType.Info, small, message,
 }: DialogProps) {
   const icon = {
     error: 'error',
