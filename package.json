@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,6 +10,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@brainhubeu/react-permissible": "1.9.15",
     "@svgr/webpack": "5.4.0",
     "@types/axios": "0.14.0",
     "@types/classnames": "2.2.10",

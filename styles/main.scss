@@ -5,7 +5,7 @@
   --page-margin: #{$page-margin__mobile};
 
   @include min-screen($screen-m) {
-    --logo-height: 23px;
+    --logo-height: 21px;
     --page-margin: #{$page-margin__desktop};
   }
 }

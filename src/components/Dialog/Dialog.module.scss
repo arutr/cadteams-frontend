@@ -7,6 +7,10 @@
   border-radius: var(--border-radius);
 }
 
+h1 + .dialog {
+  margin-top: 0;
+}
+
 div .icon {
   margin-left: 0.25rem;
   margin-right: 1rem;
@@ -35,7 +39,7 @@ small.dialog {
 }
 
 .success {
-  background-color: var(--color-blue);
+  background-color: var(--color-green);
 }
 
 .warning {

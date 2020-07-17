@@ -13,6 +13,7 @@ interface Context {
   logOut: () => void;
   registerAccount: (values: RegistrationForm) => Promise<void>;
   redirectToApp: () => void;
+  storeAuthPayload: (data) => void;
   updateUser: (update: object, method?: Method, endpoint?: string) => Promise<void>;
   user: User;
 }
@@ -25,7 +26,7 @@ interface AuthPayload {
 Axios.defaults.baseURL = process.env.API_URL;
 
 const AuthContext = React.createContext<Context>(null);
-const redirectUrls = ['/sign-up', '/log-in'];
+const redirectUrls = ['/sign-up', '/log-in', '/forgot-password', '/reset-password'];
 
 interface State {
   user: User;
@@ -163,6 +164,7 @@ export default class AuthProvider extends React.Component<any, State> {
           logOut: this.logOut,
           registerAccount: this.registerAccount,
           redirectToApp: this.redirectToApp,
+          storeAuthPayload: this.storeAuthPayload,
           updateUser: this.updateUser,
           user,
         }}
