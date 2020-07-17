@@ -2,7 +2,7 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import React, { useState } from 'react';
 import { FieldValues, FormContext, useForm } from 'react-hook-form';
 import { Label } from 'src/api/User';
-import { DialogProps } from 'src/components/Dialog';
+import { DialogProps, DialogType } from 'src/components/Dialog';
 import { useAuth } from 'src/contexts/AuthProvider';
 
 interface Context {
@@ -55,7 +55,7 @@ export default function ProfileUpdateProvider<F extends FieldValues>({
     } catch (error) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
-        type: 'error',
+        type: DialogType.Error,
         message: 'Failed to update profile information. Please try again later.',
       });
 

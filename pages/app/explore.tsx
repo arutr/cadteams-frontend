@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { LogOnMount } from 'react-amplitude-hooks';
 import Media from 'src/api/Media';
 import { Individual, Label as ApiLabel } from 'src/api/User';
-import Dialog, { DialogProps } from 'src/components/Dialog';
+import Dialog, { DialogProps, DialogType } from 'src/components/Dialog';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Label, { LabelContainer } from 'src/components/Label';
 import MediaObject from 'src/components/MediaObject';
@@ -34,7 +34,7 @@ export default function Explore() {
       .then(({ data }) => setPortfolioUser(data))
       .catch((error) => {
         setDialog({
-          type: 'error',
+          type: DialogType.Error,
           message: 'An unexpected error has occurred. Please try again later.',
         });
 
@@ -48,7 +48,7 @@ export default function Explore() {
     <ModalProvider className={styles.explore}>
       <LogOnMount eventType="view page" />
       <PageTitle>Explore</PageTitle>
-      <Heading1>Explore Best of <b>CAD</b>teams</Heading1>
+      <Heading1>Specialist Gallery</Heading1>
       {dialog && (
         <Dialog type={dialog.type}>{dialog.message}</Dialog>
       )}

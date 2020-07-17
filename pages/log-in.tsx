@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
 import { LoginForm } from 'src/api/Auth';
-import Dialog from 'src/components/Dialog';
-import Icon from 'src/components/Icon';
-import { useAuth } from 'src/contexts/AuthProvider';
+import Dialog, { DialogType } from 'src/components/Dialog';
 import { Error, Form, Input } from 'src/components/Form';
 import { Heading1 } from 'src/components/Heading';
 import { FacebookLoginButton } from 'src/components/SocialLogin';
@@ -31,12 +29,7 @@ function LogIn() {
         provider: 'local',
       }, redirectToApp);
     } catch (error) {
-      if (error?.response?.data?.message[0]?.messages) {
-        setServerError(error.response.data.message[0]?.messages[0]?.message);
-      } else {
-        setServerError('Unknown error has occurred. Please refresh the page.');
-      }
-
+      setServerError(getErrorMessage(error));
       setSubmitting(false);
     }
   });
@@ -47,11 +40,7 @@ function LogIn() {
         provider: data.provider,
       }, redirectToApp);
     } catch (error) {
-      if (error?.response?.data?.message[0]?.messages) {
-        setServerError(error.response.data.message[0]?.messages[0]?.message);
-      } else {
-        setServerError('Unknown error has occurred. Please refresh the page.');
-      }
+      setServerError(getErrorMessage(error));
     }
   };
 
@@ -78,7 +67,7 @@ function LogIn() {
       </Heading1>
       <Form onSubmit={onSubmit}>
         {serverError && (
-          <Dialog type="error" message={serverError} />
+          <Dialog type={DialogType.Error} message={serverError} />
         )}
         <Input
           label="E-mail Address:"

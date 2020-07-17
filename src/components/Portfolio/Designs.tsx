@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Individual } from 'src/api/User';
 import Button from 'src/components/Button';
-import Dialog from 'src/components/Dialog';
+import Dialog, { DialogType } from 'src/components/Dialog';
 import { Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Link from 'src/components/Link';
@@ -103,7 +103,7 @@ export default function Designs({
   const removeDesign = (id) => updateUser(null, 'delete', `/upload/me/${id}`)
     .catch((error) => {
       setDialog({
-        type: 'error',
+        type: DialogType.Error,
         message: 'An error has occurred during file deletion. Please try again later.',
       });
 
@@ -116,7 +116,7 @@ export default function Designs({
     <section className={styles.designs}>
       <Heading2 marginTop="0" condensed bold>Designs</Heading2>
       {isProfile && (
-        <Dialog type="info">
+        <Dialog>
           You can upload up to <strong>6 multimedia files</strong> to showcase your portfolio.
           Supported formats are: <code>.jpg</code> <code>.png</code> <code>.mp4</code>
           <br />
