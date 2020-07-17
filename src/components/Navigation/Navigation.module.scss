@@ -100,6 +100,10 @@ $screen-mobile: $screen-m + 28px;
       }
     }
 
+    @include min-screen($screen-ml) {
+      width: 100%;
+    }
+
     flex: 1;
     display: flex;
     flex-direction: column;
