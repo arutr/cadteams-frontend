@@ -5,7 +5,10 @@ import { LoginForm } from 'src/api/Auth';
 import Dialog, { DialogType } from 'src/components/Dialog';
 import { Error, Form, Input } from 'src/components/Form';
 import { Heading1 } from 'src/components/Heading';
+import Icon from 'src/components/Icon';
 import { FacebookLoginButton } from 'src/components/SocialLogin';
+import { useAuth } from 'src/contexts/AuthProvider';
+import { getErrorMessage } from 'src/utils/api';
 import Button, { AnchorButton } from '../src/components/Button';
 import Link from '../src/components/Link';
 import MediaObject from '../src/components/MediaObject';
@@ -87,7 +90,7 @@ function LogIn() {
           ref={register({ required: 'Please enter a password.' })}
         />
         <Error errors={errors} name="password" />
-        <Link external href="mailto:hello@cadteams.com">Forgot your password?</Link>
+        <Link href="/forgot-password">Forgot your password?</Link>
         <Button disabled={submitting} type="submit" block>
           {submitting ? 'Processing...' : 'Submit'}
         </Button>

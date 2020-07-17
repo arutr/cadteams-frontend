@@ -18,7 +18,7 @@ import ProfileUpdateProvider, {
   removeLabel,
   useProfileUpdate,
 } from 'src/contexts/ProfileUpdateContext';
-import getApiResource from 'src/utils/api';
+import { getApiResource } from 'src/utils/api';
 
 interface UpdateFormValues {
   company: string;

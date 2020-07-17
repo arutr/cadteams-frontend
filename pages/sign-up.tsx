@@ -6,11 +6,15 @@ import Dialog, { DialogType } from 'src/components/Dialog';
 import {
   Checkbox, Error, Form, Input, Radio,
 } from 'src/components/Form';
+import { Heading1 } from 'src/components/Heading';
+import Icon from 'src/components/Icon';
 import { FacebookLoginButton } from 'src/components/SocialLogin';
-import PageTitle from '../src/components/PageTitle';
-import MediaObject from '../src/components/MediaObject';
-import Link from '../src/components/Link';
+import { useAuth } from 'src/contexts/AuthProvider';
+import { getErrorMessage } from 'src/utils/api';
 import Button from '../src/components/Button';
+import Link from '../src/components/Link';
+import MediaObject from '../src/components/MediaObject';
+import PageTitle from '../src/components/PageTitle';
 import AuthLayout from '../src/layouts/AuthLayout';
 import authStyles from '../src/layouts/AuthLayout.module.scss';
 import styles from './sign-up.module.scss';
@@ -34,19 +38,10 @@ function SignUp() {
       logEvent('sign up', {
         provider: 'local',
       }, async () => {
-        // @ts-ignore
-        // window.gtag('event', 'conversion', {
-        //   send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
-        // });
         await redirectToApp();
       });
     } catch (error) {
-      if (error?.response?.data?.message[0]?.messages) {
-        setServerError(error.response.data.message[0]?.messages[0]?.message);
-      } else {
-        setServerError('Unknown error has occurred. Please refresh the page.');
-      }
-
+      setServerError(getErrorMessage(error));
       setSubmitting(false);
     }
   });
@@ -56,18 +51,10 @@ function SignUp() {
       logEvent('sign up', {
         provider: data.provider,
       }, async () => {
-        // @ts-ignore
-        // window.gtag('event', 'conversion', {
-        //   send_to: 'AW-696991507/ktX3CKC_ptIBEJP-rMwC',
-        // });
         await redirectToApp();
       });
     } catch (error) {
-      if (error?.response?.data?.message[0]?.messages) {
-        setServerError(error.response.data.message[0]?.messages[0]?.message);
-      } else {
-        setServerError('Unknown error has occurred. Please refresh the page.');
-      }
+      setServerError(getErrorMessage(error));
     }
   };
 
