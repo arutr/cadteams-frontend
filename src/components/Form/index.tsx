@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { FormHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'react';
 import { ErrorMessage } from 'react-hook-form';
 import Icon from 'src/components/Icon';
 import styles from './Form.module.scss';
@@ -43,30 +43,20 @@ export function Error({
   );
 }
 
-interface FormProps {
-  children: any;
-  className?: string;
-  [key: string]: any;
-}
-
-export function Form({ children, className, ...props }: FormProps) {
+export function Form({ children, className, ...props }: FormHTMLAttributes<Element>) {
   return (
     <form className={classNames(styles.form, className)} {...props}>{children}</form>
   );
 }
 
-export function Fieldset({ children, className, ...props }: FormProps) {
+export function Fieldset({ children, className, ...props }: HTMLAttributes<Element>) {
   return (
     <div className={classNames(styles.fieldset, className)} {...props}>{children}</div>
   );
 }
 
-interface InputProps {
-  className?: string;
-  id: string;
-  label: any;
-  type?: string;
-  [key: string]: any;
+interface InputProps extends InputHTMLAttributes<Element> {
+  label: string;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
