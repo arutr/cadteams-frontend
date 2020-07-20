@@ -4,8 +4,10 @@ import { AnchorButton } from 'src/components/Button';
 import { Heading1, Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Illustration from 'src/components/Illustration';
+import Label from 'src/components/Label';
 import Link from 'src/components/Link';
 import Newsletter from 'src/components/Newsletter';
+import PageTitle from 'src/components/PageTitle';
 import layout from 'src/layouts/LandingPageLayout.module.scss';
 
 const payScaleUrl = 'https://www.project-resource.co.uk/freelance/salarysurvey/freelance-bim-revit-and-cad-average-salaries';
@@ -60,9 +62,9 @@ const upgrades = [
     title: 'More Connections',
     description: (
       <>
-        With a Standard Account, you can connect with up to 2 platform members every month. To
-        increase your business opportunities, switch to the Advanced Account and
-        grow your network by <strong>up to 20 members per month</strong>!
+        As a vetted specialist with a Standard Account, you can reach out to maximum 5 companies per
+        month. To increase your business opportunities, switch to the Advanced Account and
+        grow your network by <strong>up to 20 companies per month</strong>!
       </>
     ),
   },
@@ -81,7 +83,8 @@ const upgrades = [
 ];
 const quotes = [
   {
-    author: 'Regelle E., BIM Specialist',
+    author: 'Regelle E.',
+    specialization: 'BIM Specialist',
     description: (
       <>
         I found <b>CAD</b>teams to be a very interesting and inspiring platform to share and to be
@@ -90,7 +93,8 @@ const quotes = [
     ),
   },
   {
-    author: 'Karolina F., CAD Specialist',
+    author: 'Karolina F.',
+    specialization: 'CAD Specialist',
     description: (
       <>
         The idea behind <b>CAD</b>teams is great and realised very well. Portfolios focus mainly on
@@ -104,6 +108,7 @@ const quotes = [
 export default function Individuals() {
   return (
     <div className={layout.index}>
+      <PageTitle>Get Hired by Showcasing Your BIM/CAD Talent</PageTitle>
       <main>
         <section className={layout.hero}>
           <div className={layout.left}>
@@ -138,10 +143,12 @@ export default function Individuals() {
       <div className={classNames(layout.background, layout.purple)}>
         <main>
           <Heading1 marginTop="0" bold condensed>
-            <Icon className={layout['power-up']} name="arrow-up" /> Power Up
+            <Icon className={layout['power-up']} name="arrow-up" />&nbsp;
+            Power Up&ensp;<Label inverted>Coming Soon</Label>
           </Heading1>
           <p>
-            Enjoy additional features and go further with the <strong>Advanced Account</strong>:
+            We are working hard to bring you these additional features, so you can go further with
+            the <strong>Advanced Account</strong>:
           </p>
           <section className={layout['three-column-grid']}>
             {upgrades.map((item, index) => (
@@ -159,6 +166,7 @@ export default function Individuals() {
           <blockquote key={index}>
             <p><i>{item.description}</i></p>
             <strong>{item.author}</strong>
+            <p><strong>{item.specialization}</strong></p>
           </blockquote>
         ))}
       </main>

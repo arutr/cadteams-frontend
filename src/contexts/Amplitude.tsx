@@ -29,7 +29,6 @@ export default function AmplitudeProvider({ children }) {
     <BaseAmplitudeProvider
       amplitudeInstance={amplitudeInstance}
       apiKey={process.env.AMPLITUDE_API_KEY}
-      userId={user?.id.toString()}
     >
       <Amplitude
         eventProperties={{

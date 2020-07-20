@@ -61,7 +61,7 @@
     }
 
     svg {
-      max-height: 30rem;
+      max-height: 24rem;
     }
   }
 
@@ -115,7 +115,8 @@
   }
 
   article {
-    a[role="button"] {
+    a[role="button"],
+    button {
       margin-top: auto;
     }
 

@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import React from 'react';
-import { AnchorButton } from 'src/components/Button';
+import Button, { AnchorButton } from 'src/components/Button';
 import { Heading1, Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Illustration from 'src/components/Illustration';
+import Label from 'src/components/Label';
 import Link from 'src/components/Link';
 import Newsletter from 'src/components/Newsletter';
+import PageTitle from 'src/components/PageTitle';
 import layout from 'src/layouts/LandingPageLayout.module.scss';
 
 const howCadteamsWorks = [
@@ -73,7 +75,7 @@ const exploreCadteams = [
   },
   {
     illustration: 'online_presentation',
-    title: 'Outsourcing Studios',
+    title: (<>Outsourcing Studios&ensp;<Label inverted small>Coming Soon</Label></>),
     description: (
       <>
         You have a website and existing clients, but how do you establish those new
@@ -82,51 +84,15 @@ const exploreCadteams = [
         specialists. <strong>We are all in the same boat!</strong>
       </>
     ),
-    href: '/outsourcing',
   },
 ];
 const advantages = [
-  {
-    illustration: 'time',
-    title: 'Real-Time People Resourcing',
-    description: `View your team's availability and spread the workload accordingly. No more time
-    wasted on asking multiple parties if they can fit that extra task into their week.`,
-  },
   {
     illustration: 'user_group',
     title: 'Talent Marketplace',
     description: `The beauty of a talent pool is that it attracts a variety of specialists, who know
     how to model structural elements in Revit, produce photo-realistic architectural renders,
     coordinate MEP services, implement layout changes, etc.`,
-  },
-  {
-    illustration: 'calendar',
-    title: 'Shared Calendar',
-    description: (
-      <>
-        Synchronise Microsoft Outlook and Google Calendar with <b>CAD</b>teams to easily manage your
-        projects pipeline. Indicate your days off for a good work-life balance. You&apos;re in
-        charge of your schedule now!
-      </>
-    ),
-  },
-  {
-    illustration: 'handshake',
-    title: 'Business Development',
-    description: (
-      <>
-        What is the best part of industry-specific events? Getting everyone under the same
-        roof to foster conversations among like-minded people, which lead to new professional
-        relationships. Welcome to the <b>CAD</b>teams Business Development Venue.
-      </>
-    ),
-  },
-  {
-    illustration: 'achievement',
-    title: 'Digital Assistant',
-    description: `Did you know that basic admin tasks are costing the self-employed in the United
-    Kingdom £28.1bn annually? Whether you're a single Specialist, or an Enterprise team, our tools
-    can save you time, so you can focus on delivering world-class projects.`,
   },
   {
     illustration: 'world_connection_mc',
@@ -139,11 +105,47 @@ const advantages = [
       </>
     ),
   },
+  {
+    illustration: 'handshake',
+    title: 'Business Development',
+    description: (
+      <>
+        What is the best part of industry-specific events? Getting everyone under the same
+        roof to foster conversations among like-minded people, which lead to new professional
+        relationships.
+      </>
+    ),
+  },
+  {
+    illustration: 'time',
+    title: (<>Real-Time People Resourcing&ensp;<Label small>Coming Soon</Label></>),
+    description: `View your team's availability and spread the workload accordingly. No more time
+    wasted on asking multiple parties if they can fit that extra task into their week.`,
+  },
+  {
+    illustration: 'calendar',
+    title: (<>Shared Calendar&ensp;<Label small>Coming Soon</Label></>),
+    description: (
+      <>
+        Synchronise Microsoft Outlook and Google Calendar with <b>CAD</b>teams to easily manage your
+        projects pipeline. Indicate your days off for a good work-life balance. You&apos;re in
+        charge of your schedule now!
+      </>
+    ),
+  },
+  {
+    illustration: 'achievement',
+    title: (<>Digital Assistant&ensp;<Label small>Coming Soon</Label></>),
+    description: `Did you know that basic admin tasks are costing the self-employed in the United
+    Kingdom £28.1bn annually? Whether you're a single Specialist, or an Enterprise team, our tools
+    can save you time, so you can focus on delivering world-class projects.`,
+  },
 ];
 
 export default function LandingPage() {
   return (
     <div className={layout.index}>
+      <PageTitle>Global BIM/CAD Talent Marketplace</PageTitle>
       <main>
         <section className={layout.hero}>
           <div className={layout.left}>
@@ -157,10 +159,10 @@ export default function LandingPage() {
               <Icon name="arrow-right-double" />
               For Enterprises
             </Link>
-            <Link underlined href="/outsourcing">
-              <Icon name="arrow-right-double" />
-              For Outsourcing Studios
-            </Link>
+            {/* <Link underlined href="/outsourcing"> */}
+            {/*  <Icon name="arrow-right-double" /> */}
+            {/*  For Outsourcing Studios */}
+            {/* </Link> */}
           </div>
           <aside className={layout.illustration}>
             <Illustration name="3d_model" />
@@ -198,7 +200,11 @@ export default function LandingPage() {
                 <Illustration name={item.illustration} />
                 <Heading2 bold condensed>{item.title}</Heading2>
                 <p>{item.description}</p>
-                <AnchorButton href={item.href}>Learn More</AnchorButton>
+                {item.href ? (
+                  <AnchorButton href={item.href}>Learn More</AnchorButton>
+                ) : (
+                  <Button disabled>Coming Soon</Button>
+                )}
               </article>
             ))}
           </section>

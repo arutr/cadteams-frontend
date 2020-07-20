@@ -7,8 +7,10 @@ import { Select } from 'src/components/Form';
 import { Heading1, Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Illustration from 'src/components/Illustration';
+import Label from 'src/components/Label';
 import { ModalProvider } from 'src/components/Modal';
 import Newsletter from 'src/components/Newsletter';
+import PageTitle from 'src/components/PageTitle';
 import { IdentityCard } from 'src/components/Portfolio/Identity';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import layout from 'src/layouts/LandingPageLayout.module.scss';
@@ -184,9 +186,9 @@ const upgrades = [
     title: 'Connect with More Talent',
     description: (
       <>
-        With a Standard Account, you can connect with up to 2 platform members every month. To
-        increase your business opportunities, switch to the Advanced Account and
-        grow your network by <strong>up to 40 members per month</strong>!
+        With a Standard Account, you can connect with up to 2 specialists every month. To
+        increase your personal talent pool, switch to the Advanced Account and
+        grow your network by <strong>up to 40 specialists per month</strong>!
       </>
     ),
   },
@@ -244,6 +246,7 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
   return (
     <ModalProvider providerOnly className={layout.index}>
       <main>
+        <PageTitle>Discover BIM/CAD Specialists Ready for Work</PageTitle>
         <section className={layout.hero}>
           <div className={layout.left}>
             <Heading1>Discover talented BIM/CAD specialists for your next project.</Heading1>
@@ -261,7 +264,7 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
           </Heading1>
           <p>
             For architecture, engineering, and construction (AEC) companies looking for a reliable
-            source of experienced BIM/CAD specialists. Here&apos;s how <b>CAD</b>teams can integrate
+            source of experienced BIM/CAD specialists. Here's how <b>CAD</b>teams can integrate
             into your existing talent acquisition process:
           </p>
           <section className={classNames(layout['four-column-grid'], layout.steps)}>
@@ -320,10 +323,12 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
       <div className={classNames(layout.background, layout.purple)}>
         <main>
           <Heading1 marginTop="0" bold condensed>
-            <Icon className={layout['power-up']} name="arrow-up" /> Power Up
+            <Icon className={layout['power-up']} name="arrow-up" />&nbsp;
+            Power Up&ensp;<Label inverted>Coming Soon</Label>
           </Heading1>
           <p>
-            Enjoy additional features and go further with the <strong>Advanced Account</strong>:
+            We are working hard to bring you these additional features, so you can go further with
+            the <strong>Advanced Account</strong>:
           </p>
           <section className={layout['three-column-grid']}>
             {upgrades.map((item, index) => (
