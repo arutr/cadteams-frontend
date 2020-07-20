@@ -6,7 +6,7 @@ import { AnchorButton } from 'src/components/Button';
 import Label from 'src/components/Label';
 import { useAuth } from 'src/contexts/AuthProvider';
 import { inApp } from 'src/utils/misc';
-import { getApiResource } from '../../utils/api';
+import { getApiResource } from 'src/utils/api';
 import Icon from '../Icon';
 import Link from '../Link';
 import MediaObject from '../MediaObject';
@@ -22,7 +22,7 @@ export function GuestNavigationLinks() {
         <div className={styles.users}>
           <Link href="/individuals">Specialists</Link>
           <Link href="/enterprise">Enterprise</Link>
-          <Link href="/outsourcing">Outsourcing</Link>
+          {/* <Link href="/outsourcing">Outsourcing</Link> */}
           <Link underlined={false} external href="https://medium.com/cadteams-magazine">Blog</Link>
         </div>
         <span className={styles.separator} />
@@ -70,7 +70,6 @@ interface Props {
 function Navigation({ guest }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const links = guest ? <GuestNavigationLinks /> : <AppNavigationLinks />;
 
   const toggleMenu = () => setOpen(!open);
 
@@ -94,7 +93,7 @@ function Navigation({ guest }: Props) {
         </Link>
         <Icon className={styles.toggle} name={open ? 'close' : 'menu'} onClick={toggleMenu} />
         <div className={classNames(styles.links, open && styles.open)}>
-          {links}
+          {guest ? <GuestNavigationLinks /> : <AppNavigationLinks />}
         </div>
       </nav>
     </header>
