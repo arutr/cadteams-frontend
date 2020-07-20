@@ -1,24 +1,39 @@
 import classNames from 'classnames';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { HTMLAttributes } from 'react';
 import styles from './Label.module.scss';
+
+interface LabelProps extends HTMLAttributes<Element> {
+  inverted?: boolean;
+  onRemoveLabel?: () => void;
+  small?: boolean;
+}
 
 function Label({
   children,
   className,
-  removeLabel,
+  inverted,
+  onRemoveLabel,
   small,
-}) {
+  ...props
+}: LabelProps) {
   return (
-    <span className={classNames(styles.label, className, small && styles.small)}>
+    <span
+      className={classNames(
+        styles.label,
+        className,
+        small && styles.small,
+        inverted && styles.inverted,
+      )}
+      {...props}
+    >
       {children}
-      {removeLabel && (
+      {onRemoveLabel && (
         <span
           className={styles.remove}
           role="button"
           tabIndex={0}
-          onKeyDown={removeLabel}
-          onClick={removeLabel}
+          onKeyDown={onRemoveLabel}
+          onClick={onRemoveLabel}
         >
           X
         </span>
@@ -27,30 +42,12 @@ function Label({
   );
 }
 
-Label.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  removeLabel: PropTypes.func,
-  small: PropTypes.bool,
-};
-
-Label.defaultProps = {
-  children: null,
-  className: null,
-  removeLabel: null,
-  small: false,
-};
-
-export function LabelContainer({ children }) {
+export function LabelContainer({ children, ...props }: HTMLAttributes<Element>) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} {...props}>
       {children}
     </div>
   );
 }
-
-LabelContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Label;

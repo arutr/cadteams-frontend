@@ -106,7 +106,7 @@ function UpdateForm({
       )}
       <LabelContainer>
         {sectors?.length ? sectors.map(({ id, label }) => (
-          <Label key={id} removeLabel={editing ? (() => removeSector(id)) : null}>
+          <Label key={id} onRemoveLabel={editing ? (() => removeSector(id)) : null}>
             {label}
           </Label>
         )) : null}
