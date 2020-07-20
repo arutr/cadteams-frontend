@@ -14,16 +14,17 @@ export default class extends Document {
       <Html lang="en-GB">
         <Head>
           <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
-          <meta name="description" content="A platform for BIM and CAD specialists to showcase their best building designs." />
+          <meta name="description" content="BIM/CAD talent marketplace optimized for remote workflows" />
+          <meta name="keywords" content="bim jobs, cad jobs, bim modeler jobs, bim manager jobs, bim coordinator jobs" />
           <meta name="author" content="CADteams" />
           <meta property="og:url" content="https://cadteams.com/" />
           <meta property="og:site_name" content="CADteams" />
-          <meta property="og:description" content="A platform for BIM and CAD specialists to showcase their best building designs." />
+          <meta property="og:description" content="BIM/CAD talent marketplace optimized for remote workflows" />
           <meta property="og:type" content="website" />
           <meta property="og:locale" content="en_GB" />
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:title" content="CADteams" />
-          <meta name="twitter:description" content="A platform for BIM and CAD specialists to showcase their best building designs." />
+          <meta name="twitter:description" content="BIM/CAD talent marketplace optimized for remote workflows" />
           <meta name="twitter:image:alt" content="CADteams" />
           <meta name="theme-color" content="#fff" />
           <script async defer src="/hotjar.js" />
