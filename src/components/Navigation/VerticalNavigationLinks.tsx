@@ -2,7 +2,7 @@ import Router from 'next/router';
 import React from 'react';
 import Icon from 'src/components/Icon';
 import { useAuth } from 'src/contexts/AuthProvider';
-import { getApiResource } from '../../utils/api';
+import { getApiResource } from 'src/utils/api';
 import Link from '../Link';
 import MediaObject from '../MediaObject';
 import styles from './VerticalNavigationLinks.module.scss';
@@ -20,7 +20,7 @@ export default function VerticalNavigationLinks() {
       <Link className={tabActiveStyle('contacts')} href="/app/contacts" disabled>
         <Icon large name="handshake" /> Contacts
       </Link>
-      <Link className={tabActiveStyle('explore')} href="/app/explore">
+      <Link className={tabActiveStyle('explore')} href="/app/explore" disabled>
         <Icon large name="shop" /> Explore
       </Link>
       <Link className={tabActiveStyle('jobs')} href="/app/jobs" disabled>
