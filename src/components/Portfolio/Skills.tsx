@@ -133,7 +133,7 @@ function UpdateForm({
             <Icon className={styles.icon} large name="language" title="Spoken languages" />
             <LabelContainer>
               {languages?.length ? languages.map(({ id, label }) => (
-                <Label key={id} removeLabel={editing ? (() => removeLanguage(id)) : null}>
+                <Label key={id} onRemoveLabel={editing ? (() => removeLanguage(id)) : null}>
                   {label}
                 </Label>
               )) : null}
@@ -161,7 +161,7 @@ function UpdateForm({
             />
             <LabelContainer>
               {tools?.length ? tools.map(({ id, label }) => (
-                <Label key={id} removeLabel={editing ? (() => removeTool(id)) : null}>
+                <Label key={id} onRemoveLabel={editing ? (() => removeTool(id)) : null}>
                   {label}
                 </Label>
               )) : null}

@@ -16,23 +16,31 @@
 }
 
 .label {
+  font-size: 1rem;
   padding: 0.5rem;
   text-align: center;
   font-weight: normal;
+  white-space: nowrap;
+  vertical-align: middle;
   color: var(--color-white);
   text-transform: uppercase;
   background-color: var(--color-blue);
   border-radius: var(--border-radius);
   font-family: var(--font-family__monospace);
+
+  &.inverted {
+    color: var(--color-blue);
+    background-color: var(--color-white);
+  }
+
+  &.small {
+    padding: 0.33rem;
+    font-size: 0.7rem;
+  }
 }
 
 .remove {
   cursor: pointer;
   font-weight: bold;
   margin-left: 1rem;
-}
-
-.small {
-  padding: 0.33rem;
-  font-size: 70%;
 }

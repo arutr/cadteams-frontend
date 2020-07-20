@@ -25,10 +25,10 @@ export interface PortfolioProps {
 function LandingPageFooter({ user }: PortfolioProps) {
   return (
     <footer className={styles.card}>
-      <Heading2 marginTop="0" bold condensed>Like what you&apos;re seeing?</Heading2>
+      <Heading2 marginTop="0" bold condensed>Like What You're Seeing?</Heading2>
       <p>
-        Get in touch with specialists like {user?.username} on <b>CAD</b>teams today.
-        Create a <strong>free</strong> account and explore what CADteams has to offer!
+        Get in touch with specialists like {user?.username} today.
+        Create a <strong>free</strong> account and explore what <b>CAD</b>teams has to offer!
       </p>
       <Link href="/sign-up" passHref>
         <AnchorButton block>
