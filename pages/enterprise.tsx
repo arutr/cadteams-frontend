@@ -260,11 +260,11 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
       <div className={classNames(layout.background, layout.silver)}>
         <main>
           <Heading1 marginTop="0" bold condensed>
-            Enterprise Hub
+            Enterprise Hub&ensp;<Label>Coming Soon</Label>
           </Heading1>
           <p>
             For architecture, engineering, and construction (AEC) companies looking for a reliable
-            source of experienced BIM/CAD specialists. Here's how <b>CAD</b>teams can integrate
+            source of experienced BIM/CAD specialists. Here's how <b>CAD</b>teams will integrate
             into your existing talent acquisition process:
           </p>
           <section className={classNames(layout['four-column-grid'], layout.steps)}>
