@@ -17,7 +17,6 @@ import MediaObject from '../src/components/MediaObject';
 import PageTitle from '../src/components/PageTitle';
 import AuthLayout from '../src/layouts/AuthLayout';
 import authStyles from '../src/layouts/AuthLayout.module.scss';
-import styles from './sign-up.module.scss';
 
 function SignUp() {
   const { logEvent } = useAmplitude();
@@ -151,7 +150,7 @@ function SignUp() {
           })}
         />
         <Error errors={errors} name="password" />
-        <Checkbox className={styles.newsletter} id="newsletter" ref={register}>
+        <Checkbox id="newsletter" ref={register}>
           <strong>Yes!</strong> Sign me up to <b>CAD</b>teams Magazine to hear about latest news
           and offers from <b>CAD</b>teams (optional).
         </Checkbox>
