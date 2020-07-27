@@ -1,17 +1,21 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'src/components/Button';
+import Button, { ButtonProps } from 'src/components/Button';
 import Icon from 'src/components/Icon';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import { useProfileUpdate } from 'src/contexts/ProfileUpdateContext';
 
+interface PortfolioButtonProps extends ButtonProps {
+  bottom?: boolean;
+  corner?: boolean;
+}
+
 export function PortfolioButton({
-  bottom, children, className, corner, onClick,
-}) {
+  bottom, children, className, corner, ...props
+}: PortfolioButtonProps) {
   return (
     <Button
-      onClick={onClick}
       className={classNames(
         styles.edit,
         bottom && styles.bottom,
@@ -19,6 +23,7 @@ export function PortfolioButton({
         className,
       )}
       type="button"
+      {...props}
     >
       {children}
     </Button>
@@ -42,7 +47,7 @@ PortfolioButton.defaultProps = {
 export default function EditButton(props) {
   const { editing, handleUpdateSubmit } = useProfileUpdate();
   return (
-    <PortfolioButton {...props} onClick={handleUpdateSubmit} className={editing && styles.editing}>
+    <PortfolioButton color={editing && 'success'} onClick={handleUpdateSubmit} {...props}>
       <Icon
         name={editing ? 'check' : 'pencil'}
         inverted
