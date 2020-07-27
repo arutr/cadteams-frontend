@@ -25,6 +25,21 @@ small.dialog {
   padding: 0.33rem;
 }
 
+.blank {
+  color: var(--color-black);
+  margin: 0;
+  padding: 0;
+
+  .icon {
+    margin: 0;
+  }
+}
+
+.emoji {
+  line-height: 1;
+  font-size: 1.75rem;
+}
+
 .error {
   background-color: var(--color-red);
 }
@@ -36,6 +51,7 @@ small.dialog {
 
 .message {
   flex: 1;
+  margin: 0.25rem 0;
 }
 
 .success {
