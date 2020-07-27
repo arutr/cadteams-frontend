@@ -1,12 +1,13 @@
 export default interface Media {
   id?: number;
-  mime?: string;
+  caption?: string;
   formats?: {
     thumbnail?: ImageFormat;
     small?: ImageFormat;
     medium?: ImageFormat;
     large?: ImageFormat;
   };
+  mime?: string;
   url: string;
 }
 
