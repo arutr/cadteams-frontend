@@ -1,0 +1,31 @@
+.buttons {
+  display: grid;
+  grid-gap: var(--spacing);
+  margin-top: var(--spacing);
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.entry {
+  > span {
+    margin-right: 1rem !important;
+  }
+
+  > p {
+    display: flex;
+    align-items: center;
+
+    input {
+      margin-bottom: 0.33rem;
+    }
+  }
+
+  .wrapper {
+    width: 90%;
+  }
+}
+
+.remove {
+  cursor: pointer;
+  color: var(--color-gray);
+  margin-left: var(--spacing);
+}

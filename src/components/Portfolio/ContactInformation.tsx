@@ -8,71 +8,20 @@ import { Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Label from 'src/components/Label';
 import Link from 'src/components/Link';
-import { EditableInput, EditableTextArea, Placeholder } from 'src/components/Portfolio/Editable';
+import { getFirstName } from 'src/components/Portfolio/About';
+import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
-import { PortfolioSectionProps } from 'src/components/Portfolio/index';
+import { PortfolioProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import validator from 'validator';
 
-const getFirstName = (username) => {
-  if (username) {
-    return username.split(' ')[0];
-  }
-
-  return '';
-};
-
-interface DescriptionUpdateFormValues {
-  description: string;
-}
-
-function DescriptionUpdateForm({ demo, isProfile, user }: PortfolioSectionProps) {
-  const { register } = useFormContext<DescriptionUpdateFormValues>();
-  let descriptionHeading;
-  const showChin = isProfile || !demo;
-
-  if (isProfile) {
-    descriptionHeading = user?.type === 'enterprise' ? 'Your Company' : 'Yourself';
-  } else {
-    descriptionHeading = getFirstName(user?.username);
-  }
-
-  const descriptionPlaceholder = user?.type === 'individual'
-    ? 'professional experience'
-    : 'company';
-
-  return (
-    <form className={classNames(styles.card, showChin && styles.chin)}>
-      <Heading2 bold condensed marginTop="0">
-        About {descriptionHeading}
-      </Heading2>
-      <p style={{ flex: 1 }}>
-        <EditableTextArea
-          defaultValue={user?.description}
-          placeholder={`A short description of your ${descriptionPlaceholder}.`}
-          name="description"
-          ref={register}
-        >
-          <Placeholder
-            isProfile={isProfile}
-            publicValue="N/A"
-            profileValue={`A short description of your ${descriptionPlaceholder}.`}
-            value={user?.description}
-          />
-        </EditableTextArea>
-      </p>
-      {isProfile && <EditButton bottom />}
-    </form>
-  );
-}
-
-interface ContactInformationFormValues {
+interface FormValues {
   phone: string;
   contactEmail: string;
 }
 
-function ContactInformationForm({ isProfile, user }: PortfolioSectionProps) {
+function ContactInformation({ isProfile, user }: PortfolioProps) {
   const { instrument } = useAmplitude((inheritedProps) => ({
     portfolio: {
       ...inheritedProps.portfolio,
@@ -81,10 +30,18 @@ function ContactInformationForm({ isProfile, user }: PortfolioSectionProps) {
     },
   }));
   const [revealed, setRevealed] = useState<boolean>(isProfile);
-  const { register, errors } = useFormContext<ContactInformationFormValues>();
+  const { register, errors } = useFormContext<FormValues>();
 
   return (
-    <>
+    <section className={classNames(
+      styles.card,
+      styles.contactInformation,
+      isProfile && styles.chin,
+    )}
+    >
+      <Heading2 bold condensed marginTop="0">
+        {isProfile ? 'Contact Information' : 'Like what you\'re seeing?'}
+      </Heading2>
       {isProfile && user?.type === 'individual' && (
         <p className={styles.disclaimer}>
           These details will be shared with companies registered on <b>CAD</b>teams who may wish to
@@ -170,32 +127,15 @@ function ContactInformationForm({ isProfile, user }: PortfolioSectionProps) {
           </>
         )}
       </Form>
-    </>
+      {isProfile && <EditButton bottom />}
+    </section>
   );
 }
 
-export default function PortfolioFooter(props: PortfolioSectionProps) {
-  const { setDialog, isProfile } = props;
-
+export default function (props: PortfolioProps) {
   return (
-    <footer className={styles.row}>
-      <ProfileUpdateProvider<DescriptionUpdateFormValues> setDialog={setDialog}>
-        <DescriptionUpdateForm {...props} />
-      </ProfileUpdateProvider>
-      <ProfileUpdateProvider<ContactInformationFormValues> setDialog={setDialog}>
-        <section className={classNames(
-          styles.card,
-          styles['contact-information'],
-          isProfile && styles.chin,
-        )}
-        >
-          <Heading2 bold condensed marginTop="0">
-            {isProfile ? 'Contact Information' : 'Like what you\'re seeing?'}
-          </Heading2>
-          <ContactInformationForm {...props} />
-          {isProfile && <EditButton bottom />}
-        </section>
-      </ProfileUpdateProvider>
-    </footer>
+    <ProfileUpdateProvider>
+      <ContactInformation {...props} />
+    </ProfileUpdateProvider>
   );
 }
