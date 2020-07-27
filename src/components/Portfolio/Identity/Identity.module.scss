@@ -1,0 +1,47 @@
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  form {
+    flex: 1 50%;
+  }
+
+  img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+  }
+}
+
+.specialization {
+  margin-bottom: 0.5rem;
+}
+
+.perks {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: var(--spacing);
+  justify-content: space-evenly;
+}
+
+.profilePicture {
+  position: relative;
+  margin-bottom: 0.5rem;
+  margin-right: var(--spacing);
+
+  .edit {
+    position: static;
+    margin-top: -1rem;
+  }
+}
+
+.rate {
+  z-index: 1;
+  position: absolute;
+  top: calc(-1 * var(--border-radius));
+  right: calc(-1 * var(--border-radius));
+}
