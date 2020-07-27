@@ -13,26 +13,32 @@ export default interface User {
   sectors: Label[];
   username: string;
   type: string;
-}
 
-export interface Individual extends User {
+  // individual
   dailyRate: number;
   designs: Media[];
+  instantBooking?: boolean;
+  history?: WorkHistory[];
   languages: Label[];
   specialization: string;
   tools: Label[];
   uniqueSkills?: UniqueSkill[];
-}
+  verified: boolean;
 
-export interface Enterprise extends User {
+  // enterprise
   company?: string;
   website?: string;
 }
 
-export interface Outsourcing extends User {
-  company: string;
-  website: string;
-}
+export type WorkHistory = {
+  id: number;
+  endYear?: number;
+  location?: string;
+  organization?: string;
+  startYear: number;
+  title: string;
+  type: 'education' | 'employment';
+};
 
 export interface Label {
   id: number;

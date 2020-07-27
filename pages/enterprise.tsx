@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { InferGetStaticPropsType } from 'next';
 import React, { useState } from 'react';
-import { Individual } from 'src/api/User';
+import User from 'src/api/User';
 import { AnchorButton } from 'src/components/Button';
 import { Select } from 'src/components/Form';
 import { Heading1, Heading2 } from 'src/components/Heading';
@@ -16,7 +16,7 @@ import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import layout from 'src/layouts/LandingPageLayout.module.scss';
 import styles from './enterprise.module.scss';
 
-const specialists: Individual[] = [
+const specialists: User[] = [
   {
     username: 'Manuel A.',
     dailyRate: 240,

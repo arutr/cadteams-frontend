@@ -9,7 +9,8 @@ import PortfolioFooter from 'src/components/Portfolio/PortfolioFooter';
 import Skills from 'src/components/Portfolio/Skills';
 import UniqueSkills from 'src/components/Portfolio/UniqueSkills';
 import { useAuth } from 'src/contexts/AuthProvider';
-import User, { Individual } from 'src/api/User';
+import User from 'src/api/User';
+import DialogProvider from 'src/contexts/DialogContext';
 import { AnchorButton } from '../Button';
 import { Heading2 } from '../Heading';
 import Modal from '../Modal';
@@ -72,7 +73,7 @@ function Portfolio(props: PortfolioProps) {
 
 interface ModalProps extends PortfolioProps {
   onClose: () => void,
-  user: Individual,
+  user: User,
 }
 
 export function PortfolioModal(props: ModalProps) {
