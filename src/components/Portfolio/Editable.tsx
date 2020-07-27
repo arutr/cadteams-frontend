@@ -5,35 +5,34 @@ import { useProfileUpdate } from 'src/contexts/ProfileUpdateContext';
 import styles from './Editable.module.scss';
 import portfolioStyles from './Portfolio.module.scss';
 
-interface Props {
-  children: any;
-  placeholder: any;
-  defaultValue: string;
-  [key: string]: any;
-}
-
-type DropdownProps = {
-  options: {
+interface DropdownProps extends React.HTMLProps<HTMLSelectElement> {
+  options?: {
     label: string;
     value: string;
   }[];
-} & Props;
+  values?: string[];
+}
 
+// @ts-ignore
 export const EditableDropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(({
-  children, placeholder, defaultValue, options, ...props
+  children, className, placeholder, defaultValue, options, values, ...props
 }: DropdownProps, ref) => {
   const { editing } = useProfileUpdate();
+
   if (editing) {
     return (
       <select
-        className={styles.editable}
+        className={classNames(styles.editable, className)}
         defaultValue={defaultValue}
         ref={ref}
         {...props}
       >
         <option value="">{placeholder}</option>
-        {options.map(({ label, value }, index) => (
+        {options?.map(({ label, value }, index) => (
           <option key={index} value={value}>{label}</option>
+        ))}
+        {values?.map((value, index) => (
+          <option key={index} value={value}>{value}</option>
         ))}
       </select>
     );
@@ -42,15 +41,17 @@ export const EditableDropdown = React.forwardRef<HTMLSelectElement, DropdownProp
   return children;
 });
 
-type InputProps = {
-  prefix?: string;
-  suffix?: string;
-} & Props;
+interface InputProps extends React.HTMLProps<HTMLInputElement> {
+  prefix?: any;
+  suffix?: any;
+}
 
+// @ts-ignore
 export const EditableInput = React.forwardRef<HTMLInputElement, InputProps>(({
-  children, placeholder, defaultValue, prefix, suffix, ...props
+  children, placeholder, defaultValue, prefix, suffix, type, ...props
 }: InputProps, ref) => {
   const { editing } = useProfileUpdate();
+
   if (editing) {
     return (
       <>
@@ -59,7 +60,7 @@ export const EditableInput = React.forwardRef<HTMLInputElement, InputProps>(({
           className={styles.editable}
           placeholder={placeholder}
           defaultValue={defaultValue}
-          type="input"
+          type={type || 'input'}
           ref={ref}
           {...props}
         />
@@ -71,10 +72,14 @@ export const EditableInput = React.forwardRef<HTMLInputElement, InputProps>(({
   return children;
 });
 
-export const EditableTextArea = React.forwardRef<HTMLTextAreaElement, Props>(({
+type TextAreaProps = React.HTMLProps<HTMLTextAreaElement>;
+
+// @ts-ignore
+export const EditableTextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(({
   children, placeholder, defaultValue, ...props
-}: Props, ref) => {
+}: TextAreaProps, ref) => {
   const { editing } = useProfileUpdate();
+
   if (editing) {
     return (
       <textarea
@@ -122,6 +127,10 @@ export function Placeholder({
     return value;
   }
 
+  if (isProfile && !profileValue) {
+    return null;
+  }
+
   return (
     <span className={portfolioStyles.placeholder}>
       {isProfile ? profileValue : publicValue}
@@ -131,12 +140,13 @@ export function Placeholder({
 
 Placeholder.propTypes = {
   isProfile: PropTypes.bool,
-  profileValue: PropTypes.node.isRequired,
+  profileValue: PropTypes.node,
   publicValue: PropTypes.node.isRequired,
   value: PropTypes.node,
 };
 
 Placeholder.defaultProps = {
   isProfile: false,
+  profileValue: null,
   value: null,
 };

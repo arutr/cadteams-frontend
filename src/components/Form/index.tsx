@@ -4,16 +4,12 @@ import { ErrorMessage } from 'react-hook-form';
 import Icon from 'src/components/Icon';
 import styles from './Form.module.scss';
 
-interface CheckboxProps {
-  id: string;
-  children?: any;
-  className?: string;
-}
-
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, children, className }: CheckboxProps, ref) => (
+export const Checkbox = React.forwardRef<HTMLInputElement, InputHTMLAttributes<Element>>(
+  ({
+    id, children, className, ...props
+  }: InputHTMLAttributes<Element>, ref) => (
     <div className={classNames(styles.checkbox, className)}>
-      <input id={id} name={id} type="checkbox" ref={ref} />
+      <input id={id} name={id} type="checkbox" ref={ref} {...props} />
       <label htmlFor={id}>{children}</label>
     </div>
   ),
@@ -107,15 +103,12 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(({
   </div>
 ));
 
-type DropdownProps = {
+interface DropdownProps extends React.HTMLProps<HTMLSelectElement> {
   options: {
     label: string;
     value: string;
   }[];
-  placeholder?: string;
-  defaultValue?: string;
-  [key: string]: any;
-};
+}
 
 export const Select = React.forwardRef<HTMLSelectElement, DropdownProps>(({
   placeholder, defaultValue, options, ...props

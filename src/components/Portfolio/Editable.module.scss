@@ -1,4 +1,5 @@
 @import 'styles/variables/typography';
+@import 'styles/variables/ui';
 
 .editable {
   width: 100%;
@@ -9,7 +10,10 @@
 
   &:focus {
     outline: none;
-    border-width: 2px;
+    border-style: solid;
+    filter: $drop-shadow;
+    border-color: var(--color-gray);
+    background-color: var(--color-silver);
   }
 
   h1 & {

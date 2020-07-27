@@ -5,9 +5,27 @@
 .checkbox {
   display: flex;
   align-items: center;
+  padding: 0.75rem;
+  transition: background-color 200ms;
+  border-radius: var(--border-radius);
+  background-color: var(--color-silver);
 
-  input + label {
-    margin-left: 0.5rem;
+  input {
+    width: 3rem;
+    margin-right: 0.85rem;
+  }
+
+  &, > * {
+    cursor: pointer;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: darken($color-silver, 5%);
+  }
+
+  &:active {
+    background-color: darken($color-silver, 10%);
   }
 }
 

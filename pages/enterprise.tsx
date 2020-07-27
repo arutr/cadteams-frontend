@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { InferGetStaticPropsType } from 'next';
 import React, { useState } from 'react';
-import { Individual } from 'src/api/User';
+import User from 'src/api/User';
 import { AnchorButton } from 'src/components/Button';
 import { Select } from 'src/components/Form';
 import { Heading1, Heading2 } from 'src/components/Heading';
@@ -12,14 +12,16 @@ import { ModalProvider } from 'src/components/Modal';
 import Newsletter from 'src/components/Newsletter';
 import PageTitle from 'src/components/PageTitle';
 import { IdentityCard } from 'src/components/Portfolio/Identity';
+import DialogProvider from 'src/contexts/DialogContext';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import layout from 'src/layouts/LandingPageLayout.module.scss';
 import styles from './enterprise.module.scss';
 
-const specialists: Individual[] = [
+const specialists: User[] = [
   {
     username: 'Manuel A.',
     dailyRate: 240,
+    verified: true,
     country: 'GB',
     type: 'individual',
     profilePicture: {
@@ -80,6 +82,7 @@ const specialists: Individual[] = [
   {
     username: 'Jamie M.',
     dailyRate: 216,
+    verified: true,
     country: 'GB',
     type: 'individual',
     profilePicture: {
@@ -301,24 +304,26 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
                 value: 'USD',
               },
             ]}
-            onChange={(event) => setCurrency(event.target.value)}
+            onChange={(event) => setCurrency(event.currentTarget.value)}
           />
         </Heading1>
-        <ProfileUpdateProvider>
-          <section className={layout['two-column-grid']}>
-            {specialists.map((specialist, index) => (
-              <IdentityCard
-                demo
-                key={index}
-                user={specialist}
-                className={styles.card}
-                currency={currency}
-                exchangeRate={rates[currency]}
-                sectors={specialist.sectors}
-              />
-            ))}
-          </section>
-        </ProfileUpdateProvider>
+        <DialogProvider>
+          <ProfileUpdateProvider>
+            <section className={layout['two-column-grid']}>
+              {specialists.map((specialist, index) => (
+                <IdentityCard
+                  demo
+                  key={index}
+                  user={specialist}
+                  className={styles.card}
+                  currency={currency}
+                  exchangeRate={rates[currency]}
+                  sectors={specialist.sectors}
+                />
+              ))}
+            </section>
+          </ProfileUpdateProvider>
+        </DialogProvider>
       </main>
       <div className={classNames(layout.background, layout.purple)}>
         <main>

@@ -1,9 +1,9 @@
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import React, { useState } from 'react';
-import { FieldValues, FormContext, useForm } from 'react-hook-form';
+import { FormContext, useForm } from 'react-hook-form';
 import { Label } from 'src/api/User';
-import { DialogProps, DialogType } from 'src/components/Dialog';
+import { DialogType } from 'src/components/Dialog';
 import { useAuth } from 'src/contexts/AuthProvider';
+import { useDialog } from 'src/contexts/DialogContext';
 
 interface Context {
   editing: boolean;
@@ -13,25 +13,24 @@ interface Context {
 export const ProfileUpdateContext = React.createContext<Context>(null);
 
 interface Props {
-  setDialog?: ({ type, message }: DialogProps) => void;
+  children: any;
   labelStates?: {
     [key: string]: Label[];
   };
-  [key: string]: any;
 }
 
 export function removeLabel(labels, dispatch) {
   return (id: number) => dispatch(labels.filter((label) => label.id !== id));
 }
 
-export default function ProfileUpdateProvider<F extends FieldValues>({
+export default function ProfileUpdateProvider({
   children,
   labelStates,
-  setDialog,
 }: Props) {
   const [editing, setEditing] = useState(false);
-  const formMethods = useForm<F>();
+  const formMethods = useForm();
   const { updateUser } = useAuth();
+  const { setDialog } = useDialog();
   const handleUpdateSubmit = formMethods.handleSubmit(async (values) => {
     setDialog(null);
 
@@ -58,10 +57,6 @@ export default function ProfileUpdateProvider<F extends FieldValues>({
         type: DialogType.Error,
         message: 'Failed to update profile information. Please try again later.',
       });
-
-      if (PHASE_DEVELOPMENT_SERVER) {
-        throw error;
-      }
     }
 
     setEditing(!editing);
