@@ -1,15 +1,18 @@
 import { countries } from 'countries-list';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { Amplitude, LogOnMount } from 'react-amplitude-hooks';
-import Dialog, { DialogProps } from 'src/components/Dialog';
+import About from 'src/components/Portfolio/About';
 import Designs from 'src/components/Portfolio/Designs';
+import ExperienceEducation from 'src/components/Portfolio/ExperienceEducation';
 import Identity from 'src/components/Portfolio/Identity';
-import PortfolioFooter from 'src/components/Portfolio/PortfolioFooter';
+import ContactInformation from 'src/components/Portfolio/ContactInformation';
 import Skills from 'src/components/Portfolio/Skills';
+import Status from 'src/components/Portfolio/Status';
 import UniqueSkills from 'src/components/Portfolio/UniqueSkills';
 import { useAuth } from 'src/contexts/AuthProvider';
-import User, { Individual } from 'src/api/User';
+import User from 'src/api/User';
+import DialogProvider from 'src/contexts/DialogContext';
 import { AnchorButton } from '../Button';
 import { Heading2 } from '../Heading';
 import Modal from '../Modal';
@@ -22,7 +25,7 @@ export interface PortfolioProps {
   inModal?: boolean;
 }
 
-function LandingPageFooter({ user }: PortfolioProps) {
+function Conversion({ user }: PortfolioProps) {
   return (
     <footer className={styles.card}>
       <Heading2 marginTop="0" bold condensed>Like What You're Seeing?</Heading2>
@@ -39,40 +42,48 @@ function LandingPageFooter({ user }: PortfolioProps) {
   );
 }
 
-export interface PortfolioSectionProps extends PortfolioProps {
-  setDialog?: ({ type, message }: DialogProps) => void,
-}
-
 function Portfolio(props: PortfolioProps) {
-  const { demo, isProfile } = props;
-  const [dialog, setDialog] = useState<DialogProps>();
+  const { demo, isProfile, user } = props;
   const { user: authUser } = useAuth();
   const isNotIndividual = authUser?.type !== 'individual';
 
   return (
     <div className={styles.wrapper}>
-      {dialog?.message && <Dialog {...dialog} />}
-      <header className={styles.header}>
-        <Identity {...props} setDialog={setDialog} />
-        {(demo || isProfile || isNotIndividual) && (
-          <Skills {...props} setDialog={setDialog} />
-        )}
-      </header>
-      <Designs {...props} setDialog={setDialog} />
-      {(demo || isProfile || isNotIndividual) && (
-        <UniqueSkills {...props} setDialog={setDialog} />
-      )}
-      {demo && <LandingPageFooter {...props} />}
-      {!demo && (isProfile || isNotIndividual) && (
-        <PortfolioFooter {...props} setDialog={setDialog} />
-      )}
+      <DialogProvider>
+        {user?.type === 'individual' && isProfile && <Status />}
+        <header className={styles.row}>
+          <Identity {...props} />
+          {(demo || isProfile || isNotIndividual) && (
+            <Skills {...props} />
+          )}
+        </header>
+        <Designs {...props} />
+        <div className={styles.row}>
+          <About {...props} />
+          {(demo || isProfile || isNotIndividual) && (
+            <ExperienceEducation {...props} />
+          )}
+          {user?.type !== 'individual' && (
+            <ContactInformation {...props} />
+          )}
+        </div>
+        <div className={styles.row}>
+          {(demo || isProfile || isNotIndividual) && (
+            <UniqueSkills {...props} />
+          )}
+          {!demo && user?.type === 'individual' && (isProfile || isNotIndividual) && (
+            <ContactInformation {...props} />
+          )}
+          {demo && <Conversion {...props} />}
+        </div>
+      </DialogProvider>
     </div>
   );
 }
 
 interface ModalProps extends PortfolioProps {
   onClose: () => void,
-  user: Individual,
+  user: User,
 }
 
 export function PortfolioModal(props: ModalProps) {

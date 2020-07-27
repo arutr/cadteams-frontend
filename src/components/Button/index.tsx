@@ -4,35 +4,37 @@ import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
-interface Props {
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   block?: boolean;
-  children?: any;
-  className?: string;
-  disabled?: boolean;
+  color?: 'error' | 'success';
   large?: boolean;
-  onClick?: (event) => void;
-  type?: 'submit' | 'button';
 }
 
 function Button({
-  block, large, children, disabled, onClick, className, type,
-}: Props) {
+  block, large, children, className, color, type = 'submit', ...props
+}: ButtonProps) {
   return (
     <button
-      type={type ?? 'submit'}
-      className={classNames(styles.button, className, block && styles.block, large && styles.large)}
-      onClick={onClick}
-      disabled={disabled}
+      type={type as any}
+      className={classNames(
+        styles.button,
+        block && styles.block,
+        large && styles.large,
+        styles[color],
+        className,
+      )}
+      {...props}
     >
       {children}
     </button>
   );
 }
 
-type AnchorProps = {
+interface AnchorProps extends React.HTMLProps<HTMLAnchorElement> {
+  block?: boolean;
   external?: boolean;
-  href?: string;
-} & Props;
+  large?: boolean;
+}
 
 export const AnchorButton = React.forwardRef<HTMLAnchorElement, AnchorProps>(({
   block, children, external, href, large, onClick, className,
@@ -47,7 +49,7 @@ export const AnchorButton = React.forwardRef<HTMLAnchorElement, AnchorProps>(({
       tabIndex={0}
       target={external && '_blank'}
       onClick={onClick}
-      onKeyDown={onClick}
+      onKeyDown={onClick as any}
     >
       {children}
     </a>

@@ -1,0 +1,10 @@
+.status {
+  margin-top: 0;
+
+  ul {
+    overflow: auto;
+    max-height: 8ex;
+    list-style: circle;
+    padding-inline-start: 1.25rem;
+  }
+}

@@ -14,18 +14,22 @@ import styles from './Navigation.module.scss';
 import AppNavigationLinks from './VerticalNavigationLinks';
 
 export function GuestNavigationLinks() {
-  const { isAuthenticated, logOut, user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const links = (
+    <>
+      <div className={styles.users}>
+        <Link href="/individuals">Specialists</Link>
+        <Link href="/enterprise">Enterprise</Link>
+        <Link underlined={false} external href="https://medium.com/cadteams-magazine">Blog</Link>
+      </div>
+      <span className={styles.separator} />
+    </>
+  );
 
   if (!isAuthenticated()) {
     return (
       <>
-        <div className={styles.users}>
-          <Link href="/individuals">Specialists</Link>
-          <Link href="/enterprise">Enterprise</Link>
-          {/* <Link href="/outsourcing">Outsourcing</Link> */}
-          <Link underlined={false} external href="https://medium.com/cadteams-magazine">Blog</Link>
-        </div>
-        <span className={styles.separator} />
+        {links}
         <Link className={styles['log-in']} href="/log-in">
           <Icon name="sign-in" /> Log In
         </Link>
@@ -36,18 +40,11 @@ export function GuestNavigationLinks() {
     );
   }
 
-  if (inApp()) {
-    return (
-      <>
-        <Link onClick={logOut}><Icon name="sign-out" /> Log Out</Link>
-      </>
-    );
-  }
-
   const profilePicture = user?.profilePicture;
 
   return (
     <>
+      {links}
       <Link href="/app/profile" hoverEffect={false}>
         <MediaObject
           captionAlign="left"
@@ -72,9 +69,9 @@ function Navigation({ guest }: Props) {
   const [open, setOpen] = useState(false);
 
   const toggleMenu = () => setOpen(!open);
+  const handleChange = () => setOpen(false);
 
   useEffect(() => {
-    const handleChange = () => setOpen(false);
     router.events.on('routeChangeStart', handleChange);
 
     return () => router.events.off('routeChangeStart', handleChange);

@@ -3,11 +3,11 @@
 
 .button {
   border: none;
-  display: inline-block;
   cursor: pointer;
   font-weight: 600;
   user-select: none;
   text-align: center;
+  display: inline-block;
   padding: 0.75rem 1rem;
   text-decoration: none;
   color: var(--color-white);
@@ -50,5 +50,31 @@
   p + &,
   & + a, {
     margin-top: var(--spacing);
+  }
+}
+
+.error {
+  background-color: var(--color-red);
+
+  &:focus,
+  &:hover {
+    background-color: darken($color-red, 5%);
+  }
+
+  &:active {
+    background-color: darken($color-red, 10%);
+  }
+}
+
+.success {
+  background-color: var(--color-green);
+
+  &:focus,
+  &:hover {
+    background-color: darken($color-green, 5%);
+  }
+
+  &:active {
+    background-color: darken($color-green, 10%);
   }
 }
