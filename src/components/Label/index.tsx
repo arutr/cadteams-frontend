@@ -42,7 +42,7 @@ function Label({
   );
 }
 
-export function LabelContainer({ children, ...props }: HTMLAttributes<Element>) {
+export function LabelContainer({ children, ...props }: React.HTMLProps<HTMLDivElement>) {
   return (
     <div className={styles.container} {...props}>
       {children}
