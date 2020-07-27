@@ -1,0 +1,92 @@
+@import 'styles/mixins/responsive';
+@import 'styles/variables/layout';
+@import 'styles/variables/ui';
+
+$design-height: 24rem;
+
+.designs {
+  h2 {
+    text-align: center;
+  }
+
+  img, video {
+    width: 100%;
+    outline: none;
+    object-fit: cover;
+    height: $design-height;
+    border-radius: var(--border-radius);
+  }
+}
+
+.design {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  scroll-snap-align: start;
+  border-radius: var(--border-radius);
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  &.blank {
+    height: $design-height;
+    align-items: center;
+    background-color: var(--color-silver);
+  }
+}
+
+.arrow {
+  font-size: 1.5rem;
+  position: absolute;
+  top: calc(50% - 3.5rem);
+  color: var(--color-gray);
+
+  &, &:focus {
+    background-color: var(--color-cream);
+  }
+
+  &:hover {
+    background-color: darken($color-cream, 5%);
+  }
+
+  &:active {
+    background-color: darken($color-cream, 10%);
+  }
+
+  &.left {
+    left: 0;
+    border-top-left-radius: 0;
+    filter: $drop-shadow__right;
+    border-bottom-left-radius: 0;
+  }
+
+  &.right {
+    right: 0;
+    border-top-right-radius: 0;
+    filter: $drop-shadow__left;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.grid {
+  display: grid;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  grid-gap: calc(var(--spacing));
+  padding-bottom: var(--spacing);
+  grid-template-columns: repeat(6, 100%);
+
+  @include min-screen($screen-m) {
+    grid-template-columns: repeat(6, 49%);
+  }
+}
+
+.wrapper {
+  position: relative;
+}

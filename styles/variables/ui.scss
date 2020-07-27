@@ -1,3 +1,5 @@
 @import 'styles/variables/colors';
 
 $drop-shadow: drop-shadow(0 1px 3px rgba($color-black, 0.3));
+$drop-shadow__left: drop-shadow(-5px 1px 3px rgba($color-black, 0.3));
+$drop-shadow__right: drop-shadow(5px 1px 3px rgba($color-black, 0.3));
