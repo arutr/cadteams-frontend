@@ -3,7 +3,7 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import React, { useState } from 'react';
 import { LogOnMount } from 'react-amplitude-hooks';
 import Media from 'src/api/Media';
-import { Individual, Label as ApiLabel } from 'src/api/User';
+import User, { Label as ApiLabel } from 'src/api/User';
 import Dialog, { DialogProps, DialogType } from 'src/components/Dialog';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Label, { LabelContainer } from 'src/components/Label';
@@ -26,7 +26,7 @@ const fetcher = (endpoint) => Axios.get<Entry[]>(endpoint).then(({ data }) => da
 
 export default function Explore() {
   const { data: users } = useSWR<Entry[]>('/users/individuals', fetcher);
-  const [portfolioUser, setPortfolioUser] = useState<Individual>(null);
+  const [portfolioUser, setPortfolioUser] = useState<User>(null);
   const [dialog, setDialog] = useState<DialogProps>();
   const fetchUser = (id) => () => {
     Axios

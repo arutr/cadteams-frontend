@@ -1,7 +1,8 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Individual, UniqueSkill } from 'src/api/User';
-import { Heading2, Heading3 } from 'src/components/Heading';
+import { UniqueSkill } from 'src/api/User';
+import { Heading2 } from 'src/components/Heading';
+import Icon from 'src/components/Icon';
 import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioSectionProps } from 'src/components/Portfolio/index';
