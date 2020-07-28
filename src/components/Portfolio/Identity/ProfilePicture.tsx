@@ -65,6 +65,7 @@ export default function ProfilePicture({
         className={!profilePictureUrl ? layout.blank : null}
         src={profilePictureUrl ?? '/icons/user-blank.svg'}
         alt={user?.username}
+        onContextMenu={(event) => event.preventDefault()}
       />
       {isProfile && (
         <form>
