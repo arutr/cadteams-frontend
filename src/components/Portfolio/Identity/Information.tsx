@@ -30,10 +30,11 @@ const specializations = [
   'BIM Architecture',
   'CAD Engineering',
   'CAD Architecture',
+  'Civil Engineering',
+  'MEP Technician',
   'Parametric Design',
   'Rendering',
-  'MEP',
-  'Structuring',
+  'Structural Technician',
   'Surveying',
 ];
 
