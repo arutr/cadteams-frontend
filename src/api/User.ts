@@ -10,9 +10,10 @@ export default interface User {
   location: string;
   phone?: string;
   profilePicture: Media;
+  rating?: number;
   sectors: Label[];
   username: string;
-  type: string;
+  type: 'individual' | 'enterprise';
 
   // individual
   dailyRate: number;
