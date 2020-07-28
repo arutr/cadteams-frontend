@@ -224,15 +224,17 @@ function IndividualSkills({
             />
           </EditableInput>
         </div>
-        <div>
-          <Icon
-            className={styles.icon}
-            large
-            name="star"
-            title="Satisfaction rating"
-          />
-          <span className={styles.placeholder}>No rating available</span>
-        </div>
+        {user?.rating && (
+          <div>
+            <Icon
+              className={styles.icon}
+              large
+              name="star"
+              title="Satisfaction rating"
+            />
+            <span className={styles.placeholder}>No rating available</span>
+          </div>
+        )}
       </div>
       {isProfile && <EditButton bottom />}
     </form>
