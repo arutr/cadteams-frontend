@@ -104,16 +104,6 @@
 
   grid-template-columns: repeat(auto-fill, minmax($grid-item__width, 1fr));
 
-  a[role="link"] {
-    color: var(--color-white);
-
-    &:active,
-    &:focus,
-    &:hover {
-      filter: brightness(75%);
-    }
-  }
-
   article {
     a[role="button"],
     button {

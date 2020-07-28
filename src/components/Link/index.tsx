@@ -6,15 +6,16 @@ import classNames from 'classnames';
 import styles from './Link.module.scss';
 
 function Link({
-  href, children, disabled, external, onClick, className, hoverEffect, underlined,
+  href, children, disabled, external, inverted, onClick, className, hoverEffect, underlined,
 }) {
   const { pathname } = useRouter();
   const classes = classNames(
     styles.link,
     className,
     disabled && styles.disabled,
-    href && pathname.includes(href) && styles.active,
+    pathname === href && styles.active,
     hoverEffect && styles['hover-effect'],
+    inverted && styles.inverted,
     !underlined && styles['not-underlined'],
   );
 
@@ -66,6 +67,7 @@ Link.propTypes = {
   disabled: PropTypes.bool,
   external: PropTypes.bool,
   hoverEffect: PropTypes.bool,
+  inverted: PropTypes.bool,
   underlined: PropTypes.bool,
   href: PropTypes.string,
   onClick: PropTypes.func,
@@ -77,6 +79,7 @@ Link.defaultProps = {
   disabled: false,
   external: false,
   hoverEffect: true,
+  inverted: false,
   underlined: false,
   href: '',
   onClick: null,

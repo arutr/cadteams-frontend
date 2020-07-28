@@ -13,10 +13,22 @@
 .hover-effect {
   transition: filter 200ms;
 
+  &:not(.active) {
+    &:active,
+    &:focus,
+    &:hover {
+      filter: brightness(25%);
+    }
+  }
+}
+
+.inverted {
+  color: var(--color-white) !important;
+
   &:active,
   &:focus,
   &:hover {
-    filter: brightness(25%);
+    filter: brightness(85%) !important;
   }
 }
 
@@ -24,7 +36,7 @@
   text-decoration: none;
 }
 
-.link {
+span.link {
   @include anchor;
 
   display: inline-block;

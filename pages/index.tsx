@@ -66,8 +66,8 @@ const exploreCadteams = [
         The pandemic has proven that we are all capable of working from home and leasing an
         expensive office does no longer make sense.<br /><br />If you are a
         registered <strong>Architecture, Engineering or Construction</strong> (AEC)
-        business, <Link underlined href="/sign-up">sign up</Link> for an Enterprise account to
-        discover how <b>CAD</b>teams can help you find remote colleagues and manage project
+        business, <Link inverted underlined href="/sign-up">sign up</Link> for an Enterprise account
+        to discover how <b>CAD</b>teams can help you find remote colleagues and manage project
         resources.
       </>
     ),
