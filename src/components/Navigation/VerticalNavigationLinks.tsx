@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Router from 'next/router';
 import React from 'react';
 import Icon from 'src/components/Icon';
@@ -7,8 +8,11 @@ import Link from '../Link';
 import MediaObject from '../MediaObject';
 import styles from './VerticalNavigationLinks.module.scss';
 
-function tabActiveStyle(tab) {
-  return Router.pathname.startsWith(`/app/${tab}`) ? styles.active : null;
+function ActiveTab({
+  children, className, href, ...props
+}: React.HTMLProps<HTMLAnchorElement>) {
+  const style = Router.pathname === href ? styles.active : null;
+  return <Link className={classNames(style, className)} href={href} {...props}>{children}</Link>;
 }
 
 export default function VerticalNavigationLinks() {
@@ -17,15 +21,26 @@ export default function VerticalNavigationLinks() {
 
   return (
     <>
-      <Link className={tabActiveStyle('contacts')} href="/app/contacts" disabled>
+      {user?.type === 'individual' && (
+        <ActiveTab href="/app/calendar" disabled>
+          <Icon large name="calendar" /> Calendar
+        </ActiveTab>
+      )}
+      <ActiveTab href="/app/contacts" disabled>
         <Icon large name="handshake" /> Contacts
-      </Link>
-      <Link className={tabActiveStyle('explore')} href="/app/explore" disabled>
+      </ActiveTab>
+      <ActiveTab href="/app" disabled>
+        <Icon large name="dashboard" /> Dashboard
+      </ActiveTab>
+      <ActiveTab href="/app/documents" disabled>
+        <Icon large name="file" /> Documents
+      </ActiveTab>
+      <ActiveTab href="/app/explore" disabled>
         <Icon large name="shop" /> Explore
-      </Link>
-      <Link className={tabActiveStyle('jobs')} href="/app/jobs" disabled>
+      </ActiveTab>
+      <ActiveTab href="/app/projects" disabled>
         <Icon large name="plan" /> Projects
-      </Link>
+      </ActiveTab>
       <div className={styles.separator} />
       <MediaObject
         captionAlign="left"
@@ -37,12 +52,12 @@ export default function VerticalNavigationLinks() {
       >
         {user?.username}
       </MediaObject>
-      <Link className={tabActiveStyle('profile')} href="/app/profile">
+      <ActiveTab href="/app/profile">
         <Icon large name="user" /> Profile
-      </Link>
-      <Link className={tabActiveStyle('settings')} href="/app/settings" disabled>
+      </ActiveTab>
+      <ActiveTab href="/app/settings" disabled>
         <Icon large name="gear" /> Settings
-      </Link>
+      </ActiveTab>
       <Link onClick={logOut}>
         <Icon large name="sign-out" /> Sign Out
       </Link>

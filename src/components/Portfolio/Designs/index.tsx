@@ -78,6 +78,7 @@ export default function Designs({
                     </figure>
                     {isProfile && (
                       <Button
+                        color="error"
                         className={classNames(layout.edit, layout.corner)}
                         type="button"
                         onClick={() => removeDesign(design.id)}
