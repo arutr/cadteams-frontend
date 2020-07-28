@@ -16,7 +16,9 @@ export default function Status() {
     return (
       <Dialog className={styles.status} type={DialogType.Success}>
         Your profile is <strong>verified</strong> and will be published in the specialist gallery
-        on the <Icon name="shop" /> Explore page. Good luck in discovering new opportunities!
+        on
+        the <Link underlined inverted href="/app/explore"><Icon name="shop" /> Explore page</Link>.
+        Good luck in discovering new opportunities!
       </Dialog>
     );
   }
@@ -89,7 +91,8 @@ export default function Status() {
   if (problems.length) {
     return (
       <Dialog as="div" className={styles.status} type={DialogType.Warning}>
-        Your profile is <strong>not complete</strong>. The following information is missing:
+        Your profile is <strong>not complete</strong>. In order to verify your profile, please
+        include the following information:
         <ul>
           {problems.map(({ message }, index) => (
             <li key={index}>{message}</li>
