@@ -53,9 +53,7 @@ function Portfolio(props: PortfolioProps) {
         {user?.type === 'individual' && isProfile && <Status />}
         <header className={styles.row}>
           <Identity {...props} />
-          {(demo || isProfile || isNotIndividual) && (
-            <Skills {...props} />
-          )}
+          <Skills {...props} />
         </header>
         <Designs {...props} />
         <div className={styles.row}>

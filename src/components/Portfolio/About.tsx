@@ -49,7 +49,7 @@ function About({ demo, isProfile, user }: PortfolioProps) {
         >
           <Placeholder
             isProfile={isProfile}
-            publicValue="N/A"
+            publicValue="No description provided"
             profileValue={`A short description of your ${descriptionPlaceholder}`}
             value={user?.description}
           />
