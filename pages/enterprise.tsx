@@ -78,6 +78,45 @@ const specialists: User[] = [
       id: 3,
       skill: 'Surveying and site supervision',
     }],
+    history: [{
+      id: 1,
+      startYear: 2009,
+      endYear: 2013,
+      type: 'education',
+      organization: 'Universidad de Granada',
+      title: 'Arquitectura Técnica',
+    }, {
+      id: 2,
+      startYear: 2013,
+      endYear: 2014,
+      type: 'employment',
+      title: 'Architectural Technician',
+      location: 'Morocco',
+    }, {
+      id: 3,
+      startYear: 2016,
+      endYear: 2018,
+      type: 'employment',
+      title: 'Site Supervisor',
+      location: 'Brighton',
+    }, {
+      id: 4,
+      startYear: 2018,
+      endYear: 2019,
+      type: 'employment',
+      title: 'CAD/Revit Technician',
+      organization: 'Liam Russell Architects',
+    }, {
+      id: 5,
+      startYear: 2019,
+      type: 'employment',
+      title: 'Architectural Technician',
+    }],
+    description: `I am passionate about construction, design and technologies with knowledge of site projects, measurement and design programmes. I have worked on restauration and measurement projects in Morocco, lift projects in UK and Sweden and control, quality and measurement projects in Spain.
+
+    I have acquired the ability to co-ordinate complex and diverse workloads in my last experiences living abroad.
+
+    I am organised and I am highly motivated for work as architectural technician, able to work in a pressured environment, because I have gained extensive skills and the ability to deal promptly with new challenges. I am a self-motivated person who is able to work autonomously.`,
   },
   {
     username: 'Jamie M.',
@@ -88,7 +127,7 @@ const specialists: User[] = [
     profilePicture: {
       url: '/images/portfolio-demo/jamie/profile-picture.jpeg',
     },
-    specialization: 'Piping/Mechanical Designer',
+    specialization: 'CAD Technician',
     sectors: [{
       id: 1,
       label: 'Pipework',
@@ -132,6 +171,26 @@ const specialists: User[] = [
         url: '/images/portfolio-demo/jamie/design4.jpeg',
       },
     ],
+    history: [{
+      id: 1,
+      startYear: 2010,
+      endYear: 2013,
+      type: 'education',
+      organization: 'Manchester Metropolitan University',
+      title: 'BSc Media Technology',
+    }, {
+      id: 2,
+      startYear: 2014,
+      endYear: 2015,
+      type: 'employment',
+      organization: 'EON Reality',
+      title: '3D Modeler',
+    }, {
+      id: 3,
+      startYear: 2016,
+      type: 'employment',
+      title: 'CAD Technician',
+    }],
     uniqueSkills: [{
       id: 1,
       skill: `Communication of design with all stakeholders ensuring efficiency improvements can be
@@ -143,6 +202,9 @@ const specialists: User[] = [
       id: 3,
       skill: 'Plant room design from scratch',
     }],
+    description: `Experienced in front end modelling, focusing more on using Point Cloud scanning and implementation, understanding schematics and working within constraints to create plant rooms/systems from scratch - right through to back end design, which leans more towards intricate pipework positioning and issuing fabrication drawings to the workshop.
+
+    Liasing with clients, project engineers and workshop managers is essential to efficiently process the creation of work to be delivered to site and successfully installed to tight deadlines.`,
   },
 ];
 const steps = [
