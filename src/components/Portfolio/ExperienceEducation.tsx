@@ -23,12 +23,15 @@ interface FormValues {
 }
 
 function ExperienceEducation(props: PortfolioProps) {
-  const { register } = useFormContext<FormValues>();
+  const { register, reset } = useFormContext<FormValues>();
   const { editing } = useProfileUpdate();
   const [history, setHistory] = useState<WorkHistory[]>();
-  const { demo, isProfile, user } = props;
-  const showChin = isProfile || !demo;
-  const removeEntry = (id) => setHistory(history.filter((entry) => entry.id !== id));
+  const { inModal, isProfile, user } = props;
+  const showChin = isProfile || !inModal;
+  const removeEntry = (id) => {
+    setHistory(history.filter((entry) => entry.id !== id));
+    reset();
+  };
   const addEntry = (type) => setHistory([...history, {
     id: (history[history.length - 1]?.id ?? 0) + 1,
     startYear: null,
