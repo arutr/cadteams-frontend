@@ -10,7 +10,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@brainhubeu/react-permissible": "1.9.15",
+    "@hookform/error-message": "0.0.3",
     "@svgr/webpack": "5.4.0",
     "@types/axios": "0.14.0",
     "@types/classnames": "2.2.10",
@@ -33,7 +33,7 @@
     "react": "16.13.1",
     "react-amplitude-hooks": "0.10.0",
     "react-dom": "16.13.1",
-    "react-hook-form": "5.6.0",
+    "react-hook-form": "6.1.2",
     "react-social-login": "3.4.6",
     "sass": "1.26.3",
     "sass-loader": "8.0.2",
