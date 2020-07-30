@@ -1,6 +1,6 @@
+import { ErrorMessage } from '@hookform/error-message';
 import classNames from 'classnames';
 import React, { FormHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'react';
-import { ErrorMessage } from 'react-hook-form';
 import Icon from 'src/components/Icon';
 import styles from './Form.module.scss';
 
@@ -26,8 +26,10 @@ export function Error({
   className, errors, filler = true, name,
 }: ErrorProps) {
   return (
-    <ErrorMessage errors={errors} name={name}>
-      {({ message }) => (
+    <ErrorMessage
+      errors={errors}
+      name={name}
+      render={({ message }) => (
         <div className={styles['fieldset-error']}>
           {filler && <span className={styles.filler} />}
           <span className={classNames(styles.error, className)}>
@@ -35,7 +37,7 @@ export function Error({
           </span>
         </div>
       )}
-    </ErrorMessage>
+    />
   );
 }
 

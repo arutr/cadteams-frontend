@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormContext, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Label } from 'src/api/User';
 import { DialogType } from 'src/components/Dialog';
 import { useAuth } from 'src/contexts/AuthProvider';
@@ -69,9 +69,9 @@ export default function ProfileUpdateProvider({
         handleUpdateSubmit,
       }}
     >
-      <FormContext {...formMethods}>
+      <FormProvider {...formMethods}>
         {children}
-      </FormContext>
+      </FormProvider>
     </ProfileUpdateContext.Provider>
   );
 }

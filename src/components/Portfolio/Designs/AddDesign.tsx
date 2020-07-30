@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { FormContextValues, useForm } from 'react-hook-form';
+import { UseFormMethods, useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
 import { DialogType } from 'src/components/Dialog';
 import Icon from 'src/components/Icon';
@@ -19,7 +19,7 @@ interface Form {
 
 interface DesignPreviewProps {
   previewState: [File, (state) => void];
-  formMethods: FormContextValues<Form>;
+  formMethods: UseFormMethods<Form>;
 }
 
 const IMAGE_MAX_SIZE = 4 * 1048576;
