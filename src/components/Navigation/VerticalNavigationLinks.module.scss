@@ -20,7 +20,7 @@
     }
 
     @include min-screen($screen-ml) {
-      margin-left: calc(-1 * var(--horizontal-padding));
+      margin-left: calc(-1 * var(--horizontal-spacing));
     }
   }
 }

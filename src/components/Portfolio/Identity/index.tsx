@@ -9,6 +9,7 @@ import Perks from 'src/components/Portfolio/Identity/Perks';
 import ProfilePicture from 'src/components/Portfolio/Identity/ProfilePicture';
 import { PortfolioModal, PortfolioProps } from 'src/components/Portfolio/index';
 import layout from 'src/components/Portfolio/Portfolio.module.scss';
+import { useAuth } from 'src/contexts/AuthProvider';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import styles from './Identity.module.scss';
 
@@ -31,6 +32,8 @@ export function IdentityCard(props: IdentityCardProps) {
   const [demoModal, setDemoModal] = useState(false);
   const toggleDemoModal = () => setDemoModal(!demoModal);
   const showChin = isProfile || !inModal;
+  const { user: authUser } = useAuth();
+  const isEnterpriseViewer = authUser?.type === 'enterprise';
   const currencyFormat = new Intl.NumberFormat(
     'en-GB',
     {
@@ -70,7 +73,7 @@ export function IdentityCard(props: IdentityCardProps) {
             </PortfolioButton>
           )}
         </div>
-        <Perks {...props} />
+        {user?.type === 'individual' && (isProfile || isEnterpriseViewer) && <Perks {...props} />}
       </div>
       {demoModal && (
         <PortfolioModal onClose={toggleDemoModal} user={user} demo />

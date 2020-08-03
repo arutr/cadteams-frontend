@@ -1,0 +1,49 @@
+@import 'styles/mixins/responsive';
+@import 'styles/variables/colors';
+
+.apply {
+  margin-top: var(--spacing);
+}
+
+.apply,
+.toggle {
+  @include min-screen($screen-ml) {
+    display: none;
+  }
+}
+
+.filters {
+  position: relative;
+  background-color: darken($color-silver, 5%);
+  padding: var(--vertical-spacing) var(--horizontal-spacing);
+  padding-top: 0;
+
+  header:focus {
+    outline: none;
+  }
+
+  h2 {
+    @include min-screen($screen-ml) {
+      margin-top: 1.1em;
+    }
+  }
+
+  @include max-screen($screen-ml) {
+    &:not(.open) {
+      max-height: 3.5rem;
+      overflow-y: hidden;
+    }
+  }
+}
+
+.toggle {
+  top: 1.75rem;
+  position: absolute;
+  right: var(--spacing);
+  transform: rotate(90deg);
+  transition: transform 200ms;
+
+  .open & {
+    transform: none;
+  }
+}

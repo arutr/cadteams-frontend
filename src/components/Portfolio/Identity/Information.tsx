@@ -1,42 +1,14 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Label as LabelType } from 'src/api/User';
+import { industries, Label as LabelType, specializations } from 'src/api/User';
 import { Error } from 'src/components/Form';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Label, { LabelContainer } from 'src/components/Label';
-import {
-  EditableDropdown,
-  EditableInput,
-  Placeholder,
-} from 'src/components/Portfolio/Editable';
+import { EditableDropdown, EditableInput, Placeholder, } from 'src/components/Portfolio/Editable';
 import { PortfolioProps } from 'src/components/Portfolio/index';
 import layout from 'src/components/Portfolio/Portfolio.module.scss';
 import { removeLabel, useProfileUpdate } from 'src/contexts/ProfileUpdateContext';
 import styles from './Identity.module.scss';
-
-const industries = [
-  'Arts & Culture',
-  'Aviation',
-  'Data Centres',
-  'Education',
-  'Healthcare',
-  'Industrial',
-  'Infrastructure',
-  'Residential',
-  'Retail & Leisure',
-];
-const specializations = [
-  'BIM Engineering',
-  'BIM Architecture',
-  'CAD Engineering',
-  'CAD Architecture',
-  'Civil Engineering',
-  'MEP Technician',
-  'Parametric Design',
-  'Rendering',
-  'Structural Technician',
-  'Surveying',
-];
 
 interface InformationFormValues {
   company: string;
@@ -138,7 +110,7 @@ export default function Information({
           </Label>
         )) : null}
         {!sectors?.length && (
-          <Label className={layout.placeholder}>Industry sector</Label>
+          <Label className="placeholder">Industry sector</Label>
         )}
         {editing && (
           <EditableDropdown

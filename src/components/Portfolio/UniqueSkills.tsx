@@ -17,8 +17,8 @@ interface UpdateFormValues {
 
 function UniqueSkills(props: PortfolioProps) {
   const { register } = useFormContext<UpdateFormValues>();
-  const { demo, isProfile, user } = props;
-  const showChin = isProfile || !demo;
+  const { inModal, isProfile, user } = props;
+  const showChin = isProfile || !inModal;
 
   if (user?.type === 'individual') {
     return (
@@ -26,26 +26,39 @@ function UniqueSkills(props: PortfolioProps) {
         <Heading2 marginTop="0" condensed bold>
           Unique Skills
         </Heading2>
-        <ul>
-          {[1, 2, 3].map((_, index) => (
-            <li key={index}>
-              <Icon className={layout.icon} large name="verified" />
-              <EditableInput
-                defaultValue={user?.uniqueSkills?.[index]?.skill}
-                placeholder="Something which makes you stand out"
-                name={`uniqueSkills[${index}].skill`}
-                ref={register}
-              >
-                <Placeholder
-                  isProfile={isProfile}
-                  publicValue="N/A"
-                  profileValue="Something which makes you stand out"
-                  value={user?.uniqueSkills?.[index]?.skill}
-                />
-              </EditableInput>
-            </li>
-          ))}
-        </ul>
+        {user.uniqueSkills?.some(({ skill }) => skill.length) || isProfile
+          ? (
+            <ul>
+              {[1, 2, 3].map((_, index) => {
+                const skill = user?.uniqueSkills?.[index]?.skill;
+
+                if (!isProfile && !skill) {
+                  return null;
+                }
+
+                return (
+                  <li key={index}>
+                    <Icon className={layout.icon} large name="verified" />
+                    <EditableInput
+                      defaultValue={skill}
+                      placeholder="Something which makes you stand out"
+                      name={`uniqueSkills[${index}].skill`}
+                      ref={register}
+                    >
+                      <Placeholder
+                        isProfile={isProfile}
+                        publicValue="N/A"
+                        profileValue="Something which makes you stand out"
+                        value={user?.uniqueSkills?.[index]?.skill}
+                      />
+                    </EditableInput>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="placeholder">No unique skills specified</p>
+        )}
         {isProfile && <EditButton bottom />}
       </form>
     );

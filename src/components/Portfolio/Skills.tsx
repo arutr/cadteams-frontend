@@ -17,10 +17,12 @@ import {
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
+import { useAuth } from 'src/contexts/AuthProvider';
 import ProfileUpdateProvider, {
   removeLabel,
   useProfileUpdate,
 } from 'src/contexts/ProfileUpdateContext';
+import { currencyFormat } from 'src/utils/misc';
 import validator from 'validator';
 
 const countryOptions = Object
@@ -46,21 +48,16 @@ interface SkillsFormProps extends PortfolioProps {
 }
 
 function IndividualSkills({
-  demo, isProfile, languages, setLanguages, tools, setTools, ...props
+  inModal, isProfile, languages, setLanguages, tools, setTools, ...props
 }: SkillsFormProps) {
   const { user } = props;
   const { register } = useFormContext<UpdateFormValues>();
   const { editing } = useProfileUpdate();
   const removeLanguage = removeLabel(languages, setLanguages);
   const removeTool = removeLabel(tools, setTools);
-  const showChin = isProfile || !demo;
-  const currencyFormat = new Intl.NumberFormat(
-    'en-GB',
-    {
-      style: 'currency',
-      currency: 'GBP',
-    },
-  );
+  const showChin = isProfile || !inModal;
+  const { user: authUser } = useAuth();
+  const isEnterpriseViewer = authUser?.type === 'enterprise';
 
   return (
     <form className={classNames(styles.card, styles.skills, showChin && styles.chin)}>
@@ -145,10 +142,10 @@ function IndividualSkills({
             </Label>
           )) : null}
           {!editing && !languages?.length && !isProfile && (
-            <Label className={styles.placeholder}>N/A</Label>
+            <Label className="placeholder">N/A</Label>
           )}
           {!editing && !languages?.length && isProfile && (
-            <Label className={styles.placeholder}>Spoken language(s)</Label>
+            <Label className="placeholder">Spoken language(s)</Label>
           )}
           {editing && (
             <EditableLabel
@@ -173,10 +170,10 @@ function IndividualSkills({
             </Label>
           )) : null}
           {!editing && !tools?.length && !isProfile && (
-            <Label className={styles.placeholder}>N/A</Label>
+            <Label className="placeholder">N/A</Label>
           )}
           {!editing && !tools?.length && isProfile && (
-            <Label className={styles.placeholder}>Modelling software</Label>
+            <Label className="placeholder">Modelling software</Label>
           )}
           {editing && (
             <EditableLabel
@@ -193,49 +190,51 @@ function IndividualSkills({
           is <strong>eight hours</strong>. A working month is <strong>20 days</strong>.
         </Dialog>
       )}
-      <div className={styles.row}>
-        <div>
-          <Icon
-            className={styles.icon}
-            large
-            name="banknote"
-            title="Daily rate"
-          />
-          <EditableInput
-            defaultValue={user?.dailyRate}
-            placeholder="Daily rate"
-            name="dailyRate"
-            type="number"
-            prefix={<strong>£&ensp;</strong>}
-            suffix="&ensp;per day"
-            style={{ maxWidth: '12ch' }}
-            ref={register({ min: 0 })}
-          >
-            <Placeholder
-              isProfile={isProfile}
-              publicValue="No daily rate specified"
-              profileValue="Daily rate"
-              value={user?.dailyRate && (
-                <span>
-                  <p><strong>{currencyFormat.format(user?.dailyRate)}</strong> per day</p>
-                  <p><strong>{currencyFormat.format(user?.dailyRate * 20)}</strong> per month</p>
-                </span>
-              )}
-            />
-          </EditableInput>
-        </div>
-        {user?.rating && (
+      {(isProfile || isEnterpriseViewer) && (
+        <div className={styles.row}>
           <div>
             <Icon
               className={styles.icon}
               large
-              name="star"
-              title="Satisfaction rating"
+              name="banknote"
+              title="Daily rate"
             />
-            <span className={styles.placeholder}>No rating available</span>
+            <EditableInput
+              defaultValue={user?.dailyRate}
+              placeholder="Daily rate"
+              name="dailyRate"
+              type="number"
+              prefix={<strong>£&ensp;</strong>}
+              suffix="&ensp;per day"
+              style={{ maxWidth: '12ch' }}
+              ref={register({ min: 0 })}
+            >
+              <Placeholder
+                isProfile={isProfile}
+                publicValue="No daily rate specified"
+                profileValue="Daily rate"
+                value={user?.dailyRate && (
+                  <span>
+                    <p><strong>{currencyFormat.format(user?.dailyRate)}</strong> per day</p>
+                    <p><strong>{currencyFormat.format(user?.dailyRate * 20)}</strong> per month</p>
+                  </span>
+                )}
+              />
+            </EditableInput>
           </div>
-        )}
-      </div>
+          {user?.rating && (
+            <div>
+              <Icon
+                className={styles.icon}
+                large
+                name="star"
+                title="Satisfaction rating"
+              />
+              <span className="placeholder">No rating available</span>
+            </div>
+          )}
+        </div>
+      )}
       {isProfile && <EditButton bottom />}
     </form>
   );

@@ -1,0 +1,36 @@
+@import 'styles/variables/ui';
+
+.avatar {
+  left: calc(-1 * var(--border-radius));
+  top: calc(9rem + var(--border-radius));
+  height: 5rem;
+  position: absolute;
+  border-radius: var(--border-radius);
+  background-color: var(--color-silver);
+}
+
+.entry {
+  position: relative;
+
+  img {
+    object-fit: cover;
+    height: 14rem;
+    filter: $drop-shadow;
+    border-radius: var(--border-radius);
+  }
+}
+
+.labels {
+  position: absolute;
+  flex-direction: row-reverse;
+  top: calc(-2 * var(--border-radius));
+  right: calc(-1 * var(--border-radius));
+
+  > span {
+    padding: 0.33rem;
+  }
+
+  span[class *= 'Icon'] {
+    margin: 0 -0.25rem;
+  }
+}

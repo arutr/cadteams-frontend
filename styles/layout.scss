@@ -3,9 +3,16 @@
 
 :root {
   --spacing: 1rem;
+  --vertical-spacing: 1rem;
+  --horizontal-spacing: var(--page-margin);
 
   @include min-screen($screen-m) {
     --spacing: 1.25rem;
+  }
+
+  @include min-screen($screen-ml) {
+    --vertical-spacing: 1.75rem;
+    --horizontal-spacing: 2rem;
   }
 }
 

@@ -4,17 +4,6 @@ import React, { FormHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from '
 import Icon from 'src/components/Icon';
 import styles from './Form.module.scss';
 
-export const Checkbox = React.forwardRef<HTMLInputElement, InputHTMLAttributes<Element>>(
-  ({
-    id, children, className, ...props
-  }: InputHTMLAttributes<Element>, ref) => (
-    <div className={classNames(styles.checkbox, className)}>
-      <input id={id} name={id} type="checkbox" ref={ref} {...props} />
-      <label htmlFor={id}>{children}</label>
-    </div>
-  ),
-);
-
 interface ErrorProps {
   name: string;
   errors: object;
@@ -73,15 +62,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   </div>
 ));
 
-interface RadioProps {
+interface RadioSliderProps {
   id: string;
   labels: string[];
   legend: string;
 }
 
-export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(({
+export const RadioSlider = React.forwardRef<HTMLInputElement, RadioSliderProps>(({
   id, labels, legend,
-}: RadioProps, ref) => (
+}: RadioSliderProps, ref) => (
   <div className={styles.fieldset}>
     <legend>{legend}</legend>
     <div className={styles.radio}>
