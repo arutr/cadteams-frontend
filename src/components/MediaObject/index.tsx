@@ -1,72 +1,73 @@
+import Link from 'next/link';
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import styles from './MediaObject.module.scss';
 
+interface Props extends React.HTMLProps<HTMLImageElement> {
+  captionAlign?: 'left' | 'center' | 'right';
+  href?: any;
+  vertical?: boolean;
+}
+
 function MediaObject({
-  alt, children, className, captionAlign, height, href, id, onClick, src, width, vertical,
-}) {
-  if (href) {
+  alt,
+  children,
+  className,
+  captionAlign = 'center',
+  height,
+  href,
+  id,
+  onClick,
+  src,
+  width,
+  vertical,
+}: Props) {
+  // eslint-disable-next-line react/prop-types
+  function Figure({ children: image }) {
     return (
       <figure
         id={id}
         className={classNames(styles.figure, vertical && styles.vertical, className)}
         style={{ height, width }}
       >
-        <a href={href} target="_blank" rel="noopener">
-          <img src={src} alt={alt} />
-        </a>
-        <figcaption className={styles[captionAlign]}>{children}</figcaption>
+        {image}
+        {children && <figcaption className={styles[captionAlign]}>{children}</figcaption>}
       </figure>
     );
   }
 
+  if (typeof href === 'string' && href?.startsWith('http')) {
+    return (
+      <Figure>
+        <a href={href} target="_blank" rel="noopener">
+          <img src={src} alt={alt} />
+        </a>
+      </Figure>
+    );
+  }
+
+  if (href) {
+    return (
+      <Figure>
+        <Link href={href} scroll={false}>
+          <img className={styles.clickable} src={src} alt={alt} />
+        </Link>
+      </Figure>
+    );
+  }
+
   return (
-    <figure
-      id={id}
-      className={classNames(styles.figure, vertical && styles.vertical, className)}
-      style={{ height, width }}
-    >
+    <Figure>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <img
         className={classNames(onClick && styles.clickable)}
-        onKeyDown={onClick}
+        onKeyDown={onClick as any}
         onClick={onClick}
         src={src}
         alt={alt}
       />
-      <figcaption className={styles[captionAlign]}>{children}</figcaption>
-    </figure>
+    </Figure>
   );
 }
-
-MediaObject.propTypes = {
-  alt: PropTypes.string,
-  captionAlign: PropTypes.oneOf(['left', 'center', 'right']),
-  children: PropTypes.node,
-  className: PropTypes.string,
-  height: PropTypes.string,
-  href: PropTypes.string,
-  id: PropTypes.string,
-  onClick: PropTypes.func,
-  src: PropTypes.string,
-  width: PropTypes.string,
-  vertical: PropTypes.bool,
-};
-
-MediaObject.defaultProps = {
-  alt: null,
-  captionAlign: 'center',
-  children: null,
-  className: null,
-  height: null,
-  href: null,
-  id: null,
-  onClick: null,
-  src: null,
-  width: null,
-  vertical: false,
-};
 
 export default MediaObject;
