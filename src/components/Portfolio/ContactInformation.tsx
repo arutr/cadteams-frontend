@@ -8,12 +8,12 @@ import { Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import Label from 'src/components/Label';
 import Link from 'src/components/Link';
-import { getFirstName } from 'src/components/Portfolio/About';
 import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
+import { getFirstName } from 'src/utils/misc';
 import validator from 'validator';
 
 interface FormValues {
@@ -21,7 +21,7 @@ interface FormValues {
   contactEmail: string;
 }
 
-function ContactInformation({ isProfile, user }: PortfolioProps) {
+function ContactInformation({ inModal, isProfile, user }: PortfolioProps) {
   const { instrument } = useAmplitude((inheritedProps) => ({
     portfolio: {
       ...inheritedProps.portfolio,
@@ -31,16 +31,17 @@ function ContactInformation({ isProfile, user }: PortfolioProps) {
   }));
   const [revealed, setRevealed] = useState<boolean>(isProfile);
   const { register, errors } = useFormContext<FormValues>();
+  const showChin = isProfile || !inModal;
 
   return (
     <section className={classNames(
       styles.card,
       styles.contactInformation,
-      isProfile && styles.chin,
+      showChin && styles.chin,
     )}
     >
       <Heading2 bold condensed marginTop="0">
-        {isProfile ? 'Contact Information' : 'Like what you\'re seeing?'}
+        {isProfile ? 'Contact Information' : 'Like What You\'re Seeing?'}
       </Heading2>
       {isProfile && user?.type === 'individual' && (
         <p className={styles.disclaimer}>
@@ -104,7 +105,7 @@ function ContactInformation({ isProfile, user }: PortfolioProps) {
               >
                 <Placeholder
                   isProfile={isProfile}
-                  publicValue="N/A"
+                  publicValue="No e-mail address specified"
                   profileValue="Contact e-mail address"
                   value={<a href={`mailto:${user?.contactEmail}`}>{user?.contactEmail}</a>}
                 />
@@ -115,8 +116,8 @@ function ContactInformation({ isProfile, user }: PortfolioProps) {
         ) : (
           <>
             <p className={styles.disclaimer}>
-              Get in touch with {getFirstName(user?.username)} if you wish to discuss this
-              portfolio further!
+              Get in touch with {getFirstName(user?.username)} if you wish to discuss work
+              opportunities.
             </p>
             <Button
               onClick={instrument('reveal contact information', () => setRevealed(true))}

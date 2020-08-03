@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import Dialog, { DialogType } from 'src/components/Dialog';
-import { Checkbox } from 'src/components/Form';
+import Dialog from 'src/components/Dialog';
+import Checkbox from 'src/components/Form/Checkbox';
 import Icon from 'src/components/Icon';
 import styles from 'src/components/Portfolio/Identity/Identity.module.scss';
 import { PortfolioProps } from 'src/components/Portfolio/index';

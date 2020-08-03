@@ -7,23 +7,16 @@ import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
-
-export const getFirstName = (username) => {
-  if (username) {
-    return username.split(' ')[0];
-  }
-
-  return '';
-};
+import { getFirstName } from 'src/utils/misc';
 
 interface FormValues {
   description: string;
 }
 
-function About({ demo, isProfile, user }: PortfolioProps) {
+function About({ inModal, isProfile, user }: PortfolioProps) {
   const { register } = useFormContext<FormValues>();
   let descriptionHeading;
-  const showChin = isProfile || !demo;
+  const showChin = isProfile || !inModal;
 
   if (isProfile) {
     descriptionHeading = user?.type === 'enterprise' ? 'Your Company' : 'Yourself';
