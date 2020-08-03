@@ -45,7 +45,7 @@ function Conversion({ user }: PortfolioProps) {
 function Portfolio(props: PortfolioProps) {
   const { demo, isProfile, user } = props;
   const { user: authUser } = useAuth();
-  const isNotIndividual = authUser?.type !== 'individual';
+  const isEnterpriseViewer = authUser?.type === 'enterprise';
 
   return (
     <div className={styles.wrapper}>
@@ -58,7 +58,7 @@ function Portfolio(props: PortfolioProps) {
         <Designs {...props} />
         <div className={styles.row}>
           <About {...props} />
-          {(demo || isProfile || isNotIndividual) && (
+          {(demo || isProfile || isEnterpriseViewer) && (
             <ExperienceEducation {...props} />
           )}
           {user?.type !== 'individual' && (
@@ -66,10 +66,10 @@ function Portfolio(props: PortfolioProps) {
           )}
         </div>
         <div className={styles.row}>
-          {(demo || isProfile || isNotIndividual) && (
+          {(demo || isProfile || isEnterpriseViewer) && (
             <UniqueSkills {...props} />
           )}
-          {!demo && user?.type === 'individual' && (isProfile || isNotIndividual) && (
+          {!demo && user?.type === 'individual' && (isProfile || isEnterpriseViewer) && (
             <ContactInformation {...props} />
           )}
           {demo && <Conversion {...props} />}

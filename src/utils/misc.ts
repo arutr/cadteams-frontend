@@ -6,3 +6,19 @@ export const inApp = () => {
 };
 
 export const isBrowser = () => typeof window !== 'undefined';
+
+export const currencyFormat = new Intl.NumberFormat(
+  'en-GB',
+  {
+    style: 'currency',
+    currency: 'GBP',
+  },
+);
+
+export const getFirstName = (username) => {
+  if (username) {
+    return username.split(' ')[0];
+  }
+
+  return '';
+};
