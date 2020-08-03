@@ -132,7 +132,7 @@ export function Placeholder({
   }
 
   return (
-    <span className={portfolioStyles.placeholder}>
+    <span className="placeholder">
       {isProfile ? profileValue : publicValue}
     </span>
   );

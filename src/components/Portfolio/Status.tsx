@@ -69,7 +69,7 @@ export default function Status() {
       message: 'Timeline of your professional and academic experience',
     },
     {
-      status: user.uniqueSkills?.find(({ skill }) => skill.length),
+      status: user.uniqueSkills?.some(({ skill }) => skill.length),
       message: (<><strong>At least one</strong> unique skill</>),
     },
     {
@@ -104,8 +104,16 @@ export default function Status() {
 
   return (
     <Dialog className={styles.status} type={DialogType.Info}>
-      Your profile is complete and <strong>pending verification</strong>. If we don't get in touch
-      with you within the next few days, please contact us via Live Chat
+      Your profile is complete! To proceed with the verification process, please&nbsp;
+      <Link
+        external
+        underlined
+        href="https://calendly.com/peter-cadteams/meeting"
+      >
+        schedule a meeting with us
+      </Link>.
+      <br />
+      If you have any questions or concerns, please contact us via Live Chat
       or <Link external href="mailto:hello@cadteams.com">send us an e-mail</Link>.
     </Dialog>
   );

@@ -1,8 +1,8 @@
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import React from 'react';
 import Axios, { Method } from 'axios';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
+import { isProduction } from 'src/utils/misc';
 import { LoginForm, RegistrationForm } from '../api/Auth';
 import User from '../api/User';
 
@@ -69,11 +69,9 @@ export default class AuthProvider extends React.Component<any, State> {
       Axios
         .get('/users/me')
         .then(({ data }) => this.setState({ user: data }))
-        .catch((error) => {
-          this.logOut();
-
-          if (PHASE_DEVELOPMENT_SERVER) {
-            throw error;
+        .catch(() => {
+          if (isProduction) {
+            this.logOut();
           }
         });
     }

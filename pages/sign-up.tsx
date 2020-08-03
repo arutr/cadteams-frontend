@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import { RegistrationForm } from 'src/api/Auth';
 import Dialog, { DialogType } from 'src/components/Dialog';
 import {
-  Checkbox, Error, Form, Input, Radio,
+  Error, Form, Input, RadioSlider,
 } from 'src/components/Form';
+import Checkbox from 'src/components/Form/Checkbox';
 import { Heading1 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
 import { FacebookLoginButton } from 'src/components/SocialLogin';
@@ -86,7 +87,12 @@ function SignUp() {
         {serverError && (
           <Dialog type={DialogType.Error}>{serverError}</Dialog>
         )}
-        <Radio id="type" labels={['Individual', 'Enterprise']} legend="I am an..." ref={register} />
+        <RadioSlider
+          id="type"
+          labels={['Individual', 'Enterprise']}
+          legend="I am an..."
+          ref={register}
+        />
         <Input
           label="Full Name:"
           placeholder="John Smith"

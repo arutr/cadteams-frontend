@@ -1,17 +1,17 @@
-import { PHASE_PRODUCTION_SERVER } from 'next/constants';
 import { useRouter } from 'next/router';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AmplitudeClient } from 'amplitude-js';
 import { Amplitude, AmplitudeProvider as BaseAmplitudeProvider } from 'react-amplitude-hooks';
 import { useAuth } from 'src/contexts/AuthProvider';
-import { inApp } from 'src/utils/misc';
+import { inApp, isProduction } from 'src/utils/misc';
 
 export default function AmplitudeProvider({ children }) {
   const { user } = useAuth();
   const { pathname } = useRouter();
 
-  if ((inApp() && !user) || user?.email.endsWith('cadteams.com')) {
+  if ((inApp() && !user)
+    || (isProduction && user?.email.endsWith('cadteams.com'))) {
     return children;
   }
 
@@ -19,7 +19,7 @@ export default function AmplitudeProvider({ children }) {
   const amplitude = require('amplitude-js');
   const amplitudeInstance: AmplitudeClient = amplitude.getInstance();
   amplitudeInstance.init(process.env.AMPLITUDE_API_KEY, null, {
-    logLevel: PHASE_PRODUCTION_SERVER ? 'DISABLE' : 'WARN',
+    logLevel: isProduction ? 'DISABLE' : 'WARN',
     includeGclid: true,
     includeReferrer: true, // https://help.amplitude.com/hc/en-us/articles/215131888#track-referrers
     includeUtm: true,
