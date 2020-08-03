@@ -24,6 +24,10 @@
   border-radius: var(--border-radius);
   font-family: var(--font-family__monospace);
 
+  &.green {
+    background-color: var(--color-green);
+  }
+
   &.inverted {
     color: var(--color-blue);
     background-color: var(--color-white);
@@ -32,6 +36,14 @@
   &.small {
     padding: 0.33rem;
     font-size: 0.7rem;
+  }
+
+  &.purple {
+    background-color: var(--color-purple);
+  }
+
+  &.red {
+    background-color: var(--color-red);
   }
 }
 
