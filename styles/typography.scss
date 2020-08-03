@@ -1,5 +1,6 @@
 @import 'mixins/typography';
 @import 'mixins/responsive';
+@import 'variables/colors';
 @import 'variables/typography';
 
 a:not([role="button"]),
@@ -56,4 +57,8 @@ strong {
 .cadteams {
   font-family: var(--font-family__sans-serif);
   font-weight: normal;
+}
+
+.placeholder {
+  opacity: 0.5;
 }
