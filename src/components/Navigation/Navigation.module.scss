@@ -33,9 +33,6 @@ $screen-mobile: $screen-m + 28px;
 }
 
 .vertical {
-  --vertical-padding: 1rem;
-  --horizontal-padding: var(--page-margin);
-
   top: 0;
   z-index: 2;
   position: sticky;
@@ -43,12 +40,9 @@ $screen-mobile: $screen-m + 28px;
   box-sizing: border-box;
   height: $navigation-height;
   background-color: var(--color-silver);
-  padding: var(--vertical-padding) var(--horizontal-padding);
+  padding: var(--vertical-spacing) var(--horizontal-spacing);
 
   @include min-screen($screen-ml) {
-    --vertical-padding: 1.75rem;
-    --horizontal-padding: 2rem;
-
     height: $viewport-height;
     width: $navigation-app__width;
   }
