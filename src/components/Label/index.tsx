@@ -3,6 +3,7 @@ import React, { HTMLAttributes } from 'react';
 import styles from './Label.module.scss';
 
 interface LabelProps extends HTMLAttributes<Element> {
+  color?: 'purple' | 'red' | 'green';
   inverted?: boolean;
   onRemoveLabel?: () => void;
   small?: boolean;
@@ -11,6 +12,7 @@ interface LabelProps extends HTMLAttributes<Element> {
 function Label({
   children,
   className,
+  color,
   inverted,
   onRemoveLabel,
   small,
@@ -20,9 +22,10 @@ function Label({
     <span
       className={classNames(
         styles.label,
-        className,
+        styles[color],
         small && styles.small,
         inverted && styles.inverted,
+        className,
       )}
       {...props}
     >
@@ -42,9 +45,11 @@ function Label({
   );
 }
 
-export function LabelContainer({ children, ...props }: React.HTMLProps<HTMLDivElement>) {
+export function LabelContainer({
+  children, className, ...props
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className={styles.container} {...props}>
+    <div className={classNames(styles.container, className)} {...props}>
       {children}
     </div>
   );
