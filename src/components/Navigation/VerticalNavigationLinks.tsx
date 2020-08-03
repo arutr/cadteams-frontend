@@ -35,7 +35,7 @@ export default function VerticalNavigationLinks() {
       <ActiveTab href="/app/documents" disabled>
         <Icon large name="file" /> Documents
       </ActiveTab>
-      <ActiveTab href="/app/explore" disabled>
+      <ActiveTab href="/app/explore">
         <Icon large name="shop" /> Explore
       </ActiveTab>
       <ActiveTab href="/app/projects" disabled>

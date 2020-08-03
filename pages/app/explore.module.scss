@@ -1,20 +1,33 @@
+@import 'styles/mixins/responsive';
 @import 'styles/variables/ui';
 @import 'styles/variables/layout';
-@import 'styles/variables/responsive';
 
-.entry {
-  justify-content: flex-start;
+.explore {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+
+  @include min-screen($screen-ml) {
+    flex-direction: row;
+  }
+}
+
+.gallery {
+  flex: 1;
+  max-width: var(--page-width);
+  padding: 0 var(--page-margin);
+
+  @include min-screen($screen-ml) {
+    height: 100vh;
+    margin: 0 auto;
+    overflow-y: scroll;
+  }
 }
 
 .grid {
   display: grid;
-  grid-gap: var(--spacing);
-  grid-template-columns: repeat(auto-fill, minmax($grid-item--four-column__width, 1fr));
-
-  img {
-    object-fit: cover;
-    max-height: 14rem;
-    filter: $drop-shadow;
-    border-radius: var(--border-radius);
-  }
+  grid-gap: calc(2 * var(--spacing));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
