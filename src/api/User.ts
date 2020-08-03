@@ -50,3 +50,27 @@ export interface UniqueSkill {
   id: number;
   skill: string;
 }
+
+export const industries = [
+  'Arts & Culture',
+  'Aviation',
+  'Data Centres',
+  'Education',
+  'Healthcare',
+  'Industrial',
+  'Infrastructure',
+  'Residential',
+  'Retail & Leisure',
+];
+export const specializations = [
+  'BIM Engineering',
+  'BIM Architecture',
+  'CAD Engineering',
+  'CAD Architecture',
+  'Civil Engineering',
+  'MEP Technician',
+  'Parametric Design',
+  'Rendering',
+  'Structural Technician',
+  'Surveying',
+];
