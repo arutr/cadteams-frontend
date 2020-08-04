@@ -1,22 +1,18 @@
 @import 'styles/mixins/responsive';
 @import 'styles/variables/colors';
 
-.apply {
-  margin-top: var(--spacing);
-}
-
-.apply,
-.toggle {
-  @include min-screen($screen-ml) {
-    display: none;
-  }
-}
-
 .filters {
   position: relative;
   background-color: darken($color-silver, 5%);
   padding: var(--vertical-spacing) var(--horizontal-spacing);
   padding-top: 0;
+
+  @include max-screen($screen-ml) {
+    &:not(.open) {
+      max-height: 3.5rem;
+      overflow-y: hidden;
+    }
+  }
 
   header:focus {
     outline: none;
@@ -28,22 +24,26 @@
     }
   }
 
-  @include max-screen($screen-ml) {
-    &:not(.open) {
-      max-height: 3.5rem;
-      overflow-y: hidden;
+  .apply {
+    margin-top: var(--spacing);
+  }
+
+  .apply,
+  .toggle {
+    @include min-screen($screen-ml) {
+      display: none;
     }
   }
-}
 
-.toggle {
-  top: 1.75rem;
-  position: absolute;
-  right: var(--spacing);
-  transform: rotate(90deg);
-  transition: transform 200ms;
+  .toggle {
+    top: 1.75rem;
+    position: absolute;
+    right: var(--spacing);
+    transform: rotate(90deg);
+    transition: transform 200ms;
 
-  .open & {
-    transform: none;
+    .open & {
+      transform: none;
+    }
   }
 }
