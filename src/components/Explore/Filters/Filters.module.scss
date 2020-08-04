@@ -41,9 +41,9 @@
     right: var(--spacing);
     transform: rotate(90deg);
     transition: transform 200ms;
+  }
 
-    .open & {
-      transform: none;
-    }
+  &.open .toggle {
+    transform: none;
   }
 }
