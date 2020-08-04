@@ -1,13 +1,11 @@
 {
   "name": "frontend",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook"
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/error-message": "0.0.3",
@@ -43,11 +41,6 @@
     "validator": "13.1.1"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "5.3.18",
-    "@storybook/addon-links": "5.3.18",
-    "@storybook/addons": "5.3.18",
-    "@storybook/preset-typescript": "3.0.0",
-    "@storybook/react": "5.3.18",
     "@typescript-eslint/eslint-plugin": "2.26.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-typescript": "7.2.0",
