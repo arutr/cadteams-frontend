@@ -4,7 +4,7 @@ import { industries, Label as LabelType, specializations } from 'src/api/User';
 import { Error } from 'src/components/Form';
 import { Heading1, Heading3 } from 'src/components/Heading';
 import Label, { LabelContainer } from 'src/components/Label';
-import { EditableDropdown, EditableInput, Placeholder, } from 'src/components/Portfolio/Editable';
+import { EditableDropdown, EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import { PortfolioProps } from 'src/components/Portfolio/index';
 import layout from 'src/components/Portfolio/Portfolio.module.scss';
 import { removeLabel, useProfileUpdate } from 'src/contexts/ProfileUpdateContext';
@@ -109,7 +109,7 @@ export default function Information({
             {label}
           </Label>
         )) : null}
-        {!sectors?.length && (
+        {!sectors?.length && isProfile && (
           <Label className="placeholder">Industry sector</Label>
         )}
         {editing && (
