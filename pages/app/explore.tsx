@@ -111,7 +111,7 @@ function Explore(props: Props) {
 }
 
 export default function () {
-  const [filters, setFilters] = useState<FiltersForm>({ verified: true });
+  const [filters, setFilters] = useState<FiltersForm>();
 
   return (
     <ModalProvider className={styles.explore}>

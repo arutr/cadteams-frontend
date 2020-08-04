@@ -33,7 +33,6 @@ const sections = [
           </span>
         ),
         id: 'verified',
-        defaultChecked: true,
       },
       {
         label: (<>Instant Booking <Icon name="time-quick" /></>),
