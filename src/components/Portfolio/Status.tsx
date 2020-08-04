@@ -3,7 +3,10 @@ import Dialog, { DialogType } from 'src/components/Dialog';
 import Icon from 'src/components/Icon';
 import Link from 'src/components/Link';
 import { useAuth } from 'src/contexts/AuthProvider';
+import { analyzeUserProfile, getUserProfileProblems, getUserProfileStatus } from 'src/utils/user';
 import styles from './Status.module.scss';
+
+export const calendly = 'https://calendly.com/peter-cadteams/meeting';
 
 export default function Status() {
   const { user } = useAuth();
@@ -23,98 +26,44 @@ export default function Status() {
     );
   }
 
-  const analysis = [
-    {
-      status: !!user.profilePicture,
-      message: 'Your profile picture',
-    },
-    {
-      status: !!user.specialization,
-      message: 'Your specialisation',
-    },
-    {
-      status: user.sectors?.length,
-      message: (<><strong>At least one</strong> industry sector you work in</>),
-    },
-    {
-      status: !!user.location && !!user.country,
-      message: 'Your location and country',
-    },
-    {
-      status: !!user.experience,
-      message: 'Years of professional experience',
-    },
-    {
-      status: user.languages?.length,
-      message: (<><strong>At least one</strong> language you speak</>),
-    },
-    {
-      status: user.tools?.length,
-      message: 'Modelling/rendering tool(s) you use',
-    },
-    {
-      status: !!user.dailyRate,
-      message: 'Your daily rate',
-    },
-    {
-      status: user.designs?.length > 1,
-      message: (<><strong>At least two</strong> sample designs</>),
-    },
-    {
-      status: !!user.description,
-      message: 'Brief description of your professional experience',
-    },
-    {
-      status: user.history?.length,
-      message: 'Timeline of your professional and academic experience',
-    },
-    {
-      status: user.uniqueSkills?.some(({ skill }) => skill.length),
-      message: (<><strong>At least one</strong> unique skill</>),
-    },
-    {
-      status: user.contactEmail || user.phone,
-      message: (<>Contact e-mail address <strong>or</strong> phone number</>),
-    },
-  ];
-  const problems = analysis.filter(({ status }) => !status);
+  const analysis = analyzeUserProfile(user);
+  const problems = getUserProfileProblems(user, analysis);
+  const status = getUserProfileStatus(user, problems);
 
-  if (analysis.length === problems.length) {
-    return (
-      <Dialog emoji="&#x1f44b;" className={styles.status} type={DialogType.Info}>
-        Welcome to <b>CAD</b>teams! To get started, fill out your profile.
-        Once it's complete, we will get in touch with you regarding the verification process.
-      </Dialog>
-    );
+  switch (status) {
+    case 'new':
+      return (
+        <Dialog emoji="&#x1f44b;" className={styles.status} type={DialogType.Info}>
+          Welcome to <b>CAD</b>teams! To get started, fill out your profile.
+          Once it's complete, you will be able to schedule a verification meeting with us.
+        </Dialog>
+      );
+    case 'incomplete':
+      return (
+        <Dialog as="div" className={styles.status} type={DialogType.Warning}>
+          <strong>Your profile is not complete</strong>. In order to verify your profile, please
+          include the following information:
+          <ul>
+            {problems.map(({ message }, index) => (
+              <li key={index}>{message}</li>
+            ))}
+          </ul>
+        </Dialog>
+      );
+    case 'complete':
+      return (
+        <Dialog icon="clipboard" className={styles.status} type={DialogType.Warning}>
+          <strong>Your profile is complete!</strong> To proceed with the verification process,
+          please&nbsp;
+          <Link inverted external underlined href={calendly}>
+            schedule a meeting with us
+          </Link>.
+          <br />
+          If you have any questions or concerns, please contact us via Live Chat or&nbsp;
+          <Link inverted underlined external href="mailto:hello@cadteams.com">send us an e-mail</Link>.
+        </Dialog>
+      );
+    default:
+      return null;
   }
-
-  if (problems.length) {
-    return (
-      <Dialog as="div" className={styles.status} type={DialogType.Warning}>
-        Your profile is <strong>not complete</strong>. In order to verify your profile, please
-        include the following information:
-        <ul>
-          {problems.map(({ message }, index) => (
-            <li key={index}>{message}</li>
-          ))}
-        </ul>
-      </Dialog>
-    );
-  }
-
-  return (
-    <Dialog className={styles.status} type={DialogType.Info}>
-      Your profile is complete! To proceed with the verification process, please&nbsp;
-      <Link
-        external
-        underlined
-        href="https://calendly.com/peter-cadteams/meeting"
-      >
-        schedule a meeting with us
-      </Link>.
-      <br />
-      If you have any questions or concerns, please contact us via Live Chat
-      or <Link external href="mailto:hello@cadteams.com">send us an e-mail</Link>.
-    </Dialog>
-  );
 }
