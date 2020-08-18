@@ -36,7 +36,7 @@ export default function ProfilePicture({
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'An error has occurred during file deletion. Please try again later.',
+        children: 'An error has occurred during file deletion. Please try again later.',
       });
     });
 
@@ -47,7 +47,7 @@ export default function ProfilePicture({
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'Maximum file size of a profile picture is 4 megabytes.',
+        children: 'Maximum file size of a profile picture is 4 megabytes.',
       });
       return;
     }
