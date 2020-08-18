@@ -24,25 +24,24 @@ export interface DialogProps extends HTMLAttributes<Element> {
   as?: string;
   emoji?: string;
   icon?: string;
-  message?: string;
   small?: boolean;
   type?: DialogType;
 }
 
 export default function Dialog({
-  as, children, className, emoji, icon, type = DialogType.Blank, small, message, ...props
+  as, children, className, emoji, icon, type = DialogType.Blank, small, ...props
 }: DialogProps) {
   const Wrapper = small ? 'small' : 'div';
   const As: any = as ?? 'p';
 
-  if (children || message) {
+  if (children) {
     return (
       <Wrapper className={classNames(styles.dialog, styles[type], className)} {...props}>
         {emoji && <span className={classNames(styles.icon, styles.emoji)}>{emoji}</span>}
         {(icon || type) && !emoji && (
           <Icon className={styles.icon} large name={icon || dialogIcons[type]} />
         )}
-        <As className={styles.message}>{children ?? message}</As>
+        <As className={styles.message}>{children}</As>
       </Wrapper>
     );
   }

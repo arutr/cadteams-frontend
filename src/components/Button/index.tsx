@@ -8,18 +8,21 @@ export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   block?: boolean;
   color?: 'error' | 'success';
   large?: boolean;
+  loading?: boolean;
 }
 
 function Button({
-  block, large, children, className, color, type = 'submit', ...props
+  block, disabled, large, loading, children, className, color, type = 'submit', ...props
 }: ButtonProps) {
   return (
     <button
       type={type as any}
+      disabled={loading || disabled}
       className={classNames(
         styles.button,
         block && styles.block,
         large && styles.large,
+        (loading && !disabled) && styles.loading,
         styles[color],
         className,
       )}
@@ -33,6 +36,7 @@ function Button({
 interface AnchorProps extends React.HTMLProps<HTMLAnchorElement> {
   block?: boolean;
   external?: boolean;
+  href?: any;
   large?: boolean;
 }
 
@@ -41,7 +45,7 @@ export const AnchorButton = React.forwardRef<HTMLAnchorElement, AnchorProps>(({
 }: AnchorProps, ref) => {
   const Anchor = (
     <a
-      href={href}
+      href={external ? href : null}
       ref={ref}
       rel={external && 'noopener'}
       role="button"

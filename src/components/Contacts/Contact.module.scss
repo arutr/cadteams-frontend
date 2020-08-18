@@ -1,0 +1,107 @@
+@import 'styles/mixins/responsive';
+
+.avatar {
+  justify-content: flex-start;
+  margin-right: var(--spacing);
+
+  img {
+    height: 8rem;
+    border-radius: var(--border-radius);
+  }
+}
+
+.avatar,
+.identity,
+.message {
+  margin-bottom: var(--spacing);
+}
+
+.decision {
+  flex-basis: 100%;
+  justify-content: flex-end;
+
+  button {
+    @include max-screen($screen-sm) {
+      flex: 1;
+    }
+
+    @include min-screen($screen-sm) {
+      flex-basis: 25%;
+    }
+  }
+}
+
+.decision,
+.options {
+  display: flex;
+
+  a + button,
+  button + button {
+    margin-left: 1rem;
+  }
+}
+
+.details {
+  flex: 1 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include min-screen($screen-sm) {
+    align-items: flex-end;
+    flex-basis: 50%;
+  }
+
+  span + span {
+    margin-top: 0.5rem;
+  }
+}
+
+.entry {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.entry + .entry {
+  margin-top: calc(2 * var(--spacing));
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+
+  @include min-screen($screen-s) {
+    margin-right: var(--spacing);
+  }
+
+  .labels {
+    flex: 0;
+    margin: auto 0 0;
+
+    > span {
+      margin: 0;
+    }
+  }
+}
+
+.message {
+  //flex: 1;
+  font-style: italic;
+  text-align: justify;
+  white-space: pre-wrap;
+
+  @include max-screen($screen-sm) {
+    flex-basis: 100%;
+  }
+
+  @include min-screen($screen-sm) {
+    margin-left: auto;
+  }
+}
+
+.options {
+  margin-top: var(--spacing);
+
+  @include min-screen($screen-sm) {
+    margin-top: auto;
+  }
+}

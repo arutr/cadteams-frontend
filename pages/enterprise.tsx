@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { InferGetStaticPropsType } from 'next';
+import { GuestLayout } from 'pages/_app';
 import React, { useState } from 'react';
 import User from 'src/api/User';
 import { AnchorButton } from 'src/components/Button';
@@ -426,3 +427,5 @@ export default function Enterprise({ rates }: InferGetStaticPropsType<typeof get
     </ModalProvider>
   );
 }
+
+Enterprise.Layout = GuestLayout;

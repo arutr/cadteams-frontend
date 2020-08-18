@@ -22,45 +22,47 @@ function UniqueSkills(props: PortfolioProps) {
 
   if (user?.type === 'individual') {
     return (
-      <form className={classNames(layout.card, styles.uniqueSkills, showChin && layout.chin)}>
-        <Heading2 marginTop="0" condensed bold>
-          Unique Skills
-        </Heading2>
-        {user.uniqueSkills?.some(({ skill }) => skill.length) || isProfile
-          ? (
-            <ul>
-              {[1, 2, 3].map((_, index) => {
-                const skill = user?.uniqueSkills?.[index]?.skill;
+      <div>
+        <form className={classNames(layout.card, styles.uniqueSkills, showChin && layout.chin)}>
+          <Heading2 marginTop="0" condensed bold>
+            Unique Skills
+          </Heading2>
+          {user.uniqueSkills?.some(({ skill }) => skill.length) || isProfile
+            ? (
+              <ul>
+                {[1, 2, 3].map((_, index) => {
+                  const skill = user?.uniqueSkills?.[index]?.skill;
 
-                if (!isProfile && !skill) {
-                  return null;
-                }
+                  if (!isProfile && !skill) {
+                    return null;
+                  }
 
-                return (
-                  <li key={index}>
-                    <Icon className={layout.icon} large name="verified" />
-                    <EditableInput
-                      defaultValue={skill}
-                      placeholder="Something which makes you stand out"
-                      name={`uniqueSkills[${index}].skill`}
-                      ref={register}
-                    >
-                      <Placeholder
-                        isProfile={isProfile}
-                        publicValue="N/A"
-                        profileValue="Something which makes you stand out"
-                        value={user?.uniqueSkills?.[index]?.skill}
-                      />
-                    </EditableInput>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p className="placeholder">No unique skills specified</p>
-        )}
-        {isProfile && <EditButton bottom />}
-      </form>
+                  return (
+                    <li key={index}>
+                      <Icon className={layout.icon} large name="verified" />
+                      <EditableInput
+                        defaultValue={skill}
+                        placeholder="Something which makes you stand out"
+                        name={`uniqueSkills[${index}].skill`}
+                        ref={register}
+                      >
+                        <Placeholder
+                          isProfile={isProfile}
+                          publicValue="N/A"
+                          profileValue="Something which makes you stand out"
+                          value={user?.uniqueSkills?.[index]?.skill}
+                        />
+                      </EditableInput>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="placeholder">No unique skills specified</p>
+            )}
+          {isProfile && <EditButton bottom />}
+        </form>
+      </div>
     );
   }
 

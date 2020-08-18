@@ -21,26 +21,26 @@ export default function VerticalNavigationLinks() {
 
   return (
     <>
-      {user?.type === 'individual' && (
-        <ActiveTab href="/app/calendar" disabled>
-          <Icon large name="calendar" /> Calendar
-        </ActiveTab>
-      )}
-      <ActiveTab href="/app/contacts" disabled>
+      {/* {user?.type === 'individual' && ( */}
+      {/*  <ActiveTab href="/app/calendar" disabled> */}
+      {/*    <Icon large name="calendar" /> Calendar */}
+      {/*  </ActiveTab> */}
+      {/* )} */}
+      <ActiveTab href="/app/contacts">
         <Icon large name="handshake" /> Contacts
       </ActiveTab>
-      <ActiveTab href="/app" disabled>
-        <Icon large name="dashboard" /> Dashboard
-      </ActiveTab>
-      <ActiveTab href="/app/documents" disabled>
-        <Icon large name="file" /> Documents
-      </ActiveTab>
+      {/* <ActiveTab href="/app" disabled> */}
+      {/*  <Icon large name="dashboard" /> Dashboard */}
+      {/* </ActiveTab> */}
+      {/* <ActiveTab href="/app/documents" disabled> */}
+      {/*  <Icon large name="file" /> Documents */}
+      {/* </ActiveTab> */}
       <ActiveTab href="/app/explore">
         <Icon large name="shop" /> Explore
       </ActiveTab>
-      <ActiveTab href="/app/projects" disabled>
-        <Icon large name="plan" /> Projects
-      </ActiveTab>
+      {/* <ActiveTab href="/app/projects" disabled> */}
+      {/*  <Icon large name="plan" /> Projects */}
+      {/* </ActiveTab> */}
       <div className={styles.separator} />
       <MediaObject
         captionAlign="left"
@@ -55,7 +55,7 @@ export default function VerticalNavigationLinks() {
       <ActiveTab href="/app/profile">
         <Icon large name="user" /> Profile
       </ActiveTab>
-      <ActiveTab href="/app/settings" disabled>
+      <ActiveTab href="/app/settings">
         <Icon large name="gear" /> Settings
       </ActiveTab>
       <Link onClick={logOut}>

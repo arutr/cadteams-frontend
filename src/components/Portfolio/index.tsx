@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { Amplitude, LogOnMount } from 'react-amplitude-hooks';
 import About from 'src/components/Portfolio/About';
+import Connect from 'src/components/Portfolio/Connect';
 import Designs from 'src/components/Portfolio/Designs';
 import ExperienceEducation from 'src/components/Portfolio/ExperienceEducation';
 import Identity from 'src/components/Portfolio/Identity';
@@ -58,20 +59,18 @@ function Portfolio(props: PortfolioProps) {
         <Designs {...props} />
         <div className={styles.row}>
           <About {...props} />
-          {(demo || isProfile || isEnterpriseViewer) && (
-            <ExperienceEducation {...props} />
-          )}
-          {user?.type !== 'individual' && (
-            <ContactInformation {...props} />
-          )}
+          {(demo || isProfile || isEnterpriseViewer) && <ExperienceEducation {...props} />}
+          {user?.type !== 'individual' && <ContactInformation {...props} />}
         </div>
         <div className={styles.row}>
-          {(demo || isProfile || isEnterpriseViewer) && (
-            <UniqueSkills {...props} />
-          )}
-          {!demo && user?.type === 'individual' && (isProfile || isEnterpriseViewer) && (
-            <ContactInformation {...props} />
-          )}
+          {(demo || isProfile || isEnterpriseViewer) && <UniqueSkills {...props} />}
+          {!demo && !isProfile
+            && authUser?.type === 'enterprise'
+            && user?.type === 'individual'
+            && (
+              <Connect {...props} />
+            )}
+          {isProfile && user?.type === 'individual' && <ContactInformation {...props} />}
           {demo && <Conversion {...props} />}
         </div>
       </DialogProvider>

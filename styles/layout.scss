@@ -30,10 +30,7 @@
     width: 100%;
     min-height: 95vh;
     box-sizing: border-box;
-
-    @include max-screen($screen-m) {
-      margin-bottom: $mobile-chin;
-    }
+    margin-bottom: $mobile-chin;
   }
 
   .modal-overlay {

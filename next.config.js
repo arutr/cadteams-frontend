@@ -1,10 +1,6 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 module.exports = (phase) => {
-  if (phase !== PHASE_DEVELOPMENT_SERVER) {
-    console.log(`phase: ${phase} environment: ${process.env.NODE_ENV}`);
-  }
-
   const dotEnvResult = require('dotenv').config({
     path: `.${process.env.NODE_ENV}.env`
   });
