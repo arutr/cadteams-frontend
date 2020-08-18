@@ -1,3 +1,4 @@
+import { GuestLayout } from 'pages/_app';
 import React, { useState } from 'react';
 import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
@@ -16,7 +17,7 @@ import PageTitle from '../src/components/PageTitle';
 import AuthLayout from '../src/layouts/AuthLayout';
 import styles from '../src/layouts/AuthLayout.module.scss';
 
-function LogIn() {
+export default function LogIn() {
   const { logEvent } = useAmplitude();
   const [serverError, setServerError] = useState<string>();
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -70,7 +71,7 @@ function LogIn() {
       </Heading1>
       <Form onSubmit={onSubmit}>
         {serverError && (
-          <Dialog type={DialogType.Error} message={serverError} />
+          <Dialog type={DialogType.Error}>{serverError}</Dialog>
         )}
         <Input
           label="E-mail Address:"
@@ -91,7 +92,7 @@ function LogIn() {
         />
         <Error errors={errors} name="password" />
         <Link href="/forgot-password">Forgot your password?</Link>
-        <Button disabled={submitting} type="submit" block>
+        <Button loading={submitting} type="submit" block>
           {submitting ? 'Processing...' : 'Submit'}
         </Button>
       </Form>
@@ -117,4 +118,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+LogIn.Layout = GuestLayout;

@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { GuestLayout } from 'pages/_app';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { DialogType } from 'src/components/Dialog';
@@ -50,7 +51,7 @@ function ResetPassword() {
     } catch (error) {
       setDialog({
         type: DialogType.Error,
-        message: getErrorMessage(error),
+        children: getErrorMessage(error),
       });
       setSubmitting(false);
     }
@@ -113,7 +114,7 @@ function ResetPassword() {
                 })}
               />
               <Error errors={errors} name="passwordConfirmation" />
-              <Button disabled={submitting} type="submit" block>
+              <Button loading={submitting} type="submit" block>
                 {submitting ? 'Processing...' : 'Reset password'}
               </Button>
             </Form>
@@ -123,5 +124,7 @@ function ResetPassword() {
     </AuthLayout>
   );
 }
+
+ResetPassword.Layout = GuestLayout;
 
 export default dynamic(() => Promise.resolve(ResetPassword), { ssr: false });
