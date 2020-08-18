@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { AnchorButton } from 'src/components/Button';
 import Label from 'src/components/Label';
 import { useAuth } from 'src/contexts/AuthProvider';
-import { inApp } from 'src/utils/misc';
 import { getApiResource } from 'src/utils/api';
 import Icon from '../Icon';
 import Link from '../Link';

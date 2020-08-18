@@ -55,7 +55,7 @@ export default function VerticalNavigationLinks() {
       <ActiveTab href="/app/profile">
         <Icon large name="user" /> Profile
       </ActiveTab>
-      <ActiveTab href="/app/settings" disabled>
+      <ActiveTab href="/app/settings">
         <Icon large name="gear" /> Settings
       </ActiveTab>
       <Link onClick={logOut}>
