@@ -32,12 +32,14 @@
   }
 }
 
+.link {
+  display: inline-block;
+}
+
 .not-underlined {
   text-decoration: none;
 }
 
 span.link {
   @include anchor;
-
-  display: inline-block;
 }

@@ -32,7 +32,7 @@ $content-width: 55vw;
   }
 }
 
-.main {
+.wrapper {
   display: flex;
   min-height: calc(#{$viewport-height} - #{$navigation-height});
 
