@@ -38,8 +38,7 @@ function ContactInformation({ user }: PortfolioProps) {
       {user?.type === 'enterprise' && (
         <p className={styles.disclaimer}>
           These details will be shared with <b>CAD</b>teams members present in
-          <Link href="/app/contacts" disabled><Icon large name="handshake" /> Contacts</Link>
-          <Label className={styles['coming-soon']} small>Coming soon</Label>.
+          <Link href="/app/contacts"><Icon large name="handshake" /> Contacts</Link>.
         </p>
       )}
       <Form>
