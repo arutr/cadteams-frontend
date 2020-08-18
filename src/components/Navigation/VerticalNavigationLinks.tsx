@@ -29,18 +29,18 @@ export default function VerticalNavigationLinks() {
       <ActiveTab href="/app/contacts">
         <Icon large name="handshake" /> Contacts
       </ActiveTab>
-      <ActiveTab href="/app" disabled>
-        <Icon large name="dashboard" /> Dashboard
-      </ActiveTab>
-      <ActiveTab href="/app/documents" disabled>
-        <Icon large name="file" /> Documents
-      </ActiveTab>
+      {/* <ActiveTab href="/app" disabled> */}
+      {/*  <Icon large name="dashboard" /> Dashboard */}
+      {/* </ActiveTab> */}
+      {/* <ActiveTab href="/app/documents" disabled> */}
+      {/*  <Icon large name="file" /> Documents */}
+      {/* </ActiveTab> */}
       <ActiveTab href="/app/explore">
         <Icon large name="shop" /> Explore
       </ActiveTab>
-      <ActiveTab href="/app/projects" disabled>
-        <Icon large name="plan" /> Projects
-      </ActiveTab>
+      {/* <ActiveTab href="/app/projects" disabled> */}
+      {/*  <Icon large name="plan" /> Projects */}
+      {/* </ActiveTab> */}
       <div className={styles.separator} />
       <MediaObject
         captionAlign="left"
