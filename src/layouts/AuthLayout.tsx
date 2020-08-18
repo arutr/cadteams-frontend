@@ -5,7 +5,7 @@ import styles from './AuthLayout.module.scss';
 
 export default function AuthLayout({ children, aside }) {
   return (
-    <main className={styles.main}>
+    <main className={styles.wrapper}>
       <LogOnMount eventType="view page" />
       <section className={styles.content}>
         {children}

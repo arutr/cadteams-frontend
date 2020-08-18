@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { GuestLayout } from 'pages/_app';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { LoginForm } from 'src/api/Auth';
@@ -26,7 +27,7 @@ function ForgotPassword() {
       });
       setDialog({
         type: DialogType.Success,
-        message: (
+        children: (
           <>
             Password reset form has been sent to the e-mail address provided.
           </>
@@ -35,7 +36,7 @@ function ForgotPassword() {
     } catch (error) {
       setDialog({
         type: DialogType.Error,
-        message: getErrorMessage(error),
+        children: getErrorMessage(error),
       });
     }
 
@@ -80,7 +81,7 @@ function ForgotPassword() {
                 ref={register({ required: 'Please enter your e-mail address.' })}
               />
               <Error errors={errors} name="email" />
-              <Button disabled={submitting} type="submit" block>
+              <Button loading={submitting} type="submit" block>
                 {submitting ? 'Processing...' : 'Submit'}
               </Button>
             </Form>
@@ -90,5 +91,7 @@ function ForgotPassword() {
     </AuthLayout>
   );
 }
+
+ForgotPassword.Layout = GuestLayout;
 
 export default ForgotPassword;

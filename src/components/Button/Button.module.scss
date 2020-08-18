@@ -18,8 +18,8 @@
   font-family: var(--font-family__monospace), monospace;
 
   &:disabled {
-    cursor: wait;
     opacity: 0.5;
+    cursor: not-allowed;
   }
 
   &:focus {
@@ -35,16 +35,20 @@
     background-color: darken($color-gray, 10%);
   }
 
+  &.block {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   &.large {
     font-size: 1.5rem;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
 
-  &.block {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+  &.loading:disabled {
+    cursor: wait;
   }
 
   p + &,

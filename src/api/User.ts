@@ -1,3 +1,4 @@
+import WorkHistory from 'src/api/WorkHistory';
 import Media from './Media';
 
 export default interface User {
@@ -8,8 +9,10 @@ export default interface User {
   experience: number;
   id?: number;
   location: string;
+  notifications?: Notification[];
   phone?: string;
   profilePicture: Media;
+  provider?: 'local' | 'facebook';
   rating?: number;
   sectors: Label[];
   username: string;
@@ -31,15 +34,11 @@ export default interface User {
   website?: string;
 }
 
-export type WorkHistory = {
-  id: number;
-  endYear?: number;
-  location?: string;
-  organization?: string;
-  startYear: number;
-  title: string;
-  type: 'education' | 'employment';
-};
+export interface Notification {
+  type: 'connection';
+  email?: boolean;
+  sms?: boolean;
+}
 
 export interface Label {
   id: number;

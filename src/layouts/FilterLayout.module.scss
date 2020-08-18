@@ -1,0 +1,30 @@
+@import 'styles/mixins/responsive';
+
+.content {
+  flex: 1;
+
+  @include min-screen($screen-ml) {
+    height: 100vh;
+    margin: 0 auto;
+    overflow-y: scroll;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  @include min-screen($screen-ml) {
+    flex-direction: row;
+  }
+
+  &.withFilter {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+
+    .content {
+      padding: 0 var(--page-margin);
+    }
+  }
+}

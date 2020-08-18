@@ -1,41 +1,63 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import React from 'react';
 import Footer from 'src/components/Footer';
 import AmplitudeProvider from 'src/contexts/Amplitude';
-import { inApp, isBrowser } from 'src/utils/misc';
+import { fetcher } from 'src/utils/api';
+import { SWRConfig } from 'swr';
 import Navigation from '../src/components/Navigation';
 import AuthProvider from '../src/contexts/AuthProvider';
 import useResize from '../src/utils/viewportHeight';
 import '../styles/index.scss';
 
-export default function App({ Component, pageProps }: AppProps) {
-  const Layout = (Page) => (
-    <AuthProvider>
-      <div className={inApp() ? 'app' : null}>
-        {inApp() ? <Navigation /> : <Navigation guest />}
-        {Page}
-        {!inApp() && <Footer />}
-      </div>
-    </AuthProvider>
+function AppLayout({ children }) {
+  return (
+    <div className="app">
+      <Navigation />
+      <SWRConfig
+        value={{
+          revalidateOnFocus: false,
+          fetcher,
+        }}
+      >
+        {children}
+      </SWRConfig>
+    </div>
   );
+}
 
-  if (!isBrowser()) {
-    return Layout(<Component {...pageProps} />);
-  }
+AppLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
+export function GuestLayout({ children }) {
+  return (
+    <div>
+      <Navigation guest />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+
+GuestLayout.propTypes = AppLayout.propTypes;
+
+export default function App({ Component, pageProps }: AppProps) {
+  // @ts-ignore
+  const Layout = Component.Layout || AppLayout;
   useResize();
 
   return (
-    <>
-      <Head>
-        <title>CADteams</title>
-      </Head>
-      {Layout((
+    <AuthProvider>
+      <Layout>
+        <Head>
+          <title>CADteams</title>
+        </Head>
         <AmplitudeProvider>
           <Component {...pageProps} />
         </AmplitudeProvider>
-      ))}
-    </>
+      </Layout>
+    </AuthProvider>
   );
 }
