@@ -55,7 +55,7 @@ export default function ProfileUpdateProvider({
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'Failed to update profile information. Please try again later.',
+        children: 'Failed to update profile information. Please try again later.',
       });
     }
 

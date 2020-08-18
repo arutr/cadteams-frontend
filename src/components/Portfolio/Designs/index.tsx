@@ -32,7 +32,7 @@ export default function Designs({
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'An error has occurred during file deletion. Please try again later.',
+        children: 'An error has occurred during file deletion. Please try again later.',
       });
     });
 
@@ -53,52 +53,43 @@ export default function Designs({
         )}
         <div className={styles.wrapper}>
           <div id="designGrid" className={styles.grid}>
-            {Array((user?.designs?.length ?? 0) + 1).fill(1).map((_, index) => {
-              const design = user?.designs[index];
+            {user?.designs?.map((design, index) => {
+              const url = demo ? design.url : getApiResource(design.url);
+              const preview = demo
+                ? design.url
+                : getApiResource(design.formats?.large?.url, design.url);
 
-              if (design) {
-                const url = demo ? design.url : getApiResource(design.url);
-                const preview = demo
-                  ? design.url
-                  : getApiResource(design.formats?.large?.url, design.url);
-
-                return (
-                  <div key={index} className={styles.design}>
-                    <figure>
-                      {design.mime?.startsWith('video/') ? (
-                        <video controls controlsList="nodownload noremoteplayback" muted playsInline>
-                          <source src={url} type="video/mp4" />
-                        </video>
-                      ) : (
-                        <Link external href={url} hoverEffect={false}>
-                          <img src={preview} alt="Design" />
-                        </Link>
-                      )}
-                      <figcaption>{design.caption}</figcaption>
-                    </figure>
-                    {isProfile && (
-                      <Button
-                        color="error"
-                        className={classNames(layout.edit, layout.corner)}
-                        type="button"
-                        onClick={() => removeDesign(design.id)}
-                      >
-                        <Icon name="trash" inverted title="Remove this design" />
-                        <span className={layout.label}>Remove</span>
-                      </Button>
+              return (
+                <div key={index} className={styles.design}>
+                  <figure>
+                    {design.mime?.startsWith('video/') ? (
+                      <video controls controlsList="nodownload noremoteplayback" muted playsInline>
+                        <source src={url} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <Link external href={url} hoverEffect={false}>
+                        <img src={preview} alt="Design" />
+                      </Link>
                     )}
-                  </div>
-                );
-              }
-
-              if (isProfile) {
-                return (
-                  <AddDesign key={index} index={index} />
-                );
-              }
-
-              return null;
+                    <figcaption>{design.caption}</figcaption>
+                  </figure>
+                  {isProfile && (
+                    <Button
+                      color="error"
+                      className={classNames(layout.edit, layout.corner)}
+                      type="button"
+                      onClick={() => removeDesign(design.id)}
+                    >
+                      <Icon name="trash" inverted title="Remove this design" />
+                      <span className={layout.label}>Remove</span>
+                    </Button>
+                  )}
+                </div>
+              );
             })}
+            {isProfile && (!user?.designs?.length || user?.designs?.length < 6) && (
+              <AddDesign />
+            )}
           </div>
           {!!user?.designs?.length && (
             <>
