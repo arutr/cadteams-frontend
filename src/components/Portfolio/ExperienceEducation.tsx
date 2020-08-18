@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { WorkHistory } from 'src/api/User';
+import WorkHistory from 'src/api/WorkHistory';
 import Button from 'src/components/Button';
 import Dialog from 'src/components/Dialog';
 import { Heading2 } from 'src/components/Heading';
