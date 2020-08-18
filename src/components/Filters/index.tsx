@@ -1,55 +1,29 @@
 import classNames from 'classnames';
-import { FiltersForm } from 'pages/app/explore';
+import { ExploreFilters } from 'pages/app/explore';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { industries, specializations } from 'src/api/User';
 import Button from 'src/components/Button';
 import Checkbox, { CheckboxGroup } from 'src/components/Form/Checkbox';
 import { Heading2, Heading3 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
-import styles from './Filters.module.scss';
+import styles from 'src/components/Filters/Filters.module.scss';
 
-const sections = [
-  {
-    title: 'Industries',
-    name: 'sectors',
-    type: 'checkbox',
-    options: industries,
-  },
-  {
-    title: 'Specialisation',
-    name: 'specialization',
-    type: 'checkbox',
-    options: specializations,
-  },
-  {
-    title: 'Perks',
-    type: 'checkbox',
-    options: [
-      {
-        label: (
-          <span title="Specialists that have successfully passed the CADteams verification process">
-            Verified by <b>CAD</b>teams <Icon name="verified" />
-          </span>
-        ),
-        id: 'verified',
-      },
-      {
-        label: (<>Instant Booking <Icon name="time-quick" /></>),
-        id: 'instantBooking',
-      },
-    ],
-  },
-];
+export type FilterSectionType = 'checkbox' | 'radio';
 
 interface Props {
+  sections: {
+    type: FilterSectionType,
+    title: string,
+    name?: string,
+    options: string[] | object[],
+  }[];
   setFilters: (filters) => void;
 }
 
 export default function Filters(props: Props) {
-  const { setFilters } = props;
+  const { sections, setFilters } = props;
   const [open, setOpen] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm<FiltersForm>();
+  const { register, handleSubmit } = useForm<ExploreFilters>();
   const toggleMenu = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setOpen(!open);
@@ -66,7 +40,7 @@ export default function Filters(props: Props) {
         <Heading2 bold condensed>Filters</Heading2>
         <Icon className={styles.toggle} name="chevron" />
       </header>
-      {sections.map((section, index) => {
+      {sections?.map((section, index) => {
         if (section.type === 'checkbox') {
           return (
             <React.Fragment key={index}>
@@ -78,7 +52,8 @@ export default function Filters(props: Props) {
                     return (
                       <Checkbox
                         key={j}
-                        id={option.id}
+                        id={option.name}
+                        name={option.name}
                         onInput={onInput}
                         ref={register}
                         defaultChecked={option.defaultChecked}

@@ -2,30 +2,6 @@
 @import 'styles/variables/ui';
 @import 'styles/variables/layout';
 
-.explore {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  max-width: 100%;
-  flex-direction: column;
-
-  @include min-screen($screen-ml) {
-    flex-direction: row;
-  }
-}
-
-.gallery {
-  flex: 1;
-  max-width: var(--page-width);
-  padding: 0 var(--page-margin);
-
-  @include min-screen($screen-ml) {
-    height: 100vh;
-    margin: 0 auto;
-    overflow-y: scroll;
-  }
-}
-
 .grid {
   display: grid;
   grid-gap: calc(2 * var(--spacing));
