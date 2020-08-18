@@ -62,29 +62,47 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   </div>
 ));
 
-interface RadioSliderProps {
-  id: string;
-  labels: string[];
-  legend: string;
+interface RadioSliderProps extends React.HTMLProps<HTMLInputElement> {
+  labels: {
+    name: string;
+    value: string;
+  }[] | string[];
+  legend?: string;
 }
 
 export const RadioSlider = React.forwardRef<HTMLInputElement, RadioSliderProps>(({
-  id, labels, legend,
+  className, labels, legend, style, ...props
 }: RadioSliderProps, ref) => (
   <div className={styles.fieldset}>
-    <legend>{legend}</legend>
-    <div className={styles.radio}>
-      {labels.map((label, index) => {
+    {legend && <legend>{legend}</legend>}
+    <div className={classNames(styles.radio, className, style)}>
+      {(labels as any).map((label, index) => {
+        if (typeof label === 'object') {
+          return (
+            <div className={styles.option} key={index}>
+              <input
+                defaultChecked={index === 0}
+                id={label.value}
+                value={label.value}
+                type="radio"
+                ref={ref}
+                {...props}
+              />
+              <label htmlFor={label.value}>{label.name}</label>
+            </div>
+          );
+        }
+
         const value = label.toLowerCase();
         return (
           <div className={styles.option} key={index}>
             <input
               defaultChecked={index === 0}
               id={value}
-              name={id}
               value={value}
               type="radio"
               ref={ref}
+              {...props}
             />
             <label htmlFor={value}>{label}</label>
           </div>
