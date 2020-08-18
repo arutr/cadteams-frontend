@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { UseFormMethods, useForm } from 'react-hook-form';
 import Button from 'src/components/Button';
@@ -55,12 +54,13 @@ function DesignPreview({ formMethods, previewState }: DesignPreviewProps) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'An error has occurred during file upload. Please try again later.',
+        children: 'An error has occurred during file upload. Please try again later.',
       });
       onCancel();
     }
 
     URL.revokeObjectURL(url);
+    setPreview(null);
   });
 
   return (
@@ -88,7 +88,7 @@ function DesignPreview({ formMethods, previewState }: DesignPreviewProps) {
         color="success"
         type="button"
         onClick={onUpload}
-        disabled={submitting}
+        loading={submitting}
       >
         <Icon name="upload" inverted title="Upload this design" />
         <span className={layout.label}>Upload</span>
@@ -108,13 +108,13 @@ function DesignPreview({ formMethods, previewState }: DesignPreviewProps) {
   );
 }
 
-export default function AddDesign({ index }) {
+export default function AddDesign() {
   const { setDialog } = useDialog();
   const formMethods = useForm<Form>();
   const { register, handleSubmit } = formMethods;
   const previewState = useState<File>(null);
   const [preview, setPreview] = previewState;
-  const onClick = () => document.querySelector<HTMLInputElement>(`#design${index}`).click();
+  const onClick = () => document.querySelector<HTMLInputElement>('#addDesign').click();
   const onInput = handleSubmit(async ({ design }) => {
     const file = design[0];
     setDialog(null);
@@ -123,7 +123,7 @@ export default function AddDesign({ index }) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'Image files cannot be larger than 4 megabytes.',
+        children: 'Image files cannot be larger than 4 megabytes.',
       });
 
       return;
@@ -133,7 +133,7 @@ export default function AddDesign({ index }) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setDialog({
         type: DialogType.Error,
-        message: 'Video files cannot be larger than 20 megabytes.',
+        children: 'Video files cannot be larger than 20 megabytes.',
       });
 
       return;
@@ -151,7 +151,7 @@ export default function AddDesign({ index }) {
   return (
     <form className={classNames(styles.design, styles.blank)}>
       <input
-        id={`design${index}`}
+        id="addDesign"
         name="design"
         type="file"
         hidden
@@ -165,7 +165,3 @@ export default function AddDesign({ index }) {
     </form>
   );
 }
-
-AddDesign.propTypes = {
-  index: PropTypes.number.isRequired,
-};
