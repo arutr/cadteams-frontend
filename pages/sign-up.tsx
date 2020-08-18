@@ -1,3 +1,4 @@
+import { GuestLayout } from 'pages/_app';
 import React, { useState } from 'react';
 import { useAmplitude } from 'react-amplitude-hooks';
 import { useForm } from 'react-hook-form';
@@ -88,13 +89,14 @@ function SignUp() {
           <Dialog type={DialogType.Error}>{serverError}</Dialog>
         )}
         <RadioSlider
-          id="type"
+          name="type"
           labels={['Individual', 'Enterprise']}
           legend="I am an..."
+          style={{ marginLeft: '-0.85rem' }}
           ref={register}
         />
         <Input
-          label="Full Name:"
+          label="Full name:"
           placeholder="John Smith"
           id="username"
           ref={register({
@@ -132,7 +134,7 @@ function SignUp() {
           </>
         )}
         <Input
-          label="E-mail Address:"
+          label="E-mail address:"
           placeholder="your@email.com"
           id="email"
           type="email"
@@ -170,7 +172,7 @@ function SignUp() {
             Privacy Policy
           </Link>.
         </p>
-        <Button disabled={submitting} type="submit" block>
+        <Button loading={submitting} type="submit" block>
           {submitting ? 'Processing...' : 'Create a free account'}
         </Button>
       </Form>
@@ -194,5 +196,7 @@ function SignUp() {
     </AuthLayout>
   );
 }
+
+SignUp.Layout = GuestLayout;
 
 export default SignUp;

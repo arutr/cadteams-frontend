@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { GuestLayout } from 'pages/_app';
 import React from 'react';
 import { AnchorButton } from 'src/components/Button';
 import { Heading1, Heading2 } from 'src/components/Heading';
@@ -150,3 +151,5 @@ export default function Outsourcing() {
     </div>
   );
 }
+
+Outsourcing.Layout = GuestLayout;

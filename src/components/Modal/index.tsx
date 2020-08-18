@@ -21,15 +21,17 @@ export function ModalProvider({ className, children, providerOnly }) {
 
   if (providerOnly) {
     return (
-      <div className={className} ref={modalRef}>
+      <div className={className}>
         <Context.Provider value={context}>{children}</Context.Provider>
+        <div ref={modalRef} />
       </div>
     );
   }
 
   return (
-    <main className={classNames(styles.container, className)} ref={modalRef}>
+    <main className={classNames(styles.container, className)}>
       <Context.Provider value={context}>{children}</Context.Provider>
+      <div ref={modalRef} />
     </main>
   );
 }

@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import { AmplitudeClient } from 'amplitude-js';
 import { Amplitude, AmplitudeProvider as BaseAmplitudeProvider } from 'react-amplitude-hooks';
 import { useAuth } from 'src/contexts/AuthProvider';
-import { inApp, isProduction } from 'src/utils/misc';
+import { isBrowser, isProduction } from 'src/utils/misc';
 
 export default function AmplitudeProvider({ children }) {
   const { user } = useAuth();
   const { pathname } = useRouter();
 
-  if ((inApp() && !user)
-    || (isProduction && user?.email.endsWith('cadteams.com'))) {
+  if (!isBrowser() || (isProduction && user?.email.endsWith('cadteams.com'))) {
     return children;
   }
 

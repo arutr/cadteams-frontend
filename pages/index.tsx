@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { GuestLayout } from 'pages/_app';
 import React from 'react';
 import Button, { AnchorButton } from 'src/components/Button';
 import { Heading1, Heading2 } from 'src/components/Heading';
@@ -203,7 +204,7 @@ export default function LandingPage() {
                 {item.href ? (
                   <AnchorButton href={item.href}>Learn More</AnchorButton>
                 ) : (
-                  <Button disabled>Coming Soon</Button>
+                  <Button disabled loading={false}>Coming Soon</Button>
                 )}
               </article>
             ))}
@@ -228,3 +229,5 @@ export default function LandingPage() {
     </div>
   );
 }
+
+LandingPage.Layout = GuestLayout;
