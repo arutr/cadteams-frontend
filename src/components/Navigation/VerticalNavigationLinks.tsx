@@ -21,12 +21,12 @@ export default function VerticalNavigationLinks() {
 
   return (
     <>
-      {user?.type === 'individual' && (
-        <ActiveTab href="/app/calendar" disabled>
-          <Icon large name="calendar" /> Calendar
-        </ActiveTab>
-      )}
-      <ActiveTab href="/app/contacts" disabled>
+      {/* {user?.type === 'individual' && ( */}
+      {/*  <ActiveTab href="/app/calendar" disabled> */}
+      {/*    <Icon large name="calendar" /> Calendar */}
+      {/*  </ActiveTab> */}
+      {/* )} */}
+      <ActiveTab href="/app/contacts">
         <Icon large name="handshake" /> Contacts
       </ActiveTab>
       <ActiveTab href="/app" disabled>
