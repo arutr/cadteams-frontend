@@ -2,8 +2,10 @@ import classNames from 'classnames';
 import Router from 'next/router';
 import React from 'react';
 import Icon from 'src/components/Icon';
+import Label from 'src/components/Label';
 import { useAuth } from 'src/contexts/AuthProvider';
 import { getApiResource } from 'src/utils/api';
+import useSWR from 'swr';
 import Link from '../Link';
 import MediaObject from '../MediaObject';
 import styles from './VerticalNavigationLinks.module.scss';
@@ -18,29 +20,23 @@ function ActiveTab({
 export default function VerticalNavigationLinks() {
   const { logOut, user } = useAuth();
   const profilePicture = user?.profilePicture;
+  const { data: pendingCount } = useSWR<number>((
+    user?.type === 'individual' && '/connections/count?status=pending'
+  ));
 
   return (
     <>
-      {/* {user?.type === 'individual' && ( */}
-      {/*  <ActiveTab href="/app/calendar" disabled> */}
-      {/*    <Icon large name="calendar" /> Calendar */}
-      {/*  </ActiveTab> */}
-      {/* )} */}
-      <ActiveTab href="/app/contacts">
-        <Icon large name="handshake" /> Contacts
-      </ActiveTab>
-      {/* <ActiveTab href="/app" disabled> */}
-      {/*  <Icon large name="dashboard" /> Dashboard */}
-      {/* </ActiveTab> */}
-      {/* <ActiveTab href="/app/documents" disabled> */}
-      {/*  <Icon large name="file" /> Documents */}
-      {/* </ActiveTab> */}
+      <span>
+        <ActiveTab href="/app/contacts">
+          <Icon large name="handshake" /> Contacts&ensp;
+        </ActiveTab>
+        {!!pendingCount && (
+          <Label className={styles.indicator} small>{pendingCount}</Label>
+        )}
+      </span>
       <ActiveTab href="/app/explore">
         <Icon large name="shop" /> Explore
       </ActiveTab>
-      {/* <ActiveTab href="/app/projects" disabled> */}
-      {/*  <Icon large name="plan" /> Projects */}
-      {/* </ActiveTab> */}
       <div className={styles.separator} />
       <MediaObject
         captionAlign="left"
