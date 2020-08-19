@@ -163,6 +163,7 @@ $screen-mobile: $screen-m + 28px;
     img {
       width: 3rem;
       max-height: 3rem;
+      object-fit: cover;
     }
   }
 
