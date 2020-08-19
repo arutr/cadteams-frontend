@@ -9,7 +9,7 @@ import Label, { LabelContainer } from 'src/components/Label';
 import MediaObject from 'src/components/MediaObject';
 import { getApiResource } from 'src/utils/api';
 import { currencyFormat } from 'src/utils/misc';
-import { UrlObject } from "url";
+import { UrlObject } from 'url';
 import styles from './Contact.module.scss';
 
 interface HocProps {
