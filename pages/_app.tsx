@@ -14,13 +14,13 @@ import '../styles/index.scss';
 function AppLayout({ children }) {
   return (
     <div className="app">
-      <Navigation />
       <SWRConfig
         value={{
           revalidateOnFocus: false,
           fetcher,
         }}
       >
+        <Navigation />
         {children}
       </SWRConfig>
     </div>
