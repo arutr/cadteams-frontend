@@ -7,10 +7,11 @@ interface Props extends React.HTMLProps<HTMLSpanElement> {
   name: string;
   inverted?: boolean;
   large?: boolean;
+  small?: boolean;
 }
 
 function Icon({
-  name, inverted, large, className, ...props
+  className, inverted, name, large, small, ...props
 }: Props) {
   const SvgComponent = dynamic(() => import(`assets/icons/${name}.svg`));
   return (
@@ -20,6 +21,7 @@ function Icon({
         className,
         inverted && styles.inverted,
         large && styles.large,
+        small && styles.small,
       )}
       {...props}
     >

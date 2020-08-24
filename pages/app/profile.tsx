@@ -6,7 +6,7 @@ import { useAuth } from 'src/contexts/AuthProvider';
 import styles from './profile.module.scss';
 import Portfolio from '../../src/components/Portfolio';
 
-export default function Profile() {
+export default function ProfilePage() {
   const { user } = useAuth();
 
   return (

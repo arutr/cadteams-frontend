@@ -9,7 +9,7 @@ import Icon from 'src/components/Icon';
 import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
-import layout from 'src/components/Portfolio/Portfolio.module.scss';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import ProfileUpdateProvider, { useProfileUpdate } from 'src/contexts/ProfileUpdateContext';
 import styles from './ExperienceEducation.module.scss';
 
@@ -54,7 +54,7 @@ function ExperienceEducation(props: PortfolioProps) {
 
   if (user?.type === 'individual') {
     return (
-      <form className={classNames(layout.card, showChin && layout.chin)}>
+      <form className={classNames(cardStyles.card, showChin && cardStyles.chin)}>
         <Heading2 marginTop="0" condensed bold>
           Experience and Education
         </Heading2>
@@ -182,7 +182,7 @@ function ExperienceEducation(props: PortfolioProps) {
   return null;
 }
 
-export default function (props: PortfolioProps) {
+export default function ExperienceEducationSection(props: PortfolioProps) {
   return (
     <ProfileUpdateProvider>
       <ExperienceEducation {...props} />

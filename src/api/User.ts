@@ -19,6 +19,7 @@ export default interface User {
   type: 'individual' | 'enterprise';
 
   // individual
+  calendar?: Calendar;
   dailyRate: number;
   designs: Media[];
   instantBooking?: boolean;
@@ -32,6 +33,13 @@ export default interface User {
   // enterprise
   company?: string;
   website?: string;
+}
+
+export interface Calendar {
+  unavailableDates: {
+    id: number;
+    date: string;
+  }[];
 }
 
 export interface Notification {

@@ -14,6 +14,7 @@ import UniqueSkills from 'src/components/Portfolio/UniqueSkills';
 import { useAuth } from 'src/contexts/AuthProvider';
 import User from 'src/api/User';
 import DialogProvider from 'src/contexts/DialogContext';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import { AnchorButton } from '../Button';
 import { Heading2 } from '../Heading';
 import Modal from '../Modal';
@@ -28,7 +29,7 @@ export interface PortfolioProps {
 
 function Conversion({ user }: PortfolioProps) {
   return (
-    <footer className={styles.card}>
+    <footer className={cardStyles.card}>
       <Heading2 marginTop="0" bold condensed>Like What You're Seeing?</Heading2>
       <p>
         Get in touch with specialists like {user?.username} today.

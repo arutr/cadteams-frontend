@@ -1,0 +1,48 @@
+@import 'styles/variables/colors';
+
+.button {
+  left: 0;
+  width: 100%;
+  font-size: 0.8rem;
+  position: absolute;
+  max-height: 2.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  bottom: calc(-1 * var(--border-radius));
+}
+
+.button,
+.status {
+  text-transform: uppercase;
+}
+
+.button,
+.date,
+.status {
+  font-family: var(--font-family__monospace);
+}
+
+.date {
+  text-align: right;
+}
+
+.status {
+  text-align: center;
+}
+
+.tile {
+  position: relative;
+  color: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 0.5rem calc(2 * var(--spacing));
+
+  &.available {
+    background-color: darken($color-green, 5%);
+  }
+
+  &.unavailable {
+    background-color: darken($color-red, 5%);
+  }
+}

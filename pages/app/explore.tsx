@@ -100,7 +100,7 @@ function Explore(props: Props) {
   );
 }
 
-export default function () {
+export default function ExplorePage() {
   const [filters, setFilters] = useState<ExploreFilters>();
 
   return (

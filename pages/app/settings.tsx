@@ -150,7 +150,7 @@ function ChangePassword() {
   );
 }
 
-export default function () {
+export default function SettingsPage() {
   const { user } = useAuth();
   return (
     <main>

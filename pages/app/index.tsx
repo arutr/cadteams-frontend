@@ -5,7 +5,7 @@ import { Heading1 } from 'src/components/Heading';
 import { useAuth } from 'src/contexts/AuthProvider';
 import { getFirstName } from 'src/utils/misc';
 
-function AppIndex() {
+function DashboardPage() {
   const { user } = useAuth();
 
   return (
@@ -19,4 +19,4 @@ function AppIndex() {
   );
 }
 
-export default AppIndex;
+export default DashboardPage;

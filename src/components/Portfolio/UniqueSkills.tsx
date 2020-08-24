@@ -7,6 +7,7 @@ import Icon from 'src/components/Icon';
 import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import layout from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import styles from './UniqueSkills.module.scss';
@@ -23,7 +24,9 @@ function UniqueSkills(props: PortfolioProps) {
   if (user?.type === 'individual') {
     return (
       <div>
-        <form className={classNames(layout.card, styles.uniqueSkills, showChin && layout.chin)}>
+        <form
+          className={classNames(cardStyles.card, styles.uniqueSkills, showChin && cardStyles.chin)}
+        >
           <Heading2 marginTop="0" condensed bold>
             Unique Skills
           </Heading2>
@@ -69,7 +72,7 @@ function UniqueSkills(props: PortfolioProps) {
   return null;
 }
 
-export default function (props: PortfolioProps) {
+export default function UniqueSkillsSection(props: PortfolioProps) {
   return (
     <ProfileUpdateProvider>
       <UniqueSkills {...props} />

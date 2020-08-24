@@ -4,11 +4,11 @@ import { useFormContext } from 'react-hook-form';
 import { Error, Fieldset, Form } from 'src/components/Form';
 import { Heading2 } from 'src/components/Heading';
 import Icon from 'src/components/Icon';
-import Label from 'src/components/Label';
 import Link from 'src/components/Link';
 import { EditableInput, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import validator from 'validator';
@@ -23,9 +23,10 @@ function ContactInformation({ user }: PortfolioProps) {
 
   return (
     <section className={classNames(
+      cardStyles.card,
+      cardStyles.chin,
       styles.card,
       styles.contactInformation,
-      styles.chin,
     )}
     >
       <Heading2 bold condensed marginTop="0">Contact Information</Heading2>
@@ -96,7 +97,7 @@ function ContactInformation({ user }: PortfolioProps) {
   );
 }
 
-export default function (props: PortfolioProps) {
+export default function ContactInformationSection(props: PortfolioProps) {
   return (
     <ProfileUpdateProvider>
       <ContactInformation {...props} />

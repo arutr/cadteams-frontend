@@ -7,7 +7,7 @@ import Button from 'src/components/Button';
 import { Error, Form } from 'src/components/Form';
 import { Heading2 } from 'src/components/Heading';
 import { PortfolioProps } from 'src/components/Portfolio/index';
-import layout from 'src/components/Portfolio/Portfolio.module.scss';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import { useAuth } from 'src/contexts/AuthProvider';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import { getErrorMessage } from 'src/utils/api';
@@ -55,7 +55,7 @@ function Connect({ user }: PortfolioProps) {
   });
 
   return (
-    <section className={classNames(layout.card)}>
+    <section className={classNames(cardStyles.card)}>
       <Heading2 bold condensed marginTop="0">Connect</Heading2>
       <p>
         Like {getFirstName(user?.username)}'s portfolio? Connect with them by briefly introducing
@@ -87,7 +87,7 @@ function Connect({ user }: PortfolioProps) {
   );
 }
 
-export default function (props: PortfolioProps) {
+export default function ConnectSection(props: PortfolioProps) {
   return (
     <ProfileUpdateProvider>
       <Connect {...props} />

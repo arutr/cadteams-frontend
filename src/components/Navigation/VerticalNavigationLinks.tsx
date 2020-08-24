@@ -26,6 +26,14 @@ export default function VerticalNavigationLinks() {
 
   return (
     <>
+      <ActiveTab href="/app/bookings">
+        <Icon large name="calendar-confirmed" /> Bookings
+      </ActiveTab>
+      {user?.type === 'individual' && (
+        <ActiveTab href="/app/calendar">
+          <Icon large name="calendar" /> Calendar
+        </ActiveTab>
+      )}
       <span>
         <ActiveTab href="/app/contacts">
           <Icon large name="handshake" /> Contacts&ensp;

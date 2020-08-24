@@ -111,7 +111,7 @@ function Contacts() {
   );
 }
 
-export default function () {
+export default function ContactsPage() {
   return (
     <ModalProvider className={classNames(layout.wrapper)}>
       <LogOnMount eventType="view page" />

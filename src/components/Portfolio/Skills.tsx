@@ -16,6 +16,7 @@ import {
 } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import { useAuth } from 'src/contexts/AuthProvider';
 import ProfileUpdateProvider, {
@@ -60,7 +61,7 @@ function IndividualSkills({
   const isEnterpriseViewer = authUser?.type === 'enterprise';
 
   return (
-    <form className={classNames(styles.card, styles.skills, showChin && styles.chin)}>
+    <form className={classNames(cardStyles.card, styles.skills, showChin && cardStyles.chin)}>
       <div className={styles.row}>
         <span>
           <Icon className={styles.icon} large name="location" title="Location" />
@@ -248,7 +249,7 @@ function EnterpriseSkills({
   const showChin = isProfile || !demo;
 
   return (
-    <form className={classNames(styles.card, styles.skills, showChin && styles.chin)}>
+    <form className={classNames(cardStyles.card, styles.skills, showChin && cardStyles.chin)}>
       <div>
         <Icon className={styles.icon} large name="location" title="Company location" />
         <EditableInput

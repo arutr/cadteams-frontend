@@ -13,7 +13,6 @@ export default class extends Document {
     return (
       <Html lang="en-GB">
         <Head>
-          <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
           <meta name="description" content="BIM/CAD talent marketplace optimized for remote workflows" />
           <meta name="keywords" content="bim jobs, cad jobs, bim modeler jobs, bim manager jobs, bim coordinator jobs" />
           <meta name="author" content="CADteams" />

@@ -50,6 +50,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <AuthProvider>
+      <Head>
+        <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
+      </Head>
       <Layout>
         <Head>
           <title>CADteams</title>

@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { AnchorButton } from 'src/components/Button';
-import Label from 'src/components/Label';
 import { useAuth } from 'src/contexts/AuthProvider';
 import { getApiResource } from 'src/utils/api';
 import Icon from '../Icon';
@@ -85,7 +84,6 @@ function Navigation({ guest }: Props) {
           className={styles.logo}
         >
           <img src="/images/logo.svg" alt="CADteams" />
-          <Label className={styles.beta} small>Beta</Label>
         </Link>
         <Icon className={styles.toggle} name={open ? 'close' : 'menu'} onClick={toggleMenu} />
         <div className={classNames(styles.links, open && styles.open)}>

@@ -1,5 +1,4 @@
 @import 'styles/mixins/responsive';
-@import 'styles/variables/ui';
 
 .about,
 .contactInformation {
@@ -10,19 +9,6 @@
 
   p {
     white-space: pre-line;
-  }
-}
-
-.card {
-  position: relative;
-  filter: $drop-shadow;
-  padding: var(--spacing);
-  border-radius: var(--border-radius);
-  background-color: var(--color-white);
-
-  &.chin {
-    padding-bottom: calc(3 * var(--spacing));
-    margin-bottom: var(--spacing);
   }
 }
 

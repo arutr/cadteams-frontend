@@ -49,7 +49,6 @@ $screen-mobile: $screen-m + 28px;
 
   .logo {
     display: flex;
-    align-items: center;
 
     @include max-screen($screen-ml) {
       order: 1;
@@ -67,7 +66,6 @@ $screen-mobile: $screen-m + 28px;
 
   nav {
     display: flex;
-    align-items: center;
 
     @include min-screen($screen-ml) {
       height: 100%;

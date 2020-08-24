@@ -5,6 +5,7 @@ import { Heading2 } from 'src/components/Heading';
 import { EditableTextArea, Placeholder } from 'src/components/Portfolio/Editable';
 import EditButton from 'src/components/Portfolio/EditButton';
 import { PortfolioProps } from 'src/components/Portfolio/index';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import styles from 'src/components/Portfolio/Portfolio.module.scss';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
 import { getFirstName } from 'src/utils/misc';
@@ -29,7 +30,9 @@ function About({ inModal, isProfile, user }: PortfolioProps) {
     : 'company';
 
   return (
-    <form className={classNames(styles.card, styles.about, showChin && styles.chin)}>
+    <form
+      className={classNames(cardStyles.card, styles.card, styles.about, showChin && styles.chin)}
+    >
       <Heading2 bold condensed marginTop="0">
         About {descriptionHeading}
       </Heading2>
@@ -53,7 +56,7 @@ function About({ inModal, isProfile, user }: PortfolioProps) {
   );
 }
 
-export default function (props: PortfolioProps) {
+export default function AboutSection(props: PortfolioProps) {
   return (
     <ProfileUpdateProvider>
       <About {...props} />

@@ -8,6 +8,7 @@ import Information, { InformationProps } from 'src/components/Portfolio/Identity
 import Perks from 'src/components/Portfolio/Identity/Perks';
 import ProfilePicture from 'src/components/Portfolio/Identity/ProfilePicture';
 import { PortfolioModal, PortfolioProps } from 'src/components/Portfolio/index';
+import cardStyles from 'src/components/Card/Card.module.scss';
 import layout from 'src/components/Portfolio/Portfolio.module.scss';
 import { useAuth } from 'src/contexts/AuthProvider';
 import ProfileUpdateProvider from 'src/contexts/ProfileUpdateContext';
@@ -45,8 +46,8 @@ export function IdentityCard(props: IdentityCardProps) {
   return (
     <>
       <div className={classNames(
-        layout.card,
-        showChin && layout.chin,
+        cardStyles.card,
+        showChin && cardStyles.chin,
         className,
       )}
       >
