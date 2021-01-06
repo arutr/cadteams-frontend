@@ -19,7 +19,7 @@
     "@types/react-dom": "16.9.6",
     "@types/validator": "13.1.0",
     "amplitude-js": "5.11.0",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "babel-loader": "8.1.0",
     "classnames": "2.2.6",
     "countries-list": "2.5.4",
